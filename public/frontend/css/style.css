@@ -1,0 +1,182 @@
+/* CSS Document */
+/*
+|--------------------------------------------------------------------------
+| Core Theme
+|--------------------------------------------------------------------------
+*/
+.main{
+    min-height: 600px;
+}
+.page-header {
+    background-color: #EEEEEE;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+   
+    margin: 0 0 35px;
+    min-height: 50px;
+    padding: 20px 0;
+    position: relative;
+    text-align: left;
+}
+
+section.page-header h1 {
+    border-bottom-color: #015294;
+    border:0;
+    color:#32323C;
+}
+#footer {
+    background: #015294 none repeat scroll 0 0;
+    border-top: 4px solid #015294;
+    
+}
+#footer .footer-ribbon::before {
+    border-left-color: #db3d2f;
+    border-right-color: #db3d2f;
+}
+#footer .footer-ribbon{
+     background: #db3d2f
+}
+#footer p{
+    color:#fff!important;
+}
+#footer .footer-copyright {
+    background: #282A2B;
+    border:0;
+}
+
+#footer .footer-copyright p{
+    color: #8c8989!important;
+}
+
+.col-center {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Circle Buttons
+|--------------------------------------------------------------------------
+*/
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+}
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Menu
+|--------------------------------------------------------------------------
+*/
+ul.dropdown-menu li.active a{
+    background: #f4f4f4!important;
+}
+#header .header-nav-main{
+    float: left !important;
+    margin-left: 45px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Form
+|--------------------------------------------------------------------------
+*/
+.form-group.required .control-label:after {
+  content:" *";
+  color:#a94442;
+}
+ul.form-validate-errors{list-style: none;}
+ul.form-validate-errors li{list-style: none; text-align: left}
+label.error{
+    color:#a94442;
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    font-weight: 700;
+    float: left;
+    clear: both;
+}
+label.error-:before {
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    content:"\f00d ";
+    color:#a94442;
+    font-size: 16px;
+    margin: 0 5px;
+}
+input[type="text"].error,
+input[type="email"].error,
+input[type="password"].error,
+input[type="file"].error,
+select.error{ 
+    border: 1px solid #a94442!important; 
+}
+.product-list-info{
+   padding: 9px 9px 0px 9px; 
+}
+.product-img{
+    height: 220px !important;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Table
+|--------------------------------------------------------------------------
+*/
+
+.table tbody tr > td.success {
+  background-color: #dff0d8 !important;
+}
+
+.table tbody tr > td.error {
+  background-color: #f2dede !important;
+}
+
+.table tbody tr > td.warning {
+  background-color: #fcf8e3 !important;
+}
+
+.table tbody tr > td.info {
+  background-color: #d9edf7 !important;
+}
+
+.table-hover tbody tr:hover > td.success {
+  background-color: #d0e9c6 !important;
+}
+
+.table-hover tbody tr:hover > td.error {
+  background-color: #ebcccc !important;
+}
+
+.table-hover tbody tr:hover > td.warning {
+  background-color: #faf2cc !important;
+}
+
+.table-hover tbody tr:hover > td.info {
+  background-color: #c4e3f3 !important;
+}

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>News | Welcome to Josh Frontend</title>
+    <!--global css starts-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <!--end of global css-->
+    <!--page level css starts-->
+    <link rel="stylesheet" type="text/css" href="css/news.css">
+    <link rel="stylesheet" type="text/css" href="css/timeline.css">
+    <link rel="stylesheet" href="vendors/tags/dist/bootstrap-tagsinput.css" />
+    <!--end of page level css-->
+</head>
+
+<body>
+    <!-- Header Section Start -->
+    <header>
+        <!-- Icon Section Start -->
+        <div class="icon-section">
+            <div class="container">
+                <ul class="list-inline">
+                    <li>
+                        <a href="#"> <i class="livicon" data-name="facebook" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="livicon" data-name="twitter" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="livicon" data-name="google-plus" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="livicon" data-name="linkedin" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="livicon" data-name="rss" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
+                        </a>
+                    </li>
+                    <li class="pull-right">
+                        <ul class="list-inline icon-position">
+                            <li>
+                                <a href="mailto:"><i class="livicon" data-name="mail" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
+                                <label class="hidden-xs"><a href="mailto:" class="text-white">info@joshadmin.com</a></label>
+                            </li>
+                            <li>
+                                <a href="tel:"><i class="livicon" data-name="phone" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
+                                <label class="hidden-xs"><a href="tel:"class="text-white">(703) 717-4200</a></label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- //ICon Section End -->
+        <!-- Navbar Section Start -->
+        <nav class="navbar navbar-default container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
+                    <span><a href="#"> <i class="livicon" data-name="responsive-menu" data-size="25" data-loop="true" data-c="#757b87" data-hc="#ccc"></i>
+                    </a></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="images/logo.png" class="logo_position">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.html"> Home</a>
+                    </li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> Features</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="typography.html">Typography</a>
+                            </li>
+                            <li><a href="advancedfeatures.html">Advanced Features</a>
+                            </li>
+                            <li><a href="grid.html">Grid System</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> Pages</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="aboutus.html">About Us</a>
+                            </li>
+                            <li><a href="timeline.html">Timeline</a></li>
+                            <li><a href="price.html">Price</a>
+                            </li>
+                            <li><a href="404.html">404 Error</a>
+                            </li>
+                            <li><a href="500.html">500 Error</a>
+                            </li>
+                            <li><a href="faq.html">FAQ</a>
+                            </li>
+                            <li><a href="blank_page.html">Blank</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> Shop</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="products.html">Products</a>
+                            </li>
+                            <li><a href="single_product.html">Single_Product</a>
+                            </li>
+                            <li><a href="compareproducts.html">Compare Products</a>
+                            </li>
+                            <li><a href="category.html">Categories</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> Portfolio</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="portfolio.html">Portfolio</a>
+                            </li>
+                            <li><a href="portfolioitem.html">Portfolio Item</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown active"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> News</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="news.html">News</a>
+                            </li>
+                            <li><a href="news_item.html">News Item</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> Blog</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="blog.html">Blog</a>
+                            </li>
+                            <li><a href="blogitem.html">Blog Item</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html"> Blank</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Navbar Section End -->
+    </header>
+    <!-- Header Section End -->
+    <!-- Breadcrumb Section Start -->
+    <div class="breadcum">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="index.html"> <i class="livicon icon3 icon4" data-name="home" data-size="18" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i>Dashboard
+                    </a>
+                </li>
+                <li class="hidden-xs">
+                    <i class="livicon icon3" data-name="angle-double-right" data-size="18" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                    <a href="#">News</a>
+                </li>
+            </ol>
+            <div class="pull-right">
+                <i class="livicon icon3" data-name="responsive-menu" data-size="20" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i> News
+            </div>
+        </div>
+    </div>
+    <!-- //Breadcrumb Section End -->
+    <!-- Container Section Start -->
+    <div class="container">
+        <div class="row news">
+            <div class="col-md-8">
+                <!-- News1 Section Start -->
+                <div class="blog thumbnail">
+                    <label>
+                        <a href="news_item.html"><h3 class="primary news_headings">Jelly-o sesame snaps halvah croissant oat cake cookie</h3></a>
+                    </label>
+                    <img src="images/img_b2.jpg" alt="image" class="img-responsive">
+                    <div class="news_item_text_1">
+                        <p>
+                            But they got diff'rent strokes. It takes diff'rent strokes - it takes diff'rent strokes to move the world. Go Speed Racer. Go Speed Racer. Go Speed Racer go! That this group would somehow form a family that's the way we all became the Brady Bunch. No phone no lights no motor car not a single luxury. Like Robinson Crusoe it's primitive as can be. Well we're movin' on up to the east side to a deluxe apartment in the sky. These Happy Days are yours and mine Happy Days. And we know Flipper lives in a world full of wonder flying there-under under the sea. Baby if you've ever wondered - wondered whatever became of me. I'm living on the air in Cincinnati. Cincinnati WKRP. It's time to put on makeup. It's time to dress up right. It's time to raise the curtain on the Muppet Show tonight.
+                        </p>
+                        <p class="text-right">
+                            <a href="news_item.html" class="btn btn-primary text-white">
+                                Read more
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <!-- //News1 Section End -->
+                <!-- New2 Section Start -->
+                <div class="blog thumbnail">
+                    <label>
+                        <a href="news_item.html"><h3 class="primary news_headings">Fishing cayenne bisque cayenne viens ci red beans </h3></a>
+                    </label>
+                    <img src="images/img_b1.jpg" alt="image" class="img-responsive">
+                    <div class="news_item_text_1">
+                        <p>
+                            But they got diff'rent strokes. It takes diff'rent strokes - it takes diff'rent strokes to move the world. Go Speed Racer. Go Speed Racer. Go Speed Racer go! That this group would somehow form a family that's the way we all became the Brady Bunch. No phone no lights no motor car not a single luxury. Like Robinson Crusoe it's primitive as can be. Well we're movin' on up to the east side to a deluxe apartment in the sky. These Happy Days are yours and mine Happy Days. And we know Flipper lives in a world full of wonder flying there-under under the sea. Baby if you've ever wondered - wondered whatever became of me. I'm living on the air in Cincinnati. Cincinnati WKRP. It's time to put on makeup. It's time to dress up right. It's time to raise the curtain on the Muppet Show tonight.
+                        </p>
+                        <p class="text-right">
+                            <a href="news_item.html" class="btn btn-primary text-white">
+                                Read more
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <!-- //News2 Section  End-->
+                <!-- New3 Section Start -->
+                <div class="blog thumbnail">
+                    <label>
+                        <a href="news_item.html"><h3 class="primary news_headings">Come along, Pond. Allons-y! Have a jelly baby </h3></a>
+                    </label>
+                    <img src="images/img_b3.jpg" alt="image" class="img-responsive">
+                    <div class="news_item_text_1">
+                        <p>
+                            But they got diff'rent strokes. It takes diff'rent strokes - it takes diff'rent strokes to move the world. Go Speed Racer. Go Speed Racer. Go Speed Racer go! That this group would somehow form a family that's the way we all became the Brady Bunch. No phone no lights no motor car not a single luxury. Like Robinson Crusoe it's primitive as can be. Well we're movin' on up to the east side to a deluxe apartment in the sky. These Happy Days are yours and mine Happy Days. And we know Flipper lives in a world full of wonder flying there-under under the sea. Baby if you've ever wondered - wondered whatever became of me. I'm living on the air in Cincinnati. Cincinnati WKRP. It's time to put on makeup. It's time to dress up right. It's time to raise the curtain on the Muppet Show tonight.
+                        </p>
+                        <p class="text-right">
+                            <a href="news_item.html" class="btn btn-primary text-white">
+                                Read more
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <!-- //News3 Section End -->
+            </div>
+            <div class="col-md-4 ">
+                <!-- Tabbable-Panel Start -->
+                <div class="tabbable-panel">
+                    <!-- Tabbablw-line Start -->
+                    <div class="tabbable-line">
+                        <!-- Nav Nav-tabs Start -->
+                        <ul class="nav nav-tabs ">
+                            <li class="active">
+                                <a href="#tab_default_1" data-toggle="tab">
+                                Popular </a>
+                            </li>
+                            <li>
+                                <a href="#tab_default_2" data-toggle="tab">
+                                Recent </a>
+                            </li>
+                        </ul>
+                        <!-- //Nav Nav-tabs End -->
+                        <!-- Tab-content Start -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_default_1">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object" src="images/image_13.jpg" alt="image">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <a href="#">
+                                            <h5 class="media-heading text-primary">Efficiently unleash cross-media information without cross-media value.</h5></a><span class="text-danger">May 10, 2015</span>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object" src="images/image_14.jpg" alt="image">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <a href="#">
+                                            <h5 class="media-heading text-primary">Efficiently unleash cross-media information without cross-media value.</h5></a><span class="text-danger">May 8, 2015</span>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object" src="images/image_15.jpg" alt="image">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <a href="#">
+                                            <h5 class="media-heading text-primary">Efficiently unleash cross-media information without cross-media value.</h5></a><span class="text-danger">May5, 2015</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_default_2">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object" src="images/image_15.jpg" alt="image">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <a href="#">
+                                            <h5 class="media-heading text-primary">Efficiently unleash cross-media information without cross-media value.</h5></a><span class="text-danger">May 13, 2015</span>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object" src="images/image_13.jpg" alt="image">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <a href="#">
+                                            <h5 class="media-heading text-primary">Efficiently unleash cross-media information without cross-media value.</h5></a><span class="text-danger">May 12, 2015</span>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="#">
+                                            <img class="media-object " src="images/image_14.jpg" alt="image">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                    <a href="#">
+                                        <h5 class="media-heading text-primary">Efficiently unleash cross-media information without cross-media value.</h5> </a>
+                                        <span class="text-danger">Feb 28, 2015
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="comments">
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="images/image_13.jpg" alt="image">
+                                </a>
+                            </div>
+                            <div class="media-body"><a href="#">
+                                <h5 class="media-heading text-primary">Efficiently unleash cross-media information without cross-media value.</h5> </a>
+                                <span class="text-danger">Feb 28, 2015</span>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                               
+                                <img class="media-object" src="images/image_14.jpg" alt="image">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                 <a href="#">
+                                    <h5 class="media-heading text-primary">Efficiently unleash cross-media information without cross-media value.</h5></a><span class="text-danger">May 11, 2015</span>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="images/image_15.jpg" alt="image">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h5 class="media-heading text-primary">Efficiently unleash cross-media information without cross-media value.</h5></a><span class="text-danger">Feb 28, 2015</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- Tab-content End -->
+            </div>
+            <!-- //Tabbablw-line End -->
+        </div>
+        <!-- Tabbable_panel End -->
+    </div>
+    <!-- //Container Section End -->
+   
+        <!-- Footer Section Start -->
+        <footer>
+            <div class="container footer-text">
+                <!-- About us Section Start -->
+                <div class="col-sm-4">
+                    <h4>About Us</h4>
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                    </p>
+                    <h4>Follow Us</h4>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#"> <i class="livicon" data-name="facebook" data-size="18" data-loop="true" data-c="#ccc" data-hc="#ccc"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"> <i class="livicon" data-name="twitter" data-size="18" data-loop="true" data-c="#ccc" data-hc="#ccc"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"> <i class="livicon" data-name="google-plus" data-size="18" data-loop="true" data-c="#ccc" data-hc="#ccc"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"> <i class="livicon" data-name="linkedin" data-size="18" data-loop="true" data-c="#ccc" data-hc="#ccc"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- About Us Section End -->
+                <!-- Contact Section Start -->
+                <div class="col-sm-4">
+                    <h4>Contact Us</h4>
+                    <ul class="list-unstyled">
+                        <li>35,Lorem Lis Street, Park Ave</li>
+                        <li>Lis Street, India.</li>
+                        <li><i class="livicon icon4 icon3" data-name="cellphone" data-size="18" data-loop="true" data-c="#ccc" data-hc="#ccc"></i>Phone:9140 123 4588</li>
+                        <li><i class="livicon icon4 icon3" data-name="printer" data-size="18" data-loop="true" data-c="#ccc" data-hc="#ccc"></i> Fax:400 423 1456</li>
+                        <li><i class="livicon icon3" data-name="mail-alt" data-size="20" data-loop="true" data-c="#ccc" data-hc="#ccc"></i> Email:<span>
+                        <a href="mailto:" class="text-success">info@joshadmin.com</a></span>
+                        </li>
+                        <li><i class="livicon icon4 icon3" data-name="skype" data-size="18" data-loop="true" data-c="#ccc" data-hc="#ccc"></i> Skype:
+                            <span class="text-success">Joshadmin</span>
+                        </li>
+                    </ul>
+                    <div class="news">
+                        <h4>News letter</h4>
+                        <p>subscribe to our newsletter and stay up to date with the latest news and deals</p>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="yourmail@mail.com" aria-describedby="basic-addon2">
+                            <a href="#" class="btn btn-primary text-white" role="button">Subscribe</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Contact Section End -->
+                <!-- Recent post Section Start -->
+                <div class="col-sm-4">
+                    <h4>Recent Posts</h4>
+                    <div class="media">
+                        <div class="media-left media-top">
+                            <a href="#">
+                                <img class="media-object" src="images/image_14.jpg" alt="image">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <p class="media-heading">Lorem Ipsum is simply dummy text of the printing and type setting industry dummy.
+                            </p>
+                            <p class="pull-right"><i>John Doe</i></p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left media-top">
+                            <a href="#">
+                                <img class="media-object" src="images/image_15.jpg" alt="image">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <p class="media-heading">Lorem Ipsum is simply dummy text of the printing and type setting industry dummy.
+                            </p>
+                            <p class="pull-right"><i>John Doe</i></p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left media-top">
+                            <a href="#">
+                                <img class="media-object" src="images/image_13.jpg" alt="image">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <p class="media-heading">Lorem Ipsum is simply dummy text of the printing and type setting industry dummy.
+                            </p>
+                            <p class="pull-right"><i>John Doe</i></p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left media-top">
+                            <a href="#">
+                                <img class="media-object" src="images/c1.jpg" alt="image">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <p class="media-heading">Lorem Ipsum is simply dummy text of the printing and type setting industry dummy.
+                            </p>
+                            <p class="pull-right"><i>John Doe</i></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- //Recent Post Section End -->
+            </div>
+        </footer>
+        <!-- //Footer Section End -->
+        <div class="copyright">
+            <div class="container">
+                <p>Copyright &copy; Josh Admin Template, 2015</p>
+            </div>
+        </div>
+        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Return to top" data-toggle="tooltip" data-placement="left">
+            <i class="livicon" data-name="plane-up" data-size="18" data-loop="true" data-c="#fff" data-hc="white"></i>
+        </a>
+        <!--global js starts-->
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/raphael.js"></script>
+        <script type="text/javascript" src="js/livicons-1.4.min.js"></script>
+        <script type="text/javascript" src="js/josh_frontend.js"></script>
+        <!--global js end-->
+        <!-- begining of page level js -->
+        <!--tags-->
+        <script src="vendors/tags/dist/bootstrap-tagsinput.js"></script>
+        <!-- end of page level js -->
+</body>
+
+</html>

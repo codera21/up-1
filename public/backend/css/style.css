@@ -1,0 +1,50 @@
+/*
+|--------------------------------------------------------------------------
+| Form
+|--------------------------------------------------------------------------
+*/
+.form-group.required .control-label:after {
+  content:" *";
+  color:red;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Alerts
+|--------------------------------------------------------------------------
+*/
+.alert ul {
+	margin:0;
+	padding:0
+}
+.alert ul li {
+    list-style:none;
+}
+
+ul.chzn-choices > li.search-field > input.default {
+    min-height: 30px;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Product Thumbnail
+|--------------------------------------------------------------------------
+*/
+.thumbnail img {
+    height:250px;
+    width:100%;
+}
+
+.thumbnail:hover {
+    cursor: hand;
+}
+
+.product-images-handle {
+    cursor: move;
+}
+
+.form-control{
+  font-size:14px !important;
+  font-weight:normal !important;
+}

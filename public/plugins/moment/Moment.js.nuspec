@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Moment.js</id>
+        <version>2.16.0</version>
+        <authors>Tim Wood, Iskren Chernev, Moment.js contributors</authors>
+        <owners>Cory Deppen, Iskren Chernev</owners>
+        <description>A lightweight javascript date library for parsing, manipulating, and formatting dates.</description>
+        <releaseNotes>
+            * Release Nov 9, 2016 -- full changelog https://gist.github.com/ichernev/17bffc1005a032cb1a8ac4c1558b4994
+            * [3515] [feature] Default to current week (fixes #2300)
+            * [3546] [bugfix] lazy loading of locales
+            * [3523] [3581] Fix multiple issue in parseZone
+        </releaseNotes>
+        <projectUrl>http://momentjs.com/</projectUrl>
+        <iconUrl>http://pbs.twimg.com/profile_images/482670411402858496/Xrtdc94q_normal.png</iconUrl>
+        <licenseUrl>https://raw.github.com/timrwood/moment/master/LICENSE</licenseUrl>
+        <tags>JavaScript date time browser node.js</tags>
+  </metadata>
+  <files>
+      <file src="moment.js" target="Content\Scripts" />
+      <file src="min/moment.min.js" target="Content\Scripts" />
+      <file src="min/moment-with-locales.js" target="Content\Scripts" />
+      <file src="min/moment-with-locales.min.js" target="Content\Scripts" />
+  </files>
+</package>

@@ -1,0 +1,334 @@
+@charset "utf-8";
+/* CSS Document */
+.grid
+{
+	
+	position:relative;
+	margin-bottom:10px;
+	
+	
+}
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+*/
+.grid div#gridHeader h1
+{
+
+	font-size:24px;
+	font-weight:bold;
+	text-align:center;
+}
+.grid div#gridHeader div#gridMainActions
+{
+	float:right;
+	margin-bottom:5px;
+}
+.grid div#gridHeader div#gridSearchForm
+{
+	clear:both;
+	margin:10px 0px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Body
+|--------------------------------------------------------------------------
+*/
+.grid div#gridBody
+{
+    margin-top:20px;
+	
+}
+
+.grid div#gridBody table.gridTable
+{
+}
+
+.grid div#gridBody table.gridTable thead
+{
+}
+.grid div#gridBody table.gridTable thead tr th
+{
+	
+	line-height:36px;
+	text-align:center;
+	font-size:12px;
+	
+}
+.grid div#gridBody table.gridTable thead tr th a
+{
+        display:block;
+        
+        
+	
+}
+.grid div#gridBody table.gridTable thead tr th a:hover,
+.grid div#gridBody table.gridTable thead tr th a.asc,
+.grid div#gridBody table.gridTable thead tr th a.desc:hover
+{
+
+}
+.grid div#gridBody table.gridTable thead tr th a.desc,
+.grid div#gridBody table.gridTable thead  tr th a.asc:hover
+{
+
+}
+.grid div#gridBody table.gridTable tbody
+{
+}
+.grid div#gridBody table.gridTable tbody tr.on
+{
+	background-color:#FCFCFC;
+}
+.grid div#gridBody table.gridTable tbody tr.off
+{
+	background-color:#FFFFFF;
+}
+.grid div#gridBody table.gridTable tbody tr.on:hover,
+.grid div#gridBody table.gridTable tbody tr.off:hover
+{
+	background-color:#FFFFCC;
+}
+.grid div#gridBody table.gridTable tbody tr.selected
+{
+	background-color:#E0ECF8;
+}
+
+.grid div#gridBody table.gridTable tr td
+{
+	padding:5px 8px;
+	line-height:25px;
+}
+
+.grid div#gridBody table.gridTable tr td input[type=text],
+.grid div#gridBody table.gridTable tr td input[type=password],
+.grid div#gridBody table.gridTable tr td textarea,
+.grid div#gridBody table.gridTable tr td select 
+{
+
+	width:auto;
+	border:1px solid #CCCCCC;
+	padding:4px;
+	-moz-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Footer
+|--------------------------------------------------------------------------
+*/
+.grid div#gridFooter
+{
+
+    min-height:50px;
+    margin-top: 20px;
+	
+}
+
+.grid div#gridFooter div#gridPagination
+{
+	margin:5px auto;
+	padding:0;
+	height:100%;
+	overflow:hidden;
+	text-align:center;
+}
+.grid div#gridFooter div#gridPagination ul
+{
+	margin:0;
+	padding:0;
+}
+.grid div#gridFooter div#gridPagination ul li
+{
+	float:left;
+	list-style:none;
+        height:36px;
+        margin-left: 10px;
+}
+.grid div#gridFooter div#gridPagination a,
+.grid div#gridFooter div#gridPagination span
+{
+	display:inline-block;
+	font-size:14px;
+	font-weight:bold;
+	line-height:24px;
+	height:24px;
+	margin:0 2px;
+	color:#949494;
+	text-decoration:none;
+	outline:none;
+
+}
+.grid div#gridFooter div#gridPagination a:hover
+{
+	color:#1E75BC;
+}
+.grid div#gridFooter div#gridPagination i
+{
+}
+.grid div#gridFooter div#gridPagination a:hover,
+.grid div#gridFooter div#gridPagination i:hover
+{
+	cursor:pointer;
+}
+.grid div#gridFooter div#gridPagination span.glyphicon{
+    display:none;
+}
+.grid div#gridFooter div#gridPagination input#page,
+.grid div#gridFooter div#gridPagination select#page
+{
+	width:60px;
+}
+
+
+.grid div#gridFooter  div#gridRecordsPerPage
+{
+	float:right;
+	margin-top:5px;
+	line-height:20px;
+	height:20px;
+}
+.grid div#gridFooter div#gridRecordsPerPage a,
+.grid div#gridFooter div#gridRecordsPerPage span
+{
+	display:block;
+	font-size:14px;
+	font-weight:bold;
+	line-height:20px;
+	height:20px;
+	margin:0 2px;
+	color:#949494;
+	text-decoration:none;
+	display:inline-block;
+	
+	background-repeat:no-repeat;
+	background-position:center ;
+	outline:none;
+
+}
+.grid div#gridFooter div#gridRecordsPerPage a:hover
+{
+    color:#1E75BC;
+}
+.grid div#gridFooter div#gridRecordsPerPage span
+{
+    color:#1E75BC;
+}
+.grid div#gridFooter div#gridRecordsPerPage input#limit,
+.grid div#gridFooter div#gridRecordsPerPage select#limit
+{
+	width:auto;
+	min-width:60px;
+        display: inline-block;
+
+}
+.grid div#gridFooter div#gridDisplayInfo
+{
+	float:left;
+	margin-top:5px;
+	line-height:40px;
+	height:40px;
+	font-style:italic;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Table
+|--------------------------------------------------------------------------
+*/
+table.gridTable {
+    clear: both;
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+    max-width: none !important
+}
+table.gridTable td,
+table.gridTable th {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box
+}
+table.gridTable thead>tr>th.sorting_asc,
+table.gridTable thead>tr>th.sorting_desc,
+table.gridTable thead>tr>th.sorting,
+table.gridTable thead>tr>td.sorting_asc,
+table.gridTable thead>tr>td.sorting_desc,
+table.gridTable thead>tr>td.sorting {
+    padding-right: 30px
+}
+table.gridTable thead>tr>th:active,
+table.gridTable thead>tr>td:active {
+    outline: none
+}
+table.gridTable thead .sorting,
+table.gridTable thead .sorting_asc,
+table.gridTable thead .sorting_desc,
+table.gridTable thead .sorting_asc_disabled,
+table.gridTable thead .sorting_desc_disabled {
+    cursor: pointer;
+    position: relative
+}
+table.gridTable thead .sorting:after,
+table.gridTable thead .sorting_asc:after,
+table.gridTable thead .sorting_desc:after,
+table.gridTable thead .sorting_asc_disabled:after,
+table.gridTable thead .sorting_desc_disabled:after {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    display: block;
+    font-family: 'Glyphicons Halflings';
+    opacity: 0.8;
+}
+table.gridTable thead .sorting:after {
+    opacity: 0.4;
+    content: "\e150"
+}
+table.gridTable thead .sorting_asc:after {
+    content: "\e155"
+}
+table.gridTable thead .sorting_desc:after {
+    content: "\e156"
+}
+table.gridTable thead .sorting_asc_disabled:after,
+table.gridTable thead .sorting_desc_disabled:after {
+    color: #eee
+}
+table.gridTable.table-condensed>thead>tr>th {
+    padding-right: 20px
+}
+table.gridTable.table-condensed .sorting:after,
+table.gridTable.table-condensed .sorting_asc:after,
+table.gridTable.table-condensed .sorting_desc:after {
+    top: 6px;
+    right: 6px
+}
+table.table-bordered.gridTable {
+    border-collapse: separate !important
+}
+table.table-bordered.gridTable th,
+table.table-bordered.gridTable td {
+    border-left-width: 0
+}
+table.table-bordered.gridTable th:last-child,
+table.table-bordered.gridTable th:last-child,
+table.table-bordered.gridTable td:last-child,
+table.table-bordered.gridTable td:last-child {
+    border-right-width: 0
+}
+table.table-bordered.gridTable tbody th,
+table.table-bordered.gridTable tbody td {
+    border-bottom-width: 0
+}
+table.gridTable>tbody>tr.child {
+    padding: 0.5em 1em
+}
+table.gridTable>tbody>tr.child:hover {
+    background: transparent !important
+}
+

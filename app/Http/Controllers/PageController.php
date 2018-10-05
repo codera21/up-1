@@ -1,0 +1,136 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+// Request & Response
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+// Models and Repo
+
+use App\Repositories\PageRepository;
+use App\Repositories\FAQRepository;
+use App\Repositories\NewsRepository;
+
+// Form Requests
+use App\Http\Requests\ContactFormRequest;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
+
+class PageController extends Controller
+{
+
+    protected $page;
+    protected $faq;
+    protected $news;
+
+    public function __construct(PageRepository $page, FAQRepository $faq, NewsRepository $news)
+    {
+        $this->page = $page;
+        $this->faq = $faq;
+        $this->news = $news;
+    }
+
+    public function index($page = null)
+    {
+        $language = App::getLocale();
+        if ($page == null) {
+            $pageName = 'home';
+        } else {
+            $pageName = $page->slug;
+        }
+        $page = $this->page->findWhere(['slug' => $pageName, 'language' => $language])->first();
+
+        return view('page.page-right-sidebar');
+    }
+
+    /**
+     * Show faq
+     *
+     * @return Response
+     */
+    public function faq(Request $request)
+    {
+
+        $faqs = DB::table('faqs')
+            ->where('lang', App::getLocale())
+            ->get();
+
+
+        return view('page.faq', ['faqs' => $faqs]);
+    }
+
+    /**
+     * Show news
+     *
+     * @return Response
+     */
+    public function news(Request $request)
+    {
+
+        //$news = $this->news->all();
+        $lang = App::getLocale();
+        // get material group
+        $news = DB::table('news')
+            ->where('lang', $lang)
+            ->get();
+
+        return view('page.news', ['news' => $news]);
+    }
+
+    /**
+     * Show news details
+     *
+     * @return Response
+     */
+    public function newsDetails($id)
+    {
+
+        $news = $this->news->find($id);
+
+        return view('page.news-detail', ['news' => $news]);
+    }
+
+    /**
+     * Show contact us
+     *
+     * @return Response
+     */
+    public function contact(Request $request)
+    {
+
+        return view('page.contact-us', []);
+    }
+
+    /**
+     * Show send contact us email
+     *
+     * @return Response
+     */
+
+    public function postContact(ContactFormRequest $request)
+    {
+
+        $name = $request->get('name');
+        $email = $request->get('email');
+        $message = $request->get('message');
+        \Mail::send('emails.contact',
+            array(
+                'name' => $request->get('name'),
+                'email' => $request->get('email'),
+                'user_message' => $request->get('message')
+            ), function ($message) use ($name, $email) {
+                $message->from($email, $name);
+                //$message->to(config('settings.email'), config('settings.sitename'))->subject('DNAsbook Digital Marketing - Contact Us');
+                $message->to('tariqalikhan19@gmail.com', config('settings.sitename'))->subject('DNAsbook Digital Marketing - Contact Us');
+            });
+        return \Redirect::route('contact')->with('success', trans('Thanks for contacting us!'));
+
+
+    }
+
+    public function active()
+    {
+        return view('not_active');
+    }
+}

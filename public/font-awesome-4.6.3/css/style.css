@@ -1,0 +1,171 @@
+body {
+    background: #F9F9F9;
+}
+
+.jumbotron {
+    background-image: url("https://simpleprabidhi.com/wp-content/uploads/2018/06/Dark-blue-wallpaper-HD-download.jpg");
+    height: 450px;
+    background-position: 60% 90%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.jumbotron .text-white {
+    color: #507FE2;
+    font-size: 4rem;
+    top: 12px !important;
+    text-align: center;
+    font-weight: 700;
+    padding-bottom: 50px;
+    padding-top: 30px;
+    text-shadow: 0px 0px 30px rgba(0, 48, 53, 0.81);
+    line-height: 37px;
+    size: 37px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.jumbotron .text-blue {
+    color: #ffffff;
+    text-align: center;
+    font-size: 3rem !important;
+    font-weight: 600;
+    line-height: 57px;
+    size: 57px;
+    font-family: 'Poppins', sans-serif;
+}
+/*html css */
+.text-description {
+    padding-top: 2.6rem;
+    text-align: center;
+    margin-top: 73px;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 2px;
+    line-height: 40px;
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.paragraph-content {
+    padding-bottom: 3rem;
+}
+
+.desc {
+    background-color: #ffffff;
+}
+
+.desc-paragraph {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin: 0 7%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.for-center {
+    text-align: center;
+    font-size: 18px;
+    padding-bottom: 14px;
+}
+
+.one {
+    font-size: 16px;
+}
+
+.photo-section {
+    width: auto;
+    height: auto;
+    text-align: center;
+    padding: 0 0 40px 0;
+}
+
+.testo-content {
+    background-color: #F9F9F9;
+}
+
+.text-testo {
+    padding-bottom: 0px;
+    font-weight: 600;
+    margin-top: 10px;
+    font-size: 3rem;
+}
+
+hr {
+    border: 2px solid #02c6d8;
+    margin: 24px auto 30px;
+    width: 60px;
+}
+
+/*contact section css*/
+.text-contact {
+    font-size: 3rem;
+    padding-top: 0.8rem;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 2px;
+    line-height: 40px;
+    font-weight: 600;
+}
+
+.contact-box {
+    padding-bottom: 3rem;
+    text-align: center;
+}
+
+.contact-section {
+    height: auto;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.info h3 {
+    font-size: 2rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.info p {
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+.btn-primary {
+    border-radius: 30px;
+    position: relative;
+    top: -188px;
+    color: #F9F9F9;
+    opacity: 0.5;
+}
+
+button:hover {
+    opacity: 1;
+}
+
+.next {
+    margin-right: 11%;
+    float: right;
+}
+
+.previous {
+    margin-left: 7.7%;
+}
+
+.gal-color {
+    background-color: #F9F9F9;
+    padding-bottom: 2rem;
+}
+
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#myImg:hover {
+    opacity: .7;
+}
+/*silk*/
+
+
+/*End of contact section css*/
+/*end of html css */
+
