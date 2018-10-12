@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\DB;
 // Request & Response
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
 // Facades
 use Grid;
 use Date;
 use Auth;
+
 
 // Models and Repo
 use App\Repositories\UserRepository;
@@ -395,6 +395,15 @@ class UserController extends Controller
                 )
             );
         return view('admin.user.user_commission', ['grid' => $grid]);
+    }
+    public function test()
+    {
+        /*$admin_user = DB::table('users')->get();*/
+        $admin_user = $this->user;
+        $user = Auth::user();
+        $users = $this->user->findByField('parent_id', $user->id);
+        $level = DB::table('levels')->get()->count();
+        return view('admin.user-commission.admin_tree',['users' => $users, 'level' => $level,'admin_user'=>$admin_user]);
     }
 }
         
