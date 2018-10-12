@@ -125,7 +125,7 @@ class UserController extends Controller
         if ($username1->username == $username) {
             $array = array('username' => $username);
             $user = $this->user->findByField($array)->first();
-      //      $goals = $this->goal->pushCriteria(new \App\Criteria\Admin\GoalCriteria())->all();
+            //      $goals = $this->goal->pushCriteria(new \App\Criteria\Admin\GoalCriteria())->all();
             $goals_table = DB::table('goals')->get();
             $goals = DB::table('goals')->where('lang', App::getLocale())->get();
             $userGoals = [];
@@ -166,5 +166,12 @@ class UserController extends Controller
         $users = $this->user->findByField('parent_id', $user->id);
         $level = DB::table('levels')->get()->count();
         return view('user.tree', ['users' => $users, 'level' => $level]);
+    }
+    public function tree_list()
+    {
+        $user = Auth::user();
+        $users = $this->user->findByField('parent_id', $user->id);
+        $level = DB::table('levels')->get()->count();
+        return view('user.subs_level', ['users' => $users, 'level' => $level]);
     }
 }

@@ -151,6 +151,8 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::get('/account', ['as' => '.account', 'uses' => 'UserController@edit']);
         Route::post('/account', ['as' => '.account', 'uses' => 'UserController@update']);
         Route::get('/tree', ['as' => '.tree', 'uses' => 'UserController@treeView']);
+        Route::get('/tree1', ['as' => '.tree1', 'uses' => 'UserController@tree_list']);
+        Route::get('/test', ['as' => '.test', 'uses' => 'UserController@tree_list']);
         Route::post('/{username}/comment', ['as' => '.{username}.comment', 'uses' => 'CommentController@save']);
         Route::get('/{username}', ['as' => '.{username}', 'uses' => 'UserController@profile']);
         Route::post('/{username}/goal', ['as' => '.{username}.goal', 'uses' => 'UserGoalController@save']);
@@ -414,4 +416,5 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     Route::get('{page}', ['as' => 'page', 'uses' => 'PageController@index']);
 
 });
+
 

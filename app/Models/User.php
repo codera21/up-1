@@ -98,7 +98,7 @@ class User extends Authenticatable
      */
     public function parent()
     {
-        return $this->belongsTo(self::class, 'parent_id');
+        return $this->belongsTo('App\Models\parent', 'parent_id');
     }
 
     /**

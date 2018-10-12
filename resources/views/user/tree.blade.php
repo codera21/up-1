@@ -23,7 +23,7 @@
                                     echo '&#x274C';
                                 }
                                 ?>
-                                <?php   $user->children?>
+                                <?php   ($user->children)?>
                                 @if(count($user->children))
                                     @include('user.tree-nodes',['childs' => $user->children,'count'=>$count,'level'=>$level])
                                 @endif
