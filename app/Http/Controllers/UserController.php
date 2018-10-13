@@ -174,4 +174,22 @@ class UserController extends Controller
         $level = DB::table('levels')->get()->count();
         return view('user.subs_level ', ['users' => $users, 'level' => $level]);
     }
+    public function pagination()
+    {
+        $no_of_result = $this->user->get()->count();
+        $result_per_page = 5;
+        $no_of_page = ceil($no_of_result/$result_per_page);
+        if(!isset($_GET['page']))
+        {
+            $page = 1;
+        }else{
+            $page = $_GET['page'];
+        }
+        $first_page_result = ($page-1)*$result_per_page;
+        $users = DB::table('users')
+            ->offset($first_page_result)
+            ->limit($result_per_page)
+            ->get();
+        return view('payment-profile.pagination_test',['no_of_page'=>$no_of_page,'users'=>$users]);
+    }
 }

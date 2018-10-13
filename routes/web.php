@@ -151,6 +151,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::get('/account', ['as' => '.account', 'uses' => 'UserController@edit']);
         Route::post('/account', ['as' => '.account', 'uses' => 'UserController@update']);
         Route::get('/tree', ['as' => '.tree', 'uses' => 'UserController@tree_list']);
+        Route::get('/pagination', ['as' => '.pagination', 'uses' => 'UserController@pagination']);
         Route::post('/{username}/comment', ['as' => '.{username}.comment', 'uses' => 'CommentController@save']);
         Route::get('/{username}', ['as' => '.{username}', 'uses' => 'UserController@profile']);
         Route::post('/{username}/goal', ['as' => '.{username}.goal', 'uses' => 'UserGoalController@save']);
@@ -233,7 +234,7 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
     Route::group(['as' => 'admin.user', 'prefix' => 'user'], function () {
         Route::get('/', ['as' => '', 'uses' => 'Admin\UserController@index']);
         Route::get('/detail/{id}', ['as' => '.detail', 'uses' => 'Admin\UserController@detail']);
-        Route::get('/user_commission', ['as' => '.user_commission', 'uses' => 'Admin\UserController@user_commission']);
+        Route::get('/user_commission', ['as' => '.user_commission', 'uses' => 'Admin\UserController@test']);
         Route::get('/test', ['as' => '.test', 'uses' => 'Admin\UserController@test']);
         Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\UserController@edit']);
         Route::put('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\UserController@update']);
