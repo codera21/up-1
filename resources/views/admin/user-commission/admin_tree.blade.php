@@ -7,10 +7,11 @@
 
 @section('content')
     <br>
-    @foreach($admin_user->get() as $item)
+    <?php $count = 1?>
+    @foreach($admin_user->paginate(3) as $item)
         <h4 style="color: #3a4559;font-weight: 700">{{$item->first_name}} {{$item->last_name}}</h4>
         <?php $item1 = $item->id;?>
-       <?php $admin_user_id = $admin_user->findbyfield('parent_id', $item1); ?>
+        <?php $admin_user_id = $admin_user->findbyfield('parent_id', $item1); ?>
         <br>
         <table class="table">
             <thead class="thead-dark">
@@ -188,7 +189,11 @@
             </tr>
             </tbody>
         </table>
-        @endforeach
+        <?php $count++?>
+    @endforeach
+    <div class="text-center">
+        {!! $admin_user->paginate(3)->links() !!}
+    </div>
     <style>
         th{
             font-size: 1.8rem;
