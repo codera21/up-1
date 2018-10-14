@@ -396,6 +396,7 @@ class UserController extends Controller
             );
         return view('admin.user.user_commission', ['grid' => $grid]);
     }
+
     public function test()
     {
         /*$admin_user = DB::table('users')->get();*/
@@ -403,7 +404,7 @@ class UserController extends Controller
         $user = Auth::user();
         $users = $this->user->findByField('parent_id', $user->id);
         $level = DB::table('levels')->get()->count();
-        return view('admin.user-commission.admin_tree',['users' => $users, 'level' => $level,'admin_user'=>$admin_user]);
+        return view('admin.user-commission.admin_tree', ['users' => $users, 'level' => $level, 'admin_user' => $admin_user]);
     }
 }
         

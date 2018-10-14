@@ -27,20 +27,45 @@
                     <br>
                 @endforeach
             </td>
-            <td>    @foreach($users as $user)
-                    <?php if ($user->is_active == 'YES'){
-                    echo '&#9989';
-                    }
-                    else{
-                    echo '&#x274C';
+            <td>
+                <?php $one = 0?>
+                @foreach($users as $user)
+                    <?php
+                    if ($user->is_active == 'YES') {
+                        echo '&#9989';
+                        $one++;
+                    } else {
+                        echo '&#x274C';
                     }?>
                     <br>
-                @endforeach  </td>
-            <td>$500</td>
-            <td>$500</td>
+                @endforeach
+            </td>
             <td>
                 @foreach($users as $user)
-                    <a href="#"><button type="button" class="btn btn-primary btn-xs">Payment</button>
+                    <?php
+                    if ($user->is_active == 'YES') {
+                        echo '$50';
+                    } else {
+                        echo 'Not paid';
+                    }?>
+                    <br>
+                @endforeach
+            </td>
+            <td>
+                @foreach($users as $user)
+                    <?php
+                    if ($user->is_active == 'YES') {
+                        echo '$5';
+                    } else {
+                        echo 'Null';
+                    }?>
+                    <br>
+                @endforeach
+            </td>
+            <td>
+                @foreach($users as $user)
+                    <a href="#">
+                        <button type="button" class="btn btn-primary btn-xs">Payment</button>
                     </a>
                     <br>
                 @endforeach
@@ -52,35 +77,64 @@
             <td>
                 @foreach($users as $user)
                     <?php $second_level = $user->children?>
-                @foreach($second_level as $second)
-                            <a href="">{{$second->first_name}} {{$second->last_name}}</a>
-                    <br>
-                @endforeach
+                    @foreach($second_level as $second)
+                        <a href="">{{$second->first_name}} {{$second->last_name}}</a>
+                        <br>
                     @endforeach
+                @endforeach
+            </td>
+            <td>
+                <?php $two = 0 ?>
+                @foreach($users as $user)
+                    <?php $second_level = $user->children?>
+                    @foreach($second_level as $second)
+                        <?php if ($second->is_active == 'YES') {
+                            echo '&#9989';
+                            $two++;
+                        } else {
+                            echo '&#x274C';
+                        }?>
+                        <br>
+                    @endforeach
+                @endforeach
             </td>
             <td>
                 @foreach($users as $user)
                     <?php $second_level = $user->children?>
                     @foreach($second_level as $second)
-                            <?php if ($second->is_active == 'YES'){
-                                echo '&#9989';
-                            }
-                            else{
-                                echo '&#x274C';
-                            }?>
+                        <?php if ($second->is_active == 'YES') {
+                            echo '$50';
+                        } else {
+                            echo 'Not paid';
+                        }?>
                         <br>
                     @endforeach
                 @endforeach
-               </td>
-            <td>$500</td>
-            <td>$500</td>
-            <td>@foreach($users as $user)
+            </td>
+            <td>
+                @foreach($users as $user)
                     <?php $second_level = $user->children?>
                     @foreach($second_level as $second)
-                            <a href="#"><button type="button" class="btn btn-primary btn-xs">Payment</button></a>
+                        <?php if ($second->is_active == 'YES') {
+                            echo '$5';
+                        } else {
+                            echo 'Null';
+                        }?>
                         <br>
                     @endforeach
-                @endforeach</td>
+                @endforeach
+            </td>
+            <td>
+                @foreach($users as $user)
+                    <?php $second_level = $user->children?>
+                    @foreach($second_level as $second)
+                        <a href="#">
+                            <button type="button" class="btn btn-primary btn-xs">Payment</button>
+                        </a>
+                        <br>
+                    @endforeach
+                @endforeach
+            </td>
         </tr>
         <tr>
             <th scope="row">3</th>
@@ -90,35 +144,70 @@
                     @foreach($second_level as $second)
                         <?php $third_level = $second->children?>
                         @foreach($third_level as $third)
-                                <a href="">{{$third->first_name}} {{$third->last_name}}</a>
-                        <br>
+                            <a href="">{{$third->first_name}} {{$third->last_name}}</a>
+                            <br>
+                        @endforeach
                     @endforeach
                 @endforeach
-                    @endforeach
             </td>
-            <td>  @foreach($users as $user)
+            <td>
+                <?php $three = 0?>
+                @foreach($users as $user)
                     <?php $second_level = $user->children?>
                     @foreach($second_level as $second)
                         <?php $third_level = $second->children?>
                         @foreach($third_level as $third)
-                                <?php if ($third->is_active == 'YES'){
-                                    echo '&#9989';
-                                }
-                                else{
-                                    echo '&#x274C';
-                                }?>
+                            <?php if ($third->is_active == 'YES') {
+                                echo '&#9989';
+                                $three++;
+                            } else {
+                                echo '&#x274C';
+                            }?>
                             <br>
                         @endforeach
                     @endforeach
-                @endforeach</td>
-            <td>$500</td>
-            <td>$500</td>
+                @endforeach
+            </td>
+            <td>
+                @foreach($users as $user)
+                    <?php $second_level = $user->children?>
+                    @foreach($second_level as $second)
+                        <?php $third_level = $second->children?>
+                        @foreach($third_level as $third)
+                            <?php if ($third->is_active == 'YES') {
+                                echo '$50';
+                            } else {
+                                echo 'Not paid';
+                            }?>
+                            <br>
+                        @endforeach
+                    @endforeach
+                @endforeach
+            </td>
+            <td>
+                @foreach($users as $user)
+                    <?php $second_level = $user->children?>
+                    @foreach($second_level as $second)
+                        <?php $third_level = $second->children?>
+                        @foreach($third_level as $third)
+                            <?php if ($third->is_active == 'YES') {
+                                echo '$5';
+                            } else {
+                                echo 'Null';
+                            }?>
+                            <br>
+                        @endforeach
+                    @endforeach
+                @endforeach
+            </td>
             <td> @foreach($users as $user)
                     <?php $second_level = $user->children?>
                     @foreach($second_level as $second)
                         <?php $third_level = $second->children?>
                         @foreach($third_level as $third)
-                                <a href="#"><button type="button" class="btn btn-primary btn-xs">Payment</button></a>
+                            <a href="#">
+                                <button type="button" class="btn btn-primary btn-xs">Payment</button>
+                            </a>
                             <br>
                         @endforeach
                     @endforeach
@@ -134,7 +223,66 @@
                         @foreach($third_level as $third)
                             <?php $forth_level = $third->children?>
                             @foreach($forth_level as $forth)
-                                    <a href="">{{$forth->first_name}} {{$forth->last_name}}</a>
+                                <a href="">{{$forth->first_name}} {{$forth->last_name}}</a>
+                                <br>
+                            @endforeach
+                        @endforeach
+                    @endforeach
+                @endforeach
+            </td>
+            <td>
+                <?php $four = 0?>
+                @foreach($users as $user)
+                    <?php $second_level = $user->children?>
+                    @foreach($second_level as $second)
+                        <?php $third_level = $second->children?>
+                        @foreach($third_level as $third)
+                            <?php $forth_level = $third->children?>
+                            @foreach($forth_level as $forth)
+                                <?php if ($forth->is_active == 'YES') {
+                                    echo '&#9989';
+                                    $four++;
+                                } else {
+                                    echo '&#x274C';
+                                }?>
+                                <br>
+                            @endforeach
+                        @endforeach
+                    @endforeach
+                @endforeach
+            </td>
+            <td>
+                @foreach($users as $user)
+                    <?php $second_level = $user->children?>
+                    @foreach($second_level as $second)
+                        <?php $third_level = $second->children?>
+                        @foreach($third_level as $third)
+                            <?php $forth_level = $third->children?>
+                            @foreach($forth_level as $forth)
+                                <?php if ($forth->is_active == 'YES') {
+                                    echo '$50';
+                                } else {
+                                    echo 'Not paid';
+                                }?>
+                                <br>
+                            @endforeach
+                        @endforeach
+                    @endforeach
+                @endforeach
+            </td>
+            <td>
+                @foreach($users as $user)
+                    <?php $second_level = $user->children?>
+                    @foreach($second_level as $second)
+                        <?php $third_level = $second->children?>
+                        @foreach($third_level as $third)
+                            <?php $forth_level = $third->children?>
+                            @foreach($forth_level as $forth)
+                                <?php if ($forth->is_active == 'YES') {
+                                    echo '$5';
+                                } else {
+                                    echo 'Null';
+                                }?>
                                 <br>
                             @endforeach
                         @endforeach
@@ -148,47 +296,35 @@
                         @foreach($third_level as $third)
                             <?php $forth_level = $third->children?>
                             @foreach($forth_level as $forth)
-                                    <?php if ($forth->is_active == 'YES'){
-                                        echo '&#9989';
-                                    }
-                                    else{
-                                        echo '&#x274C';
-                                    }?>
-                                <br>
-                            @endforeach
-                        @endforeach
-                    @endforeach
-                @endforeach</td>
-            <td>$500</td>
-            <td>$500</td>
-            <td> @foreach($users as $user)
-                    <?php $second_level = $user->children?>
-                    @foreach($second_level as $second)
-                        <?php $third_level = $second->children?>
-                        @foreach($third_level as $third)
-                            <?php $forth_level = $third->children?>
-                            @foreach($forth_level as $forth)
-                                    <a href="#"><button type="button" class="btn btn-primary btn-xs">Payment</button></a>
+                                <a href="#">
+                                    <button type="button" class="btn btn-primary btn-xs">Payment</button>
+                                </a>
                                 <br>
                             @endforeach
                         @endforeach
                     @endforeach
                 @endforeach</td>
         </tr>
+        <?php $total = $one+$two+$three+$four;?>
         <tr>
             <th colspan="3" style="text-align: center;font-size: 2rem">Total</th>
-            <td>@$2000</td>
-            <td>$2000</td>
+            <td>
+                ${{$total*50}}
+            </td>
+            <td>
+                ${{$total*5}}
+            </td>
 
         </tr>
         </tbody>
     </table>
     <style>
-        th{
+        th {
             font-size: 1.8rem;
-            color:black;
+            color: black;
         }
-        td{
+
+        td {
             font-size: 1.7rem;
         }
     </style>

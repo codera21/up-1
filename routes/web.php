@@ -133,7 +133,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
         Route::get('/cancel-onetime-payment', ['as' => '.cancel-onetime-payment', 'uses' => 'OnlinePaymentController@cancelOneTimePayment']);
         // Show Material's Box loaded from Sub Group
         Route::post('/show-material', ['as' => '.show-material', 'uses' => 'OnlinePaymentController@showMaterial']);
-        Route::get('/activate' , ['as' => '.activate' , 'uses' => 'OnlinePaymentController@activate' ]);
+        Route::get('/activate', ['as' => '.activate', 'uses' => 'OnlinePaymentController@activate']);
     });
 });
 
