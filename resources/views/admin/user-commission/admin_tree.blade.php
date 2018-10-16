@@ -9,7 +9,9 @@
     <br>
     <?php $count = 1?>
     @foreach($admin_user->paginate(3) as $item)
-        <h4 style="color: #3a4559;font-weight: 700">{{$item->first_name}} {{$item->last_name}}</h4>
+        <h4 style="color: #3a4559;font-weight: 700">
+            {{$item->first_name}} {{$item->last_name}}
+        </h4>
         <?php $item1 = $item->id;?>
         <?php $admin_user_id = $admin_user->findbyfield('parent_id', $item1); ?>
         <br>
@@ -68,7 +70,7 @@
                 <td>
                     @foreach($admin_user_id as $user)
                         <a href="#">
-                            <button type="button" class="btn btn-primary btn-xs">Payment</button>
+
                         </a>
                         <br>
                     @endforeach
@@ -131,7 +133,7 @@
                         <?php $second_level = $user->children?>
                         @foreach($second_level as $second)
                             <a href="#">
-                                <button type="button" class="btn btn-primary btn-xs">Payment</button>
+
                             </a>
                             <br>
                         @endforeach
@@ -210,7 +212,7 @@
                             <?php $third_level = $second->children?>
                             @foreach($third_level as $third)
                                 <a href="#">
-                                    <button type="button" class="btn btn-primary btn-xs">Payment</button>
+
                                 </a>
                                 <br>
                             @endforeach
@@ -256,7 +258,7 @@
                         @endforeach
                     @endforeach
                 </td>
-                <?php $total = $level_3+$level_4+$level_2+$level_1?>
+                <?php $total = $level_3 + $level_4 + $level_2 + $level_1?>
                 <td>
                     @foreach($admin_user_id as $user)
                         <?php $second_level = $user->children?>
@@ -304,7 +306,7 @@
                                 <?php $forth_level = $third->children?>
                                 @foreach($forth_level as $forth)
                                     <a href="#">
-                                        <button type="button" class="btn btn-primary btn-xs">Payment</button>
+
                                     </a>
                                     <br>
                                 @endforeach
@@ -321,7 +323,9 @@
                 <td>
                     ${{$total*5}}
                 </td>
-
+                <td>
+                    <button type="button" class="btn btn-primary btn-xs">Payment</button>
+                </td>
             </tr>
             </tbody>
         </table>
