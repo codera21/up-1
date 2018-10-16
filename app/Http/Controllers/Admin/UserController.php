@@ -400,6 +400,7 @@ class UserController extends Controller
     public function test()
     {
         /*$admin_user = DB::table('users')->get();*/
+
         $admin_user = $this->user;
         $user = Auth::user();
         $users = $this->user->findByField('parent_id', $user->id);

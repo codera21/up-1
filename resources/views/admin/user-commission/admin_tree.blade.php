@@ -7,13 +7,15 @@
 
 @section('content')
     <br>
-    <?php $count = 1?>
+    {!! $count = 1 !!}
     @foreach($admin_user->paginate(3) as $item)
         <h4 style="color: #3a4559;font-weight: 700">
             {{$item->first_name}} {{$item->last_name}}
         </h4>
         <?php $item1 = $item->id;?>
-        <?php $admin_user_id = $admin_user->findbyfield('parent_id', $item1); ?>
+        <?php $admin_user_id = $admin_user->findbyfield('parent_id', $item1);  ?>
+        <?php if(count($admin_user_id) > 0):  ?>
+
         <br>
         <table class="table">
             <thead class="thead-dark">
@@ -68,12 +70,7 @@
                     @endforeach
                 </td>
                 <td>
-                    @foreach($admin_user_id as $user)
-                        <a href="#">
-
-                        </a>
-                        <br>
-                    @endforeach
+                    &nbsp;
                 </td>
             </tr>
             {{--for level 2--}}
@@ -81,7 +78,7 @@
                 <th scope="row">2</th>
                 <td>
                     @foreach($admin_user_id as $user)
-                        <?php $second_level = $user->children?>
+                        <?php $second_level = $user->children ?>
                         @foreach($second_level as $second)
                             <a href="">{{$second->first_name}} {{$second->last_name}}</a>
                             <br>
@@ -129,145 +126,51 @@
                         @endforeach
                     @endforeach
                 </td>
-                <td>@foreach($admin_user_id as $user)
-                        <?php $second_level = $user->children?>
-                        @foreach($second_level as $second)
-                            <a href="#">
-
-                            </a>
-                            <br>
-                        @endforeach
-                    @endforeach</td>
+                <td> &nbsp;</td>
             </tr>
+
             {{--end of 2 start of 3--}}
-            <tr>
-                <th scope="row">3</th>
-                <td>
-                    @foreach($admin_user_id as $user)
-                        <?php $second_level = $user->children?>
-                        @foreach($second_level as $second)
-                            <?php $third_level = $second->children?>
-                            @foreach($third_level as $third)
-                                <a href="">{{$third->first_name}} {{$third->last_name}}</a>
-                                <br>
-                            @endforeach
-                        @endforeach
-                    @endforeach
-                </td>
-                <td>
-                    <?php $level_3 = 0; ?>
-                    @foreach($admin_user_id as $user)
-                        <?php $second_level = $user->children?>
-                        @foreach($second_level as $second)
-                            <?php $third_level = $second->children?>
-                            @foreach($third_level as $third)
-                                <?php if ($third->is_active == 'YES') {
-                                    echo '&#9989';
-                                    $level_3++;
-                                } else {
-                                    echo '&#x274C';
-                                }
-                                ?>
-                                <br>
-                            @endforeach
-                        @endforeach
-                    @endforeach
-                </td>
-                <td>
-                    @foreach($admin_user_id as $user)
-                        <?php $second_level = $user->children?>
-                        @foreach($second_level as $second)
-                            <?php $third_level = $second->children?>
-                            @foreach($third_level as $third)
-                                <?php if ($third->is_active == 'YES') {
-                                    echo '$50';
-                                } else {
-                                    echo 'Not paid';
-                                }?>
-                                <br>
-                            @endforeach
-                        @endforeach
-                    @endforeach
-                </td>
-                <td>
-                    @foreach($admin_user_id as $user)
-                        <?php $second_level = $user->children?>
-                        @foreach($second_level as $second)
-                            <?php $third_level = $second->children?>
-                            @foreach($third_level as $third)
-                                <?php if ($third->is_active == 'YES') {
-                                    echo '$5';
-                                } else {
-                                    echo 'Null';
-                                }?>
-                                <br>
-                            @endforeach
-                        @endforeach
-                    @endforeach
-                </td>
-                <td>
-                    @foreach($admin_user_id as $user)
-                        <?php $second_level = $user->children?>
-                        @foreach($second_level as $second)
-                            <?php $third_level = $second->children?>
-                            @foreach($third_level as $third)
-                                <a href="#">
-
-                                </a>
-                                <br>
-                            @endforeach
-                        @endforeach
-                    @endforeach</td>
-            </tr>
-            {{--end of 3 start of 4--}}
-            <tr>
-                <th scope="row">4</th>
-                <td>
-                    @foreach($admin_user_id as $user)
-                        <?php $second_level = $user->children?>
-                        @foreach($second_level as $second)
-                            <?php $third_level = $second->children?>
-                            @foreach($third_level as $third)
-                                <?php $forth_level = $third->children?>
-                                @foreach($forth_level as $forth)
-                                    <a href="">{{$forth->first_name}} {{$forth->last_name}}</a>
+            @if (true)
+                <tr>
+                    <th scope="row">3</th>
+                    <td>
+                        @foreach($admin_user_id as $user)
+                            <?php $second_level = $user->children?>
+                            @foreach($second_level as $second)
+                                <?php $third_level = $second->children?>
+                                @foreach($third_level as $third)
+                                    <a href="">{{$third->first_name}} {{$third->last_name}}</a>
                                     <br>
                                 @endforeach
                             @endforeach
                         @endforeach
-                    @endforeach
-                </td>
-                <td>
-                    <?php $level_4 = 0;?>
-                    @foreach($admin_user_id as $user)
-                        <?php $second_level = $user->children?>
-                        @foreach($second_level as $second)
-                            <?php $third_level = $second->children?>
-                            @foreach($third_level as $third)
-                                <?php $forth_level = $third->children?>
-                                @foreach($forth_level as $forth)
-                                    <?php if ($forth->is_active == 'YES') {
+                    </td>
+                    <td>
+                        <?php $level_3 = 0; ?>
+                        @foreach($admin_user_id as $user)
+                            <?php $second_level = $user->children?>
+                            @foreach($second_level as $second)
+                                <?php $third_level = $second->children?>
+                                @foreach($third_level as $third)
+                                    <?php if ($third->is_active == 'YES') {
                                         echo '&#9989';
-                                        $level_4++;
+                                        $level_3++;
                                     } else {
                                         echo '&#x274C';
-                                    }?>
+                                    }
+                                    ?>
                                     <br>
                                 @endforeach
                             @endforeach
                         @endforeach
-                    @endforeach
-                </td>
-                <?php $total = $level_3 + $level_4 + $level_2 + $level_1?>
-                <td>
-                    @foreach($admin_user_id as $user)
-                        <?php $second_level = $user->children?>
-                        @foreach($second_level as $second)
-                            <?php $third_level = $second->children?>
-                            @foreach($third_level as $third)
-                                <?php $forth_level = $third->children?>
-                                @foreach($forth_level as $forth)
-                                    <?php if ($forth->is_active == 'YES') {
+                    </td>
+                    <td>
+                        @foreach($admin_user_id as $user)
+                            <?php $second_level = $user->children?>
+                            @foreach($second_level as $second)
+                                <?php $third_level = $second->children?>
+                                @foreach($third_level as $third)
+                                    <?php if ($third->is_active == 'YES') {
                                         echo '$50';
                                     } else {
                                         echo 'Not paid';
@@ -276,17 +179,14 @@
                                 @endforeach
                             @endforeach
                         @endforeach
-                    @endforeach
-                </td>
-                <td>
-                    @foreach($admin_user_id as $user)
-                        <?php $second_level = $user->children?>
-                        @foreach($second_level as $second)
-                            <?php $third_level = $second->children?>
-                            @foreach($third_level as $third)
-                                <?php $forth_level = $third->children?>
-                                @foreach($forth_level as $forth)
-                                    <?php if ($forth->is_active == 'YES') {
+                    </td>
+                    <td>
+                        @foreach($admin_user_id as $user)
+                            <?php $second_level = $user->children?>
+                            @foreach($second_level as $second)
+                                <?php $third_level = $second->children?>
+                                @foreach($third_level as $third)
+                                    <?php if ($third->is_active == 'YES') {
                                         echo '$5';
                                     } else {
                                         echo 'Null';
@@ -295,26 +195,120 @@
                                 @endforeach
                             @endforeach
                         @endforeach
-                    @endforeach
-                </td>
-                <td>
-                    @foreach($admin_user_id as $user)
-                        <?php $second_level = $user->children?>
-                        @foreach($second_level as $second)
-                            <?php $third_level = $second->children?>
-                            @foreach($third_level as $third)
-                                <?php $forth_level = $third->children?>
-                                @foreach($forth_level as $forth)
+                    </td>
+                    <td>
+                        @foreach($admin_user_id as $user)
+                            <?php $second_level = $user->children?>
+                            @foreach($second_level as $second)
+                                <?php $third_level = $second->children?>
+                                @foreach($third_level as $third)
                                     <a href="#">
 
                                     </a>
                                     <br>
                                 @endforeach
                             @endforeach
+                        @endforeach</td>
+                </tr>
+            @endif
+            {{--end of 3 start of 4--}}
+            @if(true)
+                <tr>
+                    <th scope="row">4</th>
+                    <td>
+                        @foreach($admin_user_id as $user)
+                            <?php $second_level = $user->children?>
+                            @foreach($second_level as $second)
+                                <?php $third_level = $second->children?>
+                                @foreach($third_level as $third)
+                                    <?php $forth_level = $third->children?>
+                                    @foreach($forth_level as $forth)
+                                        <a href="">{{$forth->first_name}} {{$forth->last_name}}</a>
+                                        <br>
+                                    @endforeach
+                                @endforeach
+                            @endforeach
                         @endforeach
-                    @endforeach
-                </td>
-            </tr>
+                    </td>
+                    <td>
+                        <?php $level_4 = 0;?>
+                        @foreach($admin_user_id as $user)
+                            <?php $second_level = $user->children?>
+                            @foreach($second_level as $second)
+                                <?php $third_level = $second->children?>
+                                @foreach($third_level as $third)
+                                    <?php $forth_level = $third->children?>
+                                    @foreach($forth_level as $forth)
+                                        <?php if ($forth->is_active == 'YES') {
+                                            echo '&#9989';
+                                            $level_4++;
+                                        } else {
+                                            echo '&#x274C';
+                                        }?>
+                                        <br>
+                                    @endforeach
+                                @endforeach
+                            @endforeach
+                        @endforeach
+                    </td>
+                    <?php $total = $level_3 + $level_4 + $level_2 + $level_1?>
+                    <td>
+                        @foreach($admin_user_id as $user)
+                            <?php $second_level = $user->children?>
+                            @foreach($second_level as $second)
+                                <?php $third_level = $second->children?>
+                                @foreach($third_level as $third)
+                                    <?php $forth_level = $third->children?>
+                                    @foreach($forth_level as $forth)
+                                        <?php if ($forth->is_active == 'YES') {
+                                            echo '$50';
+                                        } else {
+                                            echo 'Not paid';
+                                        }?>
+                                        <br>
+                                    @endforeach
+                                @endforeach
+                            @endforeach
+                        @endforeach
+                    </td>
+                    <td>
+                        @foreach($admin_user_id as $user)
+                            <?php $second_level = $user->children?>
+                            @foreach($second_level as $second)
+                                <?php $third_level = $second->children?>
+                                @foreach($third_level as $third)
+                                    <?php $forth_level = $third->children?>
+                                    @foreach($forth_level as $forth)
+                                        <?php if ($forth->is_active == 'YES') {
+                                            echo '$5';
+                                        } else {
+                                            echo 'Null';
+                                        }?>
+                                        <br>
+                                    @endforeach
+                                @endforeach
+                            @endforeach
+                        @endforeach
+                    </td>
+                    <td>
+                        @foreach($admin_user_id as $user)
+                            <?php $second_level = $user->children?>
+                            @foreach($second_level as $second)
+                                <?php $third_level = $second->children?>
+                                @foreach($third_level as $third)
+                                    <?php $forth_level = $third->children?>
+                                    @foreach($forth_level as $forth)
+                                        <a href="#">
+
+                                        </a>
+                                        <br>
+                                    @endforeach
+                                @endforeach
+                            @endforeach
+                        @endforeach
+                    </td>
+                </tr>
+            @endif
             <tr>
                 <th colspan="3" style="text-align: center;font-size: 2rem">Total</th>
                 <td>
@@ -330,18 +324,12 @@
             </tbody>
         </table>
         <?php $count++?>
+        <?php else:?>
+        <h1> User don't have any commission</h1>
+        <?php endif;?>
     @endforeach
     <div class="text-center">
         {!! $admin_user->paginate(3)->links() !!}
     </div>
-    <style>
-        th {
-            font-size: 1.8rem;
-            color: black;
-        }
 
-        td {
-            font-size: 1.7rem;
-        }
-    </style>
 @endsection
