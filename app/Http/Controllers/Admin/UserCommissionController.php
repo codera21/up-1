@@ -292,6 +292,5 @@ class UserCommissionController extends Controller
     }
 
 
-
 }
 

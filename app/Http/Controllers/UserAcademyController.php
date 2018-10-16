@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -35,12 +34,13 @@ class UserAcademyController extends Controller
 
     protected $material;
 
-    public function __construct(PaymentRepository $academy,
+    public function __construct(
+        PaymentRepository $academy,
                                 PaymentDetailsRepository $academyDetail,
                                 MaterialSubGroupRepository $materialSubGroup,
                                 MaterialGroupRepository $materialGroup,
-                                MaterialRepository $material)
-    {
+                                MaterialRepository $material
+    ) {
         $this->academy = $academy;
         $this->academyDetail = $academyDetail;
 
@@ -76,6 +76,21 @@ class UserAcademyController extends Controller
     }
     public function viewGroup($groupID)
     {
+        $lang = App::getLocale();
+        $materialGrp = DB::table('material_group')
+          ->where('lang', $lang)
+          ->get();
+        $flag  = false;
+        foreach ($materialGrp as  $material) {
+            if ($material->id == $groupID) {
+                $flag = true;
+            }
+        }
+
+        if ($flag == false) {
+            return redirect('/user-academy/video');
+        }
+
         $material = DB::table('material')->where('group_id', $groupID)->where('id', '!=', 30)->orderby('title', 'asc')->get();
         return view('user-academy.view-material-group', ['material' => $material]);
     }
@@ -124,8 +139,7 @@ class UserAcademyController extends Controller
             );
 
             return redirect('/user-academy/viewGroup/' . $materialGroup->id);
-        } else if ($type == 'material') {
-
+        } elseif ($type == 'material') {
             $material = DB::table('material')
                 ->where('id', $id)
                 ->first();
@@ -157,5 +171,4 @@ class UserAcademyController extends Controller
             return  abort(404);
         }
     }
-
 }

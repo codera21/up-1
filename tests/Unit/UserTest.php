@@ -5,14 +5,14 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use User;
 
 class UserTest extends TestCase
 {
     use DatabaseTransactions;
+
     /**
-     * A basic test example.
-     * @test
-     * @return void
+     * @throws \Exception
      */
     public function user_full_name()
     {

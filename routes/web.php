@@ -1,21 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of the routes that are handled
-| by your application. Just tell Laravel the URIs it should respond
-| to using a Closure or controller method. Build something great!
-|
-*/
-
-/*
-|--------------------------------------------------------------------------
-| Patterns - Instead, you could have a handy list of patterns and reuse them everywhere:
-|--------------------------------------------------------------------------
-*/
 Route::pattern('id', '\d+');
 Route::pattern('id', '[A-Za-z0-9-]+');
 Route::pattern('hash', '[a-z0-9]+');
@@ -26,18 +10,6 @@ Route::pattern('slug', '[a-z0-9-]+');
 Route::pattern('username', '(.*)');
 Route::pattern('any', '(.*)');
 
-/*
-|--------------------------------------------------------------------------
-| Public
-|--------------------------------------------------------------------------
-*/
-
-// test
-Route::get('/test/paypal', ['as' => 'payPalBtn', 'uses' => 'TestController@payPalBtn']);
-Route::get('/test/commission', 'TestController@index')->name('testCommission');
-Route::get('/test/payforuser/{id}', 'TestController@payforuser')->name('payforuser');
-
-///
 Route::get('locale/{locale}', function ($locale) {
     \Session::put('locale', $locale);
     return redirect()->back();
@@ -45,26 +17,20 @@ Route::get('locale/{locale}', function ($locale) {
 
 Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('cache:clear');
-    // return what you want
     return redirect()->back();
 });
 
 Route::get('/clear-config', function () {
     $exitCode = Artisan::call('config:clear');
-    // return what you want
     return redirect()->back();
 });
 
 Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () {
-    // General
     Route::get('/', ['as' => 'home', 'uses' => 'PageController@index']);
     Route::get('/active', ['as' => '.active', 'uses' => 'PageController@active']);
     Route::group(['as' => 'view_user', 'prefix' => 'view_user'], function () {
         Route::get('/{id}', ['as' => '.{username}', 'uses' => 'UserController@public_profile']);
     });
-
-    //Authentication
-    //Auth::routes();
 
     // Authentication Routes...
     Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
@@ -143,9 +109,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
 | Private
 |--------------------------------------------------------------------------
 */
-
 Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVerified', 'isActive']], function () {
-    // User dashboard
     Route::group(['as' => 'user', 'prefix' => 'user'], function () {
         Route::get('/dashboard', ['as' => '.dashboard', 'uses' => 'UserController@dashboard']);
         Route::get('/account', ['as' => '.account', 'uses' => 'UserController@edit']);
@@ -416,5 +380,3 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     Route::get('{page}', ['as' => 'page', 'uses' => 'PageController@index']);
 
 });
-
-
