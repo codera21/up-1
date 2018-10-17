@@ -7,8 +7,7 @@
 
 @section('content')
     <br>
-    {!! $count = 1 !!}
-    @foreach($admin_user->paginate(3) as $item)
+    @foreach($admin_user->paginate(5) as $item)
         <h4 style="color: #3a4559;font-weight: 700">
             {{$item->first_name}} {{$item->last_name}}
         </h4>
@@ -137,7 +136,7 @@
                         @foreach($admin_user_id as $user)
                             <?php $second_level = $user->children?>
                             @foreach($second_level as $second)
-                                <?php $third_level = $second->children?>
+                                <?php $third_level = $second->children ?>
                                 @foreach($third_level as $third)
                                     <a href="">{{$third->first_name}} {{$third->last_name}}</a>
                                     <br>
@@ -251,7 +250,6 @@
                             @endforeach
                         @endforeach
                     </td>
-                    <?php $total = $level_3 + $level_4 + $level_2 + $level_1?>
                     <td>
                         @foreach($admin_user_id as $user)
                             <?php $second_level = $user->children?>
@@ -308,6 +306,7 @@
                         @endforeach
                     </td>
                 </tr>
+                <?php $total = $level_3 + $level_4 + $level_2 + $level_1?>
             @endif
             <tr>
                 <th colspan="3" style="text-align: center;font-size: 2rem">Total</th>
@@ -323,13 +322,12 @@
             </tr>
             </tbody>
         </table>
-        <?php $count++?>
         <?php else:?>
-        <h1> User don't have any commission</h1>
+        <h4> User don't have any commission</h4>
         <?php endif;?>
     @endforeach
     <div class="text-center">
-        {!! $admin_user->paginate(3)->links() !!}
+        {!! $admin_user->paginate(5)->links() !!}
     </div>
 
 @endsection
