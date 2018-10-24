@@ -50,7 +50,7 @@
                 </td>
                 <td> @foreach($admin_user_id as $item)
                         <?php if ($item->is_active == 'YES') {
-                            echo '$50';
+                            echo 'F250';
                             echo '<br>';
                         } else {
                             echo 'Not paid';
@@ -60,7 +60,7 @@
                 <td>
                     @foreach($admin_user_id as $item)
                         <?php if ($item->is_active == 'YES') {
-                            echo '$5';
+                            echo 'F25';
                             echo '<br>';
                         } else {
                             echo 'Not paid';
@@ -104,7 +104,7 @@
                         <?php $second_level = $user->children?>
                         @foreach($second_level as $second)
                             <?php if ($second->is_active == 'YES') {
-                                echo '$50';
+                                echo 'F250';
                             } else {
                                 echo 'Not paid';
                             }?>
@@ -117,7 +117,7 @@
                         <?php $second_level = $user->children?>
                         @foreach($second_level as $second)
                             <?php if ($second->is_active == 'YES') {
-                                echo '$5';
+                                echo 'F25';
                             } else {
                                 echo 'Null';
                             }?>
@@ -170,7 +170,7 @@
                                 <?php $third_level = $second->children?>
                                 @foreach($third_level as $third)
                                     <?php if ($third->is_active == 'YES') {
-                                        echo '$50';
+                                        echo 'F250';
                                     } else {
                                         echo 'Not paid';
                                     }?>
@@ -186,7 +186,7 @@
                                 <?php $third_level = $second->children?>
                                 @foreach($third_level as $third)
                                     <?php if ($third->is_active == 'YES') {
-                                        echo '$5';
+                                        echo 'F25';
                                     } else {
                                         echo 'Null';
                                     }?>
@@ -259,7 +259,7 @@
                                     <?php $forth_level = $third->children?>
                                     @foreach($forth_level as $forth)
                                         <?php if ($forth->is_active == 'YES') {
-                                            echo '$50';
+                                            echo 'F250';
                                         } else {
                                             echo 'Not paid';
                                         }?>
@@ -278,7 +278,7 @@
                                     <?php $forth_level = $third->children?>
                                     @foreach($forth_level as $forth)
                                         <?php if ($forth->is_active == 'YES') {
-                                            echo '$5';
+                                            echo 'F25';
                                         } else {
                                             echo 'Null';
                                         }?>
@@ -311,10 +311,10 @@
             <tr>
                 <th colspan="3" style="text-align: center;font-size: 2rem">Total</th>
                 <td>
-                    ${{$total*50}}
+                    F{{$total*250}}
                 </td>
                 <td>
-                    ${{$total*5}}
+                    F{{$total*25}}
                 </td>
                 <td>
                     <button type="button" class="btn btn-primary btn-xs">Payment</button>

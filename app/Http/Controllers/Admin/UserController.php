@@ -232,11 +232,10 @@ class UserController extends Controller
      */
     public function treeView(Request $request)
     {
-        $user = Auth::user(); // Admim ID
+        $user = Auth::user();
         $users = $this->user->findByField('parent_id', $user->id);
-        dd($users->children);
-        //dd($users);
-        return view('admin.user.tree', ['users' => $users]);
+        $level = DB::table('levels')->get()->count();
+        return view('admin.user.tree ', ['users' => $users, 'level' => $level]);
 
     }
 

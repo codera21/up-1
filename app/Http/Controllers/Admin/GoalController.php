@@ -19,7 +19,7 @@ use App\Repositories\GoalRepository;
 use App\Http\Requests\Admin\GoalSaveRequest;
 use App\Http\Requests\Admin\GoalUpdateRequest;
 
-
+use Illuminate\Support\Facades\DB;
 class GoalController extends Controller
 {
     protected $goal;
@@ -124,12 +124,20 @@ class GoalController extends Controller
      */
     public function save(GoalSaveRequest $request)
     {
-        $data = $request->except(['_token']);
+        /*$data = $request->except(['_token']);
 
         if ($goal = $this->goal->create($data)) {
             return redirect()->route('admin.goal')->with('success', trans('Goal has been saved successfully.'));
         } else {
             return redirect()->route('admin.goal.add')->withInput()->with('error', trans('Goal has not been saved.'));
+        }*/
+        $addgoal = DB::table('goals')->insert([
+            'goal_question' => $request->input('goal_question'),
+            'lang' => $request->input('lang')
+        ]);
+        if ($addgoal) {
+            return redirect()->route('admin.goal')
+                ->with('success', 'Goals added successfully');
         }
     }
 

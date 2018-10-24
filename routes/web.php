@@ -378,5 +378,4 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
       return \App\Models\Page::where('slug', $value)->where('language', $language)->first();
   });*/
     Route::get('{page}', ['as' => 'page', 'uses' => 'PageController@index']);
-
 });

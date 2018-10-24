@@ -1,3 +1,4 @@
+{{--
 <ul>
     @foreach($childs as $child)
         <li>
@@ -7,4 +8,4 @@
             @endif
         </li>
     @endforeach
-</ul>
+</ul>--}}
