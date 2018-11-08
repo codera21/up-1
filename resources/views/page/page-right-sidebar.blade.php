@@ -14,7 +14,7 @@
                 <video class="visible-desktop" id="hero-vid" poster="" autoplay
                        loop muted>
                     <source type="video/mp4"
-                            src="https://video.wixstatic.com/video/ea71bb_f91b98dc21b449f08046b5de2a2922e8/1080p/mp4/file.mp4"></source>
+                            src="https://video.wixstatic.com/video/ea71bb_f91b98dc21b449f08046b5de2a2922e8/1080p/mp4/file.mp4">
                 </video>
                 <div class="hero-content">
                     <div class="hero-subheading">{{ __('home_page.subheading')}}</div>

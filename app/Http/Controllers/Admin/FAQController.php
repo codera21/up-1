@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\DB;
 // Request & Response
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -108,23 +108,47 @@ class FAQController extends Controller
 
     public function save(FAQSaveRequest $request)
     {
-        $data = $request->except(['_token']);
+        /*$data = $request->except(['_token']);
 
         if ($faq = $this->faq->create($data)) {
             return redirect()->route('admin.faq')->with('success', trans('FAQ has been saved successfully.'));
         } else {
             return redirect()->route('admin.faq.add')->withInput()->with('error', trans('FAQ has not been saved.'));
+        }*/
+        $addfaqs = DB::table('faqs')->insert([
+            'question' => $request->input('question'),
+            'lang' => $request->input('lang'),
+            'slug' =>$request->input('slug'),
+            'answer'=>$request->input('answer')
+        ]);
+        if ($addfaqs) {
+            return redirect()->route('admin.faq')
+                ->with('success', 'faqs added successfully');
         }
     }
 
         public function update(FAQUpdateRequest $request, $Id)
     {
-        $data = $request->except(['_token']);
+        /*$data = $request->except(['_token']);
 
         if ($faq = $this->faq->update($data, $Id)) {
             return redirect()->route('admin.faq.edit', ['id' => $Id])->with('success', trans('FAQ has been updated successfully.'));
         } else {
             return redirect()->route('admin.faq.edit', ['id' => $Id])->withInput()->with('error', trans('FAQ has not been updated.'));
+        }*/
+        $array = array(
+            'id' => $Id
+        );
+        $faqupdate = DB::table('faqs')->where($array)
+            ->update([
+                'question' => $request->input('question'),
+                'lang' => $request->input('lang'),
+                'slug' =>$request->input('slug'),
+                'answer'=>$request->input('answer')
+            ]);
+        if ($faqupdate) {
+            return redirect()->route('admin.faq.edit', ['post' => $Id])
+                ->with('success', 'Faqs updated successfully');
         }
     }
 

@@ -78,7 +78,7 @@
                                         {{ Form::radio('paid_for', 'GROUP', true) }}
                                     </div>
                                     <div class="col-md-7">
-                                    	
+
                                         {!! Form::selectGroup('group_id', old('group_id'), ['id'=>'group_id', 'class'=>'form-control']) !!}
 
                                     </div>

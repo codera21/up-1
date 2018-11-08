@@ -92,7 +92,7 @@ class UserCommissionController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return '$'.Helper::moneyFormat($row->commission_amount);
+                            return 'F'.Helper::moneyFormat($row->commission_amount);
                         }
                     ),
                     array(
@@ -105,7 +105,7 @@ class UserCommissionController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return '$'.Helper::moneyFormat($row->opening_balance);
+                            return 'F'.Helper::moneyFormat($row->opening_balance);
                         }
                     ),
                     array(
@@ -118,7 +118,7 @@ class UserCommissionController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return '$'.Helper::moneyFormat($row->closing_balance);
+                            return 'F'.Helper::moneyFormat($row->closing_balance);
                         }
                     ),                    
                 )

@@ -27,7 +27,7 @@ class PaymentProfileSaveRequest extends FormRequest
             'payment_type' => 'required',
             'card_no' => 'required_if:payment_type,CARD',
             'card_exp_date' => 'required_if:payment_type,CARD',
-            'bank_name' => 'required_if:payment_type,BANK',
+            /*'bank_name' => 'required_if:payment_type,BANK',*/
             'bank_routing_no' => 'required_if:payment_type,BANK',
             'bank_account_no' => 'required_if:payment_type,BANK',
             'bank_account_type' => 'required_if:payment_type,BANK',

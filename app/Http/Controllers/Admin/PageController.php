@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+
 // Request & Response
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -224,7 +226,7 @@ class PageController extends Controller
             return redirect()->route('admin.page')->with('success',
                 trans('Page has been updated successfully.'));
         } else {
-            return redirect()->route('admin.page.edit', ['id' => $page_id])->withInput()->with('error',
+            return redirect()->route('admin.page.edit')->withInput()->with('error',
                 trans('Page has not been updated.'));
         }
     }
@@ -251,4 +253,58 @@ class PageController extends Controller
         }
     }
 
+//about page backend perspective only for frontend go directly to pagecontroller.php in controller
+    public function aboutindex()
+    {
+        $about_us = DB::table('about')->paginate(1);
+        return view('admin.about.index',['about_us'=>$about_us]);
+    }
+    public function aboutadd()
+    {
+        return view('admin.about.add');
+    }
+    public function aboutsave(request $request)
+    {
+        $addabout = DB::table('about')->insert([
+            'title' => $request->input('title'),
+            'description' =>$request->input('description'),
+            'slug' =>$request->input('slug'),
+            'lang'=>$request->input('lang'),
+        ]);
+        if ($addabout) {
+            return redirect()->route('admin.about')
+                ->with('success', 'About page added successfully');
+        }
+    }
+    public  function aboutedit($id)
+    {
+        $about = DB::table('about')->where('id',$id)->first();
+        return view('admin.about.edit',['about'=>$about]);
+    }
+    public function aboutupdate(request $request , $id)
+    {
+        $array = array(
+            'id' => $id
+        );
+        $faqupdate = DB::table('about')->where($array)
+            ->update([
+                'title' => $request->input('title'),
+                'slug' =>$request->input('slug'),
+                'description'=>$request->input('description'),
+                'lang' => $request->input('lang'),
+            ]);
+        if ($faqupdate) {
+            return redirect()->route('admin.about')
+                ->with('success', 'About pages updated successfully');
+        }
+    }
+    public function aboutdelete(request $request, $id)
+    {
+        $data = DB::table('about')->where('id',$id)->delete();
+        if($data)
+        {
+            return redirect()->route('admin.about')
+                ->with('success', 'Deleted successfully');
+        }
+    }
 }

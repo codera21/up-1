@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 // Request & Response
 use Illuminate\Http\Request;
@@ -99,23 +100,47 @@ class NewsController extends Controller
 
     public function save(NewsSaveRequest $request)
     {
-        $data = $request->except(['_token']);
-
+        /*$data = $request->except(['_token']);*/
+/*
         if ($news = $this->news->create($data)) {
             return redirect()->route('admin.news')->with('success', trans('News has been saved successfully.'));
         } else {
             return redirect()->route('admin.news.add')->withInput()->with('error', trans('News has not been saved.'));
+        }*/
+        $addnews = DB::table('news')->insert([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'lang' => $request->input('lang'),
+            'slug' => $request->input('slug'),
+        ]);
+        if ($addnews) {
+            return redirect()->route('admin.news')
+                ->with('success', 'News added successfully');
         }
     }
 
     public function update(NewsUpdateRequest $request, $Id)
     {
-        $data = $request->except(['_token']);
+        /*$data = $request->except(['_token']);
 
         if ($news = $this->news->update($data, $Id)) {
             return redirect()->route('admin.news.edit', ['id' => $Id])->with('success', trans('News has been updated successfully.'));
         } else {
             return redirect()->route('admin.news.edit', ['id' => $Id])->withInput()->with('error', trans('News has not been updated.'));
+        }*/
+        $array = array(
+            'id' => $Id
+        );
+        $newsupdate = DB::table('news')->where($array)
+            ->update([
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'lang' => $request->input('lang'),
+                'slug' => $request->input('slug'),
+            ]);
+        if ($newsupdate) {
+            return redirect()->route('admin.news.edit', ['post' => $Id])
+                ->with('success', 'News updated successfully');
         }
     }
 

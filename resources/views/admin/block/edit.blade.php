@@ -15,7 +15,7 @@
                     {!! Form::label('language', trans('Language'), ['class' => 'control-label']) !!}
                 </div>
                 <div class="col-md-6">
-                    {!! Form::select('language', ['en' => 'English', 'fr' => 'French'], $page->language, ['class'=>'form-control']) !!}
+                    {!! Form::select('language', ['en' => 'English', 'fr' => 'French'], $block->language, ['class'=>'form-control']) !!}
                 </div>
             </div>
             

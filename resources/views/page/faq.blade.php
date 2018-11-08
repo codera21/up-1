@@ -5,27 +5,24 @@
 @endsection
 
 @section('content')
-<div class="row">
-    
-    <div class="col-md-12">
-    	<ul>
+    <div class="row">
 
-        @foreach($faqs as $faq)
-        	<li><a href="#{{ $faq->question }}" style="text-decoration:underline;">{{ $faq->question }}</a></li>
-        @endforeach
-    	</ul>
+        <div class="col-md-12">
+            <ul>
 
+                @foreach($faqs as $faq)
+                    <li>{{ $faq->question }}</li>
+                @endforeach
+            </ul>
+            <ul>
 
-    	<ul>
+                @foreach($faqs as $faq)
+                    <li>
+                        <a name="{{ $faq->question }}">{!! $faq->answer !!}</a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
 
-    	@foreach($faqs as $faq)
-    		<li>
-
-    		<a name="{{ $faq->question }}">{!! $faq->answer !!}</a>
-    		</li>
-    	@endforeach
-    	</ul>
     </div>
-
-</div>
 @endsection

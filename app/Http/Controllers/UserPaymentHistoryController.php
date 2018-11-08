@@ -11,7 +11,6 @@ use Illuminate\Http\Response;
 use Grid;
 use Date;
 use Helper;
-
 // Models and Repo
 use App\Repositories\PaymentRepository;
 use App\Repositories\PaymentDetailsRepository;
@@ -101,8 +100,9 @@ class UserPaymentHistoryController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            //if($row->bank())
-                            //return $row->bank->bank_name.' '.$row->bank->account_title.' '.$row->bank->account_no;
+                            /*if($row->bank())
+                            return $row->bank->bank_name.' '.$row->bank->account_title.' '.$row->bank->account_no;*/
+                            /*return $row->bank_id;*/
                         }
                     ),
                     array(
@@ -145,7 +145,7 @@ class UserPaymentHistoryController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return '$'.Helper::moneyFormat($row->amount_paid);
+                            return 'F'.Helper::moneyFormat($row->amount_paid);
                         }
                     ),
                     array(
@@ -158,7 +158,7 @@ class UserPaymentHistoryController extends Controller
                         'value' => function ($row) {
                             return '<a href="' . route('payment-history.detail', ['id' => $row->id]) . '" class="btn btn-primary btn-xs text-white edit" >' . trans('app.details') . '</a>';
                         }
-                    ),                    
+                    ),
                 )
             );
 

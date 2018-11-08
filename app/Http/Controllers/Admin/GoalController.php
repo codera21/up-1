@@ -150,12 +150,24 @@ class GoalController extends Controller
      */
     public function update(GoalUpdateRequest $request, $Id)
     {
-        $data = $request->except(['_token']);
+        /*$data = $request->except(['_token']);
 
         if ($goal = $this->goal->update($data, $Id)) {
             return redirect()->route('admin.goal.edit', ['id' => $Id])->with('success', trans('Goal has been updated successfully.'));
         } else {
             return redirect()->route('admin.goal.edit', ['id' => $Id])->withInput()->with('error', trans('Goal has not been updated.'));
+        }*/
+        $array = array(
+            'id' => $Id
+        );
+        $goalupdate = DB::table('goals')->where($array)
+            ->update([
+                'goal_question' => $request->input('goal_question'),
+                'lang' => $request->input('lang')
+            ]);
+        if ($goalupdate) {
+            return redirect()->route('admin.goal.edit', ['post' => $Id])
+                ->with('success', 'Goal updated successfully');
         }
     }
 

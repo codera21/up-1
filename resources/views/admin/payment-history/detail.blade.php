@@ -89,12 +89,12 @@
                     @if($payment->paymentDetails->count() > 0)
                         @foreach($payment->paymentDetails as $item)                              
                             <tr>
-                                <td>{{ $item->materialGroup->title }}</td>
-                                <td>{{ $item->materialSubGroup->title }}</td>
-                                <td>{{ $item->material->title }}</td>
+                                <td></td>
+                                <td>{{ $item->materialGroup['title'] }}</td>
+                                <td>{{ $item->material['title'] }}</td>
                                 <td>{{ $item->start_date }}</td>
                                 <td>{{ $item->end_date }}</td>
-                                <td>${{ Helper::moneyFormat($item->amount) }}</td>
+                                <td>F{{ Helper::moneyFormat($item->amount) }}</td>
                             </tr>
                         @endforeach
                     @endif

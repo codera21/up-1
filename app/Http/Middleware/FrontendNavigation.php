@@ -31,9 +31,7 @@ class FrontendNavigation
             $menu->get('payments')
                     ->add(trans('navigation.payment_profiles'), route('payment-profile'))
                     ->active('payment.*');
-            $menu->get('payments')
-                    ->add(trans('navigation.add_offline_payment'), route('offline-payment.add'))
-                    ->active('offline-payment.add.*');
+
             $menu->get('payments')
                     ->add(trans('navigation.online_purchase'), route('online-payment.add'))
                     ->active('online-payment.*');
@@ -50,7 +48,7 @@ class FrontendNavigation
             // Help
             $menu->add(trans('navigation.help'), route('faq'));
             $menu->add(trans('navigation.news'), route('news'));
-            $menu->add(trans('navigation.about'), 'http://'.$_SERVER['SERVER_NAME'].'/about-us');
+            $menu->add(trans('navigation.about'), route('about'));
             $menu->add(trans('navigation.contact_us'), route('contact'));
         });
 

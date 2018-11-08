@@ -10,7 +10,6 @@
         <div class="col-sm-8 col-md-offset-2">
             
             <div class="featured-box featured-box-primary">
-    
                 <div class="box-content">
 
                     {!! Form::open(['id' => 'reset-password', 'url' => '/password/reset', 'method' => 'post', 'files' => false, 'class'=>'form-horizontal']) !!}

@@ -50,6 +50,7 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     // All below pages will be in Page Controller
     // FAQs
     Route::get('/faq', ['as' => 'faq', 'uses' => 'PageController@faq']);
+    Route::get('/about', ['as' => 'about', 'uses' => 'PageController@about']);
     // News
     Route::group(['as' => 'news', 'prefix' => 'news'], function () {
         Route::get('/', ['as' => '', 'uses' => 'PageController@news']);
@@ -198,7 +199,9 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
     Route::group(['as' => 'admin.user', 'prefix' => 'user'], function () {
         Route::get('/', ['as' => '', 'uses' => 'Admin\UserController@index']);
         Route::get('/detail/{id}', ['as' => '.detail', 'uses' => 'Admin\UserController@detail']);
-        Route::get('/user_commission', ['as' => '.user_commission', 'uses' => 'Admin\UserController@test']);
+        /*Route::get('/user_commission', ['as' => '.user_commission', 'uses' => 'Admin\UserController@test']);*/
+        Route::get('/user_commission', ['as' => '.user_commission', 'uses' => 'Admin\UserController@test2']);
+        Route::get('/details/{id}', ['as' => '.details', 'uses' => 'Admin\UserController@details']);
         Route::get('/test', ['as' => '.test', 'uses' => 'Admin\UserController@test']);
         Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\UserController@edit']);
         Route::put('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\UserController@update']);
@@ -250,6 +253,15 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
         Route::put('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\FAQController@update']);
         Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\FAQController@delete']);
 
+    });
+    //About us
+    Route::group(['as' => 'admin.about', 'prefix' => 'about'], function () {
+        Route::get('/', ['as' => '', 'uses' => 'Admin\PageController@aboutindex']);
+        Route::get('/add', ['as' => '.add', 'uses' => 'Admin\PageController@aboutadd']);
+        Route::post('/add', ['as' => '.add', 'uses' => 'Admin\PageController@aboutsave']);
+        Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\PageController@aboutedit']);
+        Route::put('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\PageController@aboutupdate']);
+        Route::get('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\PageController@aboutdelete']);
     });
 
     // Material Group

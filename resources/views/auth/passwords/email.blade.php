@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-
+    <h4>Note: Please check you span folder for password reset link.</h4>
 <div class="featured-boxes">
     <div class="row">
         <div class="col-sm-8 col-md-offset-2">

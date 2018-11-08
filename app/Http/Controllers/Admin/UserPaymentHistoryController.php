@@ -127,7 +127,7 @@ class UserPaymentHistoryController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return $row->bank->bank_name.' '.$row->bank->account_title.' '.$row->bank->account_no;
+                            /*return $row->bank->bank_name.' '.$row->bank->account_title.' '.$row->bank->account_no;*/
                         }
                     ),
                     array(
@@ -170,7 +170,7 @@ class UserPaymentHistoryController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return '$'.Helper::moneyFormat($row->amount_paid);
+                            return 'F'.Helper::moneyFormat($row->amount_paid);
                         }
                     ),
                     array(

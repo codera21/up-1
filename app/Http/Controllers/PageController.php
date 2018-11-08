@@ -60,6 +60,18 @@ class PageController extends Controller
         return view('page.faq', ['faqs' => $faqs]);
     }
 
+    public function about()
+    {
+        $lang = App::getLocale();
+        $data = array(
+            'lang' => $lang
+        );
+        $data1['about_us'] = DB::table('about')->where($data)->get();
+        /*dd($data1);*/
+        return view('page.about', $data1);
+    }
+
+
     /**
      * Show news
      *
@@ -74,7 +86,6 @@ class PageController extends Controller
         $news = DB::table('news')
             ->where('lang', $lang)
             ->get();
-
         return view('page.news', ['news' => $news]);
     }
 
@@ -99,7 +110,7 @@ class PageController extends Controller
     public function contact(Request $request)
     {
 
-        return view('page.contact-us', []);
+        return view('page.contact-us');
     }
 
     /**
