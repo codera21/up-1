@@ -5,7 +5,5 @@
 @endsection
 
 @section('content')
-
-{!! $grid->render() !!}
-	
+    {!! $grid->render() !!}
 @endsection

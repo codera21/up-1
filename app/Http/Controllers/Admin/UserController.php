@@ -53,10 +53,11 @@ class UserController extends Controller
 
         //Get model
         $this->user->pushCriteria(new \App\Criteria\Admin\UserCriteria());
+        $grid = new Grid();
         $users = $this->user;
 
         //Setup grid
-        $grid = new Grid();
+
         $grid->setGridName('user-grid')->setBaseUrl(route('admin.user'))
             ->setPaginator($users, 'created_at', 'desc', 25)
             ->setMainActions(//Optional
@@ -180,8 +181,7 @@ class UserController extends Controller
                     ),
                 )
             );
-
-        return view('admin.user.index', ['grid' => $grid]);
+        return view('admin.user.index',['grid'=>$grid]);
     }
 
     /**
@@ -408,7 +408,7 @@ class UserController extends Controller
     }
     public function test2()
     {
-        $admin['list'] = DB::table('users')->get();
+        $admin['list'] = DB::table('users')->where('is_active','YES')->paginate(25);
         return view('admin.user-commission.user_list',$admin);
     }
     public function details($id)
