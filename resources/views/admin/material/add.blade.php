@@ -86,10 +86,10 @@
 
             <div class="form-group required" id="material-course" style="display:none;">
                 <div class="col-md-4">
-                    {!! Form::label('course_url', trans('Course File (PDF, DOC, DOCX)'), ['class' => 'control-label']) !!}
+                    {!! Form::label('url', trans('Url'), ['class' => 'control-label']) !!}
                 </div>
                 <div class="col-md-6">
-                    {!! Form::file('course_url') !!}
+                    {!! Form::text('url', old('url'), ['id'=>'url', 'class'=>'form-control']) !!}
                 </div>
             </div>
 

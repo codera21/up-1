@@ -30,7 +30,8 @@ class MaterialUpdateRequest extends FormRequest
             'slug' => 'required|max:255',
             'material_type' => 'required',
             'video_url' => 'mimes:flv,mp4|max:12000',
-            'course_url' => 'mimes:doc,docx,pdf',
+            /*'course_url' => 'mimes:doc,docx,pdf',*/
+            'course_url' => '',
             'price' => 'required|numeric',
             //'payment_type' => 'required',
         ];

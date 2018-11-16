@@ -21,10 +21,10 @@
 
             <div class="form-group">
                 <div class="col-md-4">
-                    {!! Form::label('parent_id', trans('Parent Page'), ['class' => 'control-label']) !!}
+                    {{--{!! Form::label('parent_id', trans('Parent Page'), ['class' => 'control-label']) !!}--}}
                 </div>
                 <div class="col-md-6">
-                    {!! Form::selectPage('parent_id', old('parent_id'), ['class'=>'form-control']) !!}
+                    {{--{!! Form::selectPage('parent_id', old('parent_id'), ['class'=>'form-control']) !!}--}}
                 </div>
             </div>
 

@@ -144,4 +144,11 @@ class PageController extends Controller
     {
         return view('not_active');
     }
+    public function pages($slug)
+    {
+        $lang = App::getLocale();
+        $array = array('slug'=>$slug,'language'=>$lang);
+        $data['data'] = DB::table('pages')->where($array)->get();
+        return view('page.pages',$data);
+    }
 }

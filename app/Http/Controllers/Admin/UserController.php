@@ -249,21 +249,14 @@ class UserController extends Controller
         }
         return $list;
     }
+
     public function treeView(Request $request)
     {
-        /*$user = Auth::user();
+        $user = Auth::user();
         $users = $this->user->findByField('parent_id', $user->id);
         $level = DB::table('levels')->get()->count();
-        return view('admin.user.tree ', ['users' => $users, 'level' => $level]);*/
+        return view('admin.user.tree ', ['users' => $users, 'level' => $level]);
         /////////////////////////////////////////////////
-        $user = Auth::user();
-        $users = DB::table('users')->where('parent_id',$user->id)->get();
-        $second_level = $this->second($users)->get();
-        foreach ($second_level as $item)
-        {
-            $third_level = DB::table('users')->where('parent_id',$item->id)->get();
-        }
-        /*$array_list = $this->array_list($second_level);*/
     }
 
     /**

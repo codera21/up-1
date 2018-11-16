@@ -37,5 +37,9 @@ class IpnController extends Controller
         // Reply with an empty 200 response to indicate to paypal the IPN was received correctly.
         header("HTTP/1.1 200 OK");
     }
+    public function smp()
+    {
+        echo 'ashish';
+    }
 
 }

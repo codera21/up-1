@@ -1,43 +1,35 @@
 @extends('layouts.frontend.default')
-
 @section('page_title')
     {{ trans('user_academy.my_academy') }}
 @endsection
 
 @section('content')
-    @foreach ($materialList as $material)
-        <div class="col-sm-6 col-lg-4 col-md-4">
-            <div class="thumbnail">
-                <a href="{!! url('user-academy/viewpdf/' . $material->id)   !!}">
-                    <img src="https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/user_photos/000/332/699/datas/profile.jpg"
-                         style="width: 700px; height: 300px">
-                </a>
-                <div class="caption">
-                    <h4 class="pull-right text-success">${{$material->price}}</h4>
-
-                    <h4>
-
-                        <a href="{!! url('user-academy/viewpdf/' . $material->id)   !!}">{{ $material->title }}</a>
-
-                    </h4>
-                    <hr>
-                    <p class="description">{!!  str_limit($material->description,  $limit = 150 ,  $end ='... <a href="' . url('user-academy/viewpdf/' . $material->id) ) . '">read more</a>"'  !!}</p>
+    @foreach ($materialGroup as $materialGrp)
+        @if($materialGrp->group_thumbnail_url != '' && $materialGrp->group_thumbnail_url != null )
+            <div class="col-sm-6 col-lg-4 col-md-4">
+                <div class="thumbnail">
+                    <div class="caption">
+                        @if($materialGrp->price > 0.00)
+                            <h4 class="pull-right text-success">${{$materialGrp->price}}</h4>
+                        @endif
+                        <h4>
+                            <a href="{!! url('user-academy/viewGroup/' . $materialGrp->id)   !!}">{{ $materialGrp->title }}</a>
+                        </h4>
+                        <hr>
+                    </div>
+                    <a href="{!! url('user-academy/courseGroup/' . $materialGrp->id)!!}">
+                        <img src="{{$materialGrp->group_thumbnail_url}}"
+                             style="width: 700px; height: 300px; margin-top: 0"/>
+                    </a>
                 </div>
             </div>
-        </div>
-
-
+        @endif
     @endforeach
 @endsection
-
 <style>
-    .description {
-        /*height: 100px;*/
-    }
-
     .thumbnail {
         margin: 20px 20px 0 0;
-        height: 500px;
+        height: 425px;
     }
 
     .thumbnail:hover {

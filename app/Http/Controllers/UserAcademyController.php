@@ -61,8 +61,9 @@ class UserAcademyController extends Controller
 
     public function view_course()
     {
-        $materialList = DB::table('material')->where('material_type', 'COURSE')->get();
-        return view('user-academy.view_course', ['materialList' => $materialList]);
+        $lang = App::getLocale();
+        $materialGroup = DB::table('material_group')->where('lang',$lang)->get();
+        return view('user-academy.view_course', ['materialGroup' => $materialGroup]);
     }
     public function viewMaterial($id)
     {
@@ -94,6 +95,27 @@ class UserAcademyController extends Controller
         $material = DB::table('material')->where('group_id', $groupID)->where('id', '!=', 30)->orderby('title', 'asc')->get();
         return view('user-academy.view-material-group', ['material' => $material]);
     }
+    public function courseGroup($groupID)
+    {
+        $lang = App::getLocale();
+        $materialGrp = DB::table('material_group')
+            ->where('lang', $lang)
+            ->get();
+        $flag  = false;
+        foreach ($materialGrp as  $material) {
+            if ($material->id == $groupID) {
+                $flag = true;
+            }
+        }
+
+        if ($flag == false) {
+            return redirect('/user-academy/course');
+        }
+
+        $material = DB::table('material')->where('group_id', $groupID)->where('material_type','COURSE')->orderby('title', 'asc')->get();
+        return view('user-academy.view_pdf_group', ['material' => $material]);
+    }
+
     public function groupMaterialPayment($groupID)
     {
         $materialGroup = DB::table('material_group')

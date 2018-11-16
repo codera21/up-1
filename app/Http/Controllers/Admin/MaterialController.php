@@ -314,14 +314,14 @@ class MaterialController extends Controller
     {
 
 
-        $data = $request->except(['_token', 'video_url', 'course_url', 'thumbnail']);
+        $data = $request->except(['_token', 'video_url', 'thumbnail']);
 
         $data['enable_payment_button'] = $request->input('enable_payment_button');
 
         // Check Payment Type button
         $materialGroup = $this->materialGroup->find($data['group_id']);
         $data['payment_type'] = $materialGroup->payment_type;
-
+        $data['course_url'] = $request->input('url');
         // Online Payment with Paypal starts here
 //        if ($data['payment_type'] == 'RECURRING') {
 //
@@ -416,7 +416,7 @@ class MaterialController extends Controller
             $data['video_url'] = asset($local->url($fileName));
         }
 
-        if ($request->hasFile('course_url')) {
+        /*if ($request->hasFile('course_url')) {
             $file = $request->file('course_url');
             $fileName = date('Ymd_His') . '_' . $file->getClientOriginalName();
             $fileRelativePath = $local->putFileAs('', $file, $fileName);
@@ -424,7 +424,7 @@ class MaterialController extends Controller
             $fileUrl = asset($storagePath);
             //$fileUrl                = public_path($storagePath);
             $data['course_url'] = $fileUrl;
-        }
+        }*/
 
 
         if ($material = $this->material->create($data)) {
@@ -446,6 +446,7 @@ class MaterialController extends Controller
         $data = $request->except(['_token']);
 
         $data['enable_payment_button'] = $request->input('enable_payment_button');
+        $data['course_url'] = $request->input('course_url');
         // Check Payment Type button
         $materialGroup = $this->materialGroup->find($data['group_id']);
         $data['payment_type'] = $materialGroup->payment_type;

@@ -9,7 +9,7 @@
 <div class="ibox float-e-margins">
     <div class="ibox-content">
         {!! Form::open(array('id' => 'material', 'method' => 'put', 'files' => true,'class'=>'form-horizontal')) !!}
-	
+
             <div class="form-group required">
                 <div class="col-md-4">
                     {!! Form::label('group_id', trans('Group'), ['class' => 'control-label']) !!}
@@ -36,22 +36,32 @@
                     {!! Form::text('title', old('title', $material->title), ['id'=>'title', 'class'=>'form-control']) !!}
                 </div>
             </div>
-                                                                
+
             <div class="form-group required">
                 <div class="col-md-4">
                     {!! Form::label('slug', trans('Slug'), ['class' => 'control-label']) !!}
                 </div>
                 <div class="col-md-6">
-                    {!! Form::text('slug', old('slug', $material->slug), ['id'=>'slug', 'class'=>'form-control']) !!}                    
+                    {!! Form::text('slug', old('slug', $material->slug), ['id'=>'slug', 'class'=>'form-control']) !!}
                 </div>
             </div>
+                {{--edit url--}}
 
+        <div class="form-group required">
+            <div class="col-md-4">
+                {!! Form::label('Url', trans('Url'), ['class' => 'control-label']) !!}
+            </div>
+            <div class="col-md-6">
+                {!! Form::text('course_url', old('title', $material->course_url), ['id'=>'course_url', 'class'=>'form-control']) !!}
+            </div>
+        </div>
+        {{--end of edit--}}
             <div class="form-group required">
                 <div class="col-md-4">
                     {!! Form::label('material_type', trans('Material Type'), ['class' => 'control-label']) !!}
                 </div>
                 <div class="col-md-6">
-                    {!! Form::select('material_type', ['VIDEO' => 'Video', 'COURSE' => 'Course'], old('material_type', $material->material_type), ['class'=>'form-control']) !!}                    
+                    {!! Form::select('material_type', ['VIDEO' => 'Video', 'COURSE' => 'Course'], old('material_type', $material->material_type), ['class'=>'form-control']) !!}
                 </div>
             </div>
 
@@ -70,7 +80,7 @@
                     {!! Form::text('video_url_name', old('video_url_name'), ['id'=>'video_url_name', 'class'=>'form-control']) !!}
 
                 </div>
-               
+
             </div>
 
             <div class="form-group required">
@@ -87,16 +97,16 @@
                     {!! Form::label('description', trans('Description'), ['class' => 'control-label']) !!}
                 </div>
                 <div class="col-md-8">
-                    {!! Form::textarea('description', old('description'), ['id'=>'description', 'class'=>'form-control']) !!}
+                    {!! Form::textarea('description', old('description',$material->description), ['id'=>'description', 'class'=>'form-control']) !!}
                 </div>
-            </div>   
+            </div>
 
             <div class="form-group required">
                 <div class="col-md-4">
                     {!! Form::label('price', trans('Price'), ['class' => 'control-label']) !!}
                 </div>
                 <div class="col-md-6">
-                    {!! Form::text('price', old('price'), ['id'=>'slug', 'class'=>'form-control']) !!}                    
+                    {!! Form::text('price', old('price',$material->price), ['id'=>'slug', 'class'=>'form-control']) !!}
                 </div>
             </div>
 
@@ -115,7 +125,7 @@
                     {!! Form::submit(trans('Update Changes'), ['class' => 'btn btn-success']) !!}
                 </div>
             </div>
-            
+
 
         {!! Form::close() !!}
     </div>

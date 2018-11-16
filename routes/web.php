@@ -60,6 +60,7 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     // Contact Us
     Route::get('contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
     Route::post('contact', ['as' => 'contact', 'uses' => 'PageController@postContact']);
+    Route::get('pages/{slug}', ['as' => 'pages', 'uses' => 'PageController@pages']);
 
     // IPN Listener
     Route::post('ipn', ['as' => 'ipn', 'uses' => 'IpnController@ipn']);
@@ -171,6 +172,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::get('/viewpdf/{id}', ['as' => '.viewpdf', 'uses' => 'UserAcademyController@viewPdf']);
         Route::get('/view/{id}', ['as' => '.view', 'uses' => 'UserAcademyController@viewMaterial'])->middleware('checkMaterialPayment');
         Route::get('/viewGroup/{id}', ['as' => '.viewGroup', 'uses' => 'UserAcademyController@viewGroup'])->middleware('checkGroupPayment');
+        Route::get('/courseGroup/{id}', ['as' => '.courseGroup', 'uses' => 'UserAcademyController@courseGroup'])->middleware('checkGroupPayment');
         Route::get('/group-material-payment/{id}', ['as' => '.groupMaterialPayment', 'uses' => 'UserAcademyController@groupMaterialPayment']);
         Route::get('/material-payment/{id}', ['as' => '.materialPayment', 'uses' => 'UserAcademyController@materialPayment']);
         Route::get('/payment-success/{any}/{id}', ['as' => '.paymentSuccess', 'uses' => 'UserAcademyController@paymentSuccess']);
