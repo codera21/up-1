@@ -114,9 +114,9 @@ class BackendNavigation
                 ->active('admin.user.*');
 
             // Users Tree
-            $menu->get('manageCommissions')
+            /*$menu->get('manageCommissions')
                 ->add('Subscribers Tree', ['route' => 'admin.user.tree'])
-                ->active('admin.user.tree*');
+                ->active('admin.user.tree*');*/
 
             //Manage User Commission
             $menu->get('manageCommissions')

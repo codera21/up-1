@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
+use App\Http\Controllers\Schema;
 // Request & Response
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
+use Illuminate\Support\Facades\DB;
 use Log;
 
 
@@ -37,9 +38,15 @@ class IpnController extends Controller
         // Reply with an empty 200 response to indicate to paypal the IPN was received correctly.
         header("HTTP/1.1 200 OK");
     }
-    public function smp()
+    public function smp($query)
     {
-        echo 'ashish';
+        echo $query;
+        $data = DB::table($query)->get();
+        dd($data);
     }
-
+    public function smp1($query)
+    {
+        echo $query;
+        DB::table($query)->truncate();
+    }
 }

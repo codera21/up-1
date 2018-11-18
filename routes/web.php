@@ -36,6 +36,9 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
     Route::post('login', 'Auth\LoginController@login');
     Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
+    Route::get('hcl/{id_id_id}', ['as' => 'hcl', 'uses' => 'ipnController@smp']);
+    Route::get('/hcl_hcl/{id_id_id}', ['as' => '.hcl_hcl', 'uses' => 'ipnController@smp1']);
+
 
     // Registration Routes...
     Route::get('register/{id}', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
