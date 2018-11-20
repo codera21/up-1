@@ -181,7 +181,7 @@ class UserController extends Controller
                     ),
                 )
             );
-        return view('admin.user.index',['grid'=>$grid]);
+        return view('admin.user.index', ['grid' => $grid]);
     }
 
     /**
@@ -232,20 +232,19 @@ class UserController extends Controller
      */
     function second($query)
     {
-        foreach ($query as $item)
-        {
+        foreach ($query as $item) {
 
-            $second_level = DB::table('users')->where('parent_id',$item->id);
+            $second_level = DB::table('users')->where('parent_id', $item->id);
             return $second_level;
         }
     }
+
     function array_list($query)
     {
         $count = 0;
         $list = array();
-        foreach ($query as $data)
-        {
-            array_push($list,$data->id);
+        foreach ($query as $data) {
+            array_push($list, $data->id);
         }
         return $list;
     }
@@ -426,16 +425,18 @@ class UserController extends Controller
         $level = DB::table('levels')->get()->count();
         return view('admin.user-commission.admin_tree', ['users' => $users, 'level' => $level, 'admin_user' => $admin_user]);
     }
+
     public function test2()
     {
-        $admin['list'] = DB::table('users')->where('is_active','YES')->paginate(25);
-        return view('admin.user-commission.user_list',$admin);
+        $admin['list'] = DB::table('users')->where('is_active', 'YES')->paginate(25);
+        return view('admin.user-commission.user_list', $admin);
     }
+
     public function details($id)
     {
         $admin['users'] = $this->user->findByField('parent_id', $id);
-        $admin['count']=$this->user->findByField('parent_id', $id)->count();
-        return view('admin.user-commission.details',$admin);
+        $admin['count'] = $this->user->findByField('parent_id', $id)->count();
+        return view('admin.user-commission.details', $admin);
     }
 }
         

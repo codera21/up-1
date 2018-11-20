@@ -7,11 +7,13 @@
 
 @section('content')
     <br>
+
     @foreach($admin_user->paginate(5) as $item)
         <h4 style="color: #3a4559;font-weight: 700" id="hightlight">
             <span>
                 {{$item->first_name}} {{$item->last_name}}
             </span>
+
         </h4>
         <?php $item1 = $item->id;?>
         <?php $admin_user_id = $admin_user->findbyfield('parent_id', $item1);  ?>
@@ -335,7 +337,7 @@
 
 @endsection
 <style>
-    #hightlight span{
+    #hightlight span {
         background-color: #f8fc7e;
     }
 </style>
