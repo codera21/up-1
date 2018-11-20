@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\DB;
 // Request & Response
 use Illuminate\Http\Request;
 use App\Http\Requests;
-
+use Storage;
 // Facades
 use Date;
 use Auth;
@@ -55,12 +55,12 @@ class OfflinePaymentController extends Controller
      * @var MaterialRepository
      */
     protected $material;
-    
+
     /**
      * @var PaymentProfileRepository
      */
     protected $paymentProfile;
-    
+
     /**
      * @var LevelRepository
      */
@@ -81,16 +81,16 @@ class OfflinePaymentController extends Controller
      */
     protected $user;
 
-    public function __construct(PaymentRepository $offlinePayment, 
-        PaymentDetailsRepository $offlinePaymentDetails,
-        MaterialGroupRepository $materialGroup,
-        MaterialSubGroupRepository $materialSubGroup,
-        MaterialRepository $material,
-        PaymentProfileRepository $paymentProfile,
-        LevelRepository $level,
-        UserCommissionRepository $userCommission,
-        BankRepository $bank,
-        UserRepository $user)
+    public function __construct(PaymentRepository $offlinePayment,
+                                PaymentDetailsRepository $offlinePaymentDetails,
+                                MaterialGroupRepository $materialGroup,
+                                MaterialSubGroupRepository $materialSubGroup,
+                                MaterialRepository $material,
+                                PaymentProfileRepository $paymentProfile,
+                                LevelRepository $level,
+                                UserCommissionRepository $userCommission,
+                                BankRepository $bank,
+                                UserRepository $user)
     {
         $this->offlinePaymentDetails = $offlinePaymentDetails;
         $this->offlinePayment = $offlinePayment;
@@ -109,8 +109,9 @@ class OfflinePaymentController extends Controller
 
     public function index()
     {
-        
+
     }
+
     /**
      * Show add offline payment form
      *
@@ -127,10 +128,10 @@ class OfflinePaymentController extends Controller
 
         return view('offline-payment.add');
     }
-    
+
     /**
      * Save Payment
-     * 
+     *
      * @param OfflinePaymentSaveRequest $request
      * @return Redirect
      */
@@ -144,17 +145,17 @@ class OfflinePaymentController extends Controller
 
         // Get Default Offline Payment Profile
         $paymentProfile = $this->paymentProfile->findWhere(['payment_type' => 'OFFLINE BANK', 'default' => 'YES'])->first();
-        if($paymentProfile){
-            $data['payment_profile_id'] = $paymentProfile->id;    
-        }else{
+        if ($paymentProfile) {
+            $data['payment_profile_id'] = $paymentProfile->id;
+        } else {
             $data['payment_profile_id'] = null;
         }
-        
 
-        if($data['paid_for'] == 'SUBSCRIPTION'){
+
+        if ($data['paid_for'] == 'SUBSCRIPTION') {
             $data['payment_type'] = 'RECURRING'; //SUBSCRIPTION WILL BE RECURRING
             Log::info('Subscription Payment');
-        }else{
+        } else {
             $materialGroupID = $data['group_id'];
             $materialSubGroupID = $data['sub_group_id'];
             $materials = $data['material'];
@@ -163,32 +164,32 @@ class OfflinePaymentController extends Controller
             $group = $this->materialGroup->find($data['group_id']);
             $paymentType = $group->payment_type;
             $data['payment_type'] = $paymentType;
-        
-            if($data['paid_for'] == 'GROUP'){
 
-                if($data['amount_paid'] < $group->price){
-                    return redirect()->route('offline-payment.add')->withInput()->with('error', trans('Amount which you entered is less than selected Group Price.'));    
+            if ($data['paid_for'] == 'GROUP') {
+
+                if ($data['amount_paid'] < $group->price) {
+                    return redirect()->route('offline-payment.add')->withInput()->with('error', trans('Amount which you entered is less than selected Group Price.'));
                 }
                 $groupMaterialPrice = $group->material->sum('price');
                 $discount = $groupMaterialPrice - $data['amount_paid'];
 
 
-            }elseif($data['paid_for'] == 'LEVEL'){
+            } elseif ($data['paid_for'] == 'LEVEL') {
 
                 $subGroups = $this->materialSubGroup->find($data['sub_group_id']);
-                if($data['amount_paid'] < $subGgroup->price){
-                    return redirect()->route('offline-payment.add')->withInput()->with('error', trans('Amount which you entered is less than selected Level Price.'));    
+                if ($data['amount_paid'] < $subGgroup->price) {
+                    return redirect()->route('offline-payment.add')->withInput()->with('error', trans('Amount which you entered is less than selected Level Price.'));
                 }
 
                 $subGroupMaterialPrice = $subGroup->material->sum('price');
                 $discount = $subGroupMaterialPrice - $data['amount_paid'];
-            
-            }elseif($data['paid_for'] == 'MATERIAL'){
 
-                
+            } elseif ($data['paid_for'] == 'MATERIAL') {
+
+
                 $materialsObj = $this->material->findWhereIn('id', $materials);
-                if($data['amount_paid'] < $materialsObj->sum('price')){
-                    return redirect()->route('offline-payment.add')->withInput()->with('error', trans('Amount which you entered is less than selected Video/Course Price.'));    
+                if ($data['amount_paid'] < $materialsObj->sum('price')) {
+                    return redirect()->route('offline-payment.add')->withInput()->with('error', trans('Amount which you entered is less than selected Video/Course Price.'));
                 }
                 $discount = 0;
             }
@@ -207,49 +208,48 @@ class OfflinePaymentController extends Controller
             // Get all levels
             $this->level->pushCriteria(new \App\Criteria\Admin\LevelCriteria());
             $levels = $this->level->all();
-        
+
             $levelCounter = 1;
-            foreach($parents as $parentKey => $parent){
+            foreach ($parents as $parentKey => $parent) {
                 //last/first parent (from top) will consider level first
 
                 $parentUser = $this->user->find($parent);
-                Log::info('Level '.$levelCounter);
-                foreach($levels as $levelKey => $level){
-                    if($parentKey == $levelKey and $level->active == 'YES' and $parentUser->is_active == 'YES'){
-                        Log::info('Level Title = '.$level->level_title.' == Level Percentage =='.$level->level_percentage);    
-                        $commission = array();                        
-                        
+                Log::info('Level ' . $levelCounter);
+                foreach ($levels as $levelKey => $level) {
+                    if ($parentKey == $levelKey and $level->active == 'YES' and $parentUser->is_active == 'YES') {
+                        Log::info('Level Title = ' . $level->level_title . ' == Level Percentage ==' . $level->level_percentage);
+                        $commission = array();
+
                         $commission['receiver_id'] = $parent;
                         $commission['payer_id'] = $user->id;
-                        $commission['payment_id'] = $offlinePayment->id;                        
+                        $commission['payment_id'] = $offlinePayment->id;
                         $commission['payment'] = $data['amount_paid'];
                         $commission['level_id'] = $level->id;
-                        $commission['commission_amount'] = ($data['amount_paid']/100)*$level->level_percentage;
+                        $commission['commission_amount'] = ($data['amount_paid'] / 100) * $level->level_percentage;
                         // find last commission transaction
                         $lastCommission = $this->userCommission->findWhere(['receiver_id' => $parent])->last();
                         $commission['opening_balance'] = $lastCommission['closing_balance'];
-                        $commission['closing_balance'] = $commission['commission_amount']+$commission['opening_balance'];
+                        $commission['closing_balance'] = $commission['commission_amount'] + $commission['opening_balance'];
                         Log::info('User Commission');
                         Log::info(print_r($commission, true));
-                        if($userCommission = $this->userCommission->create($commission)){
+                        if ($userCommission = $this->userCommission->create($commission)) {
                             Log::info('User commission saved successfully');
                             Log::info(print_r($userCommission, true));
-                        }else{
+                        } else {
                             Log::error('User commission not saved successfully');
                         }
 
                     }
-                    
+
                 }
-                
+
                 $levelCounter++;
 
             }
             Log::info("======= Commission Calculation (END) =======");
 
 
-
-            if($data['paid_for'] == 'SUBSCRIPTION'){
+            if ($data['paid_for'] == 'SUBSCRIPTION') {
                 $data = array();
                 $data['user_id'] = $user->id;
                 $data['subscription_fee'] = 'YES';
@@ -263,10 +263,10 @@ class OfflinePaymentController extends Controller
                     // make user active
                     $this->user->update(['is_active' => 'YES'], $user->id);
                 }
-            }else{
+            } else {
 
                 //Save material item(s)
-                foreach($materials as $material) {
+                foreach ($materials as $material) {
                     $data = array();
                     $objMaterial = $this->material->find($material);
                     $data['user_id'] = $user->id;
@@ -274,8 +274,8 @@ class OfflinePaymentController extends Controller
                     $data['sub_group_id'] = $materialSubGroupID;
                     $data['material_id'] = $material;
                     $data['start_date'] = Date::now();
-                    if($paymentType == 'RECURRING'){
-                        $data['end_date'] = Date::now()->addMonth();    
+                    if ($paymentType == 'RECURRING') {
+                        $data['end_date'] = Date::now()->addMonth();
                     }
                     $data['transaction_id'] = $offlinePayment->id;
                     $data['amount'] = $objMaterial->price;
@@ -288,10 +288,10 @@ class OfflinePaymentController extends Controller
             }
 
             $response = array(
-                    'status' => 'success',
-                    'message' => trans('Offline Payment has been saved successfully.'),
-                    'redirect_url' => route('offline-payment.add')
-                );
+                'status' => 'success',
+                'message' => trans('Offline Payment has been saved successfully.'),
+                'redirect_url' => route('offline-payment.add')
+            );
 
             //return redirect()->route('offline-payment.add')->with('success', trans('Offline Payment has been saved successfully.'));
 
@@ -311,27 +311,28 @@ class OfflinePaymentController extends Controller
     public function showMaterial(Request $request)
     {
         $post = $request->all();
-        
-        if($post['paid_for'] == 'GROUP' or $post['paid_for'] == 'MATERIAL'){
+
+        if ($post['paid_for'] == 'GROUP' or $post['paid_for'] == 'MATERIAL') {
             $materials = $this->material->findByField('group_id', $post['group_id']);
-        }elseif($post['paid_for'] == 'LEVEL' and isset($post['sub_group_id'])){
+        } elseif ($post['paid_for'] == 'LEVEL' and isset($post['sub_group_id'])) {
             $materials = $this->material->findByField('sub_group_id', $post['sub_group_id']);
         }
-        
-        if($post['paid_for'] != 'MATERIAL'){
+
+        if ($post['paid_for'] != 'MATERIAL') {
             $disabled = true;
-        }else{
+        } else {
             $disabled = false;
         }
-        if(!empty($materials)){
+        if (!empty($materials)) {
             return view('offline-payment.material', ['materials' => $materials, 'disabled' => $disabled]);
-        }else{
+        } else {
             return '';
         }
-        
+
     }
 
-    function getParents($user, $parents = array()) {
+    function getParents($user, $parents = array())
+    {
 
         $parent = $user->parent;
         if ($parent) {
@@ -340,5 +341,26 @@ class OfflinePaymentController extends Controller
             return $this->getParents($parent, $parents);
         }
         return $parents;
+    }
+
+    public function offline()
+    {
+        return view('offline-payment.off_add');
+    }
+
+    public function offline_add(request $request)
+    {
+        $addpayment = DB::table('offline_pay')->insert([
+            'bank_slip_no' => $request->input('bank_slip_no'),
+            'amount_paid' => $request->input('amount_paid'),
+            'payment_type' => $request->input('payment_type'),
+            'account_no' => $request->input('account_no'),
+            'country' => $request->input('country'),
+            'name_of_subscriber' => $request->input('name_of_subscriber'),
+        ]);
+        if ($addpayment) {
+            return redirect()->route('offline_pay.offline_pay')
+                ->with('success', 'payment added successfully');
+        }
     }
 }

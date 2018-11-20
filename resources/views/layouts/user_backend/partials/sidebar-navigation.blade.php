@@ -57,7 +57,7 @@ $user = $user1->id;
             @include('layouts.backend.partials.sidebar-navigation-items', array('items' => $MainNav->roots()))
             <li class="">
                 <a class="treeview" data-toggle="dropdown" href="" aria-expanded="false">
-                    Company
+                    COMPANY
                     <span class="fa arrow"></span> </a>
                 <ul class="treeview-menu" style="display: none;">
                     <li>
@@ -76,6 +76,11 @@ $user = $user1->id;
                         </a>
                     </li>
                 </ul>
+            </li>
+            <li>
+                <a href="/offline_pay">
+                    OFFLINE PAYMENT
+                </a>
             </li>
             <li><a href="{{ url('/logout') }}"><i class="fa fa-link"></i> <span>Logout</span></a></li>
         </ul>
