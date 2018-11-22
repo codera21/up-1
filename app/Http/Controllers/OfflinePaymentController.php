@@ -363,4 +363,15 @@ class OfflinePaymentController extends Controller
                 ->with('success', 'payment added successfully');
         }
     }
+    public function verify()
+    {
+      return view('offline-payment.verify_form');
+    }
+    public function search(request $request)
+    {
+        $data = $request->input('bank_slip_no');
+        $payment = DB::table('offline_pay')->where('bank_slip_no',$data)->first();
+        $count = DB::table('offline_pay')->where('bank_slip_no',$data)->count();
+        return view('offline-payment.details',['payment'=>$payment,'count'=>$count]);
+    }
 }

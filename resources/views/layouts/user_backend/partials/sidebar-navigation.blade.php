@@ -77,11 +77,28 @@ $user = $user1->id;
                     </li>
                 </ul>
             </li>
-            <li>
+            <li class="">
+                <a class="treeview" data-toggle="dropdown" href="" aria-expanded="false">
+                    OFFLINE PAYMENT
+                    <span class="fa arrow"></span> </a>
+                <ul class="treeview-menu" style="display: none;">
+                    <li>
+                        <a href="/offline_pay">
+                            PAYMENT
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('offline_pay.verify')}}">
+                            VERIFY
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            {{--<li>
                 <a href="/offline_pay">
                     OFFLINE PAYMENT
                 </a>
-            </li>
+            </li>--}}
             <li><a href="{{ url('/logout') }}"><i class="fa fa-link"></i> <span>Logout</span></a></li>
         </ul>
     </section>

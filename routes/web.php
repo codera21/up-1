@@ -135,8 +135,10 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
     Route::group(['as' => 'offline_pay', 'prefix' => 'offline_pay'], function () {
         Route::get('/', ['as' => '.offline_pay', 'uses' => 'OfflinePaymentController@offline']);
         Route::post('/add', ['as' => '.add', 'uses' => 'OfflinePaymentController@offline_add']);
-        Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'CompanyProfileController@edit']);
-        Route::post('/update/{id}', ['as' => '.update', 'uses' => 'CompanyProfileController@update']);
+        Route::get('/verify', ['as' => '.verify', 'uses' => 'OfflinePaymentController@verify']);
+        Route::get('/search', ['as' => '.search', 'uses' => 'OfflinePaymentController@search']);
+        /*Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'CompanyProfileController@edit']);
+        Route::post('/update/{id}', ['as' => '.update', 'uses' => 'CompanyProfileController@update']);*/
     });
 
     Route::group(['as' => 'testo', 'prefix' => 'testo'], function () {
