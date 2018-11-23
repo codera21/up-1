@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use ok;
+use Illuminate\Support\Facades\DB;use ok;
 use App\Http\Controllers\Controller;
 
 // Request & Response
@@ -197,7 +197,7 @@ class BankController extends Controller
      * @return Redirect
      */
     public function delete(Request $request, $bankId)
-    {       
+    {
         if ($this->bank->delete($bankId)) {
             return redirect()->route('admin.bank')->with('success', trans('Bank has been deleted successfully.'));
         } else {
@@ -205,7 +205,15 @@ class BankController extends Controller
         }
     }
 
+    public function offline_pay()
+    {
+        $data['data'] = DB::table('offline_pay')->get();
+        return view('admin.payment-history.offline_pay',$data);
+    }
 
-
-
+    public function details($id)
+    {
+        $data['data'] = DB::table('offline_pay')->where('id',$id)->first();
+        return view('admin.payment-history.details',$data);
+    }
 }

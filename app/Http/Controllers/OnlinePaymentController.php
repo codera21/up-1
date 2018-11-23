@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use DateTime;
 
 // Request & Response
 use Carbon\Carbon;
@@ -133,7 +134,8 @@ class OnlinePaymentController extends Controller
 
         $user = DB::table('users')
             ->find($userID);
-
+        $dt = new DateTime();
+        $dt->format('Ymd');
         return view('online-payment.add', ['material' => $material, 'notNow' => $user->not_now]);
     }
 
@@ -149,7 +151,7 @@ class OnlinePaymentController extends Controller
         $userID = Auth::user()->id;
         DB::table('users')
             ->where('id', $userID)
-            ->update(['is_active' => 'YES', 'not_now' => 1]);
+            ->update([ 'not_now' => 1]);
         // this is working or not in the live
         return redirect()->route('user.dashboard');
     }

@@ -148,6 +148,10 @@ class BackendNavigation
             $menu->get('payments')
                 ->add('User Payments History', route('admin.payment-history'))
                 ->active('admin.payment-history.*');
+            //Offline payment dashboard
+            $menu->get('payments')
+                ->add('Offline Payment', route('admin.offline_pay'))
+                ->active('admin.offline_pay.*');
 
 
         })->filter(function ($item) {

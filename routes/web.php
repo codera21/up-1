@@ -24,7 +24,6 @@ Route::get('/clear-config', function () {
     $exitCode = Artisan::call('config:clear');
     return redirect()->back();
 });
-
 Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () {
     Route::get('/', ['as' => 'home', 'uses' => 'PageController@index']);
     Route::get('/active', ['as' => '.active', 'uses' => 'PageController@active']);
@@ -235,6 +234,11 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
         Route::put('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\GoalController@update']);
         Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\GoalController@delete']);
 
+    });
+    //offline payment
+    Route::group(['as' => 'admin.offline_pay', 'prefix' => 'offline_pay'], function () {
+        Route::get('/', ['as' => '', 'uses' => 'Admin\BankController@offline_pay']);
+        Route::get('/details/{id}', ['as' => '.details', 'uses' => 'Admin\BankController@details']);
     });
 
     // News
