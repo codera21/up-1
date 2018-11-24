@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 // Request & Response
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Illuminate\Support\Facades\Storage;
+use Storage;
 // Facades
 use Date;
 use Auth;
@@ -31,25 +31,54 @@ use App\Http\Requests\OfflinePaymentUpdateRequest;
 
 class OfflinePaymentController extends Controller
 {
-
+    /**
+     * @var offlinePaymentDetailsRepository
+     */
     protected $offlinePaymentDetails;
 
+    /**
+     * @var OfflinePaymentRepository
+     */
     protected $offlinePayment;
 
+    /**
+     * @var MaterialGroupRepository
+     */
     protected $materialGroup;
 
+    /**
+     * @var MaterialSubGroupRepository
+     */
     protected $materialSubGroup;
 
+    /**
+     * @var MaterialRepository
+     */
     protected $material;
 
+    /**
+     * @var PaymentProfileRepository
+     */
     protected $paymentProfile;
 
+    /**
+     * @var LevelRepository
+     */
     protected $level;
 
+    /**
+     * @var UserCommissionRepository
+     */
     protected $userCommission;
 
+    /**
+     * @var BankRepository
+     */
     protected $bank;
 
+    /**
+     * @var UserRepository
+     */
     protected $user;
 
     public function __construct(PaymentRepository $offlinePayment,
@@ -83,7 +112,11 @@ class OfflinePaymentController extends Controller
 
     }
 
-
+    /**
+     * Show add offline payment form
+     *
+     * @return Response
+     */
     public function add()
     {
         //Get all material sub groups
@@ -96,6 +129,12 @@ class OfflinePaymentController extends Controller
         return view('offline-payment.add');
     }
 
+    /**
+     * Save Payment
+     *
+     * @param OfflinePaymentSaveRequest $request
+     * @return Redirect
+     */
     public function save(OfflinePaymentSaveRequest $request)
     {
         $data = $request->except(['_token']);
@@ -138,11 +177,11 @@ class OfflinePaymentController extends Controller
             } elseif ($data['paid_for'] == 'LEVEL') {
 
                 $subGroups = $this->materialSubGroup->find($data['sub_group_id']);
-                if ($data['amount_paid'] < $subGroups->price) {
+                if ($data['amount_paid'] < $subGgroup->price) {
                     return redirect()->route('offline-payment.add')->withInput()->with('error', trans('Amount which you entered is less than selected Level Price.'));
                 }
 
-                $subGroupMaterialPrice = $subGroups->material->sum('price');
+                $subGroupMaterialPrice = $subGroup->material->sum('price');
                 $discount = $subGroupMaterialPrice - $data['amount_paid'];
 
             } elseif ($data['paid_for'] == 'MATERIAL') {
@@ -311,25 +350,18 @@ class OfflinePaymentController extends Controller
 
     public function offline_add(request $request)
     {
-        /*$receipt = Storage::disk('uploads.receipts');
-
-        $file = $request->file('receipt_photo');
-
-        if ($request->hasFile('receipt_photo')) {
-
-            $receiptFile = $request->file('receipt_photo');
-            $receiptFileName = date('Ymd_His') . '_' . $receiptFile->getClientOriginalName();
-            $receiptFileRElativePath = $receipt->putFileAs('', $receiptFile, $receiptFileName);
-            $receiptStoragePath = $receipt->url($receiptFileRElativePath);
-            $receiptFileUrl = asset($receiptStoragePath);
-            $fileName = $receiptFileUrl;
-        } else {
-            $fileName = '';
-        }*/
-
-        /*exit();*/
-
-
+        $receipt = Storage::disk('uploads.receipt_photo');
+               $file = $request->file('receipt_photo');
+               if ($request->hasFile('receipt_photo')) {
+                   $receiptFile = $request->file('receipt_photo');
+                   $receiptFileName = date('Ymd_His') . '_' . $receiptFile->getClientOriginalName();
+                   $receiptFileRElativePath = $receipt->putFileAs('', $receiptFile, $receiptFileName);
+                   $receiptStoragePath = $receipt->url($receiptFileRElativePath);
+                   $receiptFileUrl = asset($receiptStoragePath);
+                   $fileName = $receiptFileUrl;
+               } else {
+                   $fileName = '';
+               }
         $addpayment = DB::table('offline_pay')->insert([
             'bank_slip_no' => $request->input('bank_slip_no'),
             'amount_paid' => $request->input('amount_paid'),
@@ -337,11 +369,8 @@ class OfflinePaymentController extends Controller
             'account_no' => $request->input('account_no'),
             'country' => $request->input('country'),
             'name_of_subscriber' => $request->input('name_of_subscriber'),
-            'username'=>$request->input('username'),
-            /*'payment_receipt_url' => $fileName*/
+            'receipt_photo'=>$fileName
         ]);
-
-
         if ($addpayment) {
             return redirect()->route('offline_pay.offline_pay')
                 ->with('success', 'payment added successfully');
@@ -353,13 +382,9 @@ class OfflinePaymentController extends Controller
     }
     public function search(request $request)
     {
-        $auth = Auth::user()->id;
         $data = $request->input('bank_slip_no');
         $payment = DB::table('offline_pay')->where('bank_slip_no',$data)->first();
         $count = DB::table('offline_pay')->where('bank_slip_no',$data)->count();
-        DB::table('users')->where('id',$auth)->update([
-            'is_active'=>'YES',
-        ]);
         return view('offline-payment.details',['payment'=>$payment,'count'=>$count]);
     }
 }

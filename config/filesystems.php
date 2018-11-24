@@ -45,7 +45,7 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => storage_path('app'),
         ],
 
         'public' => [
@@ -91,16 +91,16 @@ return [
                 'root' => public_path('uploads/company_photo/'),
                 'url' => '/uploads/company_photo',
             ],
-            'back_photo' => [
-                'driver' => 'local',
-                'root' => public_path('uploads/back_photo/'),
-                'url' => '/uploads/back_photo',
+            'back_photo'=>[
+                'driver'=>'local',
+                'root'=>public_path('uploads/back_photo/'),
+                'url'=>'/uploads/back_photo',
             ],
-            'receipts' => [
-                'driver' => 'local',
-                'root' => public_path('uploads/receipts/'),
-                'url' => '/uploads/receipts',
-            ],
+            'receipt_photo'=>[
+                'driver'=>'local',
+                'root'=>public_path('uploads/receipt_photo/'),
+                'url'=>'/uploads/receipt_photo',
+            ]
 
         ],
 
