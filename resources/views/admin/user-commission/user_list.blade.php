@@ -19,6 +19,7 @@
     </thead>
     <tbody>
     @foreach($list as $item)
+        <?php if ($item->not_now == 1):?>
         <tr>
             <th scope="row">{{$item->id}}</th>
             <td>{{$item->first_name}}</td>
@@ -30,9 +31,9 @@
                         <a href="{{route('admin.user.details',array('id'=>$item->id))}}" class="btn btn-info btn-xs edit">Commission</a>
                     </div>
                 </div>
-
             </td>
         </tr>
+        <?php endif;?>
     @endforeach
     </tbody>
 </table>

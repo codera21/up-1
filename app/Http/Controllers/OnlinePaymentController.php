@@ -151,7 +151,7 @@ class OnlinePaymentController extends Controller
         $userID = Auth::user()->id;
         DB::table('users')
             ->where('id', $userID)
-            ->update([ 'not_now' => 1,'is_active'=>'YES']);
+            ->update([ 'not_now' => 1]);
         // this is working or not in the live
         return redirect()->route('user.dashboard');
     }
