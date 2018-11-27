@@ -113,8 +113,9 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
 | Private
 |--------------------------------------------------------------------------
 */
-Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVerified', 'isActive']], function () {
-    Route::group(['as' => 'user', 'prefix' => 'user'], function () {
+//is active is add on each group manually
+Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVerified']], function () {
+    Route::group(['middleware'=>['isActive'],'as' => 'user', 'prefix' => 'user'], function () {
         Route::get('/dashboard', ['as' => '.dashboard', 'uses' => 'UserController@dashboard']);
         Route::get('/account', ['as' => '.account', 'uses' => 'UserController@edit']);
         Route::post('/account', ['as' => '.account', 'uses' => 'UserController@update']);
@@ -125,7 +126,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::post('/{username}/goal', ['as' => '.{username}.goal', 'uses' => 'UserGoalController@save']);
 
     });
-    Route::group(['as' => 'company_dashboard', 'prefix' => 'company'], function () {
+    Route::group(['middleware'=>['isActive'],'as' => 'company_dashboard', 'prefix' => 'company'], function () {
         Route::get('/', ['as' => '.dashboard', 'uses' => 'CompanyProfileController@fetch_data']);
         Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'CompanyProfileController@edit']);
         Route::post('/update/{id}', ['as' => '.update', 'uses' => 'CompanyProfileController@update']);
@@ -140,7 +141,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         /*Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'CompanyProfileController@edit']);
         Route::post('/update/{id}', ['as' => '.update', 'uses' => 'CompanyProfileController@update']);*/
     });
-    Route::group(['as' => 'testo', 'prefix' => 'testo'], function () {
+    Route::group(['middleware'=>['isActive'],'as' => 'testo', 'prefix' => 'testo'], function () {
         Route::get('/', ['as' => '.dashboard', 'uses' => 'TestoController@index']);
         Route::get('/add', ['as' => '.add', 'uses' => 'TestoController@add']);
         Route::get('/store', ['as' => '.store', 'uses' => 'TestoController@store']);
@@ -148,7 +149,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'TestoController@edit']);
         Route::get('/update/{id}', ['as' => '.update', 'uses' => 'TestoController@update']);
     });
-    Route::group(['as' => 'photo', 'prefix' => 'photo'], function () {
+    Route::group(['middleware'=>['isActive'],'as' => 'photo', 'prefix' => 'photo'], function () {
         Route::get('/', ['as' => '.dashboard', 'uses' => 'CompanyPhotoController@index']);
         Route::get('/add', ['as' => '.add', 'uses' => 'CompanyPhotoController@add']);
         Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'CompanyPhotoController@edit']);
@@ -156,11 +157,11 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::get('/delete/{id}', ['as' => '.delete', 'uses' => 'CompanyPhotoController@destroy']);
     });
 
-    Route::group(['as' => 'company-profile', 'prefix' => 'companyprofile'], function () {
+    Route::group(['middleware'=>['isActive'],'as' => 'company-profile', 'prefix' => 'companyprofile'], function () {
         Route::get('/', ['as' => '.index', 'uses' => 'CompanyProfileController@index']);
     });
     // Payment
-    Route::group(['as' => 'payment-profile', 'prefix' => 'payment-profile'], function () {
+    Route::group(['middleware'=>['isActive'],'as' => 'payment-profile', 'prefix' => 'payment-profile'], function () {
         Route::get('/', ['as' => '', 'uses' => 'PaymentProfileController@index']);
         Route::get('/add-profile', ['as' => '.add-profile', 'uses' => 'PaymentProfileController@addProfile']);
         Route::post('/add-profile', ['as' => '.add-profile', 'uses' => 'PaymentProfileController@saveProfile']);
@@ -169,16 +170,16 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
     });
 
     // Payments history
-    Route::group(['as' => 'payment-history', 'prefix' => 'payment-history'], function () {
+    Route::group(['middleware'=>['isActive'],'as' => 'payment-history', 'prefix' => 'payment-history'], function () {
         Route::get('/', ['as' => '', 'uses' => 'UserPaymentHistoryController@index']);
         Route::get('/detail/{id}', ['as' => '.detail', 'uses' => 'UserPaymentHistoryController@detail']);
     });
     // Commission history
-    Route::group(['as' => 'commission', 'prefix' => 'commission'], function () {
+    Route::group(['middleware'=>['isActive'],'as' => 'commission', 'prefix' => 'commission'], function () {
         Route::get('/', ['as' => '', 'uses' => 'UserCommissionController@index']);
     });
     // My Academy
-    Route::group(['as' => 'user-academy', 'prefix' => 'user-academy'], function () {
+    Route::group(['middleware'=>['isActive'],'as' => 'user-academy', 'prefix' => 'user-academy'], function () {
         Route::get('/video', ['as' => '.video', 'uses' => 'UserAcademyController@view_video']);
         Route::get('/course', ['as' => '.course', 'uses' => 'UserAcademyController@view_course']);
         Route::get('/viewpdf/{id}', ['as' => '.viewpdf', 'uses' => 'UserAcademyController@viewPdf']);
@@ -190,7 +191,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::get('/payment-success/{any}/{id}', ['as' => '.paymentSuccess', 'uses' => 'UserAcademyController@paymentSuccess']);
     });
     // Messaging
-    Route::group(['as' => 'message', 'prefix' => 'message'], function () {
+    Route::group(['middleware'=>['isActive'],'as' => 'message', 'prefix' => 'message'], function () {
         Route::get('/unread', ['as' => '.unread', 'uses' => 'MessageController@unread']);
         Route::get('/sent', ['as' => '.sent', 'uses' => 'MessageController@sent']);
         Route::get('/inbox', ['as' => '.inbox', 'uses' => 'MessageController@inbox']);

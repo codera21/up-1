@@ -143,7 +143,7 @@ class OnlinePaymentController extends Controller
     public function activate()
     {
         $material = $this->material->find(30);
-        return view('online-payment.add', ['material' => $material, 'notNow' => 1]);
+        return view('online-payment.add', ['material' => $material, 'notNow' => $user->not_now]);
     }
 
     public function notNow()

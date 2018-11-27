@@ -16,9 +16,12 @@
                href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=37MF4DYE7RXKE">Pay for this
                 month</a>
         </div>
+        <h3>Make your offline payment</h3>
         <div class="embed-responsive embed-responsive-16by9">
             <iframe class="embed-responsive-item" src="/offline_pay" allowfullscreen></iframe>
         </div>
+        <br>
+        <br>
         @if($notNow == 0)
             <div class="alert alert-danger" role="alert">
                 {!!  __('app.not_now_message') !!}

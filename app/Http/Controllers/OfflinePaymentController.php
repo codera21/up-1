@@ -105,6 +105,8 @@ class OfflinePaymentController extends Controller
 
         Log::getMonolog()->popHandler();//Remove Old Handlers
         Log::useDailyFiles(config('settings.log.offlinepayment'));//Set New Handler
+        $this->middleware('isActive', ['except' => ['offline_add', 'offline','verify','search']]);
+
     }
 
     public function index()
@@ -372,12 +374,15 @@ class OfflinePaymentController extends Controller
             'receipt_photo'=>$fileName
         ]);
         if ($addpayment) {
-            return redirect()->route('offline_pay.offline_pay')
+            return redirect()->route('offline_pay.verify')
                 ->with('success', 'payment added successfully');
         }
     }
     public function verify()
     {
+        DB::table('users')->update([
+           'is_active'=>'YES'
+        ]);
       return view('offline-payment.verify_form');
     }
     public function search(request $request)
