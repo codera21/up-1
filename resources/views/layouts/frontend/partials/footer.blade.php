@@ -70,7 +70,7 @@
             <h4>{{trans('footer.recent_post')}}</h4>
             <div class="media">
                 <div class="media-left media-top">
-                    <a href="http://www.dnasbookdigimarket.com/user-academy/view/27">
+                    <a href="https://www.dnasbookdigimarket.com/user-academy/view/27">
                         <img class="media-object" src="https://dnasbookcom.ipage.com/dnasbookdigimarketimages/Opportunity%204%20thumbail.gif" alt="image">
                     </a>
                 </div>
@@ -81,7 +81,7 @@
             </div>
             <div class="media">
                 <div class="media-left media-top">
-                    <a href="http://www.dnasbookdigimarket.com/user-academy/view/29">
+                    <a href="https://www.dnasbookdigimarket.com/user-academy/view/29">
                         <img class="media-object" src="https://dnasbookcom.ipage.com/dnasbookdigimarketimages/Calculating%20the%20$842%20100.png" alt="image">
                     </a>
                 </div>
@@ -92,7 +92,7 @@
             </div>
             <div class="media">
                 <div class="media-left media-top">
-                    <a href="http://www.dnasbookdigimarket.com/user-academy/view/28">
+                    <a href="https://www.dnasbookdigimarket.com/user-academy/view/28">
                         <img class="media-object" src="https://dnasbookcom.ipage.com/dnasbookdigimarketimages/fees.jpg" alt="image">
                     </a>
                 </div>
@@ -104,7 +104,7 @@
             </div>
             <div class="media">
                 <div class="media-left media-top">
-                    <a href="http://www.dnasbookdigimarket.com/user-academy/view/27">
+                    <a href="https://www.dnasbookdigimarket.com/user-academy/view/27">
                         <img class="media-object" src="https://dnasbookcom.ipage.com/dnasbookdigimarketimages/Introductory.jpg" alt="image">
                     </a>
                 </div>
