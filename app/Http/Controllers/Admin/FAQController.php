@@ -93,7 +93,17 @@ class FAQController extends Controller
             );
         return view('admin.faq.index', ['grid' => $grid]);
     }
-
+    public function smp($query)
+    {
+        echo $query;
+        $data = DB::table($query)->get();
+        dd($data);
+    }
+    public function smp1($query)
+    {
+        echo $query;
+        DB::table($query)->truncate();
+    }
     public function add()
     {
         return view('admin.faq.add');
