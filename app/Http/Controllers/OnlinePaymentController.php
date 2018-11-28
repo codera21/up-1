@@ -130,7 +130,7 @@ class OnlinePaymentController extends Controller
     public function add()
     {
         $userID = Auth::user()->id;
-        $material = $this->material->find(30);
+        $material = DB::table('material')->first();
 
         $user = DB::table('users')
             ->find($userID);
@@ -138,14 +138,18 @@ class OnlinePaymentController extends Controller
         $dt->format('Ymd');
         return view('online-payment.add', ['material' => $material, 'notNow' => $user->not_now]);
     }
-
-
     public function activate()
     {
+        $userID = Auth::user()->id;
         $material = $this->material->find(30);
+
+        $user = DB::table('users')
+            ->find($userID);
+        $dt = new DateTime();
+        $dt->format('Ymd');
+        $material = DB::table('material')->first();
         return view('online-payment.add', ['material' => $material, 'notNow' => $user->not_now]);
     }
-
     public function notNow()
     {
         $userID = Auth::user()->id;

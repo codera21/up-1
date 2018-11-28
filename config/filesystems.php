@@ -100,7 +100,12 @@ return [
                 'driver'=>'local',
                 'root'=>public_path('uploads/receipt_photo/'),
                 'url'=>'/uploads/receipt_photo',
-            ]
+            ],
+            'profile'=>[
+                'driver'=>'local',
+                'root'=>public_path('uploads/profile/'),
+                'url'=>'/uploads/profile',
+            ],
 
         ],
 

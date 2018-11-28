@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 // Facades
 use Auth;
 use Grid;
+use Storage;
 
 // Models and Repo
 use App\Repositories\UserRepository;
@@ -90,10 +91,22 @@ class UserController extends Controller
     {
         $data = $request->except(['_token']);
         $user = Auth::user();
-
+        $receipt = Storage::disk('uploads.profile');
+        $file = $request->file('photo');
+        if ($request->hasFile('photo')) {
+            $receiptFile = $request->file('photo');
+            $receiptFileName = date('Ymd_His') . '_' . $receiptFile->getClientOriginalName();
+            $receiptFileRElativePath = $receipt->putFileAs('', $receiptFile, $receiptFileName);
+            $receiptStoragePath = $receipt->url($receiptFileRElativePath);
+            $receiptFileUrl = asset($receiptStoragePath);
+            $fileName = $receiptFileUrl;
+        } else {
+            $fileName = '';
+        }
         $data['prevent_users_to_see_email'] = $request->input('prevent_users_to_see_email');
         $data['prevent_users_to_see_phone'] = $request->input('prevent_users_to_see_phone');
         $data['prevent_users_to_see_comments_messages'] = $request->input('prevent_users_to_comments_messages');
+        $data['photo'] = $fileName;
         //dd($data);        
         /*if($user->id === $user_id){
             $data['disabled'] = 'NO';
@@ -102,7 +115,9 @@ class UserController extends Controller
         if($request->has('password')){
             $data['password'] = bcrypt($request->input('password'));
         }*/
-
+        /*DB::table('users')->where('id',$user->id)->update([
+            'photo'=>$fileName
+        ]);*/
         if ($user = $this->user->update($data, $user->id)) {
             return redirect()->route('user.account')->with('success', trans('Account Settings have been updated successfully.'));
         } else {
