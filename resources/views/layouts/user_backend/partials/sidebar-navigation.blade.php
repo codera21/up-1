@@ -77,7 +77,8 @@ $user = $user1->id;
                     </li>
                 </ul>
             </li>
-            <li class="">
+            {{--uncomment if necessary your client  is so dump--}}
+            {{--<li class="">
                 <a class="treeview" data-toggle="dropdown" href="" aria-expanded="false">
                     OFFLINE PAYMENT
                     <span class="fa arrow"></span> </a>
@@ -93,7 +94,7 @@ $user = $user1->id;
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li>--}}
             {{--<li>
                 <a href="/offline_pay">
                     OFFLINE PAYMENT

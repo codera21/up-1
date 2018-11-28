@@ -38,6 +38,12 @@ class FrontendNavigation
             $menu->get('payments')
                     ->add(trans('navigation.my_payment_histroy'), route('payment-history'))
                     ->active('payment-history.*');
+            $menu->get('payments')
+                ->add('OFFLINE PAYMENT', route('offline_pay.offline_pay'))
+                ->active('payment-history.*');
+            $menu->get('payments')
+                ->add('VERIFY', route('offline_pay.verify'))
+                ->active('payment-history.*');
             $menu->add(trans('navigation.commission'), array('nickname'=>'commissions'));
             $menu->get('commissions')
                     ->add(trans('navigation.my_subscriber_tree'), route('user.tree'))
