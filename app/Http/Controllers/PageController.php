@@ -15,6 +15,7 @@ use App\Repositories\NewsRepository;
 // Form Requests
 use App\Http\Requests\ContactFormRequest;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
@@ -144,11 +145,21 @@ class PageController extends Controller
     {
         return view('not_active');
     }
+
     public function pages($slug)
     {
         $lang = App::getLocale();
-        $array = array('slug'=>$slug,'language'=>$lang);
+        $array = array('slug' => $slug, 'language' => $lang);
         $data['data'] = DB::table('pages')->where($array)->get();
-        return view('page.pages',$data);
+        return view('page.pages', $data);
+    }
+
+    public function cancel()
+    {
+        $userID = Auth::user()->id;
+
+        DB::table('users')
+            ->where('id', $userID)
+            ->update(['is_active' => 'No']);
     }
 }
