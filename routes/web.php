@@ -90,6 +90,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
     Route::group(['as' => 'online-payment', 'prefix' => 'online-payment'], function () {
         Route::get('/', ['as' => '', 'uses' => 'OnlinePaymentController@index']);
         Route::get('/add', ['as' => '.add', 'uses' => 'OnlinePaymentController@add']);
+        Route::get('/addnew1', ['as' => '.addnew1', 'uses' => 'OnlinePaymentController@addnew1']);
         Route::post('/add', ['as' => '.add', 'uses' => 'OnlinePaymentController@saveRecurringPayment']);
         Route::get('/success', ['as' => '.success', 'uses' => 'OnlinePaymentController@successRecurringPayment']);
         Route::get('/cancel', ['as' => '.cancel', 'uses' => 'OnlinePaymentController@cancelRecurringPayment']);

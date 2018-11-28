@@ -33,7 +33,7 @@ class FrontendNavigation
                     ->active('payment.*');
 
             $menu->get('payments')
-                    ->add(trans('navigation.online_purchase'), route('online-payment.add'))
+                    ->add(trans('navigation.online_purchase'), route('online-payment.addnew1'))
                     ->active('online-payment.*');
             $menu->get('payments')
                     ->add(trans('navigation.my_payment_histroy'), route('payment-history'))
