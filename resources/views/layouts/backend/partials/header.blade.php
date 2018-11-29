@@ -26,7 +26,7 @@
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
-                        <img src="{{URL::asset('backend/admin-lte/images/user2-160x160.jpg')}}" class="user-image"
+                        <img src="{{Auth::user()->photo}}" class="user-image"
                              alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
                         <span class="hidden-xs">{{Auth::user()->last_name .' '.Auth::user()->first_name}}</span>
