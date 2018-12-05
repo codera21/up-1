@@ -200,6 +200,11 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::delete('/update_delete/{id}', ['as' => '.delete', 'uses' => 'MessageController@update_delete']);
         Route::post('/send', ['as' => '.send', 'uses' => 'MessageController@send'])->middleware('ajax');
         Route::get('/{username?}', ['as' => '', 'uses' => 'MessageController@index']);
+        Route::get('/send/{username?}', ['as' => '', 'uses' => 'MessageController@index2']);
+    });
+    Route::group(['middleware'=>['isActive'],'as' => 'send', 'prefix' => 'send'], function () {
+        Route::get('/api', ['as' => '.api', 'uses' => 'MessageController@json_data']);
+        Route::get('/{username?}', ['as' => '', 'uses' => 'MessageController@index2']);
     });
 });
 

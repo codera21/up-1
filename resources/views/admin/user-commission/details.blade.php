@@ -1,15 +1,12 @@
+<?php /*dd($users[0]->children)*/?>
 @extends('layouts.backend.default')
 
 @section('page_title')
-    {{ trans('User Commission') }}
+    {{ trans('app.tree') }}
 @endsection
 
 @section('content')
-
-
-
     <br>
-    @if($count !=0)
     <table class="table">
         <thead class="thead-dark">
         <tr>
@@ -18,7 +15,7 @@
             <th scope="col">Status</th>
             <th scope="col">Total fees</th>
             <th scope="col">Total commissions</th>
-
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -34,38 +31,58 @@
                 <?php $one = 0?>
                 @foreach($users as $user)
                     <?php
-                    if ($user->is_active == 'YES') {
-                        echo '&#9989';
-                        $one++;
+                    if ($user->not_now == 0) {
+                        if ($user->is_active == 'YES') {
+                            echo '&#9989';
+                            $one++;
+                        } else {
+                            echo '&#x274C';
+                        }
                     } else {
                         echo '&#x274C';
-                    }?>
+                    }
+                    ?>
                     <br>
                 @endforeach
             </td>
             <td>
                 @foreach($users as $user)
                     <?php
-                    if ($user->is_active == 'YES') {
-                        echo 'F250';
+                    if ($user->not_now == 0) {
+                        if ($user->is_active == 'YES') {
+                            echo '250F';
+                        } else {
+                            echo 'Not paid';
+                        }
                     } else {
                         echo 'Not paid';
-                    }?>
+                    }
+                    ?>
                     <br>
                 @endforeach
             </td>
             <td>
                 @foreach($users as $user)
                     <?php
-                    if ($user->is_active == 'YES') {
-                        echo 'F25';
+                    if ($user->not_now == 0) {
+                        if ($user->is_active == 'YES') {
+                            echo '25F';
+                        } else {
+                            echo 'Null';
+                        }
                     } else {
                         echo 'Null';
-                    }?>
+                    }
+                    ?>
                     <br>
                 @endforeach
             </td>
             <td>
+                @foreach($users as $user)
+                    {{--<a href="/send/{{$user->username}}" class="btn btn-primary btn-xs" type="button" style="color: white">Message</a>
+                    <br>--}}
+
+                @endforeach
             </td>
         </tr>
         <tr>
@@ -84,12 +101,18 @@
                 @foreach($users as $user)
                     <?php $second_level = $user->children?>
                     @foreach($second_level as $second)
-                        <?php if ($second->is_active == 'YES') {
-                            echo '&#9989';
-                            $two++;
+                        <?php
+                        if ($second->not_now == 0) {
+                            if ($second->is_active == 'YES') {
+                                echo '&#9989';
+                                $two++;
+                            } else {
+                                echo '&#x274C';
+                            }
                         } else {
                             echo '&#x274C';
-                        }?>
+                        }
+                        ?>
                         <br>
                     @endforeach
                 @endforeach
@@ -98,11 +121,17 @@
                 @foreach($users as $user)
                     <?php $second_level = $user->children?>
                     @foreach($second_level as $second)
-                        <?php if ($second->is_active == 'YES') {
-                            echo 'F250';
+                        <?php
+                        if ($second->not_now == 0) {
+                            if ($second->is_active == 'YES') {
+                                echo '250F';
+                            } else {
+                                echo 'Not paid';
+                            }
                         } else {
                             echo 'Not paid';
-                        }?>
+                        }
+                        ?>
                         <br>
                     @endforeach
                 @endforeach
@@ -111,18 +140,32 @@
                 @foreach($users as $user)
                     <?php $second_level = $user->children?>
                     @foreach($second_level as $second)
-                        <?php if ($second->is_active == 'YES') {
-                            echo 'F25';
+                        <?php
+                        if ($second->not_now == 0) {
+                            if ($second->is_active == 'YES') {
+                                echo '25F';
+                            } else {
+                                echo 'Null';
+                            }
                         } else {
                             echo 'Null';
-                        }?>
+                        }
+                        ?>
                         <br>
                     @endforeach
                 @endforeach
             </td>
-            <td>
 
+            <td>
+                @foreach($users as $user)
+                    <?php $second_level = $user->children?>
+                    @foreach($second_level as $second)
+                        {{--<a href="/send/{{$second->username}}" class="btn btn-primary btn-xs" type="button" style="color: white">Message</a>
+                        <br>--}}
+                    @endforeach
+                @endforeach
             </td>
+
         </tr>
         <tr>
             <th scope="row">3</th>
@@ -145,12 +188,18 @@
                     @foreach($second_level as $second)
                         <?php $third_level = $second->children?>
                         @foreach($third_level as $third)
-                            <?php if ($third->is_active == 'YES') {
-                                echo '&#9989';
-                                $three++;
+                            <?php
+                            if ($third->not_now == 0) {
+                                if ($third->is_active == 'YES') {
+                                    echo '&#9989';
+                                    $three++;
+                                } else {
+                                    echo '&#x274C';
+                                }
                             } else {
                                 echo '&#x274C';
-                            }?>
+                            }
+                            ?>
                             <br>
                         @endforeach
                     @endforeach
@@ -162,11 +211,17 @@
                     @foreach($second_level as $second)
                         <?php $third_level = $second->children?>
                         @foreach($third_level as $third)
-                            <?php if ($third->is_active == 'YES') {
-                                echo 'F250';
+                            <?php
+                            if ($third->not_now == 0) {
+                                if ($third->is_active == 'YES') {
+                                    echo '250F';
+                                } else {
+                                    echo 'Not paid';
+                                }
                             } else {
                                 echo 'Not paid';
-                            }?>
+                            }
+                            ?>
                             <br>
                         @endforeach
                     @endforeach
@@ -178,17 +233,34 @@
                     @foreach($second_level as $second)
                         <?php $third_level = $second->children?>
                         @foreach($third_level as $third)
-                            <?php if ($third->is_active == 'YES') {
-                                echo 'F25';
+                            <?php
+                            if ($third->not_now == 0) {
+                                if ($third->is_active == 'YES') {
+                                    echo '25F';
+                                } else {
+                                    echo 'Null';
+                                }
                             } else {
                                 echo 'Null';
-                            }?>
+                            }
+                            ?>
                             <br>
                         @endforeach
                     @endforeach
                 @endforeach
             </td>
             <td>
+                @foreach($users as $user)
+                    <?php $second_level = $user->children?>
+                    @foreach($second_level as $second)
+                        <?php $third_level = $second->children?>
+                        @foreach($third_level as $third)
+                            {{--<a href="/send/{{$third->username}}" class="btn btn-primary btn-xs" type="button"
+                               style="color: white">Message</a>
+                            <br>--}}
+                        @endforeach
+                    @endforeach
+                @endforeach
             </td>
         </tr>
         <tr>
@@ -217,9 +289,14 @@
                         @foreach($third_level as $third)
                             <?php $forth_level = $third->children?>
                             @foreach($forth_level as $forth)
-                                <?php if ($forth->is_active == 'YES') {
-                                    echo '&#9989';
-                                    $four++;
+                                <?php
+                                if ($forth->not_now == 0) {
+                                    if ($forth->is_active == 'YES') {
+                                        echo '&#9989';
+                                        $four++;
+                                    } else {
+                                        echo '&#x274C';
+                                    }
                                 } else {
                                     echo '&#x274C';
                                 }?>
@@ -237,11 +314,17 @@
                         @foreach($third_level as $third)
                             <?php $forth_level = $third->children?>
                             @foreach($forth_level as $forth)
-                                <?php if ($forth->is_active == 'YES') {
-                                    echo 'F250';
+                                <?php
+                                if ($forth->not_now == 0) {
+                                    if ($forth->is_active == 'YES') {
+                                        echo '250F';
+                                    } else {
+                                        echo 'Not paid';
+                                    }
                                 } else {
                                     echo 'Not paid';
-                                }?>
+                                }
+                                ?>
                                 <br>
                             @endforeach
                         @endforeach
@@ -256,11 +339,17 @@
                         @foreach($third_level as $third)
                             <?php $forth_level = $third->children?>
                             @foreach($forth_level as $forth)
-                                <?php if ($forth->is_active == 'YES') {
-                                    echo 'F25';
+                                <?php
+                                if ($forth->not_now == 0) {
+                                    if ($forth->is_active == 'YES') {
+                                        echo '25F';
+                                    } else {
+                                        echo 'Null';
+                                    }
                                 } else {
                                     echo 'Null';
-                                }?>
+                                }
+                                ?>
                                 <br>
                             @endforeach
                         @endforeach
@@ -268,27 +357,36 @@
                 @endforeach
             </td>
             <td>
-
+                @foreach($users as $user)
+                    <?php $second_level = $user->children?>
+                    @foreach($second_level as $second)
+                        <?php $third_level = $second->children?>
+                        @foreach($third_level as $third)
+                            <?php $forth_level = $third->children?>
+                            @foreach($forth_level as $forth)
+                                {{--  <a href="/send/{{$forth->username}}" class="btn btn-primary btn-xs" type="button" style="color: white">Message</a>
+                                  <br>--}}
+                            @endforeach
+                        @endforeach
+                    @endforeach
+                @endforeach
             </td>
         </tr>
-        <?php $total = $one+$two+$three+$four;?>
+        <?php $total = $one + $two + $three + $four;?>
         <tr>
             <th colspan="3" style="text-align: center;font-size: 2rem">Total</th>
             <td>
-                F{{$total*250}}
+                {{$total*250}}F
             </td>
             <td>
-                F{{$total*25}}
+                {{$total*25}}F
             </td>
             <td>
-                <button type="button" class="btn btn-primary btn-xs">Payment</button>
+                {{--<button type="button" class="btn btn-primary btn-xs">Payment</button>--}}
             </td>
         </tr>
         </tbody>
     </table>
-    @else
-        <h1>User don't have any subscriber</h1>
-        @endif
     <style>
         th {
             font-size: 1.8rem;
@@ -299,7 +397,4 @@
             font-size: 1.7rem;
         }
     </style>
-
-
-
 @endsection

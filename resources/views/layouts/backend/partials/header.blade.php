@@ -6,7 +6,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>DNAsbook</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>{{ getenv('APP_NAME') }}</b></span>
+        <span class="logo-lg"><b>DNAsbook Digital</b></span>
     </a>
 
     <!-- Header Navbar -->
