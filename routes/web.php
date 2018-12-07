@@ -203,7 +203,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::get('/send/{username?}', ['as' => '', 'uses' => 'MessageController@index2']);
     });
     Route::group(['middleware'=>['isActive'],'as' => 'send', 'prefix' => 'send'], function () {
-        Route::get('/api', ['as' => '.api', 'uses' => 'MessageController@json_data']);
+        Route::get('/group', ['as' => '.group', 'uses' => 'MessageController@groupmessage']);
         Route::get('/{username?}', ['as' => '', 'uses' => 'MessageController@index2']);
     });
 });
