@@ -37,7 +37,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{URL::asset('backend/admin-lte/images/user2-160x160.jpg')}}" class="img-circle"
+                <img src="{{Auth::user()->photo}}" class="img-circle"
                      alt="User Image">
             </div>
             <div class="pull-left info">

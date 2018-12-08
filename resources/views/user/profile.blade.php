@@ -76,6 +76,19 @@
                                         Message</a></td>
                             @endif
                         </tr>
+                        <tr>
+                            @if($user->is_admin != "YES")
+                            <td>{{ trans('user.message') }} to parent account</td>
+                            @if($user->is_active == "NO")
+                                <td><a href="{{ url('message/'.$parentuser->username) }}" class="btn btn-primary text-white"
+                                       disabled="disabled">Send
+                                        Message</a></td>
+                            @else
+                                <td><a href="{{ url('message/'.$parentuser->username) }}" class="btn btn-success text-white">Send
+                                        Message</a></td>
+                            @endif
+                                @endif
+                        </tr>
                     </table>
                 </div>
 

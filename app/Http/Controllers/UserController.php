@@ -136,7 +136,13 @@ class UserController extends Controller
     {
         $loggedUser = Auth::user();
         $username1 = DB::table('users')->where('id', $loggedUser->id)->first();
-
+        $parentuser = DB::table('users')->where('id',$loggedUser->parent_id)->first();
+        if($parentuser == null)
+        {
+            $parentuser = DB::table('users')->where('id', $loggedUser->id)->first();;
+        }else{
+            $parentuser = DB::table('users')->where('id',$loggedUser->parent_id)->first();
+        }
         if ($username1->username == $username) {
             $array = array('username' => $username);
             $user = $this->user->findByField($array)->first();
@@ -147,7 +153,7 @@ class UserController extends Controller
             foreach ($user->goals as $userGoal) {
                 $userGoals[$userGoal->goal_id] = $userGoal->user_answer;
             }
-            return view('user.profile', ['goals_table' => $goals_table, 'user' => $user, 'loggedUser' => $loggedUser, 'route' => 'user/' . $user->username, 'goals' => $goals, 'userGoals' => $userGoals]);
+            return view('user.profile', ['parentuser'=>$parentuser,'goals_table' => $goals_table, 'user' => $user, 'loggedUser' => $loggedUser, 'route' => 'user/' . $user->username, 'goals' => $goals, 'userGoals' => $userGoals]);
         } else {
             abort(404);
         }
@@ -187,7 +193,7 @@ class UserController extends Controller
         $user = Auth::user();
         $users = $this->user->findByField('parent_id', $user->id);
         $level = DB::table('levels')->get()->count();
-        return view('user.subs_level ', ['users' => $users, 'level' => $level]);
+        return view('user.subs_level ', ['users' => $users, 'level' => $level,'user'=>$user]);
     }
     public function pagination()
     {

@@ -10,7 +10,7 @@
                 <div class="thumbnail">
                     <div class="caption">
                         @if($materialGrp->price > 0.00)
-                            <h4 class="pull-right text-success">${{$materialGrp->price}}</h4>
+                            <h4 class="pull-right text-success">F{{$materialGrp->price}}</h4>
                         @endif
                         <h4>
                             <a href="{!! url('user-academy/viewGroup/' . $materialGrp->id)   !!}">{{ $materialGrp->title }}</a>
