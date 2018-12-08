@@ -193,7 +193,7 @@ class UserController extends Controller
         $user = Auth::user();
         $users = $this->user->findByField('parent_id', $user->id);
         $level = DB::table('levels')->get()->count();
-        return view('user.subs_level ', ['users' => $users, 'level' => $level]);
+        return view('user.subs_level ', ['users' => $users, 'level' => $level,'user'=>$user]);
     }
     public function pagination()
     {

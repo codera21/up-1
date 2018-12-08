@@ -128,7 +128,451 @@ class MessageController extends Controller
         return view('message.index', ['grid' => $grid, 'toUsername' => $username]);
     }
 
-    public function groupmessage()
+    public function index2(Request $request, $username = '')
+    {
+        $this->message->pushCriteria(new \App\Criteria\MessageCriteria('inbox'));
+        $messages = $this->message;
+
+        $grid = new Grid();
+        $grid->setGridName('message-grid')->setBaseUrl(route('message'))
+            ->setPaginator($messages, 'created_at', 'desc', 25)
+            ->setMainActions(
+                array(
+                    array(
+                        'name' => 'inbox',
+                        'title' => trans('message.inbox'),
+                        'url' => route('message')
+                    ),
+                    array(
+                        'name' => 'sent',
+                        'title' => trans('message.sent'),
+                        'url' => route('message.sent')
+                    ),
+                    array(
+                        'name' => 'trash',
+                        'title' => trans('message.trash'),
+                        'url' => route('message.trash')
+                    ),
+                )
+            )
+            ->setColumns(
+                array(
+                    array(
+                        'name' => 'from_username',
+                        'label' => trans('message.from'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->from_username;
+                        }
+                    ),
+                    array(
+                        'name' => 'subject',
+                        'label' => trans('message.subject'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->subject;
+                        }
+                    ),
+                    array(
+                        'name' => 'subject',
+                        'label' => trans('Messages'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                        ),
+                        'width' => '50%',
+                        'value' => function ($row) {
+                            return $row->message;
+                        }
+                    ),
+                    array(
+                        'name' => 'created_at',
+                        'label' => trans('message.date'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                            'attr' => array('class' => 'daterange'),
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->created_at;
+                        }
+                    ),
+                    array(
+                        'name' => 'action',
+                        'label' => trans('app.action'),
+                        'sortable' => false,
+                        'searchable' => false,
+                        'searchfield' => null,
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return '<a href="' . route('message.delete', ['id' => $row->id]) . '" class="btn btn-danger btn-xs delete text-white">' . trans('app.delete') . '</a>';
+                        }
+                    ),
+                )
+            );
+        return view('message.index2', ['grid' => $grid, 'toUsername' => $username]);
+    }
+    //group message
+    public function groupindex(Request $request, $username = '')
+    {
+        $this->message->pushCriteria(new \App\Criteria\MessageCriteria('inbox'));
+        $messages = $this->message;
+
+        $grid = new Grid();
+        $grid->setGridName('message-grid')->setBaseUrl(route('message'))
+            ->setPaginator($messages, 'created_at', 'desc', 25)
+            ->setMainActions(
+                array(
+                    array(
+                        'name' => 'inbox',
+                        'title' => trans('message.inbox'),
+                        'url' => route('group.group')
+                    ),
+                    array(
+                        'name' => 'sent',
+                        'title' => trans('message.sent'),
+                        'url' => route('group.viewsent')
+                    ),
+                    array(
+                        'name' => 'trash',
+                        'title' => trans('message.trash'),
+                        'url' => route('group.trash')
+                    ),
+                )
+            )
+            ->setColumns(
+                array(
+                    array(
+                        'name' => 'from_username',
+                        'label' => trans('message.from'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->from_username;
+                        }
+                    ),
+                    array(
+                        'name' => 'subject',
+                        'label' => trans('message.subject'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->subject;
+                        }
+                    ),
+                    array(
+                        'name' => 'subject',
+                        'label' => trans('Messages'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                        ),
+                        'width' => '50%',
+                        'value' => function ($row) {
+                            return $row->message;
+                        }
+                    ),
+                    array(
+                        'name' => 'created_at',
+                        'label' => trans('message.date'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                            'attr' => array('class' => 'daterange'),
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->created_at;
+                        }
+                    ),
+                    array(
+                        'name' => 'action',
+                        'label' => trans('app.action'),
+                        'sortable' => false,
+                        'searchable' => false,
+                        'searchfield' => null,
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return '<a href="' . route('group.delete', ['id' => $row->id]) . '" class="btn btn-danger btn-xs delete text-white">' . trans('app.delete') . '</a>';
+                        }
+                    ),
+                )
+            );
+        return view('message.groupindex', ['grid' => $grid, 'toUsername' => $username]);
+    }
+
+    public function groupunread(Request $request)
+    {
+
+        //Get model
+        $this->message->pushCriteria(new \App\Criteria\MessageCriteria('unread'));
+        $messages = $this->message;
+
+        //Setup grid
+        $grid = new Grid();
+        $grid->setGridName('message-grid')->setBaseUrl(route('message'))
+            ->setPaginator($messages, 'created_at', 'desc', 25)
+            ->setMainActions(//Optional
+                array(
+                    array(
+                        'name' => 'inbox',
+                        'title' => trans('message.inbox'),
+                        'url' => route('message')
+                    ),
+                    array(
+                        'name' => 'unread',
+                        'title' => trans('message.unread'),
+                        'url' => route('message.unread')
+                    ),
+                    array(
+                        'name' => 'sent',
+                        'title' => trans('message.sent'),
+                        'url' => route('message.sent')
+                    ),
+                    array(
+                        'name' => 'trash',
+                        'title' => trans('message.trash'),
+                        'url' => route('message.trash')
+                    ),
+                )
+            )
+            ->setColumns(
+                array(
+                    array(
+                        'name' => 'from_username',
+                        'label' => trans('message.from'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->from_username;
+                        }
+                    ),
+                    array(
+                        'name' => 'subject',
+                        'label' => trans('message.subject'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->subject;
+                        }
+                    ),
+                    array(
+                        'name' => 'created_at',
+                        'label' => trans('message.date'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                            'attr' => array('class' => 'daterange'),
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->created_at;
+                        }
+                    ),
+                    array(
+                        'name' => 'action',
+                        'label' => trans('app.action'),
+                        'sortable' => false,
+                        'searchable' => false,
+                        'searchfield' => null,
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return '<a href="' . route('message.delete', ['id' => $row->id]) . '" class="btn btn-danger btn-xs delete text-white">' . trans('app.delete') . '</a>';
+                        }
+                    ),
+                )
+            );
+
+        return view('message.groupunread', ['grid' => $grid]);
+    }
+    public function groupsent(Request $request)
+    {
+
+        //Get model
+        $this->message->pushCriteria(new \App\Criteria\MessageCriteria('sent'));
+        $messages = $this->message;
+
+        //Setup grid
+        $grid = new Grid();
+        $grid->setGridName('message-grid')->setBaseUrl(route('message'))
+            ->setPaginator($messages, 'created_at', 'desc', 25)
+            ->setMainActions(//Optional
+                array(
+                    array(
+                        'name' => 'inbox',
+                        'title' => trans('message.inbox'),
+                        'url' => route('group.group')
+                    ),
+                    array(
+                        'name' => 'sent',
+                        'title' => trans('message.sent'),
+                        'url' => route('group.viewsent')
+                    ),
+                    array(
+                        'name' => 'trash',
+                        'title' => trans('message.trash'),
+                        'url' => route('message.trash')
+                    ),
+                )
+            )
+            ->setColumns(
+                array(
+                    array(
+                        'name' => 'to_username',
+                        'label' => trans('message.recepient'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+
+                            return $row->to_username;
+                        }
+                    ),
+                    array(
+                        'name' => 'subject',
+                        'label' => trans('message.subject'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->subject;
+                        }
+                    ),
+                    array(
+                        'name' => 'created_at',
+                        'label' => trans('message.date'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                            'attr' => array('class' => 'daterange'),
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->created_at;
+                        }
+                    ),
+                )
+            );
+
+        return view('message.groupsent', ['grid' => $grid]);
+    }
+    public function grouptrash(Request $request)
+    {
+
+        //Get model
+        $this->message->pushCriteria(new \App\Criteria\MessageCriteria('trash'));
+        $messages = $this->message;
+
+        //Setup grid
+        $grid = new Grid();
+        $grid->setGridName('message-grid')->setBaseUrl(route('message'))
+            ->setPaginator($messages, 'created_at', 'desc', 25)
+            ->setMainActions(//Optional
+                array(
+                    array(
+                        'name' => 'inbox',
+                        'title' => trans('message.inbox'),
+                        'url' => route('group.group')
+                    ),
+                    array(
+                        'name' => 'sent',
+                        'title' => trans('message.sent'),
+                        'url' => route('group.viewsent')
+                    ),
+                    array(
+                        'name' => 'trash',
+                        'title' => trans('message.trash'),
+                        'url' => route('group.trash')
+                    ),
+                )
+            )
+            ->setColumns(
+                array(
+                    array(
+                        'name' => 'from_username',
+                        'label' => trans('message.from'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->from_username;
+                        }
+                    ),
+                    array(
+                        'name' => 'subject',
+                        'label' => trans('message.subject'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->subject;
+                        }
+                    ),
+                    array(
+                        'name' => 'created_at',
+                        'label' => trans('message.date'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                            'attr' => array('class' => 'daterange'),
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->created_at;
+                        }
+                    ),
+                )
+            );
+
+        return view('message.grouptrash', ['grid' => $grid]);
+    }
+    public function groupmessagesent(Request $request)
     {
         $user = Auth::user();
         $users = $this->user->findByField('parent_id', $user->id);
@@ -294,111 +738,36 @@ class MessageController extends Controller
             ];
             array_push($array, $array2);
         }
-        dump($array);
-        foreach($array as $item)
+        $user = Auth::user();
+        foreach ($array as $list)
         {
-            echo '<h5>'.$item['first_name'].'</h5>';
+            $data = DB::table('messages')->insert([
+                'from_user_id'=>$user->id,
+                'from_username'=>$user->username,
+                'to_user_id'=>$list['id'],
+                'to_username'=>$list['username'],
+                'subject'=>$request->input('subject'),
+                'message'=>$request->input('message')
+            ]);
+        }
+        if ($data)
+        {
+            return redirect()->route('group.group')
+                ->with('success', 'Messages sent successfully');
         }
     }
-
-    public function index2(Request $request, $username = '')
+    public function groupupdate_delete($id)
     {
-        $this->message->pushCriteria(new \App\Criteria\MessageCriteria('inbox'));
-        $messages = $this->message;
-
-        $grid = new Grid();
-        $grid->setGridName('message-grid')->setBaseUrl(route('message'))
-            ->setPaginator($messages, 'created_at', 'desc', 25)
-            ->setMainActions(
-                array(
-                    array(
-                        'name' => 'inbox',
-                        'title' => trans('message.inbox'),
-                        'url' => route('message')
-                    ),
-                    array(
-                        'name' => 'sent',
-                        'title' => trans('message.sent'),
-                        'url' => route('message.sent')
-                    ),
-                    array(
-                        'name' => 'trash',
-                        'title' => trans('message.trash'),
-                        'url' => route('message.trash')
-                    ),
-                )
-            )
-            ->setColumns(
-                array(
-                    array(
-                        'name' => 'from_username',
-                        'label' => trans('message.from'),
-                        'sortable' => true,
-                        'searchable' => false,
-                        'searchfield' => array(
-                            'type' => 'text',
-                        ),
-                        'width' => 'auto',
-                        'value' => function ($row) {
-                            return $row->from_username;
-                        }
-                    ),
-                    array(
-                        'name' => 'subject',
-                        'label' => trans('message.subject'),
-                        'sortable' => true,
-                        'searchable' => false,
-                        'searchfield' => array(
-                            'type' => 'text',
-                        ),
-                        'width' => 'auto',
-                        'value' => function ($row) {
-                            return $row->subject;
-                        }
-                    ),
-                    array(
-                        'name' => 'subject',
-                        'label' => trans('Messages'),
-                        'sortable' => true,
-                        'searchable' => false,
-                        'searchfield' => array(
-                            'type' => 'text',
-                        ),
-                        'width' => '50%',
-                        'value' => function ($row) {
-                            return $row->message;
-                        }
-                    ),
-                    array(
-                        'name' => 'created_at',
-                        'label' => trans('message.date'),
-                        'sortable' => true,
-                        'searchable' => false,
-                        'searchfield' => array(
-                            'type' => 'text',
-                            'attr' => array('class' => 'daterange'),
-                        ),
-                        'width' => 'auto',
-                        'value' => function ($row) {
-                            return $row->created_at;
-                        }
-                    ),
-                    array(
-                        'name' => 'action',
-                        'label' => trans('app.action'),
-                        'sortable' => false,
-                        'searchable' => false,
-                        'searchfield' => null,
-                        'width' => 'auto',
-                        'value' => function ($row) {
-                            return '<a href="' . route('message.delete', ['id' => $row->id]) . '" class="btn btn-danger btn-xs delete text-white">' . trans('app.delete') . '</a>';
-                        }
-                    ),
-                )
-            );
-        return view('message.index2', ['grid' => $grid, 'toUsername' => $username]);
+        $user = DB::table('messages')->where('id', $id)->update([
+            'deleted' => 'YES'
+        ]);
+        if ($user) {
+            return redirect()->route('group.group')->with('success', trans('message.message_deleted'));
+        } else {
+            return redirect()->route('group.group')->with('error', trans('message.message_not_deleted'));
+        }
     }
-
+    //end of group message methods
     public function unread(Request $request)
     {
 

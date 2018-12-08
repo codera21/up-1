@@ -202,9 +202,12 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::get('/{username?}', ['as' => '', 'uses' => 'MessageController@index']);
         Route::get('/send/{username?}', ['as' => '', 'uses' => 'MessageController@index2']);
     });
-    Route::group(['middleware'=>['isActive'],'as' => 'send', 'prefix' => 'send'], function () {
-        Route::get('/group', ['as' => '.group', 'uses' => 'MessageController@groupmessage']);
-        Route::get('/{username?}', ['as' => '', 'uses' => 'MessageController@index2']);
+    Route::group(['middleware'=>['isActive'],'as' => 'group', 'prefix' => 'group'], function () {
+        Route::get('/send/{username?}', ['as' => '.group', 'uses' => 'MessageController@groupindex']);
+        Route::get('/viewsent', ['as' => '.viewsent', 'uses' => 'MessageController@groupsent']);
+        Route::get('/trash', ['as' => '.trash', 'uses' => 'MessageController@grouptrash']);
+        Route::delete('/update_delete/{id}', ['as' => '.delete', 'uses' => 'MessageController@groupupdate_delete']);
+        Route::post('/sent', ['as' => '.sent', 'uses' => 'MessageController@groupmessagesent']);
     });
 });
 
