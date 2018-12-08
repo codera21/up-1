@@ -12,8 +12,8 @@
         <?php $count++ ?>
     @endforeach
     <?php  if($count):?>
-    <a href="/group/send/{{$user->username}}" class="btn btn-primary text-white" type="button" style="float: right">Group
-        messages</a>
+    <a href="/group/send/{{$user->username}}" class="btn btn-primary text-white" type="button" style="float: right">
+        Message All</a>
     <?php endif;?>
     <br>
     <table class="table">

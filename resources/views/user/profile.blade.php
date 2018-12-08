@@ -47,10 +47,10 @@
                             <td>{{ $user->email}}</td>
                         </tr>
 
-                        <tr>
+                        {{--<tr>
                             <td>{{ trans('user.location') }}</td>
                             <td>{{ $user->address }}</td>
-                        </tr>
+                        </tr>--}}
                         <tr>
                             <td>{{ trans('user.referring_affiliate') }}</td>
                             <td>
@@ -78,7 +78,7 @@
                         </tr>
                         <tr>
                             @if($user->is_admin != "YES")
-                            <td>{{ trans('user.message') }} to parent account</td>
+                            <td>{{ trans('user.message') }} to Referring Affiliate	</td>
                             @if($user->is_active == "NO")
                                 <td><a href="{{ url('message/'.$parentuser->username) }}" class="btn btn-primary text-white"
                                        disabled="disabled">Send
