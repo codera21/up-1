@@ -267,7 +267,6 @@
                 success: function () {
                     location.href = "{{ route('logout') }}"
                 }
-
             });
         }
     </script>

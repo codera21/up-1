@@ -39,7 +39,6 @@ class TestoController extends Controller
      */
     public function add()
     {
-
         return view('user.company_dashboard.add_testo');
     }
 
@@ -129,7 +128,7 @@ class TestoController extends Controller
     public function destroy($id)
     {
         $deletetesto = DB::table('testomonials')->where('id', $id)->delete();
-        if ($deletetesto){
+        if ($deletetesto) {
             return redirect()->route('testo.dashboard')
                 ->with('success', 'Company Deleted successfully');
         }

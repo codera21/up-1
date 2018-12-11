@@ -128,8 +128,16 @@ class UserController extends Controller
 
     public function dashboard()
     {
+        $loggedUser = Auth::user();
         $user = Auth::user()->id;
-        return view('user.dashboard', ['user' => $user]);
+        $parentuser = DB::table('users')->where('id',$loggedUser->parent_id)->first();
+        if($parentuser == null)
+        {
+            $parentuser = DB::table('users')->where('id', $loggedUser->id)->first();;
+        }else{
+            $parentuser = DB::table('users')->where('id',$loggedUser->parent_id)->first();
+        }
+        return view('user.dashboard', ['user' => $user,'parentuser'=>$parentuser]);
     }
 
     public function profile(Request $request, $username)

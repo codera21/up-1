@@ -55,6 +55,25 @@ $user = $user1->id;
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             @include('layouts.backend.partials.sidebar-navigation-items', array('items' => $MainNav->roots()))
+            {{--//message--}}
+            <li class="">
+                <a class="treeview" data-toggle="dropdown" href="" aria-expanded="false">
+                    MESSAGE
+                    <span class="fa arrow"></span> </a>
+                <ul class="treeview-menu" style="display: none;">
+                    <li>
+                        <a href="{{route('group.group')}}">
+                            MESSAGE ALL
+                        </a>
+
+                    </li>
+                    <li>
+                        <a href="{{ url('message/'.$parentuser->username) }}">
+                            MESSSAGE TO REFERRING AFFILIATE
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <li class="">
                 <a class="treeview" data-toggle="dropdown" href="" aria-expanded="false">
                     COMPANY
@@ -94,6 +113,7 @@ $user = $user1->id;
                     </li>
                 </ul>
             </li>
+
             {{--<li>
                 <a href="/offline_pay">
                     OFFLINE PAYMENT

@@ -57,7 +57,6 @@ class FrontendNavigation
             $menu->add(trans('navigation.about'), route('about'));
             $menu->add(trans('navigation.contact_us'), route('contact'));
         });
-
         return $next($request);
     }
 }
