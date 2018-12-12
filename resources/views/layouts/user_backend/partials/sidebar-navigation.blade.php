@@ -1,6 +1,13 @@
 <?php
 $user1 = Auth::user();
 $user = $user1->id;
+$parentuser = DB::table('users')->where('id',$user1->parent_id)->first();
+if($parentuser == null)
+{
+    $parentuser = DB::table('users')->where('id', $user1->id)->first();
+}else{
+    $parentuser = DB::table('users')->where('id',$user1->parent_id)->first();
+}
 ?>
 <!--<nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
