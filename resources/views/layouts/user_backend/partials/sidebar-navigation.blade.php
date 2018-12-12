@@ -72,6 +72,11 @@ $user = $user1->id;
                             MESSSAGE TO REFERRING AFFILIATE
                         </a>
                     </li>
+                    <li>
+                        <a href="/user/tree">
+                            MESSSAGE INDIVIDUAL
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="">

@@ -122,7 +122,8 @@
 <!-- Copy Right Section Start -->
 <div class="copyright">
     <div class="container">
-        <p>Copyright &copy; DNASbooks Digital Marketing From 2018 </p>
+        <p>Copyright © 2018 DNAsbook Digital Marketing <a href="/pages/terms-and-conditions" style="color: green;">-- Terms and Conditions -- Privacy Policy</a>
+        </p>
     </div>
     <!-- //Copy right Section End -->
     <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Return to top"
