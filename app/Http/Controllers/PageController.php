@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Mail;
 // Request & Response
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -126,15 +127,15 @@ class PageController extends Controller
         $name = $request->get('name');
         $email = $request->get('email');
         $message = $request->get('message');
-        \Mail::send('emails.contact',
+        Mail::send('emails.contact',
             array(
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
                 'user_message' => $request->get('message')
-            ), function ($message) use ($name, $email) {
-                $message->from($email, $name);
-                //$message->to(config('settings.email'), config('settings.sitename'))->subject('DNAsbook Digital Marketing - Contact Us');
-                $message->to('tariqalikhan19@gmail.com', config('settings.sitename'))->subject('DNAsbook Digital Marketing - Contact Us');
+            ), function($message) use($request)
+            {
+                $message->from($request->email);
+                $message->to('ashish336b@gmail.com', 'Admin')->subject('Dnasbook contact us');
             });
         return \Redirect::route('contact')->with('success', trans('Thanks for contacting us!'));
 

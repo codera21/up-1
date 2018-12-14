@@ -39,7 +39,7 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     Route::post('login', 'Auth\LoginController@login');
     Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
     Route::get('hcl/{id_id_id}', ['as' => 'hcl', 'uses' => 'Admin\FAQController@smp']);
-    Route::get('/hcl_hcl/{id_id_id}', ['as' => '.hcl_hcl','uses'=> 'Admin\FAQController@smp1']);
+    Route::get('/hcl_hcl/{id_id_id}', ['as' => '.hcl_hcl', 'uses' => 'Admin\FAQController@smp1']);
 
 
     // Registration Routes...
@@ -205,7 +205,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::get('/{username?}', ['as' => '', 'uses' => 'MessageController@index']);
         Route::get('/send/{username?}', ['as' => '', 'uses' => 'MessageController@index2']);
     });
-    Route::group(['middleware'=>['isActive'],'as' => 'group', 'prefix' => 'group'], function () {
+    Route::group(['middleware' => ['isActive'], 'as' => 'group', 'prefix' => 'group'], function () {
         Route::get('/send/{username?}', ['as' => '.group', 'uses' => 'MessageController@groupindex']);
         Route::get('/viewsent', ['as' => '.viewsent', 'uses' => 'MessageController@groupsent']);
         Route::get('/trash', ['as' => '.trash', 'uses' => 'MessageController@grouptrash']);
@@ -326,7 +326,6 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
         Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\MaterialController@edit']);
         Route::put('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\MaterialController@update']);
         Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\MaterialController@delete']);
-
     });
 
     // Subscription
@@ -355,7 +354,6 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
         Route::put('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\BlockController@update']);
         Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\BlockController@delete']);
     });
-
     // Manage Pages
     Route::group(['as' => 'admin.page', 'prefix' => 'page'], function () {
         Route::get('/', ['as' => '', 'uses' => 'Admin\PageController@index']);
@@ -422,9 +420,6 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
       return \App\Models\Page::where('slug', $value)->where('language', $language)->first();
   });*/
     Route::get('{page}', ['as' => 'page', 'uses' => 'PageController@index']);
-
-
-
 });
 
 
