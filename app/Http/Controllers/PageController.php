@@ -138,8 +138,6 @@ class PageController extends Controller
                 $message->to('ashish336b@gmail.com', 'Admin')->subject('Dnasbook contact us');
             });
         return \Redirect::route('contact')->with('success', trans('Thanks for contacting us!'));
-
-
     }
 
     public function active()
