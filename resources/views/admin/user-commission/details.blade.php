@@ -1,6 +1,5 @@
 <?php /*dd($users[0]->children)*/?>
 @extends('layouts.backend.default')
-
 @section('page_title')
     {{ trans('app.tree') }}
 @endsection
