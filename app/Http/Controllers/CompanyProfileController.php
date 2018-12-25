@@ -33,6 +33,7 @@ class CompanyProfileController extends Controller
 
     Public function for_frontend($id)
     {
+        $user['user'] = DB::table('users')->where("id",$id)->first();
         $user['company_data'] = DB::table('companies_profiles')->where('user_id', $id)->first();
         $user['data_no'] = DB::table('companies_profiles')->where('user_id', $id)->count();
         /*dd($user['company_data']->name);exit;*/

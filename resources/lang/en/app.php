@@ -43,5 +43,6 @@ return [
     'not_now_message' => '<b class="text-danger">Important:</b> You have the choice to skip the payment of the subscription fees
                 now by clicking the button
                 "Not Now". This serves as a trial period. But you have to pay by the 30th of this month, otherwise your
-                account will be blocked.'
+                account will be blocked.',
+    'method'=>'method',
 ];
