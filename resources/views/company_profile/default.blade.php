@@ -34,15 +34,14 @@
             <div class="row">
                 <div class="row">
                     @foreach($company_photo as $item)
-                    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                        <a class="thumbnail" href="" data-image-id="" data-toggle="modal" data-title=""
-                           data-target="#image-gallery">
-                            <img class="img-thumbnail"
-                                 src="{{$item->photo_url}}"
-                                 alt="Another alt text">
-                        </a>
-                    </div>
-                        @endforeach
+                        <div class="col-lg-3 col-md-6 col-xs-6">
+                            <a class="thumbnail" href="">
+                                <img class="img-thumbnail"
+                                     src="{{$item->photo_url}}"
+                                     alt="Another alt text">
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         {{--<button class="btn btn-primary btn-next-prev previous"><span class="glyphicon glyphicon-menu-left"></span></button>--}}
