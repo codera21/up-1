@@ -70,8 +70,8 @@ class CompanyPhotoController extends Controller
         $addphotourl = DB::table('companies_photo')->insert([
             'name' => $request->input('name'),
             'photo_url' => $data['photo_url'],
+            'pic_url' => $request->input('pic_url'),
             'user_id' => $user['user_id']
-
         ]);
         if ($addphotourl) {
             return redirect()->route('photo.dashboard')
@@ -95,7 +95,8 @@ class CompanyPhotoController extends Controller
      *
      * @param  \App\Models\CompanyPhoto $companyPhoto
      * @return \Illuminate\Http\Response
-     */    public function edit(CompanyPhoto $companyPhoto, $id)
+     */
+    public function edit(CompanyPhoto $companyPhoto, $id)
     {
         $user['user'] = Auth::user();
         $user['user_id'] = $user['user']->id;
@@ -151,13 +152,13 @@ class CompanyPhotoController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(CompanyPhoto $companyPhoto,$id)
+    public function destroy(CompanyPhoto $companyPhoto, $id)
     {
         $deletephoto = DB::table('companies_photo')->where('id', $id);
-        if ($deletephoto){
+        if ($deletephoto) {
             $deletephoto->delete();
         }
-        if ($deletephoto){
+        if ($deletephoto) {
             return redirect()->route('photo.dashboard')
                 ->with('success', 'Photo Deleted successfully');
         }

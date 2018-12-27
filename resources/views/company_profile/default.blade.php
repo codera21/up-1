@@ -35,7 +35,7 @@
                 <div class="row">
                     @foreach($company_photo as $item)
                         <div class="col-lg-3 col-md-6 col-xs-6">
-                            <a class="thumbnail" href="">
+                            <a class="thumbnail" href="{{$item->pic_url}}">
                                 <img class="img-thumbnail"
                                      src="{{$item->photo_url}}"
                                      alt="Another alt text">

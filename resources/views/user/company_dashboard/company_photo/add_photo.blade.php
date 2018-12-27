@@ -18,9 +18,15 @@
 
                 <fieldset>
                     <div class="form-group">
-                       1 <label class="control-label col-sm-2">Pic Name:</label>
+                        <label class="control-label col-sm-2">Pic Name:</label>
                         <div class="col-xs-4">
                             <input type="text" class="form-control" name="name"></input>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                         <label class="control-label col-sm-2">Add Url:</label>
+                        <div class="col-xs-4">
+                            <input type="text" class="form-control" name="pic_url"></input>
                         </div>
                     </div>
                     <div class="form-group required" id="thumbnail">
