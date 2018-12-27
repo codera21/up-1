@@ -227,6 +227,7 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
         Route::get('/', ['as' => '', 'uses' => 'Admin\UserController@index']);
         Route::get('/detail/{id}', ['as' => '.detail', 'uses' => 'Admin\UserController@detail']);
         /*Route::get('/user_commission', ['as' => '.user_commission', 'uses' => 'Admin\UserController@test']);*/
+        Route::get('/ban/{id}', ['as' => '.ban', 'uses' => 'Admin\UserController@ban']);
         Route::get('/user_commission', ['as' => '.user_commission', 'uses' => 'Admin\UserController@test2']);
         Route::get('/details/{id}', ['as' => '.details', 'uses' => 'Admin\UserController@details']);
         Route::get('/test', ['as' => '.test', 'uses' => 'Admin\UserController@test']);
