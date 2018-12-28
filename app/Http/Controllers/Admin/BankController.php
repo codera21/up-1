@@ -217,3 +217,5 @@ class BankController extends Controller
         return view('admin.payment-history.details',$data);
     }
 }
+
+
