@@ -14,7 +14,7 @@
         "kodeine/laravel-acl": "~1.0@dev",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "~5.gi0",
+        "laravelcollective/html": "~5.0",
         "lavary/laravel-menu": "^1.6",
         "league/flysystem": "^1.0",
         "nesbot/carbon": "^1.21",
