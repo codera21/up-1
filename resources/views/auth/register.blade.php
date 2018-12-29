@@ -82,15 +82,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('zip') ? ' has-error' : '' }}">
+                        <div class="form-group">
                             {!! Form::label('zip', trans('register.zip').' & '.trans('register.zip4'), ['class' => 'col-md-3 control-label']) !!}
                             <div class="col-md-3">
-                                {!! Form::text('zip', old('zip'), ['placeholder'=>'Zip', 'class'=>'form-control validate-zip', 'maxlength'=>'5']) !!}
-                                @if ($errors->has('zip'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('zip') }}</strong>
-                                    </span>
-                                @endif
+                                {!! Form::text('zip', old('zip'), ['placeholder'=>'Zip', 'class'=>'form-control']) !!}
                             </div>
                     
                         </div>

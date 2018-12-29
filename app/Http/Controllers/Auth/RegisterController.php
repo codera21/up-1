@@ -103,7 +103,6 @@ class RegisterController extends Controller
             'address2' => 'address|max:255',
             'city' => 'required|city|max:255',
             'state' => 'required',
-            'zip' => 'zip|min:5|max:5',
             'phone' => 'required|phone|max:10',
             'username' => 'required|max:100|unique:users',
             'email' => 'required|email|max:100|unique:users',

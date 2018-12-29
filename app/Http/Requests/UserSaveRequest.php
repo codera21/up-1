@@ -30,8 +30,6 @@ class UserSaveRequest extends FormRequest
             'address1' => 'required|address|max:47',
             'city' => 'required|city|max:50',
             'state' => 'required',
-            //'zip' => 'required|zip|min:5|max:5',
-            'zip' => 'zip|min:5|max:5',
             'phone' => 'required|digits:10|min:10|max:10',
             'password' => 'required|min:6|max:20',
             'password_confirmation' => 'required|min:6|max:20',
