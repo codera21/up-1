@@ -13,7 +13,7 @@ Homestead.yaml
 .env
 /storage/debugbar
 /storage/exports
-/config/database.php
+
 
 # Uploads Directory
 /public/uploads/*
@@ -28,5 +28,5 @@ Homestead.yaml
 
 !/public/uploads/*/*/.gitkeep
 vendor/*.*
-config/database.php
+
 

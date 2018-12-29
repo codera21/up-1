@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use Illuminate\Support\Facades\DB;use ok;
+
+use Illuminate\Support\Facades\DB;
+use ok;
 use App\Http\Controllers\Controller;
 
 // Request & Response
@@ -208,12 +210,12 @@ class BankController extends Controller
     public function offline_pay()
     {
         $data['data'] = DB::table('offline_pay')->get();
-        return view('admin.payment-history.offline_pay',$data);
+        return view('admin.payment-history.offline_pay', $data);
     }
 
     public function details($id)
     {
-        $data['data'] = DB::table('offline_pay')->where('id',$id)->first();
-        return view('admin.payment-history.details',$data);
+        $data['data'] = DB::table('offline_pay')->where('id', $id)->first();
+        return view('admin.payment-history.details', $data);
     }
 }
