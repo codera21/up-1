@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'home'=>'HOMESS',
+    'home'=>'HOME',
     'my_academy'=>'MY ACADEMY',
     'payment'=>'PAYMENT',
     'commission'=>'COMMISSION',
