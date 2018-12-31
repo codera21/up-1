@@ -48,7 +48,7 @@
 
                     <div class=" col-md-6">
                         <img class="img img-responsive" style="height: 571px; width: 810px; margin-left: 15px"
-                             src="https://static.wixstatic.com/media/ea71bb_e7959a5be116482b9727a9be900d2d35~mv2_d_5454_3840_s_4_2.jpg"/>
+                             src="{{URL::asset('images/Logo.jpeg')}}"/>
                     </div>
                 </div>
             </section>

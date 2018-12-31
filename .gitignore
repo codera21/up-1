@@ -1,19 +1,17 @@
 .git
 access.log
 error.log
-nbproject
-BKP
 /node_modules
 /storage
-/public/storage
+/public/storage/*.*
 /vendor
 .idea
+.vscode
 Homestead.json
 Homestead.yaml
 .env
 /storage/debugbar
 /storage/exports
-
 
 # Uploads Directory
 /public/uploads/*
@@ -27,6 +25,3 @@ Homestead.yaml
 /public/uploads/*/*/*
 
 !/public/uploads/*/*/.gitkeep
-vendor/*.*
-
-
