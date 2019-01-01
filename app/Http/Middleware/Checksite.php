@@ -36,7 +36,6 @@ class Checksite
             Session::put('twitter_url','https://twitter.com/?lang=en');
             Session::put('instagram_url','https://www.instagram.com/dnasbookdigimarket/?fbclid=IwAR3LgDXQfRxvagyOJGn9MMdJTZtKxCtrx0XMcRQVbvHxbnDOVzL3PxShTy4');
             Session::put('youtube_url','https://www.youtube.com/channel/UCY6gIihF58UEZhHy5mnks5g?view_as=subscriber&fbclid=IwAR27zvtui43k6UejNaEjvW6cM3ar-DkTpl3p8XqeMmPJz9CfjWB3WR7KC38');
-
         }
         return $next($request);
     }
