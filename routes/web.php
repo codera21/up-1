@@ -100,6 +100,8 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
         Route::get('/not_now', ['as' => '.notNow', 'uses' => 'OnlinePaymentController@notNow']);
         Route::get('/success', ['as' => '.success', 'uses' => 'OnlinePaymentController@success']);
         Route::get('/fail', ['as' => '.fail', 'uses' => 'OnlinePaymentController@fail']);
+        Route::get('/ipn', ['as' => '.ipn', 'uses' => 'OnlinePaymentController@ipn']);
+        
 
         // One Time Payment
         Route::post('/create-onetime-payment', ['as' => '.create-onetime-payment', 'uses' => 'OnlinePaymentController@createOneTimePayment']);
