@@ -5,23 +5,19 @@
         <div class="container">
             <ul class="list-inline">
                 <li>
-                    <a href="#"> <i class="livicon" data-name="facebook" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
+                    <a href= <?php echo Session::get('facebook_url');?>> <i class="livicon" data-name="facebook" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#"> <i class="livicon" data-name="twitter" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
+                    <a href=<?php echo Session::get('twitter_url')?>> <i class="livicon" data-name="twitter" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#"> <i class="livicon" data-name="google-plus" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
+                    <a href=<?php echo Session::get('instagram_url');?>> <i class="livicon" data-name="instagram" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="#"> <i class="livicon" data-name="linkedin" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"> <i class="livicon" data-name="rss" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
+                    <a href=<?php echo Session::get('youtube_url')?>> <i class="livicon" data-name="youtube" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
                     </a>
                 </li>
                 <li class="pull-right">
