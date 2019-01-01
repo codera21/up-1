@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 use Grid;
 use Date;
 use Helper;
-
+use Session;
 // Models and Repo
 use App\Repositories\UserCommissionRepository;
 
@@ -92,7 +92,7 @@ class UserCommissionController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return 'F'.Helper::moneyFormat($row->commission_amount);
+                            return Session::get('curr').Helper::moneyFormat($row->commission_amount);
                         }
                     ),
                     array(
@@ -105,7 +105,7 @@ class UserCommissionController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return 'F'.Helper::moneyFormat($row->opening_balance);
+                            return Session::get('curr').Helper::moneyFormat($row->opening_balance);
                         }
                     ),
                     array(
@@ -118,7 +118,7 @@ class UserCommissionController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return 'F'.Helper::moneyFormat($row->closing_balance);
+                            return Session::get('curr').Helper::moneyFormat($row->closing_balance);
                         }
                     ),                    
                 )

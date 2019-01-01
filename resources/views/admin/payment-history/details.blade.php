@@ -29,7 +29,7 @@
                         <h4>{{$data->country}}</h4>
                         <h4>{{$data->payment_type}}</h4>
                         <h4>{{$data->account_no}}</h4>
-                        <h4>${{$data->amount_paid}}</h4>
+                        <h4><?php echo Session::get('curr') ?>{{$data->amount_paid}}</h4>
                     </div>
                 </div>
             </div>

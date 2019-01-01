@@ -19,8 +19,14 @@
         </div>
         <h3><mark>2. Make  recurring payment</mark></h3>
         <div class="text-center" style="padding : 50px 0">
-            <a class="btn btn-primary" style="color:#fff"
-               href="">Test</a>
+            @if(session('msg'))
+                {{session('msg')}}
+            @endif
+            @if($subsexists == 0)
+                <a class="btn btn-primary" style="color:#fff" href="http://dnasbookdigimarket.com/online-payment/ipn">Start Subscription</a><br>
+            @elseif($status == 'Active')
+                <a class="btn btn-primary" style="color:#fff" data-toggle="modal" href='#modal-id' >Cancel Subscription</a>
+            @endif
         </div>
         <h3><mark>3. Make your offline payment</mark></h3>
         <form action="{{route('offline_pay.add')}}" enctype="multipart/form-data" id="manage-faq" method="POST"
@@ -136,6 +142,28 @@
 
             <!-- //-not now btn -->
         @endif
+    </div>
+    <div class="modal fade" id="modal-id">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="https://dnasbookdigimarket.com/online-payment/cancelrecurring/?profile_id={{$profile_id}}" method="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Reason for Cancellation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="" class="control-label">Reason</label>
+                            <textarea name="reason" id="reason" rows="5" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Cancel Subscription</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
 @endsection

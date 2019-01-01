@@ -715,7 +715,7 @@ footer .btn-primary.text-white {
     padding: 15px;
     background-color: #f0f0f0;
     margin: 40px 0 20px;
-    text-align:center;    
+    text-align:center;
 }
 
 
@@ -726,8 +726,8 @@ footer .btn-primary.text-white {
 |--------------------------------------------------------------------------
 */
 #account-nav > li > a:hover, #account-nav > li > a:focus {
-  color: #777!important;
-  text-decoration: none;
+    color: #777!important;
+    text-decoration: none;
 }
 
 #account-nav >.open >a:hover,
@@ -744,4 +744,3 @@ ul.dropdown-menu>li.active>a:hover{
 ul.dropdown-menu>li.active>a{
     color: #777 !important;
 }
-

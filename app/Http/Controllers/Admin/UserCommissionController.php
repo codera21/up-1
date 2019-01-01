@@ -12,7 +12,7 @@ use Grid;
 use Date;
 use Helper;
 use Auth;
-
+use Session;
 // Form Requests
 use App\Http\Requests\Admin\UserCommissionSaveRequest;
 use App\Http\Requests\Admin\UserCommissionUpdateRequest;
@@ -143,7 +143,7 @@ class UserCommissionController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return 'F' . Helper::moneyFormat($row->commission_amount);
+                            return Session::get('curr') . Helper::moneyFormat($row->commission_amount);
                         }
                     ),
                     array(
@@ -156,7 +156,7 @@ class UserCommissionController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return 'F' . Helper::moneyFormat($row->opening_balance);
+                            return Session::get('curr') . Helper::moneyFormat($row->opening_balance);
                         }
                     ),
                     array(
@@ -169,7 +169,7 @@ class UserCommissionController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return 'F' . Helper::moneyFormat($row->closing_balance);
+                            return Session::get('curr') . Helper::moneyFormat($row->closing_balance);
                         }
                     ),
                     array(

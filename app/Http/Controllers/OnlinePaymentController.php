@@ -136,7 +136,15 @@ class OnlinePaymentController extends Controller
             ->find($userID);
         $dt = new DateTime();
         $dt->format('Ymd');
-        return view('online-payment.add', ['material' => $material, 'notNow' => $user->not_now]);
+        $subsexists = DB::table('paypal_subscription')->where('user_id', $userID)->count();
+        $status = '';
+        $profile_id = '';
+        if($subsexists !=0){
+            $user_paypal_info = DB::table('paypal_subscription')->where('user_id', $userID)->first();
+            $status = $user_paypal_info->status;
+            $profile_id = $user_paypal_info->customer_profile_id;
+        }
+        return view('online-payment.add', ['material' => $material, 'notNow' => $user->not_now, 'subsexists' => $subsexists,  'status' => $status, 'profile_id' => $profile_id]);
     }
     public function addnew1()
     {
@@ -175,6 +183,76 @@ class OnlinePaymentController extends Controller
      * @param OfflinePaymentSaveRequest $request
      * @return Redirect
      */
+    public function ipn()
+    {
+        $curl = curl_init();
+
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_POST, true);
+        //curl_setopt($curl, CURLOPT_URL, 'https://api-3t.sandbox.paypal.com/nvp');
+        curl_setopt($curl, CURLOPT_URL, 'https://api-3t.paypal.com/nvp');
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query(array(
+            //Test
+            /* 'USER' => 'yahiadjipe-facilitator_api1.yahoo.com',
+            'PWD' => '8SGJGYWJV58W6JR6',
+            'SIGNATURE' => 'ANn5dzzcIR78iGR7aGxnVnfhg7baAn01lTbSYb4mFy7Bnjp7D1NINiev', */
+
+            //Live
+            'USER' => 'yahiadjipe_api1.yahoo.com',
+            'PWD' => 'N642D4NF5B78ETPN',
+            'SIGNATURE' => 'ABOwF8r6to13jmlQzssFI5MTljx3AzZoKlFxkmftsuhnXmmI98xA3DBe',
+
+            'METHOD' => 'SetExpressCheckout',
+            'VERSION' => '108',
+            'LOCALECODE' => 'pt_EN',
+
+            'PAYMENTREQUEST_0_AMT' => 54,
+            'PAYMENTREQUEST_0_CURRENCYCODE' => 'USD',
+            'PAYMENTREQUEST_0_PAYMENTACTION' => 'Sale',
+            'PAYMENTREQUEST_0_ITEMAMT' => 54,
+
+            'L_PAYMENTREQUEST_0_NAME0' => 'Monthly',
+            'L_PAYMENTREQUEST_0_DESC0' => 'Monthly subscription for dns book',
+            'L_PAYMENTREQUEST_0_QTY0' => 1,
+            'L_PAYMENTREQUEST_0_AMT0' => 54,
+
+            'L_BILLINGTYPE0' => 'RecurringPayments',
+            'L_BILLINGAGREEMENTDESCRIPTION0' => 'Monthly',
+
+            'CANCELURL' => 'http://dnasbookdigimarket.com/online-payment/fail',
+            'RETURNURL' => 'http://dnasbookdigimarket.com/online-payment/success1/'
+        )));
+
+
+        $response =    curl_exec($curl);
+        curl_close($curl);
+        //echo "<pre>";print_r($response);die;
+
+        $nvp = array();
+        if (preg_match_all('/(?<name>[^\=]+)\=(?<value>[^&]+)&?/', $response, $matches)) {
+            foreach ($matches['name'] as $offset => $name) {
+                $nvp[$name] = urldecode($matches['value'][$offset]);
+            }
+        }
+
+        if (isset($nvp['ACK']) && $nvp['ACK'] == 'Success') {
+            $query = array(
+                'cmd'    => '_express-checkout',
+                'token'  => $nvp['TOKEN']
+            );
+            //Live
+            $redirectURL = sprintf('https://www.paypal.com/cgi-bin/webscr?%s', http_build_query($query));
+            //Test
+            //$redirectURL = sprintf('https://www.sandbox.paypal.com/cgi-bin/webscr?%s', http_build_query($query));
+
+
+            header('Location: ' . $redirectURL);
+        } else {
+            //Opz, alguma coisa deu errada.
+            //Verifique os logs de erro para depuração.
+        }
+    }
     public function saveRecurringPayment(OnlinePaymentSaveRequest $request)
     {
         $data = $request->except(['_token']);

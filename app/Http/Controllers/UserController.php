@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use Grid;
 use Storage;
+use Session;
 
 // Models and Repo
 use App\Repositories\UserRepository;
@@ -130,26 +131,24 @@ class UserController extends Controller
     {
         $loggedUser = Auth::user();
         $user = Auth::user()->id;
-        $parentuser = DB::table('users')->where('id',$loggedUser->parent_id)->first();
-        if($parentuser == null)
-        {
+        $parentuser = DB::table('users')->where('id', $loggedUser->parent_id)->first();
+        if ($parentuser == null) {
             $parentuser = DB::table('users')->where('id', $loggedUser->id)->first();;
-        }else{
-            $parentuser = DB::table('users')->where('id',$loggedUser->parent_id)->first();
+        } else {
+            $parentuser = DB::table('users')->where('id', $loggedUser->parent_id)->first();
         }
-        return view('user.dashboard', ['user' => $user,'parentuser'=>$parentuser]);
+        return view('user.dashboard', ['user' => $user, 'parentuser' => $parentuser]);
     }
 
     public function profile(Request $request, $username)
     {
         $loggedUser = Auth::user();
         $username1 = DB::table('users')->where('id', $loggedUser->id)->first();
-        $parentuser = DB::table('users')->where('id',$loggedUser->parent_id)->first();
-        if($parentuser == null)
-        {
+        $parentuser = DB::table('users')->where('id', $loggedUser->parent_id)->first();
+        if ($parentuser == null) {
             $parentuser = DB::table('users')->where('id', $loggedUser->id)->first();;
-        }else{
-            $parentuser = DB::table('users')->where('id',$loggedUser->parent_id)->first();
+        } else {
+            $parentuser = DB::table('users')->where('id', $loggedUser->parent_id)->first();
         }
         if ($username1->username == $username) {
             $array = array('username' => $username);
@@ -161,7 +160,7 @@ class UserController extends Controller
             foreach ($user->goals as $userGoal) {
                 $userGoals[$userGoal->goal_id] = $userGoal->user_answer;
             }
-            return view('user.profile', ['parentuser'=>$parentuser,'goals_table' => $goals_table, 'user' => $user, 'loggedUser' => $loggedUser, 'route' => 'user/' . $user->username, 'goals' => $goals, 'userGoals' => $userGoals]);
+            return view('user.profile', ['parentuser' => $parentuser, 'goals_table' => $goals_table, 'user' => $user, 'loggedUser' => $loggedUser, 'route' => 'user/' . $user->username, 'goals' => $goals, 'userGoals' => $userGoals]);
         } else {
             abort(404);
         }
@@ -196,29 +195,47 @@ class UserController extends Controller
         $level = DB::table('levels')->get()->count();
         return view('user.tree', ['users' => $users, 'level' => $level]);
     }
+
     public function tree_list()
     {
+        $amount = Session::get('amount');
+        $comm = Session::get('comm');
+        $total1 = Session::get('total');
+        $total_comm = Session::get('total_comm');
+        $curr = Session::get('curr');
         $user = Auth::user();
         $users = $this->user->findByField('parent_id', $user->id);
         $level = DB::table('levels')->get()->count();
-        return view('user.subs_level ', ['users' => $users, 'level' => $level,'user'=>$user]);
+        //$data is variable to pass in view just to look code good
+        $data = array(
+            'users' => $users,
+            'level' => $level,
+            'user' => $user,
+            'amount' => $amount,
+            'comm' => $comm,
+            'total1' => $total1,
+            'total_comm' =>$total_comm,
+            'curr'=>$curr
+        );
+        /*dd($data);*/
+        return view('user.subs_level ', $data);
     }
+
     public function pagination()
     {
         $no_of_result = $this->user->get()->count();
         $result_per_page = 5;
-        $no_of_page = ceil($no_of_result/$result_per_page);
-        if(!isset($_GET['page']))
-        {
+        $no_of_page = ceil($no_of_result / $result_per_page);
+        if (!isset($_GET['page'])) {
             $page = 1;
-        }else{
+        } else {
             $page = $_GET['page'];
         }
-        $first_page_result = ($page-1)*$result_per_page;
+        $first_page_result = ($page - 1) * $result_per_page;
         $users = DB::table('users')
             ->offset($first_page_result)
             ->limit($result_per_page)
             ->get();
-        return view('payment-profile.pagination_test',['no_of_page'=>$no_of_page,'users'=>$users]);
+        return view('payment-profile.pagination_test', ['no_of_page' => $no_of_page, 'users' => $users]);
     }
 }

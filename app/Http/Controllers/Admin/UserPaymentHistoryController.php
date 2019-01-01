@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 use Grid;
 use Date;
 use Helper;
-
+use Session;
 // Models and Repo
 use App\Repositories\PaymentRepository;
 use App\Repositories\PaymentDetailsRepository;
@@ -170,7 +170,7 @@ class UserPaymentHistoryController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return 'F'.Helper::moneyFormat($row->amount_paid);
+                            return Session::get('curr').Helper::moneyFormat($row->amount_paid);
                         }
                     ),
                     array(

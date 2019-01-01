@@ -11,6 +11,7 @@ use App\Http\Requests;
 // Facades
 use Date;
 use Auth;
+use Illuminate\Support\Facades\Session;
 use Log;
 use Grid;
 
@@ -24,7 +25,7 @@ use App\Http\Requests\PaymentProfileSaveRequest;
 class PaymentProfileController extends Controller
 {
 
-   /**
+    /**
      * @var PaymentProfileRepository
      */
     protected $paymentProfile;
@@ -87,7 +88,7 @@ class PaymentProfileController extends Controller
                         'value' => function ($row) {
                             return $row->id;
                         }
-                    ),                    
+                    ),
                     array(
                         'name' => 'payment_type',
                         'label' => trans('Type'),
@@ -219,10 +220,10 @@ class PaymentProfileController extends Controller
     {
         return view('payment-profile.add-profile');
     }
-    
+
     /**
      * Save payment profile
-     * 
+     *
      * @param PaymentSaveRequest $request
      * @return Response
      */
@@ -230,69 +231,66 @@ class PaymentProfileController extends Controller
     {
 
         Log::info("============ Payment - Add Profile (START) ============");
-        
+
         $data = $request->except(['_token', 'amount', 'cvv']);
         $data['card_no'] = preg_replace('/\s+/', '', $data["card_no"]);
-        
+
         $user = Auth::user();
-        if($user->paymentProfiles->count()>0) {
+        if ($user->paymentProfiles->count() > 0) {
             //$customerProfileId = $user->paymentProfiles[0]->customer_profile_id;
             $customerProfileId = $user->paymentProfiles[0]->id;
         } else {
             $customerProfileId = null;
             $data['default'] = 'Yes';
         }
-        
-        Log::info("User ID: ". $user->id);
-        Log::info("Company ID: ". $user->company_id);
-        Log::info("Existing Customer Profile ID: ". $customerProfileId);
 
-        
-        
-            // Save Payment Profile 
-            $data['user_id'] = $user->id;
-            $data['company_id'] = $user->company_id;
-            //$data['customer_profile_id'] = $customerProfileId;
-            //$data['customer_payment_profile_id'] = $customerPaymentProfileId;
-            unset($data['first_name']);
-            unset($data['last_name']);
+        Log::info("User ID: " . $user->id);
+        Log::info("Company ID: " . $user->company_id);
+        Log::info("Existing Customer Profile ID: " . $customerProfileId);
 
-            if ($paymentProfile = $this->paymentProfile->create($data)) {
 
-                Log::info("Payment Profile (ID: " . $paymentProfile->id . ") has been saved successfully.");
+        // Save Payment Profile
+        $data['user_id'] = $user->id;
+        $data['company_id'] = $user->company_id;
+        //$data['customer_profile_id'] = $customerProfileId;
+        //$data['customer_payment_profile_id'] = $customerPaymentProfileId;
+        unset($data['first_name']);
+        unset($data['last_name']);
 
-                // Set Default Payment Profile Account
-                if($paymentProfile->default == 'YES') {
+        if ($paymentProfile = $this->paymentProfile->create($data)) {
 
-                    $this->paymentProfile->pushCriteria(new \App\Criteria\PaymentProfileCriteria());
-                    $paymentProfiles = $this->paymentProfile->all();
-                    if($paymentProfiles)
-                    {
-                        foreach($paymentProfiles as $profile)
-                        {
-                            $this->paymentProfile->update(['default'=>'NO'], $profile->id);
-                        }
+            Log::info("Payment Profile (ID: " . $paymentProfile->id . ") has been saved successfully.");
+
+            // Set Default Payment Profile Account
+            if ($paymentProfile->default == 'YES') {
+
+                $this->paymentProfile->pushCriteria(new \App\Criteria\PaymentProfileCriteria());
+                $paymentProfiles = $this->paymentProfile->all();
+                if ($paymentProfiles) {
+                    foreach ($paymentProfiles as $profile) {
+                        $this->paymentProfile->update(['default' => 'NO'], $profile->id);
                     }
-                    $this->paymentProfile->update(['default'=>'YES'], $paymentProfile->id);
                 }
-
-                $response = array(
-                    'status' => 'success',
-                    'message' => trans('New payment profile has been added successfully.'),
-                    'payment_profile_id' => $paymentProfile->id,
-                    'redirect_url' => route('payment-profile.add-profile')
-                );       
-            } else {
-                Log::error("Payment Profile has not been saved.");
-
-                $response = array(
-                    'status' => 'error',
-                    'message' => trans('Account has not been added.'),
-                );
+                $this->paymentProfile->update(['default' => 'YES'], $paymentProfile->id);
             }
-        
+
+            $response = array(
+                'status' => 'success',
+                'message' => trans('New payment profile has been added successfully.'),
+                'payment_profile_id' => $paymentProfile->id,
+                'redirect_url' => route('payment-profile.add-profile')
+            );
+        } else {
+            Log::error("Payment Profile has not been saved.");
+
+            $response = array(
+                'status' => 'error',
+                'message' => trans('Account has not been added.'),
+            );
+        }
+
         Log::info("============ Payment - Add Profile (END) ============");
-        
+
         return $response;
     }
 
@@ -304,8 +302,8 @@ class PaymentProfileController extends Controller
      * @return Redirect
      */
     public function delete(Request $request, $profileId)
-    {       
-        if ($this->paymentProfile->update(['deleted'=>'YES'], $profileId)) {
+    {
+        if ($this->paymentProfile->update(['deleted' => 'YES'], $profileId)) {
             return redirect()->route('payment-profile')->with('success', trans('Payment Profile has been deleted successfully.'));
         } else {
             return redirect()->route('payment-profile')->with('error', trans('Payment Profile has not been deleted.'));
@@ -322,23 +320,21 @@ class PaymentProfileController extends Controller
     public function setDefault(Request $request, $profileId)
     {
         $paymentProfile = $this->paymentProfile->find($profileId);
-                
+
         $this->paymentProfile->pushCriteria(new \App\Criteria\PaymentProfileCriteria());
         $paymentProfiles = $this->paymentProfile->all();
-        if($paymentProfiles)
-        {
-            foreach($paymentProfiles as $paymentProfile)
-            {
-                $this->paymentProfile->update(['default'=>'NO'], $paymentProfile->id);
+        if ($paymentProfiles) {
+            foreach ($paymentProfiles as $paymentProfile) {
+                $this->paymentProfile->update(['default' => 'NO'], $paymentProfile->id);
             }
         }
-            
-        if ($this->paymentProfile->update(['default'=>'YES'], $profileId)) {
+
+        if ($this->paymentProfile->update(['default' => 'YES'], $profileId)) {
             return redirect()->route('payment-profile')->with('success', trans('Default Payment Profile has been set successfully.'));
         } else {
             return redirect()->route('payment-profile')->with('error', trans('Default Payment Profile has not been set.'));
         }
-        
+
     }
-    
+
 }

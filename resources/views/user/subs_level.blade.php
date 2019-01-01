@@ -60,7 +60,7 @@
                     <?php
                     if ($user->not_now == 0) {
                         if ($user->is_active == 'YES') {
-                            echo '250F';
+                            echo $amount;
                         } else {
                             echo 'Not paid';
                         }
@@ -76,7 +76,7 @@
                     <?php
                     if ($user->not_now == 0) {
                         if ($user->is_active == 'YES') {
-                            echo '25F';
+                            echo $comm;
                         } else {
                             echo 'Null';
                         }
@@ -134,7 +134,7 @@
                         <?php
                         if ($second->not_now == 0) {
                             if ($second->is_active == 'YES') {
-                                echo '250F';
+                                echo $amount;
                             } else {
                                 echo 'Not paid';
                             }
@@ -153,7 +153,7 @@
                         <?php
                         if ($second->not_now == 0) {
                             if ($second->is_active == 'YES') {
-                                echo '25F';
+                                echo $comm;
                             } else {
                                 echo 'Null';
                             }
@@ -225,7 +225,7 @@
                             <?php
                             if ($third->not_now == 0) {
                                 if ($third->is_active == 'YES') {
-                                    echo '250F';
+                                    echo $amount;
                                 } else {
                                     echo 'Not paid';
                                 }
@@ -247,7 +247,7 @@
                             <?php
                             if ($third->not_now == 0) {
                                 if ($third->is_active == 'YES') {
-                                    echo '25F';
+                                    echo $comm;
                                 } else {
                                     echo 'Null';
                                 }
@@ -328,7 +328,7 @@
                                 <?php
                                 if ($forth->not_now == 0) {
                                     if ($forth->is_active == 'YES') {
-                                        echo '250F';
+                                        echo $amount;
                                     } else {
                                         echo 'Not paid';
                                     }
@@ -353,7 +353,7 @@
                                 <?php
                                 if ($forth->not_now == 0) {
                                     if ($forth->is_active == 'YES') {
-                                        echo '25F';
+                                        echo $comm;
                                     } else {
                                         echo 'Null';
                                     }
@@ -388,10 +388,18 @@
         <tr>
             <th colspan="3" style="text-align: center;font-size: 2rem">Total</th>
             <td>
-                {{$total*250}}F
+                @if(env('site') == 'ENG')
+                    ${{$total*50}}
+                    @else
+                {{$total*1000}}F
+                    @endif
             </td>
             <td>
-                {{$total*25}}F
+                @if(env('site') == 'ENG')
+                    ${{$total*5}}
+                @else
+                    {{$total*100}}F
+                @endif
             </td>
             <td>
                 {{--<button type="button" class="btn btn-primary btn-xs">Payment</button>--}}

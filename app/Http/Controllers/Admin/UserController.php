@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 use Grid;
 use Date;
 use Auth;
-
+use Session;
 
 // Models and Repo
 use App\Repositories\UserRepository;
@@ -200,13 +200,12 @@ class UserController extends Controller
     //ban account code is here have a look thomas
     public function ban($id)
     {
-        $check = DB::table('users')->where('id',$id)->first();
-        if($check->is_active == 'YES')
-        {
+        $check = DB::table('users')->where('id', $id)->first();
+        if ($check->is_active == 'YES') {
             $ban = DB::table('users')->where('id', $id)->update([
                 'is_active' => 'NO'
             ]);
-        }else{
+        } else {
             return redirect()->route('admin.user')
                 ->with('success', 'Already  user is banned/inactive');
         }
@@ -454,8 +453,23 @@ class UserController extends Controller
 
     public function details($id)
     {
-        $admin['users'] = $this->user->findByField('parent_id', $id);
-        $admin['count'] = $this->user->findByField('parent_id', $id)->count();
+        $amount = Session::get('amount');
+        $comm = Session::get('comm');
+        $total1 = Session::get('total');
+        $total_comm = Session::get('total_comm');
+        $curr = Session::get('curr');
+        $users = $this->user->findByField('parent_id', $id);
+        $count = $this->user->findByField('parent_id', $id)->count();
+        $admin = [
+            'users'=>$users,
+            'count'=>$count,
+            'amount' => $amount,
+            'comm'=>$comm,
+            'total1'=>$total1,
+            'total_comm'=>$total_comm,
+            'curr'=>$curr,
+        ];
+
         return view('admin.user-commission.details', $admin);
     }
 }
