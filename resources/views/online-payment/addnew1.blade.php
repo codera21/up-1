@@ -21,6 +21,7 @@
                href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=37MF4DYE7RXKE">Pay for this
                 month</a>
         </div>
+        @if(env('SITE')=='ENG')
         <h3><mark>2. Make  recurring payment</mark></h3>
         <div class="text-center" style="padding : 50px 0">
             @if($subsexists == 0)
@@ -29,6 +30,7 @@
                 <a class="btn btn-primary" style="color:#fff" data-toggle="modal" href='#modal-id' >Cancel Subscription</a>
             @endif
         </div>
+        @endif
         <br>
         <br>
         {{--@if($notNow == 0)

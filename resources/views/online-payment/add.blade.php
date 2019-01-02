@@ -23,10 +23,10 @@
                href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=37MF4DYE7RXKE">Pay for this
                 month</a>
         </div>
-        <h3>
-            <mark>2. Make recurring payment</mark>
-        </h3>
         @if(env('SITE')=='ENG')
+            <h3>
+                <mark>2. Make recurring payment</mark>
+            </h3>
             <div class="text-center" style="padding : 50px 0">
                 @if(session('msg'))
                     {{session('msg')}}
