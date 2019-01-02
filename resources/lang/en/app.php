@@ -45,4 +45,6 @@ return [
                 "Not Now". This serves as a trial period. But you have to pay by the 30th of this month, otherwise your
                 account will be blocked.',
     'method'=>'method',
+    //flash message for online-payment/add or addnew1 or activate
+    'flash-message'=>  Session::get('flash-message-english'),
 ];

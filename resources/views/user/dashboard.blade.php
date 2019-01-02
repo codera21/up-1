@@ -5,7 +5,10 @@
 @section('content')
 <div class="panel panel-default">
         <div class="panel-heading">{{ trans('app.dashboard') }}</div>
-
+    <br>
+    <div class="alert alert-info" role="alert">
+        <b class="text-danger">Important</b>: {{trans('app.flash-message')}}
+    </div>
         <div class="panel-body">
         <h3>copy your referral link</h3>
             <div class="row">

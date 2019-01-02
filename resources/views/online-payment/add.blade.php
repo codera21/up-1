@@ -6,6 +6,10 @@
 
 @section('content')
     <div class="container">
+        <br>
+        <div class="alert alert-info" role="alert">
+            <b class="text-danger">Important</b>: {{trans('app.flash-message')}}
+        </div>
         <h3><mark>1. Make one time Payment</mark> </h3>
         <br>
         <div class="alert alert-info" role="alert">

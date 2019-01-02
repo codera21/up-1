@@ -7,6 +7,11 @@
 
     <div class="panel-body">
         <div class="ibox-content">
+            <br>
+            <div class="alert alert-info" role="alert">
+                <b class="text-danger">Important</b>: {{trans('app.flash-message')}}
+            </div>
+            <br>
             <form action="{{route('offline_pay.add')}}" enctype="multipart/form-data" id="manage-faq" method="POST"
                   class="form-horizontal">
                 {{ csrf_field() }}

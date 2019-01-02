@@ -139,13 +139,14 @@ class OnlinePaymentController extends Controller
         $subsexists = DB::table('paypal_subscription')->where('user_id', $userID)->count();
         $status = '';
         $profile_id = '';
-        if($subsexists !=0){
+        if ($subsexists != 0) {
             $user_paypal_info = DB::table('paypal_subscription')->where('user_id', $userID)->first();
             $status = $user_paypal_info->status;
             $profile_id = $user_paypal_info->customer_profile_id;
         }
-        return view('online-payment.add', ['material' => $material, 'notNow' => $user->not_now, 'subsexists' => $subsexists,  'status' => $status, 'profile_id' => $profile_id]);
+        return view('online-payment.add', ['material' => $material, 'notNow' => $user->not_now, 'subsexists' => $subsexists, 'status' => $status, 'profile_id' => $profile_id]);
     }
+
     public function addnew1()
     {
         $userID = Auth::user()->id;
@@ -155,24 +156,43 @@ class OnlinePaymentController extends Controller
             ->find($userID);
         $dt = new DateTime();
         $dt->format('Ymd');
-        return view('online-payment.addnew1', ['material' => $material, 'notNow' => $user->not_now]);
+        $subsexists = DB::table('paypal_subscription')->where('user_id', $userID)->count();
+        $status = '';
+        $profile_id = '';
+        if ($subsexists != 0) {
+            $user_paypal_info = DB::table('paypal_subscription')->where('user_id', $userID)->first();
+            $status = $user_paypal_info->status;
+            $profile_id = $user_paypal_info->customer_profile_id;
+        }
+        return view('online-payment.addnew1', ['material' => $material, 'notNow' => $user->not_now, 'subsexists' => $subsexists, 'status' => $status, 'profile_id' => $profile_id]);
     }
+
     public function activate()
     {
         $userID = Auth::user()->id;
         $material = DB::table('material')->first();
+
         $user = DB::table('users')
             ->find($userID);
         $dt = new DateTime();
         $dt->format('Ymd');
-        return view('online-payment.addnew', ['material' => $material, 'notNow' => $user->not_now]);
+        $subsexists = DB::table('paypal_subscription')->where('user_id', $userID)->count();
+        $status = '';
+        $profile_id = '';
+        if ($subsexists != 0) {
+            $user_paypal_info = DB::table('paypal_subscription')->where('user_id', $userID)->first();
+            $status = $user_paypal_info->status;
+            $profile_id = $user_paypal_info->customer_profile_id;
+        }
+        return view('online-payment.addnew1', ['material' => $material, 'notNow' => $user->not_now, 'subsexists' => $subsexists, 'status' => $status, 'profile_id' => $profile_id]);
     }
+
     public function notNow()
     {
         $userID = Auth::user()->id;
         DB::table('users')
             ->where('id', $userID)
-            ->update([ 'not_now' => 1,'is_active'=>'YES']);
+            ->update(['not_now' => 1, 'is_active' => 'YES']);
         // this is working or not in the live
         return redirect()->route('user.dashboard');
     }
@@ -225,7 +245,7 @@ class OnlinePaymentController extends Controller
         )));
 
 
-        $response =    curl_exec($curl);
+        $response = curl_exec($curl);
         curl_close($curl);
         //echo "<pre>";print_r($response);die;
 
@@ -238,8 +258,8 @@ class OnlinePaymentController extends Controller
 
         if (isset($nvp['ACK']) && $nvp['ACK'] == 'Success') {
             $query = array(
-                'cmd'    => '_express-checkout',
-                'token'  => $nvp['TOKEN']
+                'cmd' => '_express-checkout',
+                'token' => $nvp['TOKEN']
             );
             //Live
             $redirectURL = sprintf('https://www.paypal.com/cgi-bin/webscr?%s', http_build_query($query));
@@ -253,6 +273,7 @@ class OnlinePaymentController extends Controller
             //Verifique os logs de erro para depuração.
         }
     }
+
     public function saveRecurringPayment(OnlinePaymentSaveRequest $request)
     {
         $data = $request->except(['_token']);
