@@ -207,15 +207,15 @@ class OnlinePaymentController extends Controller
             'VERSION' => '108',
             'LOCALECODE' => 'pt_EN',
 
-            'PAYMENTREQUEST_0_AMT' => 54,
+            'PAYMENTREQUEST_0_AMT' => 59.7,
             'PAYMENTREQUEST_0_CURRENCYCODE' => 'USD',
             'PAYMENTREQUEST_0_PAYMENTACTION' => 'Sale',
-            'PAYMENTREQUEST_0_ITEMAMT' => 54,
+            'PAYMENTREQUEST_0_ITEMAMT' => 59.7,
 
             'L_PAYMENTREQUEST_0_NAME0' => 'Monthly',
             'L_PAYMENTREQUEST_0_DESC0' => 'Monthly subscription for dns book',
             'L_PAYMENTREQUEST_0_QTY0' => 1,
-            'L_PAYMENTREQUEST_0_AMT0' => 54,
+            'L_PAYMENTREQUEST_0_AMT0' => 59.7,
 
             'L_BILLINGTYPE0' => 'RecurringPayments',
             'L_BILLINGAGREEMENTDESCRIPTION0' => 'Monthly',
