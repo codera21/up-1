@@ -366,7 +366,7 @@
 
         .hero-content {
             position: relative;
-            top: -192px;
+            top: -211px;
         }
 
         .hero-wrapper-one {
