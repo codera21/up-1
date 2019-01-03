@@ -5,7 +5,7 @@
         <!-- About Us Section Start -->
         <div class="col-sm-4">
             <h4>{{trans('navigation.about')}}</h4>
-            <p>
+            <p class="footer-about-us about-us">
                {{trans('footer.left_side')}}
             </p>
             <h4>{{trans('footer.follow_us')}}</h4>

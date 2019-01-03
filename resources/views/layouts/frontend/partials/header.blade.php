@@ -4,19 +4,19 @@
     <div class="icon-section">
         <div class="container">
             <ul class="list-inline">
-                <li>
+                <li class="ix-center">
                     <a href= <?php echo Session::get('facebook_url');?>> <i class="livicon" data-name="facebook" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
                     </a>
                 </li>
-                <li>
+                <li class="ix-center">
                     <a href=<?php echo Session::get('twitter_url')?>> <i class="livicon" data-name="twitter" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
                     </a>
                 </li>
-                <li>
+                <li class="ix-center">
                     <a href=<?php echo Session::get('instagram_url');?>> <i class="livicon" data-name="instagram" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
                     </a>
                 </li>
-                <li>
+                <li class="ix-center">
                     <a href=<?php echo Session::get('youtube_url')?>> <i class="livicon" data-name="youtube" data-size="18" data-loop="true" data-c="#fff" data-hc="#757b87"></i>
                     </a>
                 </li>
@@ -30,11 +30,11 @@
                                 <a href="tel:"><i class="livicon" data-name="phone" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
                                 <label class="hidden-xs"><a href="tel:"class="text-white">(703) 717-4200</a></label>
                             </li>-->
-                        <li><a href="#"><i class="livicon" data-name="login" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class="hidden-xs"><a href="{{ url('/locale/en') }}" class="text-white">{{ trans('English') }}</a></label></li>
-                        <li><a href="#"><i class="livicon" data-name="login" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class="hidden-xs"><a href="{{ url('/locale/fr') }}" class="text-white">{{ trans('French') }}</a></label></li>
+                        <li><a href="#"><i class="livicon" data-name="login" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class=""><a href="{{ url('/locale/en') }}" class="text-white">{{ trans('English') }}</a></label></li>
+                        <li><a href="#"><i class="livicon" data-name="login" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class=""><a href="{{ url('/locale/fr') }}" class="text-white">{{ trans('French') }}</a></label></li>
                         @if (Auth::guest())
-                            <li><a href="#"><i class="livicon" data-name="login" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class="hidden-xs"><a href="{{ url('/login') }}" class="text-white">{{ trans('frontend.login') }}</a></label></li>
-                            <li><a href="#"><i class="livicon" data-name="register" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class="hidden-xs"><a href="{{ url('/register/2') }}" class="text-white">{{ trans('frontend.register') }}</a></label></li>
+                            <li><a href="#"><i class="livicon" data-name="login" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class=""><a href="{{ url('/login') }}" class="text-white">{{ trans('frontend.login') }}</a></label></li>
+                            <li><a href="#"><i class="livicon" data-name="register" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class=""><a href="{{ url('/register/2') }}" class="text-white">{{ trans('frontend.register') }}</a></label></li>
                         @else
                             <li>
                                 <a href="{{ route('user.dashboard') }}" class="text-white"><i class="glyphicon glyphicon-user"></i> {{ trans('frontend.dashboard') }}</a>

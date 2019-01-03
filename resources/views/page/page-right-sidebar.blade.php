@@ -11,11 +11,13 @@
         <div class="main-content">
 
             <div class="hero-wrapper-one">
-                <video class="visible-desktop" id="hero-vid" poster="" autoplay
-                       loop muted>
-                    <source type="video/mp4"
-                            src="https://video.wixstatic.com/video/ea71bb_f91b98dc21b449f08046b5de2a2922e8/1080p/mp4/file.mp4">
-                </video>
+                <div class="video-content">
+                    <video class="visible-desktop" id="hero-vid" poster="" autoplay
+                           loop muted style="width: 100%">
+                        <source type="video/mp4"
+                                src="https://video.wixstatic.com/video/ea71bb_f91b98dc21b449f08046b5de2a2922e8/1080p/mp4/file.mp4">
+                    </video>
+                </div>
                 <div class="hero-content">
                     <div class="hero-subheading">{{ __('home_page.subheading')}}</div>
                     <div class="hero-heading">{{ __('home_page.heading')}}</div>
@@ -28,14 +30,14 @@
             <section class="about-us section-light">
                 <div class="about-us-content">
                     <div class="text col-md-6">
-                        <div style="width: 70%; margin: auto;">
+                        <div class="about-heading-pra" style="">
                             <hr class="hr-1">
                             <p class="heading-2"
                                style="font-size: 42px; font-weight: 400; line-height: 50.4px;  margin-bottom: 20px; text-align: center;
                            font-family: 'Raleway', sans-serif;">
                                 {{ __('home_page.AboutUs')}}
                             </p>
-                            <p style="font-family: 'Open Sans', sans-serif; font-size: 14px; line-height: 25.5px ">
+                            <p class="about-us-description" style="font-family: 'Open Sans', sans-serif;">
                                 {!! __('home_page.AboutUsDescription') !!}
                             </p>
                             <p style="text-align: center; margin-top: 20px;">
@@ -47,7 +49,7 @@
                     </div>
 
                     <div class=" col-md-6">
-                        <img class="img img-responsive" style="height: 571px; width: 810px; margin-left: 15px"
+                        <img class="img img-responsive" id="big-logo-img" style=""
                              src="{{URL::asset('images/Logo.jpeg')}}"/>
                     </div>
                 </div>
@@ -69,7 +71,7 @@
                     <div class="card-container">
                         <div class="row">
                             <div class="col-md-6 left-side">
-                                <h3 style="font-weight: 900; color: black; margin-top: 50px;">{{ __('home_page.EntrepreneurshipWith') }}
+                                <h3 class="enterp-with" style="">{{ __('home_page.EntrepreneurshipWith') }}
                                     <br>
                                     DNAsbook Digital Marketing </h3>
                             </div>

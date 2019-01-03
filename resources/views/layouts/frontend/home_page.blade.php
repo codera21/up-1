@@ -242,6 +242,190 @@
         background-color: #fff !important;
     }
 
+    @media only screen and (max-width: 780px) {
+        .card-container {
+            width: 100%;
+        }
+
+        .media {
+            padding-bottom: 10px;
+        }
+
+        .footer-about-us {
+            font-size: 1.4rem;
+            padding: 10px;
+        }
+
+        .img {
+            align-content: center;
+            width: 400px;
+            height: 400px;
+            padding: 0 20px 20px 0;
+        }
+
+        .hero-heading {
+            letter-spacing: 2rem;
+            font-size: 5rem;
+        }
+    }
+
+    .enterp-with {
+        font-weight: 900;
+        color: black;
+        margin-top: 50px;
+    }
+
+    #big-logo-img {
+        height: 571px;
+        width: 810px;
+        margin-left: 15px;
+    }
+
+    .about-heading-pra {
+        width: 70%;
+        margin: auto;
+    }
+
+    .about-us-description {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        line-height: 25px;
+    }
+/*For tab and big mobile like devices*/
+    @media only screen and (max-width: 651px) {
+        .ix-center {
+            padding-bottom: 10px;
+        }
+
+        #hero-vid {
+            position: relative;
+        }
+
+        .hero-content {
+            position: relative;
+            top: -300px;
+        }
+
+        .hero-wrapper-one {
+            height: 325px;
+        }
+
+        .hero-subheading {
+            font-size: 2rem;
+        }
+
+        .about-us-content .text {
+            height: 428px;
+        }
+
+        .about-heading-pra {
+            width: 100%;
+            margin: auto;
+        }
+
+        .about-us-description {
+            line-height: 20px;
+            font-size: 1.5rem;
+            width: 100%;
+        }
+
+        #big-logo-img {
+            height: 400px;
+            width: 100%;
+            margin: 0;
+        }
+
+        .heading-2 {
+            font-size: 45px;
+        }
+
+        .card-container {
+            padding: 2rem 4rem;
+        }
+
+        .enterp-with {
+            margin: 0;
+            font-size: 2rem;
+            padding-bottom: 20px;
+            padding-top: 0px;
+        }
+
+        .media-heading {
+            padding: 0 12px 0 0;
+        }
+
+        .footer-about-us {
+
+        }
+    }
+/*for iphone x*/
+    @media only screen and (max-width: 375px) {
+        #hero-vid {
+            position: relative;
+        }
+
+        .hero-content {
+            position: relative;
+            top: -216px;
+        }
+
+        .hero-wrapper-one {
+            height: 250px;
+        }
+
+        .ix-center {
+            padding-bottom: 10px;
+        }
+
+        .hero-button {
+            margin: 1rem 0;
+        }
+
+        .hero-heading {
+            font-size: 3rem;
+        }
+
+        .hero-subheading {
+            font-size: 1.4rem;
+        }
+
+        .about-us-content .text {
+            height: 557px;
+        }
+
+        .about-heading-pra {
+            width: 100%;
+            margin: auto;
+        }
+
+        .about-us-description {
+            line-height: 20px;
+            font-size: 1.5rem;
+            width: 100%;
+        }
+
+        #big-logo-img {
+            height: 400px;
+            width: 100%;
+            margin: 0;
+        }
+
+        .heading-2 {
+            font-size: 45px;
+        }
+
+        .card-container {
+            padding: 2rem 4rem;
+        }
+
+        .enterp-with {
+            margin: 0;
+            font-size: 2rem;
+            padding-bottom: 20px;
+            padding-top: 0px;
+        }
+    }
+
 
 </style>
 <body>
