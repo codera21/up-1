@@ -95,7 +95,7 @@
         <!-- end of addition -->
     </div>
 
-    <div class="pre-footer" style="background-color: #57BBBF; padding: 250px 0git ;">
+    <div class="pre-footer" style="background-color: #57BBBF; padding: 250px 0;">
     </div>
 
     <script>
