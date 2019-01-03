@@ -359,7 +359,7 @@
         }
     }
 /*for iphone x*/
-    @media only screen and (max-width: 375px) {
+    @media only screen and (max-width: 400px) {
         #hero-vid {
             position: relative;
         }

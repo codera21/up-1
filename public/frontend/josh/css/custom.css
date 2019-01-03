@@ -8,13 +8,15 @@ body {
     height: 100%;
     color: #757b87;
 }
-.icon-section{
+
+.icon-section {
     background-color: #09bd8f;
     line-height: 7px;
     padding-top: 10px;
     margin-bottom: 10px;
 
 }
+
 a:link,
 a:visited,
 a:hover,
@@ -47,52 +49,54 @@ p {
 p label {
     text-align: justify;
 }
+
 /* ----------Custom Color Code ---------- */
 
 .primary,
-.primary>a,
-.primary>a:visited,
-.primary>a:hover,
-.primary>a:active {
+.primary > a,
+.primary > a:visited,
+.primary > a:hover,
+.primary > a:active {
     color: #418bca;
     text-decoration: none;
 }
 
 .danger,
-.danger>a,
-.danger>a:visited,
-.danger>a:hover,
-.danger>a:active {
+.danger > a,
+.danger > a:visited,
+.danger > a:hover,
+.danger > a:active {
     color: #ef6f6c;
     text-decoration: none;
 }
 
 .success,
-.success>a,
-.success>a:visited,
-.success>a:hover,
-.success>a:active {
+.success > a,
+.success > a:visited,
+.success > a:hover,
+.success > a:active {
     color: #01bc8c;
     text-decoration: none;
 }
 
 .warning,
-.warning>a,
-.warning>a:visited,
-.warning>a:hover,
-.warning>a:active {
+.warning > a,
+.warning > a:visited,
+.warning > a:hover,
+.warning > a:active {
     color: #f89a14;
     text-decoration: none;
 }
 
 .yellow,
-.yellow>a,
-.yellow>a:visited,
-.yellow>a:hover,
-.yellow>a:active {
+.yellow > a,
+.yellow > a:visited,
+.yellow > a:hover,
+.yellow > a:active {
     color: #FFD43C;
     text-decoration: none;
 }
+
 /* ---------- //Custom Color Code End ---------- */
 /* ---------- Text-Bg color Code Css ---------- */
 
@@ -119,6 +123,7 @@ p label {
     background-color: #f89a14;
     color: #fff;
 }
+
 /* ---------- //Text-Bg color Code Css End ---------- */
 /* ---------- Why choose us Section css ---------- */
 
@@ -129,6 +134,7 @@ p label {
 .text_bg {
     background-color: #f2eded !important;
 }
+
 /* ---------- //Why choose us Section End ---------- */
 /* ---------- Text-Bg Border color Code Css ---------- */
 
@@ -151,6 +157,7 @@ p label {
     border-bottom: 2px solid #ef6f6c;
     padding-bottom: 5px;
 }
+
 /* ---------- //Text-Bg Border color Code Css End---------- */
 /* ---------- Text-Success Css---------- */
 
@@ -162,6 +169,7 @@ p label {
 .text-danger {
     color: #ef6f6c;
 }
+
 /* ---------- //Text-Success End---------- */
 /* ---------- Nav bar Css Start ---------- */
 
@@ -185,9 +193,10 @@ p label {
     font-weight: 400;
 }
 
-.navbar-default .navbar-nav > li>a:hover {
+.navbar-default .navbar-nav > li > a:hover {
     color: #01bc8c;
 }
+
 /* ---------- Navbar  Dropdown menu Css ---------- */
 
 .navbar-nav .dropdown-menu:before {
@@ -203,16 +212,18 @@ p label {
     border-right: 8px solid transparent;
     border-left: 8px solid transparent;
 }
+
 /* ---------- //Navbar  Dropdown menu Css End ---------- */
 /* ---------- Navbar  Dropdown menu hover Css ---------- */
 
 .navbar-nav .dropdown-menu a:hover {
     border-left: 2px solid #ef6f6c;
 }
+
 /* ---------- //Navbar  Dropdown menu hover Css End ---------- */
 
-.navbar-default .navbar-nav >.open >a:hover,
-.navbar-default .navbar-nav >.open >a {
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a {
     background-color: #fff !important;
     color: #01bc8c;
 }
@@ -226,6 +237,7 @@ p label {
     background-color: transparent;
     border: none;
 }
+
 /* ---------- Nav bar Css End ---------- */
 /* ---------- Breadcrumb Css ---------- */
 
@@ -262,6 +274,7 @@ p label {
     color: #3d3d3d;
     content: none;
 }
+
 /* ---------- //Breadcrumb Css End ---------- */
 /* ---------- Breadcrumb Icon Section Css ---------- */
 
@@ -275,6 +288,7 @@ p label {
     left: -1px;
     top: 3px;
 }
+
 /* ---------- //Breadcrumb Icon Section End ---------- */
 /* ---------- Carousel Css ---------- */
 
@@ -295,11 +309,13 @@ p label {
 .carousel-caption {
     font-size: 30px;
 }
+
 /* ---------- //Carousel Css End ---------- */
 
 blockquote {
     border-left: 2px solid #ef6f6c;
 }
+
 /* ---------- Testimonial Images Css Start ---------- */
 
 .author {
@@ -311,6 +327,7 @@ blockquote {
 .author img {
     width: 50px;
 }
+
 /* ---------- //Testimonial Images Css End ---------- */
 /* ---------- Feature Section Css ---------- */
 
@@ -319,6 +336,7 @@ blockquote {
     float: left;
     margin: 1px 5px;
 }
+
 /* ---------- //Feature Section Css End ---------- */
 /* ---------- Menu Section Css ---------- */
 
@@ -336,11 +354,13 @@ blockquote {
 .menu li .active {
     background-color: #01bc8c;
 }
+
 /* ---------- //Menu Section Css End ---------- */
 
 .tabbable-panel ul {
     list-style-type: none;
 }
+
 /* ---------- Our services Box  Style Css ---------- */
 
 .section {
@@ -359,6 +379,7 @@ blockquote {
     margin-top: 60px;
     margin-bottom: 15px;
 }
+
 /* ---------- //Our services Box  Style Css End ---------- */
 /* ------------- Our Services Box Icon Css ---------- */
 
@@ -372,6 +393,7 @@ blockquote {
     width: 80px;
     margin-top: -61px;
 }
+
 /* ------------- //Our Services Box Icon Css End ---------- */
 
 .box-icon span {
@@ -380,6 +402,7 @@ blockquote {
     text-align: center;
     vertical-align: middle;
 }
+
 /* ---------- Our Services Icon Border css ---------- */
 
 .box-icon1 {
@@ -393,6 +416,7 @@ blockquote {
 .box-icon3 {
     border: 1px solid #FFD43C;
 }
+
 /* ---------- //Our Services Icon Border css ---------- */
 /* ---------- Our services Text Css----------*/
 
@@ -402,6 +426,7 @@ blockquote {
     padding-top: 10px;
     text-align: justify;
 }
+
 /* ---------- //Our services Text End ----------*/
 /* ---------- Our service Icon Css ---------- */
 
@@ -416,6 +441,7 @@ blockquote {
     right: 10px;
     top: 12px;
 }
+
 /* ---------- //Our service Icon Css End---------- */
 /* ---------- Feature main Section Start --------- */
 
@@ -439,6 +465,7 @@ blockquote {
     color: #515763;
     text-align: left
 }
+
 /* ---------- //Feature main Section End --------- */
 /* ---------- Purchase Section Css Start ---------- */
 
@@ -477,6 +504,7 @@ blockquote {
 .purchase-styl:focus {
     background-color: #01bc8c !important;
 }
+
 /* ---------- //Purchase Section Css Ebd ---------- */
 /* ---------- Our Team Divide Section Css ---------- */
 
@@ -488,6 +516,7 @@ blockquote {
 .divide > a {
     padding: 3%;
 }
+
 /* ---------- //Our Team Divide Section Css End ---------- */
 
 .section1 {
@@ -511,14 +540,17 @@ blockquote {
     height: 100%;
     margin-top: 10px;
 }
+
 /* ---------- News Section Css----------*/
 
 .news {
     margin-top: 2%;
 }
-.news .form-group{
+
+.news .form-group {
     width: 80%;
 }
+
 .news .form-control {
     background-color: #444343;
     border: 1px solid #5E5E5E;
@@ -531,6 +563,7 @@ blockquote {
     -webkit-box-shadow: rgba(0, 0, 0, 0);
     box-shadow: rgba(0, 0, 0, 0);
 }
+
 /* ---------- //News Section Css End ---------- */
 
 .panel-default > .panel-heading {
@@ -538,6 +571,7 @@ blockquote {
     background-color: #fff;
     border-color: #DDD;
 }
+
 /* ---------- Headings Border Css ---------- */
 
 .heading_border {
@@ -547,6 +581,7 @@ blockquote {
     margin-bottom: 15px;
     padding: 5px 15px;
 }
+
 /* ---------- //Headings Border Css End---------- */
 
 .tab img {
@@ -569,6 +604,7 @@ blockquote {
 .profile img {
     width: 100%;
 }
+
 /* ---------- Footer Section Css ---------- */
 
 footer {
@@ -591,6 +627,7 @@ footer img {
 footer .btn-primary.text-white {
     margin-top: 2%;
 }
+
 /* ---------- //Footer Section Css End ---------- */
 
 .text-white {
@@ -601,14 +638,16 @@ footer .btn-primary.text-white {
     background-color: #fff;
 }
 
-@media(max-width: 370px) {
+@media (max-width: 370px) {
     .properties {
         border-right: none;
     }
+
     .media-object img {
         width: 50%;
     }
 }
+
 /* ---------- About Us Slider Css ---------- */
 
 #owl-demo .item img {
@@ -632,6 +671,7 @@ footer .btn-primary.text-white {
     width: 100%;
     background: #EDEDED;
 }
+
 /* ---------- //About Us Slider Css End ---------- */
 
 .center-block {
@@ -656,6 +696,7 @@ footer .btn-primary.text-white {
 .marbtm10 h3 {
     margin-bottom: 0px;
 }
+
 /* ---------- Back to top Section Icon Css ---------- */
 
 .back-to-top {
@@ -674,6 +715,7 @@ footer .btn-primary.text-white {
 .back-to-top:hover {
     opacity: 1;
 }
+
 /* ---------- //Back to top Section Icon Css End---------- */
 /* ---------- Copy Right Section Css  ---------- */
 
@@ -686,6 +728,7 @@ footer .btn-primary.text-white {
     padding: 0.5% 0;
     margin: 0.5% 0;
 }
+
 /* ---------- //Copy Right Section Css  ---------- */
 /* ---------- Advanced Features Css ---------- */
 
@@ -694,15 +737,16 @@ footer .btn-primary.text-white {
 .pop button {
     margin-bottom: 15px;
 }
+
 /* ---------- //Advanced Features Css ---------- */
 
-@media(max-width: 759px) {
+@media (max-width: 759px) {
     .navbar-nav .dropdown-menu:before {
         content: none;
     }
 }
 
-@media(max-width: 950px) {
+@media (max-width: 950px) {
     .profile {
         display: block;
         margin-right: 4%;
@@ -710,15 +754,13 @@ footer .btn-primary.text-white {
     }
 }
 
-.action-wrap-footer{
+.action-wrap-footer {
     border-top: 1px solid #d0d0d0;
     padding: 15px;
     background-color: #f0f0f0;
     margin: 40px 0 20px;
-    text-align:center;
+    text-align: center;
 }
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -726,21 +768,19 @@ footer .btn-primary.text-white {
 |--------------------------------------------------------------------------
 */
 #account-nav > li > a:hover, #account-nav > li > a:focus {
-    color: #777!important;
+    color: #777 !important;
     text-decoration: none;
 }
 
-#account-nav >.open >a:hover,
-#account-nav >.open >a {
-    color: #777!important;
-}
-
-
-
-ul.dropdown-menu>li.active>a:hover{
+#account-nav > .open > a:hover,
+#account-nav > .open > a {
     color: #777 !important;
 }
 
-ul.dropdown-menu>li.active>a{
+ul.dropdown-menu > li.active > a:hover {
+    color: #777 !important;
+}
+
+ul.dropdown-menu > li.active > a {
     color: #777 !important;
 }
