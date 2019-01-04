@@ -388,14 +388,14 @@
         <tr>
             <th colspan="3" style="text-align: center;font-size: 2rem">Total</th>
             <td>
-                @if(env('site') == 'ENG')
+                @if(env('SITE') == 'ENG')
                     ${{$total*50}}
                     @else
                 {{$total*1000}}F
                     @endif
             </td>
             <td>
-                @if(env('site') == 'ENG')
+                @if(env('SITE') == 'ENG')
                     ${{$total*5}}
                 @else
                     {{$total*100}}F
