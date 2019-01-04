@@ -1,6 +1,6 @@
 @extends('layouts.user_backend.default')
 @section('page_title')
-    {{ trans('Verify') }}
+    {{ trans('page_title.verify') }}
 @endsection
 @section('content')
 

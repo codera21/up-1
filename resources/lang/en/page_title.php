@@ -1,0 +1,20 @@
+<?php
+return [
+    'video_lesson' => 'VIDEO LESSONS',
+    'text_lessons' => 'TEXT LESSONS',
+    'payment_profile' => 'PAYMENT PROFILES',
+    'payment_method' => 'OUR DIFFERENT PAYMENT METHODS',
+    'payment_history' => 'PAYMENTS HISTORY',
+    'subscriber_tree' => 'SUBSCRIBERS TREE',
+    'my_commission' => 'COMMISSIONS',
+    'faq' => ' FREQUENTLY ASKED QUESTIONS',
+    'news' => 'NEWS',
+    'about_us' => 'ABOUT US',
+    'contact' => 'CONTACT US',
+    'profile' => 'PROFILE',
+    'account_setting' => 'ACCOUNT SETTINGS',
+    'register' => 'REGISTRATION',
+    'login' => 'LOGIN',
+    'offline'=>'OFFLINE PAYMENT FORM',
+    'verify'=>'OFFLINE PAYMENT VERIFICATION FORM',
+];

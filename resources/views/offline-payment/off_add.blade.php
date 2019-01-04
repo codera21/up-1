@@ -1,6 +1,6 @@
 @extends('layouts.user_backend.default')
 @section('page_title')
-{{ trans('Offline-Payment') }}
+{{ trans('page_title.offline') }}
 @endsection
 @section('content')
 

@@ -4,7 +4,8 @@
             @if (Breadcrumbs::renderIfExists())
 
                 @php
-                    $breadcrumbs = Breadcrumbs::generate()
+                    $breadcrumbs = Breadcrumbs::generate();
+
                 @endphp
 
                 @if (count($breadcrumbs))
@@ -45,4 +46,7 @@
 
         </div>
     </div>
-
+{{--@if(Breadcrumbs::renderIfExists())
+    <div class="hero-title">
+        {{ $breadcrumb->title }}
+    </div>--}}
