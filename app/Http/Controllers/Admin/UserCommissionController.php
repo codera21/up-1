@@ -194,12 +194,6 @@ class UserCommissionController extends Controller
                     ),
                 )
             );
-        if (env('SITE')!='ENG')
-        {
-            dump($grid);
-        }else{
-            exit;
-        }
         return view('admin.user-commission.index', ['grid' => $grid]);
     }
 
