@@ -1,7 +1,7 @@
 @extends('layouts.backend.default')
 
 @section('page_title')
-    {{ trans('Manage Page') }}
+    {{ trans('Manage About Us Page') }}
 @endsection
 
 @section('content')
@@ -16,18 +16,17 @@
             <table class="table table-sm">
                 <thead>
                 <tr>
-                    <th scope="col">SN</th>
-                    <th scope="col">Title</th>
+                    <th scope="col">Language</th>
                     <th scope="col" style="width: 39%;">Description</th>
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach($about_us as $about)
+                @foreach($about_us as $about)
                     <tr>
-                        <th scope="row">{{$about->id}}</th>
-                        <td>{{$about->title}}</td>
-                        <td><?php echo $about->description?></td>
+
+                        <td> {{ $about->lang }}</td>
+                        <td> {!! $about->description !!}</td>
                         <td>
                             <div class="row">
                                 <div class="col-lg-3">
@@ -35,22 +34,10 @@
                                         <button type="submit" class="btn btn-Success">Edit</button>
                                     </form>
                                 </div>
-                                <div class="col-lg-2">
-                                    <form action="about/delete/{{$about->id}} ">
-                                        {{method_field('DELETE')}}
-                                        {{csrf_field()}}
-                                        <button id="demo" type="submit" class="btn btn-danger" data-toggle="modal"
-                                                data-target="#myModal" onclick="ConfirmDelete()">
-                                            Delete
-                                        </button>
-
-                                        <!-- Modal -->
-                                    </form>
-                                </div>
                             </div>
                         </td>
                     </tr>
-                    @endforeach
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -61,8 +48,7 @@
 
 @endsection
 <script>
-    function ConfirmDelete()
-    {
+    function ConfirmDelete() {
         var x = confirm("Are you sure you want to delete?");
         if (!x)
             event.preventDefault();

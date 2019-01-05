@@ -205,7 +205,7 @@ class UserController extends Controller
         $curr = Session::get('curr');
         $user = Auth::user();
         $users = $this->user->findByField('parent_id', $user->id);
-        $level = DB::table('levels')->get()->count();
+        $level = 4;  // may be changed later
         //$data is variable to pass in view just to look code good
         $data = array(
             'users' => $users,
@@ -217,7 +217,6 @@ class UserController extends Controller
             'total_comm' =>$total_comm,
             'curr'=>$curr
         );
-        /*dd($data);*/
         return view('user.subs_level ', $data);
     }
 

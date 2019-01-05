@@ -8,34 +8,29 @@
     <div class="row">
 
         <div class="col-md-12">
-                @foreach($about_us as $about)
-            <div>
-                <h1 id="heading">{{$about->title}}</h1>
-                <p id="para"><?php echo $about->description?></p>
-            </div>
-                @endforeach
+            @foreach($about_us as $about)
+                <div>
+                    <h1 id="heading">{{$about->title}}</h1>
+                    <p id="para"><?php echo $about->description?></p>
+                </div>
+            @endforeach
 
-
-            <ul>
-
-                {{--@foreach($faqs as $faq)
-                    <li>
-
-                        <a name="{{ $faq->question }}">{!! $faq->answer !!}</a>
-                    </li>
-                @endforeach--}}
-            </ul>
         </div>
 
     </div>
 @endsection
 <style>
-    #heading{
+    #heading {
         color: black;
         font-size: 2.3rem;
         text-align: center;
     }
-    #para{
+
+    #para {
         font-size: 1.5rem;
+    }
+
+    div.row div.col-md-12 {
+        margin-bottom: 1.2em;
     }
 </style>

@@ -228,7 +228,6 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
     Route::group(['as' => 'admin.user', 'prefix' => 'user'], function () {
         Route::get('/', ['as' => '', 'uses' => 'Admin\UserController@index']);
         Route::get('/detail/{id}', ['as' => '.detail', 'uses' => 'Admin\UserController@detail']);
-        /*Route::get('/user_commission', ['as' => '.user_commission', 'uses' => 'Admin\UserController@test']);*/
         Route::get('/ban/{id}', ['as' => '.ban', 'uses' => 'Admin\UserController@ban']);
         Route::get('/user_commission', ['as' => '.user_commission', 'uses' => 'Admin\UserController@test2']);
         Route::get('/details/{id}', ['as' => '.details', 'uses' => 'Admin\UserController@details']);
@@ -348,15 +347,6 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
         Route::get('/updateCommission', ['as' => '.update-commission', 'uses' => 'Admin\UserCommissionController@update_commission']);
     });
 
-    // Manage Blocks
-    Route::group(['as' => 'admin.block', 'prefix' => 'block'], function () {
-        Route::get('/', ['as' => '', 'uses' => 'Admin\BlockController@index']);
-        Route::get('/add', ['as' => '.add', 'uses' => 'Admin\BlockController@add']);
-        Route::post('/add', ['as' => '.add', 'uses' => 'Admin\BlockController@save']);
-        Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\BlockController@edit']);
-        Route::put('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\BlockController@update']);
-        Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\BlockController@delete']);
-    });
     // Manage Pages
     Route::group(['as' => 'admin.page', 'prefix' => 'page'], function () {
         Route::get('/', ['as' => '', 'uses' => 'Admin\PageController@index']);

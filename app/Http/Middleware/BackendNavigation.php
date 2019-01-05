@@ -47,11 +47,6 @@ class BackendNavigation
                 ->add('FAQs', ['route' => 'admin.faq'])
                 ->active('admin.faq.*');
 
-            // Blocks
-            $menu->get('manageWebsite')
-                ->add('Blocks', ['route' => 'admin.block'])
-                ->active('admin.block.*');
-
             // Pages
             $menu->get('manageWebsite')
                 ->add('Pages', ['route' => 'admin.page'])
