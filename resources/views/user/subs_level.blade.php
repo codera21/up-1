@@ -390,9 +390,9 @@
             <td>
                 @if(env('SITE') == 'ENG')
                     ${{$total*50}}
-                    @else
-                {{$total*1000}}F
-                    @endif
+                @else
+                    {{$total*1000}}F
+                @endif
             </td>
             <td>
                 @if(env('SITE') == 'ENG')
