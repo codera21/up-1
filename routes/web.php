@@ -167,13 +167,13 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::get('/', ['as' => '.index', 'uses' => 'CompanyProfileController@index']);
     });
     // Payment
-    Route::group(['middleware' => ['isActive'], 'as' => 'payment-profile', 'prefix' => 'payment-profile'], function () {
+  /*  Route::group(['middleware' => ['isActive'], 'as' => 'payment-profile', 'prefix' => 'payment-profile'], function () {
         Route::get('/', ['as' => '', 'uses' => 'PaymentProfileController@index']);
         Route::get('/add-profile', ['as' => '.add-profile', 'uses' => 'PaymentProfileController@addProfile']);
         Route::post('/add-profile', ['as' => '.add-profile', 'uses' => 'PaymentProfileController@saveProfile']);
         Route::get('/set-default/{id}', ['as' => '.set-default', 'uses' => 'PaymentProfileController@setDefault']);
         Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'PaymentProfileController@delete']);
-    });
+    });*/
 
     // Payments history
     Route::group(['middleware' => ['isActive'], 'as' => 'payment-history', 'prefix' => 'payment-history'], function () {

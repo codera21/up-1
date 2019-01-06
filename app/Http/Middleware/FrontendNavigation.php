@@ -28,9 +28,6 @@ class FrontendNavigation
                 ->add(trans('navigation.company_profile'), route('company-profile.index'));
             //end of my academy edited by ashish bhandari roll no 336.
             $menu->add(trans('navigation.payment'), array('nickname'=>'payments'));
-            $menu->get('payments')
-                    ->add(trans('navigation.payment_profiles'), route('payment-profile'))
-                    ->active('payment.*');
 
             $menu->get('payments')
                     ->add(trans('navigation.online_purchase'), route('online-payment.addnew1'))

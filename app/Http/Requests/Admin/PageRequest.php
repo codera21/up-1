@@ -29,7 +29,6 @@ class PageRequest extends FormRequest
         $language = $request->language;
         return [
             'status' => 'required',
-            'layout' => 'required',
             'title' => 'required|name|max:255',
             //'slug' => 'required|slug|unique:pages',
             'slug' => 'required|slug|unique:pages,slug,NULL,id,language,'.$language,

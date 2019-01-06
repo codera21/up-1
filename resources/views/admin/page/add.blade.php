@@ -28,14 +28,14 @@
                 </div>
             </div>
 
-            <div class="form-group required">
+           {{-- <div class="form-group required">
                 <div class="col-md-4">
                     {!! Form::label('layout', trans('Layout'), ['class' => 'control-label']) !!}
                 </div>
                 <div class="col-md-6">
                     {!!  Form::select('layout', array('' => 'Select Layout', 'NO SIDEBAR' => 'No Sidebar', 'LEFT SIDEBAR' => 'Left Sidebar', 'RIGHT SIDEBAR' => 'Right Sidebar', 'LEFT & RIGHT SIDEBARS' => 'Left & Right Sidebars '), null, ['class'=>'form-control', 'onchange'=>'javascript:jQuery.fn.changeLeftRightSidebars(this.value);']) !!}
                 </div>
-            </div>
+            </div>--}}
 
             <div class="form-group" id="left-sidebar-block-box" {!! ((old('layout') == 'LEFT SIDEBAR'  or old('layout') == 'LEFT & RIGHT SIDEBARS') ? 'style="display:block"': 'style="display:none"') !!}>
                 <div class="col-md-4">

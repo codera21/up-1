@@ -130,12 +130,6 @@ class BackendNavigation
             $menu->add('Payments', '#')
                 ->prepend('<i class="fa fa-list"></i> <span class="nav-label">')
                 ->append('</span>');
-
-            // Manage Payment Profiles
-            $menu->get('payments')
-                ->add('Users Payment Profiles', ['route' => 'admin.payment-profile'])
-                ->active('admin.payment-profile.*');
-
             // Manage Payment History
             $menu->get('payments')
                 ->add('User Payments History', route('admin.payment-history'))

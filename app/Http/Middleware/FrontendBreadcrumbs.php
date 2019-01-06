@@ -74,10 +74,8 @@ class FrontendBreadcrumbs
             $breadcrumbs->push('Details');
         });
         // Home > User pyament profile > Add Payment Profile
-        Breadcrumbs::register('payment-profile.add-profile', function ($breadcrumbs) {
-            $breadcrumbs->parent('payment-profile');
-            $breadcrumbs->push('Add Payment Profile');
-        });
+
+
 
         // Home > Message > Inbox
         Breadcrumbs::register('message', function ($breadcrumbs) {
@@ -134,13 +132,9 @@ class FrontendBreadcrumbs
             $breadcrumbs->push(trans('page_title.text_lessons'));
         });
         // Home > User pyament profiles
-        Breadcrumbs::register('payment-profile', function ($breadcrumbs) {
-            $breadcrumbs->parent('home');
-            $breadcrumbs->push(trans('page_title.payment_profile'), route('payment-profile'));
-        });
         Breadcrumbs::register('online-payment.addnew1', function ($breadcrumbs) {
             $breadcrumbs->parent('home');
-            $breadcrumbs->push(trans('page_title.payment_method'), route('payment-profile'));
+            $breadcrumbs->push(trans('page_title.payment_method'));
         });
         //payment history
         Breadcrumbs::register('payment-history', function ($breadcrumbs) {

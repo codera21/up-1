@@ -131,7 +131,7 @@ class PageController extends Controller
                             return $row->status;
                         }
                     ),
-                    array(
+                    /*array(
                         'name' => 'layout',
                         'label' => trans('Layout'),
                         'sortable' => true,
@@ -146,7 +146,7 @@ class PageController extends Controller
                         'value' => function ($row) {
                             return $row->layout;
                         }
-                    ),
+                    ),*/
                     array(
                         'name' => 'action',
                         'label' => trans('Action'),

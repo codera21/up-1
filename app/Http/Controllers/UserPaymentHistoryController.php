@@ -78,7 +78,7 @@ class UserPaymentHistoryController extends Controller
                         'name' => 'payment_mode',
                         'label' => trans('payment_history.type'),
                         'sortable' => true,
-                        'searchable' => true,
+                        'searchable' => false,
                         'searchfield' => array(
                             'type' => 'select',
                             'attr' => array(),
@@ -110,7 +110,7 @@ class UserPaymentHistoryController extends Controller
                         'name' => 'payment_type',
                         'label' => trans('payment_history.payment_type'),
                         'sortable' => true,
-                        'searchable' => true,
+                        'searchable' => false,
                         'searchfield' => array(
                             'type' => 'select',
                             'attr' => array(),
@@ -125,7 +125,7 @@ class UserPaymentHistoryController extends Controller
                         'name' => 'paid_for',
                         'label' => trans('payment_history.payment_for'),
                         'sortable' => true,
-                        'searchable' => true,
+                        'searchable' => false,
                         'searchfield' => array(
                             'type' => 'select',
                             'attr' => array(),
@@ -140,7 +140,7 @@ class UserPaymentHistoryController extends Controller
                         'name' => 'amount_paid',
                         'label' => trans('payment_history.amount'),
                         'sortable' => true,
-                        'searchable' => true,
+                        'searchable' => false,
                         'searchfield' => array(
                             'type' => 'text',
                         ),
