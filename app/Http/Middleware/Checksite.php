@@ -19,6 +19,7 @@ class Checksite
         if (env('SITE') == 'ENG') {
             //usercommission page url
             Session::put('amount', '$50');
+            Session::put('amount_tax','$59.7');
             Session::put('comm', '$5');
             Session::put('total', 50);
             Session::put('total_comm', 5);
@@ -35,6 +36,7 @@ class Checksite
         } else {
             //usercommission page url
             Session::put('amount', '1000F');
+            Session::put('amount_tax','1600F');
             Session::put('comm', '100F');
             Session::put('total', 1000);
             Session::put('total_comm', 100);
