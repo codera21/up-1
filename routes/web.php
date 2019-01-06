@@ -101,7 +101,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
         Route::get('/success', ['as' => '.success', 'uses' => 'OnlinePaymentController@success']);
         Route::get('/fail', ['as' => '.fail', 'uses' => 'OnlinePaymentController@fail']);
         Route::get('/ipn', ['as' => '.ipn', 'uses' => 'OnlinePaymentController@ipn']);
-        
+
 
         // One Time Payment
         Route::post('/create-onetime-payment', ['as' => '.create-onetime-payment', 'uses' => 'OnlinePaymentController@createOneTimePayment']);
@@ -385,15 +385,6 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
         Route::get('/detail/{id}', ['as' => '.detail', 'uses' => 'Admin\UserPaymentHistoryController@detail']);
     });
 
-    // Manage Banners
-    Route::group(['as' => 'admin.banner', 'prefix' => 'banner'], function () {
-        Route::get('/', ['as' => '', 'uses' => 'Admin\BannerController@index']);
-        Route::get('/add', ['as' => '.add', 'uses' => 'Admin\BannerController@add']);
-        Route::post('/add', ['as' => '.add', 'uses' => 'Admin\BannerController@save']);
-        Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\BannerController@edit']);
-        Route::put('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\BannerController@update']);
-        Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\BannerController@delete']);
-    });
 
 });
 

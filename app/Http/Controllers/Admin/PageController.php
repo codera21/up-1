@@ -257,31 +257,35 @@ class PageController extends Controller
     public function aboutindex()
     {
         $about_us = DB::table('about')->paginate(1);
-        return view('admin.about.index',['about_us'=>$about_us]);
+        return view('admin.about.index', ['about_us' => $about_us]);
     }
+
     public function aboutadd()
     {
         return view('admin.about.add');
     }
+
     public function aboutsave(request $request)
     {
         $addabout = DB::table('about')->insert([
             'title' => $request->input('title'),
-            'description' =>$request->input('description'),
-            'slug' =>$request->input('slug'),
-            'lang'=>$request->input('lang'),
+            'description' => $request->input('description'),
+            'slug' => $request->input('slug'),
+            'lang' => $request->input('lang'),
         ]);
         if ($addabout) {
             return redirect()->route('admin.about')
                 ->with('success', 'About page added successfully');
         }
     }
-    public  function aboutedit($id)
+
+    public function aboutedit($id)
     {
-        $about = DB::table('about')->where('id',$id)->first();
-        return view('admin.about.edit',['about'=>$about]);
+        $about = DB::table('about')->where('id', $id)->first();
+        return view('admin.about.edit', ['about' => $about]);
     }
-    public function aboutupdate(request $request , $id)
+
+    public function aboutupdate(request $request, $id)
     {
         $array = array(
             'id' => $id
@@ -289,8 +293,8 @@ class PageController extends Controller
         $faqupdate = DB::table('about')->where($array)
             ->update([
                 'title' => $request->input('title'),
-                'slug' =>$request->input('slug'),
-                'description'=>$request->input('description'),
+                'slug' => $request->input('slug'),
+                'description' => $request->input('description'),
                 'lang' => $request->input('lang'),
             ]);
         if ($faqupdate) {
@@ -298,11 +302,11 @@ class PageController extends Controller
                 ->with('success', 'About pages updated successfully');
         }
     }
+
     public function aboutdelete(request $request, $id)
     {
-        $data = DB::table('about')->where('id',$id)->delete();
-        if($data)
-        {
+        $data = DB::table('about')->where('id', $id)->delete();
+        if ($data) {
             return redirect()->route('admin.about')
                 ->with('success', 'Deleted successfully');
         }

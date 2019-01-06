@@ -56,10 +56,7 @@ class BackendNavigation
             $menu->get('manageWebsite')
                 ->add('About Us', ['route' => 'admin.about'])
                 ->active('admin.about.*');
-            // Banners
-            $menu->get('manageWebsite')
-                ->add('Banners', ['route' => 'admin.banner'])
-                ->active('admin.banner.*');
+
 
             // Manage Materials
             $menu->add('Manage Materials', '#')
