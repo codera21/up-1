@@ -7,6 +7,7 @@ use DateTime;
 
 // Request & Response
 use Carbon\Carbon;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
@@ -15,7 +16,6 @@ use Date;
 use Auth;
 use Log;
 use Cache;
-use Session;
 
 // Models and Repo
 use App\Repositories\PaymentRepository;
@@ -42,19 +42,6 @@ use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Api\Patch;
 use PayPal\Api\PatchRequest;
 use PayPal\Common\PayPalModel;
-
-// use to create One Time payments for Paypal
-use PayPal\Api\Amount;
-use PayPal\Api\Details;
-use PayPal\Api\Item;
-use PayPal\Api\ItemList;
-use PayPal\Api\Payment;
-use PayPal\Api\RedirectUrls;
-use PayPal\Api\Transaction;
-
-// use to execute One Time Payments
-use PayPal\Api\PaymentExecution;
-
 
 class OnlinePaymentController extends Controller
 {
@@ -597,347 +584,6 @@ class OnlinePaymentController extends Controller
         return redirect()->route('online-payment.add')->with('error', trans('Online Payment has not been saved, either you cancelled the request or your session has expired.'));
     }
 
-    public function createOneTimePayment(OnlinePaymentSaveRequest $request)
-        //public function createOneTimePayment(Request $request)
-    {
-        $data = $request->except(['_token']);
-        $materials = explode(',', $data['material_id']);
-        $user = Auth::user();
-        $data['user_id'] = $user->id;
-        $data['payment_mode'] = 'ONLINE';
-        $data['payment_type'] = 'ONE TIME';
-        $data['status'] = 'APPROVED';
-
-        if ($data['paid_for'] != 'SUBSCRIPTION') {
-
-            // Initialize the PayPal API parameters
-            $payer = new Payer();
-            $payer->setPaymentMethod("paypal");
-            $itemList = new ItemList();
-            $items = array();
-
-            // Calculate discount if subscriber purchased Group or Level otherwise no discount just straight price of item
-            if ($data['paid_for'] == 'GROUP') {
-
-                $group = $this->materialGroup->find($data['group_id']);
-                $data['amount_paid'] = $group->price;
-                $groupMaterialPrice = $group->material->sum('price');
-                $materialsObj = $group->material;
-                $discount = $groupMaterialPrice - $data['amount_paid'];
-                $paymentDescription = $group->title;
-
-                $item = new Item();
-                $item->setName($group->title)
-                    ->setCurrency('USD')
-                    ->setQuantity(1)
-                    ->setSku($group->id)// Similar to `item_number` in Classic API
-                    ->setPrice($data['amount_paid']);
-
-                // Push new item into array
-                array_push($items, $item);
-
-            } elseif ($data['paid_for'] == 'LEVEL') {
-
-                $subGroups = $this->materialSubGroup->find($data['sub_group_id']);
-                $data['amount_paid'] = $subGgroup->price;
-                $materialsObj = $subGroup->material;
-                $subGroupMaterialPrice = $subGroup->material->sum('price');
-                $discount = $subGroupMaterialPrice - $data['amount_paid'];
-
-                $paymentDescription = $subGroup->title;
-
-                $item = new Item();
-                $item->setName($subGroups->title)
-                    ->setCurrency('USD')
-                    ->setQuantity(1)
-                    ->setSku($subGroup->id)// Similar to `item_number` in Classic API
-                    ->setPrice($data['amount_paid']);
-
-                // Push new item into array
-                array_push($items, $item);
-
-            } elseif ($data['paid_for'] == 'MATERIAL') {
-
-                $materialsObj = $this->material->findWhereIn('id', $materials);
-                $data['amount_paid'] = $materialsObj->sum('price');
-                $discount = 0;
-
-                $paymentDescription = 'Video / Courses';
-            }
-        }
-
-        //======
-        if ($onlinePayment = $this->onlinePayment->create($data)) {
-
-            // Commission Calculation and Levels
-            Log::info("======= Commission Calculation (START) =======");
-            $parents = $this->getParents($user);
-            Log::info(print_r($parents, true));
-
-            // Get all levels
-            $this->level->pushCriteria(new \App\Criteria\Admin\LevelCriteria());
-            $levels = $this->level->all();
-
-            $levelCounter = 1;
-            foreach ($parents as $parentKey => $parent) {
-                //last/first parent (from top) will consider level first
-                Log::info('Level ' . $levelCounter);
-                foreach ($levels as $levelKey => $level) {
-                    if ($parentKey == $levelKey and $level->active == 'YES') {
-                        Log::info('Level Title = ' . $level->level_title . ' == Level Percentage ==' . $level->level_percentage);
-                        $commission = array();
-
-                        $commission['receiver_id'] = $parent;
-                        $commission['payer_id'] = $user->id;
-                        $commission['payment_id'] = $offlinePayment->id;
-                        $commission['payment'] = $data['amount_paid'];
-                        $commission['level_id'] = $level->id;
-                        $commission['commission_amount'] = ($data['amount_paid'] / 100) * $level->level_percentage;
-                        // find last commission transaction
-                        $lastCommission = $this->userCommission->findWhere(['receiver_id' => $parent])->last();
-                        $commission['opening_balance'] = $lastCommission['closing_balance'];
-                        $commission['closing_balance'] = $commission['commission_amount'] + $commission['opening_balance'];
-                        Log::info('User Commission');
-                        Log::info(print_r($commission, true));
-                        if ($userCommission = $this->userCommission->create($commission)) {
-                            Log::info('User commission saved successfully');
-                            Log::info(print_r($userCommission, true));
-                        } else {
-                            Log::error('User commission not saved successfully');
-                        }
-                    }
-                }
-                $levelCounter++;
-            }
-            Log::info("======= Commission Calculation (END) =======");
-            // Comment from here
-            if ($data['paid_for'] != 'SUBSCRIPTION') {
-
-                //Save material item(s)
-                foreach ($materialsObj as $material) {
-
-                    if ($data['paid_for'] == 'MATERIAL') {
-
-                        $item = new Item();
-                        $item->setName($material->title)
-                            ->setCurrency('USD')
-                            ->setQuantity(1)
-                            ->setSku($material->id)// Similar to `item_number` in Classic API
-                            ->setPrice($material->price);
-
-                        // Push new item into array
-                        array_push($items, $item);
-                    }
-
-                    $details = array();
-                    $details['user_id'] = $user->id;
-                    $details['group_id'] = $data['group_id'];
-                    $details['sub_group_id'] = $data['sub_group_id'];
-                    $details['material_id'] = $material->id;
-                    $details['start_date'] = Date::now();
-                    $details['transaction_id'] = $onlinePayment->id;
-                    $details['amount'] = $material->price;
-                    $details['discount'] = 0;
-
-                    if ($onlinePaymentDetails = $this->onlinePaymentDetails->create($details)) {
-
-                    }
-
-                }
-
-                $itemList->setItems($items);
-                $details = new Details();
-                $details->setShipping(0)
-                    ->setTax(0)
-                    ->setSubtotal($data['amount_paid']);
-
-                $amount = new Amount();
-                $amount->setCurrency("USD")
-                    ->setTotal($data['amount_paid'])
-                    ->setDetails($details);
-
-                $transaction = new Transaction();
-                $transaction->setAmount($amount)
-                    ->setItemList($itemList)
-                    ->setDescription("Payment for " . $paymentDescription)
-                    ->setInvoiceNumber($onlinePayment->id);
-                //->setInvoiceNumber(uniqid());
-
-                $redirectUrls = new RedirectUrls();
-                $redirectUrls->setReturnUrl(route('online-payment.execute-onetime-payment'))
-                    ->setCancelUrl(route('online-payment.cancel-onetime-payment'));
-
-                $payment = new Payment();
-                $payment->setIntent("sale")
-                    ->setPayer($payer)
-                    ->setRedirectUrls($redirectUrls)
-                    ->setTransactions(array($transaction));
-
-                $request = clone $payment;
-
-                try {
-                    $payment->create($this->apiContext);
-                } catch (Exception $ex) {
-
-                    $response = array(
-                        'status' => 'error',
-                        'message' => trans('Exception: Online Payment has not been saved.'),
-                    );
-                    return $response;
-                }
-
-                $approvalUrl = $payment->getApprovalLink();
-
-            }
-            //======
-
-            // THIS IS SAMPLE=======================
-            /*$payer = new Payer();
-            $payer->setPaymentMethod("paypal");
-
-            $item1 = new Item();
-            $item1->setName('Ground Coffee 40 oz')
-                ->setCurrency('USD')
-                ->setQuantity(1)
-                ->setSku("123123") // Similar to `item_number` in Classic API
-                ->setPrice(7.5);
-            $item2 = new Item();
-            $item2->setName('Granola bars')
-                ->setCurrency('USD')
-                ->setQuantity(5)
-                ->setSku("321321") // Similar to `item_number` in Classic API
-                ->setPrice(2);
-
-            $itemList = new ItemList();
-            $itemList->setItems(array($item1, $item2));
-
-
-            $details = new Details();
-            $details->setShipping(1.2)
-                ->setTax(1.3)
-                ->setSubtotal(17.50);
-
-            $amount = new Amount();
-            $amount->setCurrency("USD")
-                ->setTotal(20)
-                ->setDetails($details);
-
-            $transaction = new Transaction();
-            $transaction->setAmount($amount)
-                ->setItemList($itemList)
-                ->setDescription("Payment description")
-                ->setInvoiceNumber(uniqid());
-
-
-            $redirectUrls = new RedirectUrls();
-            $redirectUrls->setReturnUrl(route('online-payment.execute-onetime-payment'))
-                            ->setCancelUrl(route('online-payment.cancel-onetime-payment'));
-
-            $payment = new Payment();
-            $payment->setIntent("sale")
-                ->setPayer($payer)
-                ->setRedirectUrls($redirectUrls)
-                ->setTransactions(array($transaction));
-
-            $request = clone $payment;
-
-            try {
-                $payment->create($this->apiContext);
-            } catch (Exception $ex) {
-
-                $response = array(
-                    'status' => 'error',
-                    'message' => trans('Exception: Online Payment has not been saved.'),
-                );
-                return $response;
-            }
-
-            $approvalUrl = $payment->getApprovalLink();
-            // THIS IS SAMPLE=======================*/
-            //=======================================
-
-
-        } else {
-            $response = array(
-                'status' => 'success',
-                'message' => trans('Online Payment has not been saved successfully.'),
-                //'redirect_url' => route('online-payment.add')
-            );
-        }
-
-        Session::put('total', $data['amount_paid']);
-        return $payment;
-        //return $data;
-    }
-
-    public function executeOneTimePayment(Request $request)
-    {
-        $total = Session::get('total');
-
-        $paymentId = $request->paymentId;
-        $payment = Payment::get($paymentId, $this->apiContext);
-
-        $execution = new PaymentExecution();
-        $execution->setPayerId($request->PayerID);
-
-        $transaction = new Transaction();
-        $amount = new Amount();
-        $details = new Details();
-
-        $details->setShipping(0)
-            ->setTax(0)
-            ->setSubtotal($total);
-
-        $amount->setCurrency('USD');
-        $amount->setTotal($total);
-        $amount->setDetails($details);
-        $transaction->setAmount($amount);
-
-        $execution->addTransaction($transaction);
-
-        try {
-
-            $result = $payment->execute($execution, $this->apiContext);
-
-            try {
-
-                $payment = Payment::get($paymentId, $this->apiContext);
-            } catch (Exception $ex) {
-
-                $response = array(
-                    'status' => 'error',
-                    'message' => trans('Exception: Online Payment has not been saved.'),
-                    //'redirect_url' => route('online-payment.add')
-                );
-                return $response;
-            }
-        } catch (Exception $ex) {
-
-            $response = array(
-                'status' => 'error',
-                'message' => trans('Exception: Online Payment has not been saved.'),
-                //'redirect_url' => route('online-payment.add')
-            );
-
-            return $response;
-        }
-
-        $response = array(
-            'status' => 'success',
-            'message' => trans('online_payment.saved_successfully'),
-            //'redirect_url' => route('online-payment.add')
-        );
-        //return $payment;
-        return $response;
-
-    }
-
-    public function cancelOneTimePayment(Request $request)
-    {
-        return redirect()->route('online-payment.add')->with('error', trans('Online One Time Payment has not been saved, either you cancelled the request or your session has expired.'));
-    }
-
-
     public function success()
     {
 
@@ -949,7 +595,7 @@ class OnlinePaymentController extends Controller
                 'payment_mode' => 'ONLINE',
                 'payment_type' => 'RECURRING',
                 'paid_for' => 'SUBSCRIPTION',
-                'amount_paid' => 50, // todo this can change.... we need to find a way to make this dynamic
+                'amount_paid' => Session::get('total'),
                 'status' => 'APPROVED'
             ]
         );
@@ -960,7 +606,7 @@ class OnlinePaymentController extends Controller
                 'subscription_fee' => 'YES',
                 'start_date' => Carbon::now()->startOfMonth(), // first day of the month no matter when he/she pays
                 'end_date' => Carbon::now()->endOfMonth(),  // last day of the month no matter when he/she pays
-                'amount' => 50,
+                'amount' => Session::get('total'),
                 'transaction_id' => $transactionID
             ]
         );
@@ -976,6 +622,4 @@ class OnlinePaymentController extends Controller
         // fail logic
         return redirect()->route('online-payment.add')->with('error', trans('Online One Time Payment has not been saved, either you cancelled the request or your session has expired.'));
     }
-
-
 }

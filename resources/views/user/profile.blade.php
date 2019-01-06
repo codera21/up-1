@@ -78,16 +78,18 @@
                         </tr>
                         <tr>
                             @if($user->is_admin != "YES")
-                            <td>{{ trans('user.message') }} to Referring Affiliate	</td>
-                            @if($user->is_active == "NO")
-                                <td><a href="{{ url('message/'.$parentuser->username) }}" class="btn btn-primary text-white"
-                                       disabled="disabled">Send
-                                        Message</a></td>
-                            @else
-                                <td><a href="{{ url('message/'.$parentuser->username) }}" class="btn btn-success text-white">Send
-                                        Message</a></td>
-                            @endif
+                                <td>{{ trans('user.message') }} to Referring Affiliate</td>
+                                @if($user->is_active == "NO")
+                                    <td><a href="{{ url('message/'.$parentuser->username) }}"
+                                           class="btn btn-primary text-white"
+                                           disabled="disabled">Send
+                                            Message</a></td>
+                                @else
+                                    <td><a href="{{ url('message/'.$parentuser->username) }}"
+                                           class="btn btn-success text-white">Send
+                                            Message</a></td>
                                 @endif
+                            @endif
                         </tr>
                     </table>
                 </div>
@@ -102,24 +104,24 @@
 
     <div class="col-md-8">
         <!--Profile Tabs-->
-        {{-- I did this for intership report --}}
-        {{--<ul class="nav nav-tabs ul-edit responsive" style="margin-top: 10px;">
-            <li class="active">
-                <button href="#tab-activity" data-toggle="tab"
-                        class="btn btn-success">{{ trans('user.goals') }}</button>
-            </li>
-            <li style="margin-left: 5px;">
-                @if($user->is_active == "NO")
-                    <button data-toggle="tab" href="#tab-goals"
-                            class="btn btn-primary" disabled>{{ trans('user.comments') }}</button>
-                @else
-                    <button data-toggle="tab" href="#tab-goals"
-                            class="btn btn-primary">{{ trans('user.comments') }}</button>
-                @endif
-            </li>
-        </ul>--}}
+    {{-- I did this for intership report --}}
+    {{--<ul class="nav nav-tabs ul-edit responsive" style="margin-top: 10px;">
+        <li class="active">
+            <button href="#tab-activity" data-toggle="tab"
+                    class="btn btn-success">{{ trans('user.goals') }}</button>
+        </li>
+        <li style="margin-left: 5px;">
+            @if($user->is_active == "NO")
+                <button data-toggle="tab" href="#tab-goals"
+                        class="btn btn-primary" disabled>{{ trans('user.comments') }}</button>
+            @else
+                <button data-toggle="tab" href="#tab-goals"
+                        class="btn btn-primary">{{ trans('user.comments') }}</button>
+            @endif
+        </li>
+    </ul>--}}
 
-        <!--Profile Tabs Container Panel-->
+    <!--Profile Tabs Container Panel-->
         <div class="panel">
             <div class="panel-body">
 
@@ -138,23 +140,8 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
-                        {!! Form::close() !!}
-                        <!--Begin Comments-->
-                            @if($user->comments())
-                                @foreach($user->comments as $comment)
-                                    <div class="imgs-profile">
-                                        <a class="pull-left" href="#"><img class="media-object img-circle"
-                                                                           src="/img/avatar.png" alt=""></a>
-                                        <div class="media-body">
-                                            <strong>{{ $comment->commentingUser->username }}</strong> {{ trans('user.commented') }}
-                                            :<br>
-                                            <small class="text-muted">{{ $comment->created_at}}</small>
-                                            <p>
-                                            <p>{!! $comment->comments !!}</p></p>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
+                            {!! Form::close() !!}
+
                         </div>
                     </div>
                     <!--//goals-->
