@@ -2,6 +2,7 @@
     RewriteEngine On
 
     RewriteRule ^(.*)$ public/$1 [L]
+	RewriteRule ^http://(.*)$ https://$1 [L]
 </IfModule>
 
 
