@@ -67,10 +67,10 @@
                         if ($user->is_active == 'YES') {
                             echo $comm;
                         } else {
-                            echo 'Null';
+                            echo '0';
                         }
                     } else {
-                        echo 'Null';
+                        echo '0';
                     }
                     ?>
                     <br>
@@ -144,10 +144,10 @@
                             if ($second->is_active == 'YES') {
                                 echo $comm;
                             } else {
-                                echo 'Null';
+                                echo '0';
                             }
                         } else {
-                            echo 'Null';
+                            echo '0';
                         }
                         ?>
                         <br>
@@ -237,10 +237,10 @@
                                 if ($third->is_active == 'YES') {
                                     echo $comm;
                                 } else {
-                                    echo 'Null';
+                                    echo '0';
                                 }
                             } else {
-                                echo 'Null';
+                                echo '0';
                             }
                             ?>
                             <br>
@@ -343,10 +343,10 @@
                                     if ($forth->is_active == 'YES') {
                                         echo $comm;
                                     } else {
-                                        echo 'Null';
+                                        echo '0';
                                     }
                                 } else {
-                                    echo 'Null';
+                                    echo '0';
                                 }
                                 ?>
                                 <br>
