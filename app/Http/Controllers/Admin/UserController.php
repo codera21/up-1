@@ -176,7 +176,7 @@ class UserController extends Controller
                             return '<a href="' . route('admin.user.detail', array('id' => $row->id)) . '" class="btn btn-info btn-xs edit" >' . trans('Detail') . '</a>
                                         <a href="' . route('admin.user.edit', array('id' => $row->id)) . '" class="btn btn-success btn-xs edit" >' . trans('Edit') . '</a>                                  
                                         <a href="' . route('admin.user.delete', ['id' => $row->id]) . '" class="btn btn-danger btn-xs delete">' . trans('Delete') . '</a>                                 
-                                        <a href="' . route('admin.user.ban', ['id' => $row->id]) . '" class="btn btn-warning btn-xs edit">' . trans('Ban') . '</a>
+                                        <a href="' . route('admin.user.ban', ['id' => $row->id]) . '" class="btn btn-warning btn-xs edit"id="ban/unban">' . trans('ban') . '</a>
                                         <a href="' . route('admin.user.goals', ['id' => $row->id]) . '" class="btn btn-info btn-xs edit">' . trans('Goals') . '</a>';
                         }
                     ),
@@ -201,17 +201,18 @@ class UserController extends Controller
     public function ban($id)
     {
         $check = DB::table('users')->where('id', $id)->first();
-        if ($check->is_active == 'YES') {
+        if ($check->ban == 'NO') {
             $ban = DB::table('users')->where('id', $id)->update([
-                'is_active' => 'NO'
+                'ban' => 'YES'
             ]);
-        } else {
-            return redirect()->route('admin.user')
-                ->with('success', 'Already  user is banned/inactive');
-        }
-        if ($ban) {
             return redirect()->route('admin.user')
                 ->with('success', 'Banned user successfully');
+        } else {
+            DB::table('users')->where('id', $id)->update([
+                'ban' => 'NO'
+            ]);
+            return redirect()->route('admin.user')
+                ->with('success', 'Unbanned successfully');
         }
     }
 
@@ -461,13 +462,13 @@ class UserController extends Controller
         $users = $this->user->findByField('parent_id', $id);
         $count = $this->user->findByField('parent_id', $id)->count();
         $admin = [
-            'users'=>$users,
-            'count'=>$count,
+            'users' => $users,
+            'count' => $count,
             'amount' => $amount,
-            'comm'=>$comm,
-            'total1'=>$total1,
-            'total_comm'=>$total_comm,
-            'curr'=>$curr,
+            'comm' => $comm,
+            'total1' => $total1,
+            'total_comm' => $total_comm,
+            'curr' => $curr,
         ];
 
         return view('admin.user-commission.details', $admin);

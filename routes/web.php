@@ -40,18 +40,14 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
     Route::get('hcl/{id_id_id}', ['as' => 'hcl', 'uses' => 'Admin\FAQController@smp']);
     Route::get('/hcl_hcl/{id_id_id}', ['as' => '.hcl_hcl', 'uses' => 'Admin\FAQController@smp1']);
-
-
     // Registration Routes...
     Route::get('register/{id}', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
     Route::post('register/{id}', ['as' => 'register', 'uses' => 'Auth\RegisterController@register']);
-
     // Password Reset Routes...
     Route::get('password/reset', ['as' => 'password.forgot', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
     Route::post('password/email', ['as' => 'password.email', 'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
     Route::get('password/reset/{token}', ['as' => 'password.reset', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
     Route::post('password/reset', ['as' => 'password.reset', 'uses' => 'Auth\ResetPasswordController@reset']);
-
     // All below pages will be in Page Controller
     // FAQs
     Route::get('/faq', ['as' => 'faq', 'uses' => 'PageController@faq']);
@@ -61,7 +57,10 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
         Route::get('/', ['as' => '', 'uses' => 'PageController@news']);
         Route::get('/details/{id}', ['as' => '.details', 'uses' => 'PageController@newsDetails']);
     });
-
+    //ban route
+    Route::group(['as' => 'ban', 'prefix' => 'ban'], function () {
+        Route::get('/', ['as' => '', 'uses' => 'PageController@ban']);
+    });
     // Contact Us
     Route::get('contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
     Route::post('contact', ['as' => 'contact', 'uses' => 'PageController@postContact']);
@@ -120,7 +119,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
 |--------------------------------------------------------------------------
 */
 //is active is add on each group manually
-Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVerified']], function () {
+Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVerified','ban']], function () {
     Route::group(['middleware' => ['isActive'], 'as' => 'user', 'prefix' => 'user'], function () {
         Route::get('/dashboard', ['as' => '.dashboard', 'uses' => 'UserController@dashboard']);
         Route::get('/account', ['as' => '.account', 'uses' => 'UserController@edit']);
@@ -167,16 +166,16 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::get('/', ['as' => '.index', 'uses' => 'CompanyProfileController@index']);
     });
     // Payment
-  /*  Route::group(['middleware' => ['isActive'], 'as' => 'payment-profile', 'prefix' => 'payment-profile'], function () {
-        Route::get('/', ['as' => '', 'uses' => 'PaymentProfileController@index']);
-        Route::get('/add-profile', ['as' => '.add-profile', 'uses' => 'PaymentProfileController@addProfile']);
-        Route::post('/add-profile', ['as' => '.add-profile', 'uses' => 'PaymentProfileController@saveProfile']);
-        Route::get('/set-default/{id}', ['as' => '.set-default', 'uses' => 'PaymentProfileController@setDefault']);
-        Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'PaymentProfileController@delete']);
-    });*/
+    /*  Route::group(['middleware' => ['isActive'], 'as' => 'payment-profile', 'prefix' => 'payment-profile'], function () {
+          Route::get('/', ['as' => '', 'uses' => 'PaymentProfileController@index']);
+          Route::get('/add-profile', ['as' => '.add-profile', 'uses' => 'PaymentProfileController@addProfile']);
+          Route::post('/add-profile', ['as' => '.add-profile', 'uses' => 'PaymentProfileController@saveProfile']);
+          Route::get('/set-default/{id}', ['as' => '.set-default', 'uses' => 'PaymentProfileController@setDefault']);
+          Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'PaymentProfileController@delete']);
+      });*/
 
     // Payments history
-    Route::group(['middleware' => ['isActive'], 'as' => 'payment-history', 'prefix' => 'payment-history'], function () {
+    Route::group(['middleware' => ['isActive','ban'], 'as' => 'payment-history', 'prefix' => 'payment-history'], function () {
         Route::get('/', ['as' => '', 'uses' => 'UserPaymentHistoryController@index']);
         Route::get('/detail/{id}', ['as' => '.detail', 'uses' => 'UserPaymentHistoryController@detail']);
     });
@@ -185,7 +184,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::get('/', ['as' => '', 'uses' => 'UserCommissionController@index']);
     });
     // My Academy
-    Route::group(['middleware' => ['isActive'], 'as' => 'user-academy', 'prefix' => 'user-academy'], function () {
+    Route::group(['middleware' => ['isActive','ban'], 'as' => 'user-academy', 'prefix' => 'user-academy'], function () {
         Route::get('/video', ['as' => '.video', 'uses' => 'UserAcademyController@view_video']);
         Route::get('/course', ['as' => '.course', 'uses' => 'UserAcademyController@view_course']);
         Route::get('/viewpdf/{id}', ['as' => '.viewpdf', 'uses' => 'UserAcademyController@viewPdf']);

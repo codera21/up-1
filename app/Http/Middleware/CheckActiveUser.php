@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Middleware;
-
-use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\DB;
 use Session;

@@ -161,4 +161,7 @@ class PageController extends Controller
             ->where('id', $userID)
             ->update(['is_active' => 'No']);
     }
+    public  function  ban(){
+        return view('page.ban');
+    }
 }
