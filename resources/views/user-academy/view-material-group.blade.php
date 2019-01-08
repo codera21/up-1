@@ -26,10 +26,14 @@
                     </div>
                 </div>
             </div>
+
         @endif
     @endforeach
+    <div style="margin-left: 40%">
+        {{$material->links()}}
+    </div>
+    <br>
 @endsection
-
 <style>
 
     .thumbnail {

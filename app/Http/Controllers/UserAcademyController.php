@@ -92,7 +92,7 @@ class UserAcademyController extends Controller
             return redirect('/user-academy/video');
         }
 
-        $material = DB::table('material')->where('group_id', $groupID)->where('id', '!=', 30)->orderby('title', 'asc')->get();
+        $material = DB::table('material')->where('group_id', $groupID)->where('id', '!=', 30)->orderby('title', 'asc')->paginate(15);
         return view('user-academy.view-material-group', ['material' => $material]);
     }
     public function courseGroup($groupID)
