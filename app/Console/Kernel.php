@@ -131,6 +131,15 @@ class Kernel extends ConsoleKernel
                 return Carbon::now()->endOfMonth()->isToday();
             }
         );
+        //for ban account
+
+
+        $schedule->call(function () {
+            DB::table('users')->where('is_active','NO')->update([
+                'ban' => 'YES',
+            ]);
+        })->everyMinute();
+
 
     }
 
