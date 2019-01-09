@@ -156,7 +156,7 @@ class Kernel extends ConsoleKernel
             DB::table('users')->update([
                 'is_active'=>'NO',
             ]);
-        })->everyMinute();
+        })->monthly();
 
         // Ban account if user bandate is today and user is inactive
 
