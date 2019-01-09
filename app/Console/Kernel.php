@@ -138,9 +138,7 @@ class Kernel extends ConsoleKernel
             DB::table('users')->where('is_active','NO')->update([
                 'ban' => 'YES',
             ]);
-        })->everyMinute();
-
-
+        })->monthly();
     }
 
     /**
