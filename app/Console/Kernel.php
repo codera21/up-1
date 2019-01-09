@@ -131,14 +131,36 @@ class Kernel extends ConsoleKernel
                 return Carbon::now()->endOfMonth()->isToday();
             }
         );
-        //for ban account
-
-
+        // Make user inactive at the end of the months
         $schedule->call(function () {
+            $users = DB::table('users')->get();
+            $bandate = Carbon::now()->addMonths(2);
+            $todaydate = Carbon::now();
+            $diff = $bandate->diffInDays($todaydate);
+            foreach ($users as $list){
+                $today = date("y-m-d");
+                $expire = $list->ban_date; //from database
+                $today_time = strtotime($today);
+                $expire_time = strtotime($expire);
+                $minus = $expire_time - $today_time;
+                if ($minus == 0){
+                    DB::table('users')->where('id',$list->id)->update([
+                       'ban'=>'YES',
+                    ]);
+                }
+            }
             DB::table('users')->where('is_active','NO')->update([
-                'ban' => 'YES',
+                'ban_date'=> Carbon::now()->addMonths(2),
             ]);
-        })->monthly();
+
+            DB::table('users')->update([
+                'is_active'=>'NO',
+            ]);
+        })->everyMinute();
+
+        // Ban account if user bandate is today and user is inactive
+
+
     }
 
     /**
