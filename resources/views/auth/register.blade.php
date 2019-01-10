@@ -12,12 +12,9 @@
             <div class="featured-box featured-box-primary">
                 <br>
                 <div class="box-content">
-                    <div class="alert alert-success">
-                        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;
-                        {{trans('auth.register_warning')}}
-                    </div>
-                    <div class="text-center">
-                        <a href="{{trans('auth.video_link')}}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Watch Video</a>
+                    <div class="alert alert-danger">
+                        <span class="fas fa-exclamation-triangle" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;
+                        {{trans('auth.register_warning')}} <a href="{{trans('auth.video_link')}}" style="color: blue">click here</a>
                     </div>
                 @if(!is_null($parentid))
                     
