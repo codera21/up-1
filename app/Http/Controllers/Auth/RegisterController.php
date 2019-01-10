@@ -135,7 +135,7 @@ class RegisterController extends Controller
 
             Log::info("============ User Registration (END) ============");
 
-            Session::flash('success', trans('login.email_sent'));
+            Session::flash('danger', trans('login.email_sent'));
 
             return $user;
         } else {

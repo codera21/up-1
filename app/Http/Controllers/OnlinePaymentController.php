@@ -462,7 +462,6 @@ class OnlinePaymentController extends Controller
 
     function getParents($user, $parents = array())
     {
-
         $parent = $user->parent;
         if ($parent) {
             //array_push($parents, $parent->id);
@@ -586,7 +585,6 @@ class OnlinePaymentController extends Controller
 
     public function success()
     {
-
         $userID = Auth::user()->id;
         // save payment
         $transactionID = DB::table('payments')->insertGetId(

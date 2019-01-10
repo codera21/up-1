@@ -53,7 +53,6 @@ class PageController extends Controller
      */
     public function faq(Request $request)
     {
-
         $faqs = DB::table('faqs')
             ->where('lang', App::getLocale())
             ->orderBY('question')
