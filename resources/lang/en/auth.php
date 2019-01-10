@@ -15,5 +15,6 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'register_warning'=>'WARNING: Please watch this video before registering!',
+    'video_link'=>Session::get('youtube_video_link'),
 ];

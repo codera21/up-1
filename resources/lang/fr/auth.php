@@ -15,5 +15,6 @@ return [
 
     'failed' => 'Ces informations d\'identification ne correspondent pas à nos enregistrements.',
     'throttle' => 'Trop de tentatives de connexion. Veuillez réessayer dans secondes secondes.',
-
+    'register_warning'=>'Attention: Visualisez cette vidéo avant de vous enregistrer!',
+    'video_link'=>Session::get('youtube_video_link_fr'),
 ];

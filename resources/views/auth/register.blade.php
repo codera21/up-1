@@ -10,8 +10,15 @@
         <div class="col-sm-12 pull-left">
             
             <div class="featured-box featured-box-primary">
-
+                <br>
                 <div class="box-content">
+                    <div class="alert alert-success">
+                        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;
+                        {{trans('auth.register_warning')}}
+                    </div>
+                    <div class="text-center">
+                        <a href="{{trans('auth.video_link')}}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Watch Video</a>
+                    </div>
                 @if(!is_null($parentid))
                     
                     {!! Form::open(['id' => 'register', 'method' => 'post', 'files' => false, 'class'=>'form-horizontal']) !!}
