@@ -55,7 +55,7 @@ class PageController extends Controller
     {
         $faqs = DB::table('faqs')
             ->where('lang', App::getLocale())
-            ->orderBY('question')
+            ->orderBYRaw('question + 0','ASC', 'question')
             ->get();
         return view('page.faq', ['faqs' => $faqs]);
     }
