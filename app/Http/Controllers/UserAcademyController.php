@@ -122,7 +122,7 @@ class UserAcademyController extends Controller
             return redirect('/user-academy/course');
         }
 
-        $material = DB::table('material')->where('group_id', $groupID)->where('material_type', 'COURSE')->orderby('title', 'asc')->get();
+        $material = DB::table('material')->where('group_id', $groupID)->where('material_type', 'COURSE')->orderBYRaw('title + 0', 'ASC', 'title')->get();
         return view('user-academy.view_pdf_group', ['material' => $material]);
     }
 

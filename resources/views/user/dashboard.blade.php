@@ -22,6 +22,18 @@
                     </button>
                 </div>
             </div>
+            {{--<h3>copy your Company profile link</h3>
+            <div class="row">
+                <div class="col-lg-5">
+                    <input type="text" id= "myInput1" class="form-control" value="{{route('frontend_company',['post'=>$user])}}" id="inputDefault"  readonly>
+                </div>
+
+                <div class="col-lg-1">
+                    <button type="button" data-toggle="tooltip" data-html="true" title="copy to clipboard" class="btn btn-default btn-sm" onclick="myFunction1()">
+                        <span class="glyphicon glyphicon-paperclip" aria-hidden="true" style="font-size: 2rem"></span>
+                    </button>
+                </div>
+            </div>--}}
         </div>
     <br>
     <div class="fb-share-button" data-href="{{asset('/register').'/'.$user  }}" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fregister%2F71&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
@@ -33,6 +45,11 @@
 <script>
     function myFunction() {
         var copyText = document.getElementById("myInput");
+        copyText.select();
+        document.execCommand("copy");
+    }
+    function myFunction1() {
+        var copyText = document.getElementById("myInput1");
         copyText.select();
         document.execCommand("copy");
     }
