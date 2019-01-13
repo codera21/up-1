@@ -91,7 +91,7 @@
                             <div class="col-md-3">
                                 {!! Form::text('zip', old('zip'), ['placeholder'=>'Zip', 'class'=>'form-control']) !!}
                             </div>
-                    
+
                         </div>
 
                         <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }} required">

@@ -240,9 +240,8 @@
                     city: "required",
                     state: "required",
                     zip: {
-                        required: true,
+                        required: false,
                         digits: true,
-                        minlength: 5
                     },
                     phone: {
                         required: true,
