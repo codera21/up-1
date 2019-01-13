@@ -49,26 +49,14 @@ class OnlinePaymentController extends Controller
     protected $onlinePaymentDetails;
 
     protected $onlinePayment;
-
     protected $materialGroup;
-
     protected $materialSubGroup;
-
     protected $material;
-
-    protected $paymentProfile;
-
-    protected $level;
-
     protected $userCommission;
-
     protected $user;
-
     private $apiContext;
-    private $mode;
     private $client_id;
     private $secret;
-    private $plan_id;
 
 
     public function __construct(PaymentRepository $onlinePayment,
@@ -76,8 +64,6 @@ class OnlinePaymentController extends Controller
                                 MaterialGroupRepository $materialGroup,
                                 MaterialSubGroupRepository $materialSubGroup,
                                 MaterialRepository $material,
-                                PaymentProfileRepository $paymentProfile,
-                                LevelRepository $level,
                                 UserCommissionRepository $userCommission,
                                 UserRepository $user)
     {
@@ -86,8 +72,6 @@ class OnlinePaymentController extends Controller
         $this->materialGroup = $materialGroup;
         $this->materialSubGroup = $materialSubGroup;
         $this->material = $material;
-        $this->paymentProfile = $paymentProfile;
-        $this->level = $level;
         $this->userCommission = $userCommission;
         $this->user = $user;
 
