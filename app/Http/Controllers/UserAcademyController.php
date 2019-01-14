@@ -100,6 +100,7 @@ class UserAcademyController extends Controller
         $material = DB::table('material')->
         where('group_id', $groupID)->
         where('id', '!=', 30)->
+            where('material_type','VIDEO')->
         orderBYRaw('title + 0', 'ASC', 'title')->
         paginate(15);
         return view('user-academy.view-material-group', ['material' => $material]);
