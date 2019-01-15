@@ -3,42 +3,42 @@
  * Created by PhpStorm.
  * User: Ashish Bhandari
  * Date: 1/15/2019
- * Time: 7:59 PM
+ * Time: 8:22 PM
  */
 
 namespace App\Http\Controllers;
 
-use App\Model\UserCommission;
+use App\Model\UserGoals;
 use Illuminate\Http\Request;
 
-class UserCommissionController extends Controller
+class UserGoalsController extends Controller
 {
     public function index()
     {
-        return response()->json(UserCommission::all());
+        return response()->json(UserGoals::all());
     }
 
     public function getbyid($id)
     {
-        return response()->json(UserCommission::find($id));
+        return response()->json(UserGoals::find($id));
     }
 
     public function create(Request $request)
     {
-        $data = UserCommission::create($request->all());
-        return response()->json($data, 200);
+        $data = UserGoals::create($request->all());
+        return response()->json($data, 201);
     }
 
     public function update(Request $request, $id)
     {
-        $data = UserCommission::findOrFail($id);
+        $data = UserGoals::findOrFail($id);
         $data->update($request->all());
         return response()->json($data, 200);
     }
 
     public function delete($id)
     {
-        $data = UserCommission::findOrFail($id)->delete();
-        return response('delete successfully');
+        UserGoals::findOrFail($id)->delete();
+        return response('Delete successfully', 200);
     }
 }
