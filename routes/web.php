@@ -156,7 +156,7 @@ $router->group(['as' => 'usercommission', 'prefix' => 'usercommission'], functio
     $router->put('update/{id}', ['as' => '.update', 'uses' => 'UserCommissionController@update']);
     $router->delete('/delete/{id}', ['as' => '.delete', 'uses' => 'UserCommissionController@delete']);
 });
-// user goal table google  done is added
+// user goal table google  done is added asdf
 $router->group(['as' => 'user_goals', 'prefix' => 'user_goals'], function () use ($router) {
     $router->get('/', ['uses' => 'UserGoalsController@index']);
     $router->get('/{id}', ['as' => '.about', 'uses' => 'UserGoalsController@getbyid']);
