@@ -148,7 +148,7 @@ $router->group(['as' => 'paypal_sub', 'prefix' => 'paypal_sub'], function () use
     $router->put('update/{id}', ['as' => '.update', 'uses' => 'PaypalSubscriptionController@update']);
     $router->delete('/delete/{id}', ['as' => '.delete', 'uses' => 'PaypalSubscriptionController@delete']);
 });
-// use r commission table
+// use r commission table dafsdf
 $router->group(['as' => 'usercommission', 'prefix' => 'usercommission'], function () use ($router) {
     $router->get('/', ['uses' => 'UserCommissionController@index']);
     $router->get('/{id}', ['as' => '.about', 'uses' => 'UserCommissionController@getbyid']);
