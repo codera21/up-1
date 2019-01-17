@@ -108,7 +108,7 @@ $router->group(['as' => 'news', 'prefix' => 'news'], function () use ($router) {
     $router->put('update/{id}', ['as' => '.update', 'uses' => 'NewsController@update']);
     $router->delete('/delete/{id}', ['as' => '.delete', 'uses' => 'NewsController@delete']);
 });
-// offline pay table
+// offline pay table asdf
 $router->group(['as' => 'offlinepay', 'prefix' => 'offline_pay'], function () use ($router) {
     $router->get('/', ['uses' => 'OfflinePayController@index']);
     $router->get('/{id}', ['as' => '.about', 'uses' => 'OfflinePayController@getbyid']);
