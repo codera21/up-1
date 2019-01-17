@@ -92,7 +92,7 @@ $router->group(['as' => 'matrialsubgroup', 'prefix' => 'material_subgroup'], fun
     $router->put('update/{id}', ['as' => '.update', 'uses' => 'MaterialSubGroupController@update']);
     $router->delete('/delete/{id}', ['as' => '.delete', 'uses' => 'MaterialSubGroupController@delete']);
 });
-// message table
+// message table ashish 
 $router->group(['as' => 'message', 'prefix' => 'message'], function () use ($router) {
     $router->get('/', ['uses' => 'MessageController@index']);
     $router->get('/{id}', ['as' => '.about', 'uses' => 'MessageController@getbyid']);
@@ -116,7 +116,7 @@ $router->group(['as' => 'offlinepay', 'prefix' => 'offline_pay'], function () us
     $router->put('update/{id}', ['as' => '.update', 'uses' => 'OfflinePayController@update']);
     $router->delete('/delete/{id}', ['as' => '.delete', 'uses' => 'OfflinePayController@delete']);
 });
-// page table
+// page table asasasasass
 $router->group(['as' => 'pages', 'prefix' => 'pages'], function () use ($router) {
     $router->get('/', ['uses' => 'OfflinePayController@index']);
     $router->get('/{id}', ['as' => '.about', 'uses' => 'PagesController@getbyid']);
@@ -148,7 +148,7 @@ $router->group(['as' => 'paypal_sub', 'prefix' => 'paypal_sub'], function () use
     $router->put('update/{id}', ['as' => '.update', 'uses' => 'PaypalSubscriptionController@update']);
     $router->delete('/delete/{id}', ['as' => '.delete', 'uses' => 'PaypalSubscriptionController@delete']);
 });
-// use r commission table dafsdf
+// use r commission table qdasdsadasd
 $router->group(['as' => 'usercommission', 'prefix' => 'usercommission'], function () use ($router) {
     $router->get('/', ['uses' => 'UserCommissionController@index']);
     $router->get('/{id}', ['as' => '.about', 'uses' => 'UserCommissionController@getbyid']);
