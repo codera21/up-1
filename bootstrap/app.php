@@ -47,6 +47,7 @@ $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
     App\Console\Kernel::class
 );
+$app['config']->set('database.connections.mysql.unix_socket', '/var/lib/mysql/mysql.sock');
 
 /*
 |--------------------------------------------------------------------------
