@@ -164,3 +164,4 @@ $router->group(['as' => 'user_goals', 'prefix' => 'user_goals'], function () use
     $router->put('update/{id}', ['as' => '.update', 'uses' => 'UserGoalsController@update']);
     $router->delete('/delete/{id}', ['as' => '.delete', 'uses' => 'UserGoalsController@delete']);
 });
+//check
