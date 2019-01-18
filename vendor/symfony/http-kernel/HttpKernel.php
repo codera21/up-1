@@ -28,7 +28,6 @@ use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Event\PostResponseEvent;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\ControllerDoesNotReturnResponseException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -52,7 +51,9 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
         $this->argumentResolver = $argumentResolver;
 
         if (null === $this->argumentResolver) {
-            $this->argumentResolver = new ArgumentResolver();
+            @trigger_error(sprintf('As of 3.1 an %s is used to resolve arguments. In 4.0 the $argumentResolver becomes the %s if no other is provided instead of using the $resolver argument.', ArgumentResolverInterface::class, ArgumentResolver::class), E_USER_DEPRECATED);
+            // fallback in case of deprecations
+            $this->argumentResolver = $resolver;
         }
     }
 
@@ -117,7 +118,7 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
      * @throws \LogicException       If one of the listener does not behave as expected
      * @throws NotFoundHttpException When controller cannot be found
      */
-    private function handleRaw(Request $request, int $type = self::MASTER_REQUEST)
+    private function handleRaw(Request $request, $type = self::MASTER_REQUEST)
     {
         $this->requestStack->push($request);
 
@@ -147,7 +148,7 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
         $arguments = $event->getArguments();
 
         // call controller
-        $response = $controller(...$arguments);
+        $response = \call_user_func_array($controller, $arguments);
 
         // view
         if (!$response instanceof Response) {
@@ -156,15 +157,16 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
 
             if ($event->hasResponse()) {
                 $response = $event->getResponse();
-            } else {
-                $msg = sprintf('The controller must return a "Symfony\Component\HttpFoundation\Response" object but it returned %s.', $this->varToString($response));
+            }
+
+            if (!$response instanceof Response) {
+                $msg = sprintf('The controller must return a response (%s given).', $this->varToString($response));
 
                 // the user may have forgotten to return something
                 if (null === $response) {
                     $msg .= ' Did you forget to add a return statement somewhere in your controller?';
                 }
-
-                throw new ControllerDoesNotReturnResponseException($msg, $controller, __FILE__, __LINE__ - 17);
+                throw new \LogicException($msg);
             }
         }
 
@@ -182,7 +184,7 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
      *
      * @throws \RuntimeException if the passed object is not a Response instance
      */
-    private function filterResponse(Response $response, Request $request, int $type)
+    private function filterResponse(Response $response, Request $request, $type)
     {
         $event = new FilterResponseEvent($this, $request, $type, $response);
 
@@ -199,8 +201,11 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
      * Note that the order of the operations is important here, otherwise
      * operations such as {@link RequestStack::getParentRequest()} can lead to
      * weird results.
+     *
+     * @param Request $request
+     * @param int     $type
      */
-    private function finishRequest(Request $request, int $type)
+    private function finishRequest(Request $request, $type)
     {
         $this->dispatcher->dispatch(KernelEvents::FINISH_REQUEST, new FinishRequestEvent($this, $request, $type));
         $this->requestStack->pop();
@@ -211,11 +216,13 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
      *
      * @param \Exception $e       An \Exception instance
      * @param Request    $request A Request instance
-     * @param int        $type    The type of the request (one of HttpKernelInterface::MASTER_REQUEST or HttpKernelInterface::SUB_REQUEST)
+     * @param int        $type    The type of the request
+     *
+     * @return Response A Response instance
      *
      * @throws \Exception
      */
-    private function handleException(\Exception $e, Request $request, int $type): Response
+    private function handleException(\Exception $e, $request, $type)
     {
         $event = new GetResponseForExceptionEvent($this, $request, $type, $e);
         $this->dispatcher->dispatch(KernelEvents::EXCEPTION, $event);
@@ -232,7 +239,13 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
         $response = $event->getResponse();
 
         // the developer asked for a specific status code
-        if (!$event->isAllowingCustomResponseCode() && !$response->isClientError() && !$response->isServerError() && !$response->isRedirect()) {
+        if ($response->headers->has('X-Status-Code')) {
+            @trigger_error(sprintf('Using the X-Status-Code header is deprecated since Symfony 3.3 and will be removed in 4.0. Use %s::allowCustomResponseCode() instead.', GetResponseForExceptionEvent::class), E_USER_DEPRECATED);
+
+            $response->setStatusCode($response->headers->get('X-Status-Code'));
+
+            $response->headers->remove('X-Status-Code');
+        } elseif (!$event->isAllowingCustomResponseCode() && !$response->isClientError() && !$response->isServerError() && !$response->isRedirect()) {
             // ensure that we actually have an error response
             if ($e instanceof HttpExceptionInterface) {
                 // keep the HTTP status code and headers
@@ -253,23 +266,23 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
     /**
      * Returns a human-readable string for the specified variable.
      */
-    private function varToString($var): string
+    private function varToString($var)
     {
         if (\is_object($var)) {
-            return sprintf('an object of type %s', \get_class($var));
+            return sprintf('Object(%s)', \get_class($var));
         }
 
         if (\is_array($var)) {
             $a = array();
             foreach ($var as $k => $v) {
-                $a[] = sprintf('%s => ...', $k);
+                $a[] = sprintf('%s => %s', $k, $this->varToString($v));
             }
 
-            return sprintf('an array ([%s])', mb_substr(implode(', ', $a), 0, 255));
+            return sprintf('Array(%s)', implode(', ', $a));
         }
 
         if (\is_resource($var)) {
-            return sprintf('a resource (%s)', get_resource_type($var));
+            return sprintf('Resource(%s)', get_resource_type($var));
         }
 
         if (null === $var) {
@@ -277,19 +290,11 @@ class HttpKernel implements HttpKernelInterface, TerminableInterface
         }
 
         if (false === $var) {
-            return 'a boolean value (false)';
+            return 'false';
         }
 
         if (true === $var) {
-            return 'a boolean value (true)';
-        }
-
-        if (\is_string($var)) {
-            return sprintf('a string ("%s%s")', mb_substr($var, 0, 255), mb_strlen($var) > 255 ? '...' : '');
-        }
-
-        if (is_numeric($var)) {
-            return sprintf('a number (%s)', (string) $var);
+            return 'true';
         }
 
         return (string) $var;

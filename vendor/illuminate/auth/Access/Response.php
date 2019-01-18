@@ -39,6 +39,6 @@ class Response
      */
     public function __toString()
     {
-        return (string) $this->message();
+        return $this->message();
     }
 }

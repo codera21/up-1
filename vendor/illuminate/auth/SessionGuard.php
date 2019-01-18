@@ -4,7 +4,6 @@ namespace Illuminate\Auth;
 
 use RuntimeException;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Traits\Macroable;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Contracts\Auth\UserProvider;
@@ -91,7 +90,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
      * @param  string  $name
      * @param  \Illuminate\Contracts\Auth\UserProvider  $provider
      * @param  \Illuminate\Contracts\Session\Session  $session
-     * @param  \Symfony\Component\HttpFoundation\Request|null  $request
+     * @param  \Symfony\Component\HttpFoundation\Request  $request
      * @return void
      */
     public function __construct($name,
@@ -128,8 +127,10 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
         // First we will try to load the user using the identifier in the session if
         // one exists. Otherwise we will check for a "remember me" cookie in this
         // request, and if one exists, attempt to retrieve the user using that.
-        if (! is_null($id) && $this->user = $this->provider->retrieveById($id)) {
-            $this->fireAuthenticatedEvent($this->user);
+        if (! is_null($id)) {
+            if ($this->user = $this->provider->retrieveById($id)) {
+                $this->fireAuthenticatedEvent($this->user);
+            }
         }
 
         // If the user is null, but we decrypt a "recaller" cookie we can attempt to
@@ -329,7 +330,6 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
      * Get the response for basic authentication.
      *
      * @return void
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
      */
     protected function failedBasicResponse()
@@ -494,7 +494,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
         }
 
         if (isset($this->events)) {
-            $this->events->dispatch(new Events\Logout($this->name, $user));
+            $this->events->dispatch(new Events\Logout($user));
         }
 
         // Once we have fired the logout event we will clear the users out of memory
@@ -534,30 +534,6 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
     }
 
     /**
-     * Invalidate other sessions for the current user.
-     *
-     * The application must be using the AuthenticateSession middleware.
-     *
-     * @param  string  $password
-     * @param  string  $attribute
-     * @return bool|null
-     */
-    public function logoutOtherDevices($password, $attribute = 'password')
-    {
-        if (! $this->user()) {
-            return;
-        }
-
-        $result = tap($this->user()->forceFill([
-            $attribute => Hash::make($password),
-        ]))->save();
-
-        $this->queueRecallerCookie($this->user());
-
-        return $result;
-    }
-
-    /**
      * Register an authentication attempt event listener.
      *
      * @param  mixed  $callback
@@ -581,7 +557,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
     {
         if (isset($this->events)) {
             $this->events->dispatch(new Events\Attempting(
-                $this->name, $credentials, $remember
+                $credentials, $remember
             ));
         }
     }
@@ -596,9 +572,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
     protected function fireLoginEvent($user, $remember = false)
     {
         if (isset($this->events)) {
-            $this->events->dispatch(new Events\Login(
-                $this->name, $user, $remember
-            ));
+            $this->events->dispatch(new Events\Login($user, $remember));
         }
     }
 
@@ -611,9 +585,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
     protected function fireAuthenticatedEvent($user)
     {
         if (isset($this->events)) {
-            $this->events->dispatch(new Events\Authenticated(
-                $this->name, $user
-            ));
+            $this->events->dispatch(new Events\Authenticated($user));
         }
     }
 
@@ -627,9 +599,7 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
     protected function fireFailedEvent($user, array $credentials)
     {
         if (isset($this->events)) {
-            $this->events->dispatch(new Events\Failed(
-                $this->name, $user, $credentials
-            ));
+            $this->events->dispatch(new Events\Failed($user, $credentials));
         }
     }
 

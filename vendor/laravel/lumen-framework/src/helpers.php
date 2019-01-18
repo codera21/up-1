@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Str;
 use Illuminate\Container\Container;
-use Laravel\Lumen\Bus\PendingDispatch;
 use Illuminate\Contracts\Bus\Dispatcher;
 
 if (! function_exists('abort')) {
@@ -27,17 +26,16 @@ if (! function_exists('app')) {
     /**
      * Get the available container instance.
      *
-     * @param  string|null  $make
-     * @param  array  $parameters
+     * @param  string  $make
      * @return mixed|\Laravel\Lumen\Application
      */
-    function app($make = null, array $parameters = [])
+    function app($make = null)
     {
         if (is_null($make)) {
             return Container::getInstance();
         }
 
-        return Container::getInstance()->make($make, $parameters);
+        return Container::getInstance()->make($make);
     }
 }
 
@@ -76,21 +74,7 @@ if (! function_exists('dispatch')) {
      */
     function dispatch($job)
     {
-        return new PendingDispatch($job);
-    }
-}
-
-if (! function_exists('dispatch_now')) {
-    /**
-     * Dispatch a command to its appropriate handler in the current process.
-     *
-     * @param  mixed  $job
-     * @param  mixed  $handler
-     * @return mixed
-     */
-    function dispatch_now($job, $handler = null)
-    {
-        return app(Dispatcher::class)->dispatchNow($job, $handler);
+        return app(Dispatcher::class)->dispatch($job);
     }
 }
 
@@ -100,7 +84,7 @@ if (! function_exists('config')) {
      *
      * If an array is passed as the key, we will assume you want to set an array of values.
      *
-     * @param  array|string|null  $key
+     * @param  array|string  $key
      * @param  mixed  $default
      * @return mixed
      */
@@ -148,8 +132,8 @@ if (! function_exists('env')) {
     /**
      * Gets the value of an environment variable. Supports boolean, empty and null.
      *
-     * @param  string|null  $key
-     * @param  mixed  $default
+     * @param  string  $key
+     * @param  mixed   $default
      * @return mixed
      */
     function env($key, $default = null)
@@ -217,7 +201,7 @@ if (! function_exists('factory')) {
         $arguments = func_get_args();
 
         if (isset($arguments[1]) && is_string($arguments[1])) {
-            return $factory->of($arguments[0], $arguments[1])->times($arguments[2] ?? null);
+            return $factory->of($arguments[0], $arguments[1])->times(isset($arguments[2]) ? $arguments[2] : null);
         } elseif (isset($arguments[1])) {
             return $factory->of($arguments[0])->times($arguments[1]);
         } else {
@@ -245,9 +229,9 @@ if (! function_exists('redirect')) {
      * Get an instance of the redirector.
      *
      * @param  string|null  $to
-     * @param  int  $status
-     * @param  array  $headers
-     * @param  bool|null  $secure
+     * @param  int     $status
+     * @param  array   $headers
+     * @param  bool    $secure
      * @return \Laravel\Lumen\Http\Redirector|\Illuminate\Http\RedirectResponse
      */
     function redirect($to = null, $status = 302, $headers = [], $secure = null)
@@ -301,8 +285,8 @@ if (! function_exists('route')) {
      * Generate a URL to a named route.
      *
      * @param  string  $name
-     * @param  array  $parameters
-     * @param  bool|null  $secure
+     * @param  array   $parameters
+     * @param  bool    $secure
      * @return string
      */
     function route($name, $parameters = [], $secure = null)
@@ -328,10 +312,10 @@ if (! function_exists('trans')) {
     /**
      * Translate the given message.
      *
-     * @param  string|null  $id
+     * @param  string  $id
      * @param  array   $replace
-     * @param  string|null  $locale
-     * @return \Illuminate\Contracts\Translation\Translator|string|array|null
+     * @param  string  $locale
+     * @return \Illuminate\Contracts\Translation\Translator|string
      */
     function trans($id = null, $replace = [], $locale = null)
     {
@@ -343,29 +327,14 @@ if (! function_exists('trans')) {
     }
 }
 
-if (! function_exists('__')) {
-    /**
-     * Translate the given message.
-     *
-     * @param  string  $key
-     * @param  array  $replace
-     * @param  string|null  $locale
-     * @return string|array|null
-     */
-    function __($key, $replace = [], $locale = null)
-    {
-        return app('translator')->getFromJson($key, $replace, $locale);
-    }
-}
-
 if (! function_exists('trans_choice')) {
     /**
      * Translates the given message based on a count.
      *
      * @param  string  $id
      * @param  int|array|\Countable  $number
-     * @param  array  $replace
-     * @param  string|null  $locale
+     * @param  array   $replace
+     * @param  string  $locale
      * @return string
      */
     function trans_choice($id, $number, array $replace = [], $locale = null)
@@ -379,8 +348,8 @@ if (! function_exists('url')) {
      * Generate a url for the application.
      *
      * @param  string  $path
-     * @param  mixed  $parameters
-     * @param  bool|null  $secure
+     * @param  mixed   $parameters
+     * @param  bool    $secure
      * @return string
      */
     function url($path = null, $parameters = [], $secure = null)
@@ -389,35 +358,13 @@ if (! function_exists('url')) {
     }
 }
 
-if (! function_exists('validator')) {
-    /**
-     * Create a new Validator instance.
-     *
-     * @param  array  $data
-     * @param  array  $rules
-     * @param  array  $messages
-     * @param  array  $customAttributes
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    function validator(array $data = [], array $rules = [], array $messages = [], array $customAttributes = [])
-    {
-        $factory = app('validator');
-
-        if (func_num_args() === 0) {
-            return $factory;
-        }
-
-        return $factory->make($data, $rules, $messages, $customAttributes);
-    }
-}
-
 if (! function_exists('view')) {
     /**
      * Get the evaluated view contents for the given view.
      *
      * @param  string  $view
-     * @param  array  $data
-     * @param  array  $mergeData
+     * @param  array   $data
+     * @param  array   $mergeData
      * @return \Illuminate\View\View
      */
     function view($view = null, $data = [], $mergeData = [])

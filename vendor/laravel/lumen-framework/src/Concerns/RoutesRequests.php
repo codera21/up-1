@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Laravel\Lumen\Routing\Pipeline;
 use Illuminate\Contracts\Support\Responsable;
-use Laravel\Lumen\Http\Request as LumenRequest;
 use Laravel\Lumen\Routing\Closure as RoutingClosure;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Laravel\Lumen\Routing\Controller as LumenController;
@@ -156,11 +155,7 @@ trait RoutesRequests
         list($method, $pathInfo) = $this->parseIncomingRequest($request);
 
         try {
-            $this->boot();
-
-            return $this->sendThroughPipeline($this->middleware, function ($request) use ($method, $pathInfo) {
-                $this->instance(Request::class, $request);
-
+            return $this->sendThroughPipeline($this->middleware, function () use ($method, $pathInfo) {
                 if (isset($this->router->getRoutes()[$method.$pathInfo])) {
                     return $this->handleFoundRoute([true, $this->router->getRoutes()[$method.$pathInfo]['action'], []]);
                 }
@@ -185,7 +180,7 @@ trait RoutesRequests
     protected function parseIncomingRequest($request)
     {
         if (! $request) {
-            $request = LumenRequest::capture();
+            $request = Request::capture();
         }
 
         $this->instance(Request::class, $this->prepareRequest($request));
@@ -415,7 +410,7 @@ trait RoutesRequests
                 ->then($then);
         }
 
-        return $then($this->make('request'));
+        return $then();
     }
 
     /**
@@ -426,10 +421,8 @@ trait RoutesRequests
      */
     public function prepareResponse($response)
     {
-        $request = app(Request::class);
-
         if ($response instanceof Responsable) {
-            $response = $response->toResponse($request);
+            $response = $response->toResponse(Request::capture());
         }
 
         if ($response instanceof PsrResponseInterface) {
@@ -440,7 +433,7 @@ trait RoutesRequests
             $response = $response->prepare(Request::capture());
         }
 
-        return $response->prepare($request);
+        return $response;
     }
 
     /**

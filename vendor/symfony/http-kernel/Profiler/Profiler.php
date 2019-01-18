@@ -17,14 +17,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
 use Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface;
-use Symfony\Contracts\Service\ResetInterface;
 
 /**
  * Profiler.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Profiler implements ResetInterface
+class Profiler
 {
     private $storage;
 
@@ -37,11 +36,14 @@ class Profiler implements ResetInterface
     private $initiallyEnabled = true;
     private $enabled = true;
 
-    public function __construct(ProfilerStorageInterface $storage, LoggerInterface $logger = null, bool $enable = true)
+    /**
+     * @param bool $enable The initial enabled state
+     */
+    public function __construct(ProfilerStorageInterface $storage, LoggerInterface $logger = null, $enable = true)
     {
         $this->storage = $storage;
         $this->logger = $logger;
-        $this->initiallyEnabled = $this->enabled = $enable;
+        $this->initiallyEnabled = $this->enabled = (bool) $enable;
     }
 
     /**
@@ -157,10 +159,6 @@ class Profiler implements ResetInterface
             $profile->setIp('Unknown');
         }
 
-        if ($prevToken = $response->headers->get('X-Debug-Token')) {
-            $response->headers->set('X-Previous-Debug-Token', $prevToken);
-        }
-
         $response->headers->set('X-Debug-Token', $profile->getToken());
 
         foreach ($this->collectors as $collector) {
@@ -176,6 +174,10 @@ class Profiler implements ResetInterface
     public function reset()
     {
         foreach ($this->collectors as $collector) {
+            if (!method_exists($collector, 'reset')) {
+                continue;
+            }
+
             $collector->reset();
         }
         $this->enabled = $this->initiallyEnabled;
@@ -209,6 +211,10 @@ class Profiler implements ResetInterface
      */
     public function add(DataCollectorInterface $collector)
     {
+        if (!method_exists($collector, 'reset')) {
+            @trigger_error(sprintf('Implementing "%s" without the "reset()" method is deprecated since Symfony 3.4 and will be unsupported in 4.0 for class "%s".', DataCollectorInterface::class, \get_class($collector)), E_USER_DEPRECATED);
+        }
+
         $this->collectors[$collector->getName()] = $collector;
     }
 

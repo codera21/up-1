@@ -29,9 +29,11 @@ class Store implements StoreInterface
     private $locks;
 
     /**
+     * @param string $root The path to the cache directory
+     *
      * @throws \RuntimeException
      */
-    public function __construct(string $root)
+    public function __construct($root)
     {
         $this->root = $root;
         if (!file_exists($this->root) && !@mkdir($this->root, 0777, true) && !is_dir($this->root)) {

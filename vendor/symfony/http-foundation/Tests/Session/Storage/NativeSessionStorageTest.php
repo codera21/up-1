@@ -36,7 +36,7 @@ class NativeSessionStorageTest extends TestCase
     protected function setUp()
     {
         $this->iniSet('session.save_handler', 'files');
-        $this->iniSet('session.save_path', $this->savePath = sys_get_temp_dir().'/sftest');
+        $this->iniSet('session.save_path', $this->savePath = sys_get_temp_dir().'/sf2test');
         if (!is_dir($this->savePath)) {
             mkdir($this->savePath);
         }
@@ -170,10 +170,6 @@ class NativeSessionStorageTest extends TestCase
             'cookie_secure' => true,
             'cookie_httponly' => false,
         );
-
-        if (\PHP_VERSION_ID >= 70300) {
-            $options['cookie_samesite'] = 'lax';
-        }
 
         $this->getStorage($options);
         $temp = session_get_cookie_params();

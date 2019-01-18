@@ -2,8 +2,6 @@
 
 namespace Illuminate\Broadcasting\Broadcasters;
 
-use Exception;
-use ReflectionClass;
 use ReflectionFunction;
 use Illuminate\Support\Str;
 use Illuminate\Container\Container;
@@ -24,7 +22,7 @@ abstract class Broadcaster implements BroadcasterContract
     /**
      * The binding registrar instance.
      *
-     * @var \Illuminate\Contracts\Routing\BindingRegistrar
+     * @var BindingRegistrar
      */
     protected $bindingRegistrar;
 
@@ -32,10 +30,10 @@ abstract class Broadcaster implements BroadcasterContract
      * Register a channel authenticator.
      *
      * @param  string  $channel
-     * @param  callable|string  $callback
+     * @param  callable  $callback
      * @return $this
      */
-    public function channel($channel, $callback)
+    public function channel($channel, callable $callback)
     {
         $this->channels[$channel] = $callback;
 
@@ -48,7 +46,6 @@ abstract class Broadcaster implements BroadcasterContract
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $channel
      * @return mixed
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
      */
     protected function verifyUserCanAccessChannel($request, $channel)
@@ -60,9 +57,7 @@ abstract class Broadcaster implements BroadcasterContract
 
             $parameters = $this->extractAuthParameters($pattern, $channel, $callback);
 
-            $handler = $this->normalizeChannelHandlerToCallable($callback);
-
-            if ($result = $handler($request->user(), ...$parameters)) {
+            if ($result = $callback($request->user(), ...$parameters)) {
                 return $this->validAuthenticationResponse($request, $result);
             }
         }
@@ -75,56 +70,18 @@ abstract class Broadcaster implements BroadcasterContract
      *
      * @param  string  $pattern
      * @param  string  $channel
-     * @param  callable|string  $callback
+     * @param  callable  $callback
      * @return array
      */
     protected function extractAuthParameters($pattern, $channel, $callback)
     {
-        $callbackParameters = $this->extractParameters($callback);
+        $callbackParameters = (new ReflectionFunction($callback))->getParameters();
 
         return collect($this->extractChannelKeys($pattern, $channel))->reject(function ($value, $key) {
             return is_numeric($key);
         })->map(function ($value, $key) use ($callbackParameters) {
             return $this->resolveBinding($key, $value, $callbackParameters);
         })->values()->all();
-    }
-
-    /**
-     * Extracts the parameters out of what the user passed to handle the channel authentication.
-     *
-     * @param  callable|string  $callback
-     * @return \ReflectionParameter[]
-     *
-     * @throws \Exception
-     */
-    protected function extractParameters($callback)
-    {
-        if (is_callable($callback)) {
-            return (new ReflectionFunction($callback))->getParameters();
-        } elseif (is_string($callback)) {
-            return $this->extractParametersFromClass($callback);
-        }
-
-        throw new Exception('Given channel handler is an unknown type.');
-    }
-
-    /**
-     * Extracts the parameters out of a class channel's "join" method.
-     *
-     * @param  string  $callback
-     * @return \ReflectionParameter[]
-     *
-     * @throws \Exception
-     */
-    protected function extractParametersFromClass($callback)
-    {
-        $reflection = new ReflectionClass($callback);
-
-        if (! $reflection->hasMethod('join')) {
-            throw new Exception('Class based channel must define a "join" method.');
-        }
-
-        return $reflection->getMethod('join')->getParameters();
     }
 
     /**
@@ -183,7 +140,6 @@ abstract class Broadcaster implements BroadcasterContract
      * @param  mixed  $value
      * @param  array  $callbackParameters
      * @return mixed
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
      */
     protected function resolveImplicitBindingIfPossible($key, $value, $callbackParameters)
@@ -244,20 +200,5 @@ abstract class Broadcaster implements BroadcasterContract
         }
 
         return $this->bindingRegistrar;
-    }
-
-    /**
-     * Normalize the given callback into a callable.
-     *
-     * @param  mixed  $callback
-     * @return callable|\Closure
-     */
-    protected function normalizeChannelHandlerToCallable($callback)
-    {
-        return is_callable($callback) ? $callback : function (...$args) use ($callback) {
-            return Container::getInstance()
-                ->make($callback)
-                ->join(...$args);
-        };
     }
 }

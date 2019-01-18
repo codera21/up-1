@@ -12,20 +12,27 @@ namespace PHPUnit\Util;
 use PHPUnit\Framework\Exception;
 
 /**
- * Factory for PHPUnit\Framework\Exception objects that are used to describe
+ * Factory for PHPUnit_Framework_Exception objects that are used to describe
  * invalid arguments passed to a function or method.
  */
-final class InvalidArgumentHelper
+class InvalidArgumentHelper
 {
-    public static function factory(int $argument, string $type, $value = null): Exception
+    /**
+     * @param int    $argument
+     * @param string $type
+     * @param mixed  $value
+     *
+     * @return Exception
+     */
+    public static function factory($argument, $type, $value = null)
     {
-        $stack = \debug_backtrace();
+        $stack = debug_backtrace(false);
 
         return new Exception(
-            \sprintf(
+            sprintf(
                 'Argument #%d%sof %s::%s() must be a %s',
                 $argument,
-                $value !== null ? ' (' . \gettype($value) . '#' . $value . ')' : ' (No Value) ',
+                $value !== null ? ' (' . gettype($value) . '#' . $value . ')' : ' (No Value) ',
                 $stack[1]['class'],
                 $stack[1]['function'],
                 $type

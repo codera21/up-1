@@ -42,7 +42,7 @@ class TaggedCache extends Repository
     }
 
     /**
-     * Decrement the value of an item in the cache.
+     * Increment the value of an item in the cache.
      *
      * @param  string  $key
      * @param  mixed   $value
@@ -56,13 +56,11 @@ class TaggedCache extends Repository
     /**
      * Remove all items from the cache.
      *
-     * @return bool
+     * @return void
      */
     public function flush()
     {
         $this->tags->reset();
-
-        return true;
     }
 
     /**

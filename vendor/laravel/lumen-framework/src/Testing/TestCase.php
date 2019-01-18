@@ -54,12 +54,6 @@ abstract class TestCase extends BaseTestCase
         Facade::clearResolvedInstances();
 
         $this->app = $this->createApplication();
-
-        $url = $this->app->make('config')->get('app.url', env('APP_URL', 'http://localhost'));
-
-        $this->app->make('url')->forceRootUrl($url);
-
-        $this->app->boot();
     }
 
     /**
@@ -192,7 +186,7 @@ abstract class TestCase extends BaseTestCase
 
         $mock = Mockery::spy('Illuminate\Contracts\Events\Dispatcher');
 
-        $mock->shouldReceive('fire', 'dispatch')->andReturnUsing(function ($called) use (&$events) {
+        $mock->shouldReceive('fire')->andReturnUsing(function ($called) use (&$events) {
             foreach ($events as $key => $event) {
                 if ((is_string($called) && $called === $event) ||
                     (is_string($called) && is_subclass_of($called, $event)) ||
@@ -224,7 +218,7 @@ abstract class TestCase extends BaseTestCase
     {
         $mock = Mockery::mock('Illuminate\Contracts\Events\Dispatcher');
 
-        $mock->shouldReceive('fire', 'dispatch');
+        $mock->shouldReceive('fire');
 
         $this->app->instance('events', $mock);
 
@@ -242,6 +236,8 @@ abstract class TestCase extends BaseTestCase
     protected function expectsJobs($jobs)
     {
         $jobs = is_array($jobs) ? $jobs : func_get_args();
+
+        unset($this->app->availableBindings['Illuminate\Contracts\Bus\Dispatcher']);
 
         $mock = Mockery::mock('Illuminate\Bus\Dispatcher[dispatch]', [$this->app]);
 
@@ -264,6 +260,8 @@ abstract class TestCase extends BaseTestCase
      */
     protected function withoutJobs()
     {
+        unset($this->app->availableBindings['Illuminate\Contracts\Bus\Dispatcher']);
+
         $mock = Mockery::mock('Illuminate\Bus\Dispatcher[dispatch]', [$this->app]);
 
         $mock->shouldReceive('dispatch')->andReturnUsing(function ($dispatched) {

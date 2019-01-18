@@ -12,7 +12,6 @@ class BladeCompiler extends Compiler implements CompilerInterface
         Concerns\CompilesComponents,
         Concerns\CompilesConditionals,
         Concerns\CompilesEchos,
-        Concerns\CompilesHelpers,
         Concerns\CompilesIncludes,
         Concerns\CompilesInjections,
         Concerns\CompilesJson,
@@ -272,7 +271,7 @@ class BladeCompiler extends Compiler implements CompilerInterface
      */
     protected function parseToken($token)
     {
-        [$id, $content] = $token;
+        list($id, $content) = $token;
 
         if ($id == T_INLINE_HTML) {
             foreach ($this->compilers as $type) {
@@ -396,13 +395,13 @@ class BladeCompiler extends Compiler implements CompilerInterface
         $this->conditions[$name] = $callback;
 
         $this->directive($name, function ($expression) use ($name) {
-            return $expression !== ''
+            return $expression
                     ? "<?php if (\Illuminate\Support\Facades\Blade::check('{$name}', {$expression})): ?>"
                     : "<?php if (\Illuminate\Support\Facades\Blade::check('{$name}')): ?>";
         });
 
         $this->directive('else'.$name, function ($expression) use ($name) {
-            return $expression !== ''
+            return $expression
                 ? "<?php elseif (\Illuminate\Support\Facades\Blade::check('{$name}', {$expression})): ?>"
                 : "<?php elseif (\Illuminate\Support\Facades\Blade::check('{$name}')): ?>";
         });
@@ -422,46 +421,6 @@ class BladeCompiler extends Compiler implements CompilerInterface
     public function check($name, ...$parameters)
     {
         return call_user_func($this->conditions[$name], ...$parameters);
-    }
-
-    /**
-     * Register a component alias directive.
-     *
-     * @param  string  $path
-     * @param  string  $alias
-     * @return void
-     */
-    public function component($path, $alias = null)
-    {
-        $alias = $alias ?: Arr::last(explode('.', $path));
-
-        $this->directive($alias, function ($expression) use ($path) {
-            return $expression
-                        ? "<?php \$__env->startComponent('{$path}', {$expression}); ?>"
-                        : "<?php \$__env->startComponent('{$path}'); ?>";
-        });
-
-        $this->directive('end'.$alias, function ($expression) {
-            return '<?php echo $__env->renderComponent(); ?>';
-        });
-    }
-
-    /**
-     * Register an include alias directive.
-     *
-     * @param  string  $path
-     * @param  string  $alias
-     * @return void
-     */
-    public function include($path, $alias = null)
-    {
-        $alias = $alias ?: Arr::last(explode('.', $path));
-
-        $this->directive($alias, function ($expression) use ($path) {
-            $expression = $this->stripParentheses($expression) ?: '[]';
-
-            return "<?php echo \$__env->make('{$path}', {$expression}, \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>";
-        });
     }
 
     /**
@@ -498,22 +457,12 @@ class BladeCompiler extends Compiler implements CompilerInterface
     }
 
     /**
-     * Set the "echo" format to double encode entities.
+     * Set the echo format to double encode entities.
      *
      * @return void
      */
-    public function withDoubleEncoding()
+    public function doubleEncode()
     {
         $this->setEchoFormat('e(%s, true)');
-    }
-
-    /**
-     * Set the "echo" format to not double encode entities.
-     *
-     * @return void
-     */
-    public function withoutDoubleEncoding()
-    {
-        $this->setEchoFormat('e(%s, false)');
     }
 }

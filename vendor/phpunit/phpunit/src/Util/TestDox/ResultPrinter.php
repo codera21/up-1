@@ -10,12 +10,12 @@
 namespace PHPUnit\Util\TestDox;
 
 use PHPUnit\Framework\AssertionFailedError;
-use PHPUnit\Framework\Test;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\TestListener;
-use PHPUnit\Framework\TestSuite;
-use PHPUnit\Framework\Warning;
 use PHPUnit\Framework\WarningTestCase;
+use PHPUnit\Framework\Warning;
+use PHPUnit\Framework\TestSuite;
+use PHPUnit\Framework\TestListener;
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Test;
 use PHPUnit\Runner\BaseTestRunner;
 use PHPUnit\Util\Printer;
 
@@ -37,7 +37,7 @@ abstract class ResultPrinter extends Printer implements TestListener
     /**
      * @var int
      */
-    protected $testStatus;
+    protected $testStatus = false;
 
     /**
      * @var array
@@ -75,12 +75,12 @@ abstract class ResultPrinter extends Printer implements TestListener
     protected $incomplete = 0;
 
     /**
-     * @var null|string
+     * @var string
      */
     protected $currentTestClassPrettified;
 
     /**
-     * @var null|string
+     * @var string
      */
     protected $currentTestMethodPrettified;
 
@@ -96,8 +96,8 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * @param resource $out
-     *
-     * @throws \PHPUnit\Framework\Exception
+     * @param array    $groups
+     * @param array    $excludeGroups
      */
     public function __construct($out = null, array $groups = [], array $excludeGroups = [])
     {
@@ -113,7 +113,7 @@ abstract class ResultPrinter extends Printer implements TestListener
     /**
      * Flush buffer and close output.
      */
-    public function flush(): void
+    public function flush()
     {
         $this->doEndClass();
         $this->endRun();
@@ -123,8 +123,12 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * An error occurred.
+     *
+     * @param Test       $test
+     * @param \Exception $e
+     * @param float      $time
      */
-    public function addError(Test $test, \Throwable $t, float $time): void
+    public function addError(Test $test, \Exception $e, $time)
     {
         if (!$this->isOfInterest($test)) {
             return;
@@ -136,8 +140,12 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * A warning occurred.
+     *
+     * @param Test    $test
+     * @param Warning $e
+     * @param float   $time
      */
-    public function addWarning(Test $test, Warning $e, float $time): void
+    public function addWarning(Test $test, Warning $e, $time)
     {
         if (!$this->isOfInterest($test)) {
             return;
@@ -149,8 +157,12 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * A failure occurred.
+     *
+     * @param Test                 $test
+     * @param AssertionFailedError $e
+     * @param float                $time
      */
-    public function addFailure(Test $test, AssertionFailedError $e, float $time): void
+    public function addFailure(Test $test, AssertionFailedError $e, $time)
     {
         if (!$this->isOfInterest($test)) {
             return;
@@ -162,8 +174,12 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * Incomplete test.
+     *
+     * @param Test       $test
+     * @param \Exception $e
+     * @param float      $time
      */
-    public function addIncompleteTest(Test $test, \Throwable $t, float $time): void
+    public function addIncompleteTest(Test $test, \Exception $e, $time)
     {
         if (!$this->isOfInterest($test)) {
             return;
@@ -175,8 +191,12 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * Risky test.
+     *
+     * @param Test       $test
+     * @param \Exception $e
+     * @param float      $time
      */
-    public function addRiskyTest(Test $test, \Throwable $t, float $time): void
+    public function addRiskyTest(Test $test, \Exception $e, $time)
     {
         if (!$this->isOfInterest($test)) {
             return;
@@ -188,8 +208,12 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * Skipped test.
+     *
+     * @param Test       $test
+     * @param \Exception $e
+     * @param float      $time
      */
-    public function addSkippedTest(Test $test, \Throwable $t, float $time): void
+    public function addSkippedTest(Test $test, \Exception $e, $time)
     {
         if (!$this->isOfInterest($test)) {
             return;
@@ -201,45 +225,63 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * A testsuite started.
+     *
+     * @param TestSuite $suite
      */
-    public function startTestSuite(TestSuite $suite): void
+    public function startTestSuite(TestSuite $suite)
     {
     }
 
     /**
      * A testsuite ended.
+     *
+     * @param TestSuite $suite
      */
-    public function endTestSuite(TestSuite $suite): void
+    public function endTestSuite(TestSuite $suite)
     {
     }
 
     /**
      * A test started.
      *
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @param Test $test
      */
-    public function startTest(Test $test): void
+    public function startTest(Test $test)
     {
         if (!$this->isOfInterest($test)) {
             return;
         }
 
-        $class = \get_class($test);
+        $class = get_class($test);
 
-        if ($this->testClass !== $class) {
-            if ($this->testClass !== '') {
+        if ($this->testClass != $class) {
+            if ($this->testClass != '') {
                 $this->doEndClass();
             }
 
-            $this->currentTestClassPrettified = $this->prettifier->prettifyTestClass($class);
-            $this->testClass                  = $class;
-            $this->tests                      = [];
+            $classAnnotations = \PHPUnit\Util\Test::parseTestMethodAnnotations($class);
+            if (isset($classAnnotations['class']['testdox'][0])) {
+                $this->currentTestClassPrettified = $classAnnotations['class']['testdox'][0];
+            } else {
+                $this->currentTestClassPrettified = $this->prettifier->prettifyTestClass($class);
+            }
 
             $this->startClass($class);
+
+            $this->testClass = $class;
+            $this->tests     = [];
         }
 
-        if ($test instanceof TestCase) {
-            $this->currentTestMethodPrettified = $this->prettifier->prettifyTestCase($test);
+        $annotations = $test->getAnnotations();
+
+        if (isset($annotations['method']['testdox'][0])) {
+            $this->currentTestMethodPrettified = $annotations['method']['testdox'][0];
+        } else {
+            $this->currentTestMethodPrettified = $this->prettifier->prettifyTestMethod($test->getName(false));
+        }
+
+        if ($test instanceof TestCase && $test->usesDataProvider()) {
+            $this->currentTestMethodPrettified .= ' ' . $test->dataDescription();
         }
 
         $this->testStatus = BaseTestRunner::STATUS_PASSED;
@@ -247,23 +289,42 @@ abstract class ResultPrinter extends Printer implements TestListener
 
     /**
      * A test ended.
+     *
+     * @param Test  $test
+     * @param float $time
      */
-    public function endTest(Test $test, float $time): void
+    public function endTest(Test $test, $time)
     {
         if (!$this->isOfInterest($test)) {
             return;
         }
 
-        $this->tests[] = [$this->currentTestMethodPrettified, $this->testStatus];
+        if (!isset($this->tests[$this->currentTestMethodPrettified])) {
+            if ($this->testStatus == BaseTestRunner::STATUS_PASSED) {
+                $this->tests[$this->currentTestMethodPrettified]['success'] = 1;
+                $this->tests[$this->currentTestMethodPrettified]['failure'] = 0;
+            } else {
+                $this->tests[$this->currentTestMethodPrettified]['success'] = 0;
+                $this->tests[$this->currentTestMethodPrettified]['failure'] = 1;
+            }
+        } else {
+            if ($this->testStatus == BaseTestRunner::STATUS_PASSED) {
+                $this->tests[$this->currentTestMethodPrettified]['success']++;
+            } else {
+                $this->tests[$this->currentTestMethodPrettified]['failure']++;
+            }
+        }
 
         $this->currentTestClassPrettified  = null;
         $this->currentTestMethodPrettified = null;
     }
 
-    protected function doEndClass(): void
+    /**
+     */
+    protected function doEndClass()
     {
-        foreach ($this->tests as $test) {
-            $this->onTest($test[0], $test[1] === BaseTestRunner::STATUS_PASSED);
+        foreach ($this->tests as $name => $data) {
+            $this->onTest($name, $data['failure'] == 0);
         }
 
         $this->endClass($this->testClass);
@@ -272,39 +333,51 @@ abstract class ResultPrinter extends Printer implements TestListener
     /**
      * Handler for 'start run' event.
      */
-    protected function startRun(): void
+    protected function startRun()
     {
     }
 
     /**
      * Handler for 'start class' event.
+     *
+     * @param string $name
      */
-    protected function startClass(string $name): void
+    protected function startClass($name)
     {
     }
 
     /**
      * Handler for 'on test' event.
+     *
+     * @param string $name
+     * @param bool   $success
      */
-    protected function onTest($name, bool $success = true): void
+    protected function onTest($name, $success = true)
     {
     }
 
     /**
      * Handler for 'end class' event.
+     *
+     * @param string $name
      */
-    protected function endClass(string $name): void
+    protected function endClass($name)
     {
     }
 
     /**
      * Handler for 'end run' event.
      */
-    protected function endRun(): void
+    protected function endRun()
     {
     }
 
-    private function isOfInterest(Test $test): bool
+    /**
+     * @param Test $test
+     *
+     * @return bool
+     */
+    private function isOfInterest(Test $test)
     {
         if (!$test instanceof TestCase) {
             return false;
@@ -316,7 +389,7 @@ abstract class ResultPrinter extends Printer implements TestListener
 
         if (!empty($this->groups)) {
             foreach ($test->getGroups() as $group) {
-                if (\in_array($group, $this->groups)) {
+                if (in_array($group, $this->groups)) {
                     return true;
                 }
             }
@@ -326,7 +399,7 @@ abstract class ResultPrinter extends Printer implements TestListener
 
         if (!empty($this->excludeGroups)) {
             foreach ($test->getGroups() as $group) {
-                if (\in_array($group, $this->excludeGroups)) {
+                if (in_array($group, $this->excludeGroups)) {
                     return false;
                 }
             }

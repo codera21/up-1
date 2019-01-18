@@ -64,7 +64,7 @@ trait InteractsWithPivotTable
     /**
      * Sync the intermediate tables with a list of IDs without detaching.
      *
-     * @param  \Illuminate\Support\Collection|\Illuminate\Database\Eloquent\Model|array  $ids
+     * @param  \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|array  $ids
      * @return array
      */
     public function syncWithoutDetaching($ids)
@@ -75,7 +75,7 @@ trait InteractsWithPivotTable
     /**
      * Sync the intermediate tables with a list of IDs or collection of models.
      *
-     * @param  \Illuminate\Support\Collection|\Illuminate\Database\Eloquent\Model|array  $ids
+     * @param  \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|array  $ids
      * @param  bool   $detaching
      * @return array
      */
@@ -133,7 +133,7 @@ trait InteractsWithPivotTable
     {
         return collect($records)->mapWithKeys(function ($attributes, $id) {
             if (! is_array($attributes)) {
-                [$id, $attributes] = [$attributes, []];
+                list($id, $attributes) = [$attributes, []];
             }
 
             return [$id => $attributes];
@@ -188,7 +188,7 @@ trait InteractsWithPivotTable
             $attributes = $this->addTimestampsToAttachment($attributes, true);
         }
 
-        $updated = $this->newPivotStatementForId($this->parseId($id))->update(
+        $updated = $this->newPivotStatementForId($id)->update(
             $this->castAttributes($attributes)
         );
 
@@ -258,7 +258,7 @@ trait InteractsWithPivotTable
      */
     protected function formatAttachRecord($key, $value, $attributes, $hasTimestamps)
     {
-        [$id, $attributes] = $this->extractAttachIdAndAttributes($key, $value, $attributes);
+        list($id, $attributes) = $this->extractAttachIdAndAttributes($key, $value, $attributes);
 
         return array_merge(
             $this->baseAttachRecord($id, $hasTimestamps), $this->castAttributes($attributes)
@@ -300,10 +300,6 @@ trait InteractsWithPivotTable
             $record = $this->addTimestampsToAttachment($record);
         }
 
-        foreach ($this->pivotValues as $value) {
-            $record[$value['column']] = $value['value'];
-        }
-
         return $record;
     }
 
@@ -317,12 +313,6 @@ trait InteractsWithPivotTable
     protected function addTimestampsToAttachment(array $record, $exists = false)
     {
         $fresh = $this->parent->freshTimestamp();
-
-        if ($this->using) {
-            $pivotModel = new $this->using;
-
-            $fresh = $fresh->format($pivotModel->getDateFormat());
-        }
 
         if (! $exists && $this->hasPivotColumn($this->createdAt())) {
             $record[$this->createdAt()] = $fresh;
@@ -427,7 +417,7 @@ trait InteractsWithPivotTable
      */
     public function newPivotStatementForId($id)
     {
-        return $this->newPivotQuery()->whereIn($this->relatedPivotKey, $this->parseIds($id));
+        return $this->newPivotQuery()->where($this->relatedPivotKey, $id);
     }
 
     /**
@@ -489,17 +479,6 @@ trait InteractsWithPivotTable
     }
 
     /**
-     * Get the ID from the given mixed value.
-     *
-     * @param  mixed  $value
-     * @return mixed
-     */
-    protected function parseId($value)
-    {
-        return $value instanceof Model ? $value->{$this->relatedKey} : $value;
-    }
-
-    /**
      * Cast the given keys to integers if they are numeric and string otherwise.
      *
      * @param  array  $keys
@@ -507,23 +486,20 @@ trait InteractsWithPivotTable
      */
     protected function castKeys(array $keys)
     {
-        return array_map(function ($v) {
+        return (array) array_map(function ($v) {
             return $this->castKey($v);
         }, $keys);
     }
 
     /**
-     * Cast the given key to convert to primary key type.
+     * Cast the given key to an integer if it is numeric.
      *
      * @param  mixed  $key
      * @return mixed
      */
     protected function castKey($key)
     {
-        return $this->getTypeSwapValue(
-            $this->related->getKeyType(),
-            $key
-        );
+        return is_numeric($key) ? (int) $key : (string) $key;
     }
 
     /**
@@ -537,29 +513,5 @@ trait InteractsWithPivotTable
         return $this->using
                     ? $this->newPivot()->fill($attributes)->getAttributes()
                     : $attributes;
-    }
-
-    /**
-     * Converts a given value to a given type value.
-     *
-     * @param  string $type
-     * @param  mixed  $value
-     * @return mixed
-     */
-    protected function getTypeSwapValue($type, $value)
-    {
-        switch (strtolower($type)) {
-            case 'int':
-            case 'integer':
-                return (int) $value;
-            case 'real':
-            case 'float':
-            case 'double':
-                return (float) $value;
-            case 'string':
-                return (string) $value;
-            default:
-                return $value;
-        }
     }
 }

@@ -18,11 +18,9 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 /**
  * The Kernel is the heart of the Symfony system.
  *
- * It manages an environment made of application kernel and bundles.
+ * It manages an environment made of bundles.
  *
  * @author Fabien Potencier <fabien@symfony.com>
- *
- * @method string getProjectDir() Gets the project dir (path of the project's composer file) - not defining it is deprecated since Symfony 4.2
  */
 interface KernelInterface extends HttpKernelInterface, \Serializable
 {
@@ -58,18 +56,22 @@ interface KernelInterface extends HttpKernelInterface, \Serializable
     public function getBundles();
 
     /**
-     * Returns a bundle.
+     * Returns a bundle and optionally its descendants by its name.
      *
-     * @param string $name Bundle name
+     * The second argument is deprecated as of 3.4 and will be removed in 4.0. This method
+     * will always return an instance of BundleInterface in 4.0.
      *
-     * @return BundleInterface A BundleInterface instance
+     * @param string $name  Bundle name
+     * @param bool   $first Whether to return the first bundle only or together with its descendants
+     *
+     * @return BundleInterface|BundleInterface[] A BundleInterface instance or an array of BundleInterface instances if $first is false
      *
      * @throws \InvalidArgumentException when the bundle is not enabled
      */
-    public function getBundle($name);
+    public function getBundle($name, $first = true);
 
     /**
-     * Returns the file path for a given bundle resource.
+     * Returns the file path for a given resource.
      *
      * A Resource can be a file or a directory.
      *
@@ -102,8 +104,6 @@ interface KernelInterface extends HttpKernelInterface, \Serializable
      * Gets the name of the kernel.
      *
      * @return string The kernel name
-     *
-     * @deprecated since Symfony 4.2
      */
     public function getName();
 
@@ -125,8 +125,6 @@ interface KernelInterface extends HttpKernelInterface, \Serializable
      * Gets the application root dir (path of the project's Kernel class).
      *
      * @return string The Kernel root dir
-     *
-     * @deprecated since Symfony 4.2
      */
     public function getRootDir();
 

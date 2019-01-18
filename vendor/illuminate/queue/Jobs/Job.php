@@ -56,13 +56,6 @@ abstract class Job
     protected $queue;
 
     /**
-     * Get the job identifier.
-     *
-     * @return string
-     */
-    abstract public function getJobId();
-
-    /**
      * Get the raw body of the job.
      *
      * @return string
@@ -78,7 +71,7 @@ abstract class Job
     {
         $payload = $this->payload();
 
-        [$class, $method] = JobName::parse($payload['job']);
+        list($class, $method) = JobName::parse($payload['job']);
 
         ($this->instance = $this->resolve($class))->{$method}($this, $payload['data']);
     }
@@ -166,7 +159,7 @@ abstract class Job
 
         $payload = $this->payload();
 
-        [$class, $method] = JobName::parse($payload['job']);
+        list($class, $method) = JobName::parse($payload['job']);
 
         if (method_exists($this->instance = $this->resolve($class), 'failed')) {
             $this->instance->failed($payload['data'], $e);

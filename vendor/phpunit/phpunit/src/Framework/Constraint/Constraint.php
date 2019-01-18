@@ -7,10 +7,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace PHPUnit\Framework\Constraint;
 
 use Countable;
 use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\SebastianBergmann;
 use PHPUnit\Framework\SelfDescribing;
 use SebastianBergmann\Comparator\ComparisonFailure;
 use SebastianBergmann\Exporter\Exporter;
@@ -37,12 +39,13 @@ abstract class Constraint implements Countable, SelfDescribing
      * a boolean value instead: true in case of success, false in case of a
      * failure.
      *
-     * @param mixed  $other        value or object to evaluate
+     * @param mixed  $other        Value or object to evaluate.
      * @param string $description  Additional information about the test
      * @param bool   $returnResult Whether to return a result or throw an exception
      *
+     * @return mixed
+     *
      * @throws ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
     public function evaluate($other, $description = '', $returnResult = false)
     {
@@ -62,39 +65,42 @@ abstract class Constraint implements Countable, SelfDescribing
     }
 
     /**
-     * Counts the number of constraint elements.
-     */
-    public function count(): int
-    {
-        return 1;
-    }
-
-    /**
      * Evaluates the constraint for parameter $other. Returns true if the
      * constraint is met, false otherwise.
      *
      * This method can be overridden to implement the evaluation algorithm.
      *
-     * @param mixed $other value or object to evaluate
+     * @param mixed $other Value or object to evaluate.
+     *
+     * @return bool
      */
-    protected function matches($other): bool
+    protected function matches($other)
     {
         return false;
     }
 
     /**
+     * Counts the number of constraint elements.
+     *
+     * @return int
+     */
+    public function count()
+    {
+        return 1;
+    }
+
+    /**
      * Throws an exception for the given compared value and test description
      *
-     * @param mixed             $other             evaluated value or object
-     * @param string            $description       Additional information about the test
-     * @param ComparisonFailure $comparisonFailure
+     * @param mixed                                          $other             Evaluated value or object.
+     * @param string                                         $description       Additional information about the test
+     * @param SebastianBergmann\Comparator\ComparisonFailure $comparisonFailure
      *
      * @throws ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    protected function fail($other, $description, ComparisonFailure $comparisonFailure = null): void
+    protected function fail($other, $description, ComparisonFailure $comparisonFailure = null)
     {
-        $failureDescription = \sprintf(
+        $failureDescription = sprintf(
             'Failed asserting that %s.',
             $this->failureDescription($other)
         );
@@ -121,9 +127,11 @@ abstract class Constraint implements Countable, SelfDescribing
      * The function can be overridden to provide additional failure
      * information like a diff
      *
-     * @param mixed $other evaluated value or object
+     * @param mixed $other Evaluated value or object.
+     *
+     * @return string
      */
-    protected function additionalFailureDescription($other): string
+    protected function additionalFailureDescription($other)
     {
         return '';
     }
@@ -137,11 +145,11 @@ abstract class Constraint implements Countable, SelfDescribing
      * To provide additional failure information additionalFailureDescription
      * can be used.
      *
-     * @param mixed $other evaluated value or object
+     * @param mixed $other Evaluated value or object.
      *
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+     * @return string
      */
-    protected function failureDescription($other): string
+    protected function failureDescription($other)
     {
         return $this->exporter->export($other) . ' ' . $this->toString();
     }

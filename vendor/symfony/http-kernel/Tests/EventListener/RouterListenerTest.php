@@ -70,7 +70,12 @@ class RouterListenerTest extends TestCase
         );
     }
 
-    private function createGetResponseEventForUri(string $uri): GetResponseEvent
+    /**
+     * @param string $uri
+     *
+     * @return GetResponseEvent
+     */
+    private function createGetResponseEventForUri($uri)
     {
         $kernel = $this->getMockBuilder('Symfony\Component\HttpKernel\HttpKernelInterface')->getMock();
         $request = Request::create($uri);

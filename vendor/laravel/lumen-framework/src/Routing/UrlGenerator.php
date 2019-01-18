@@ -10,23 +10,16 @@ class UrlGenerator
     /**
      * The application instance.
      *
-     * @var \Laravel\Lumen\Application
+     * @var Application
      */
     protected $app;
 
     /**
-     * The forced URL root.
+     * The cached URL scheme for generating URLs.
      *
-     * @var string
+     * @var string|null
      */
-    protected $forcedRoot;
-
-    /**
-     * The forced schema for URLs.
-     *
-     * @var string
-     */
-    protected $forceScheme;
+    protected $cachedScheme;
 
     /**
      * The cached URL root.
@@ -36,16 +29,16 @@ class UrlGenerator
     protected $cachedRoot;
 
     /**
-     * A cached copy of the URL schema for the current request.
+     * The URL schema to be forced on all generated URLs.
      *
      * @var string|null
      */
-    protected $cachedSchema;
+    protected $forceSchema;
 
     /**
      * Create a new URL redirector instance.
      *
-     * @param  \Laravel\Lumen\Application  $app
+     * @param  Application  $app
      * @return void
      */
     public function __construct(Application $app)
@@ -134,7 +127,7 @@ class UrlGenerator
         // Once we get the root URL, we will check to see if it contains an index.php
         // file in the paths. If it does, we will remove it since it is not needed
         // for asset paths, but only for routes to endpoints in the application.
-        $root = $this->getRootUrl($this->formatScheme($secure));
+        $root = $this->getRootUrl($this->getScheme($secure));
 
         return $this->removeIndex($root).'/'.trim($path, '/');
     }
@@ -152,7 +145,7 @@ class UrlGenerator
         // Once we get the root URL, we will check to see if it contains an index.php
         // file in the paths. If it does, we will remove it since it is not needed
         // for asset paths, but only for routes to endpoints in the application.
-        $root = $this->getRootUrl($this->formatScheme($secure), $root);
+        $root = $this->getRootUrl($this->getScheme($secure), $root);
 
         return $this->removeIndex($root).'/'.trim($path, '/');
     }
@@ -186,11 +179,14 @@ class UrlGenerator
      *
      * @param  bool|null  $secure
      * @return string
-     * @deprecated v5.5.x
      */
     protected function getScheme($secure)
     {
-        return $this->formatScheme($secure);
+        if (is_null($secure)) {
+            return $this->forceSchema ?: $this->app->make('request')->getScheme().'://';
+        }
+
+        return $secure ? 'https://' : 'http://';
     }
 
     /**
@@ -198,43 +194,10 @@ class UrlGenerator
      *
      * @param  string  $schema
      * @return void
-     * @deprecated v5.5.x
      */
     public function forceSchema($schema)
     {
-        $this->forceScheme($schema);
-    }
-
-    /**
-     * Force the schema for URLs.
-     *
-     * @param  string  $schema
-     * @return void
-     */
-    public function forceScheme($schema)
-    {
-        $this->cachedSchema = null;
-
-        $this->forceScheme = $schema.'://';
-    }
-
-    /**
-     * Get the default scheme for a raw URL.
-     *
-     * @param  bool|null  $secure
-     * @return string
-     */
-    public function formatScheme($secure)
-    {
-        if (! is_null($secure)) {
-            return $secure ? 'https://' : 'http://';
-        }
-
-        if (is_null($this->cachedSchema)) {
-            $this->cachedSchema = $this->forceScheme ?: $this->app->make('request')->getScheme().'://';
-        }
-
-        return $this->cachedSchema;
+        $this->forceSchema = $schema.'://';
     }
 
     /**
@@ -257,13 +220,9 @@ class UrlGenerator
 
         $parameters = $this->formatParametersForUrl($parameters);
 
-        $uri = preg_replace_callback('/\[([^\]]*)\]$/', function ($matches) use ($uri, &$parameters) {
-            $uri = $this->replaceRouteParameters($matches[1], $parameters);
-
-            return ($matches[1] == $uri) ? '' : $uri;
+        $uri = preg_replace_callback('/\{(.*?)(:.*?)?(\{[0-9,]+\})?\}/', function ($m) use (&$parameters) {
+            return isset($parameters[$m[1]]) ? array_pull($parameters, $m[1]) : $m[0];
         }, $uri);
-
-        $uri = $this->replaceRouteParameters($uri, $parameters);
 
         $uri = $this->to($uri, [], $secure);
 
@@ -280,7 +239,7 @@ class UrlGenerator
      * @param  string  $path
      * @return bool
      */
-    public function isValidUrl($path)
+    protected function isValidUrl($path)
     {
         if (starts_with($path, ['#', '//', 'mailto:', 'tel:', 'http://', 'https://'])) {
             return true;
@@ -298,11 +257,11 @@ class UrlGenerator
     protected function getSchemeForUrl($secure)
     {
         if (is_null($secure)) {
-            if (is_null($this->cachedSchema)) {
-                $this->cachedSchema = $this->formatScheme($secure);
+            if (is_null($this->cachedScheme)) {
+                $this->cachedScheme = $this->app->make('request')->getScheme().'://';
             }
 
-            return $this->cachedSchema;
+            return $this->cachedScheme;
         }
 
         return $secure ? 'https://' : 'http://';
@@ -339,20 +298,6 @@ class UrlGenerator
     }
 
     /**
-     * Replace the route parameters with their parameter.
-     *
-     * @param  string  $route
-     * @param  array $parameters
-     * @return string
-     */
-    protected function replaceRouteParameters($route, &$parameters = [])
-    {
-        return preg_replace_callback('/\{(.*?)(:.*?)?(\{[0-9,]+\})?\}/', function ($m) use (&$parameters) {
-            return isset($parameters[$m[1]]) ? array_pull($parameters, $m[1]) : $m[0];
-        }, $route);
-    }
-
-    /**
      * Get the base URL for the request.
      *
      * @param  string  $scheme
@@ -363,7 +308,7 @@ class UrlGenerator
     {
         if (is_null($root)) {
             if (is_null($this->cachedRoot)) {
-                $this->cachedRoot = $this->forcedRoot ?: $this->app->make('request')->root();
+                $this->cachedRoot = $this->app->make('request')->root();
             }
 
             $root = $this->cachedRoot;
@@ -372,19 +317,6 @@ class UrlGenerator
         $start = starts_with($root, 'http://') ? 'http://' : 'https://';
 
         return preg_replace('~'.$start.'~', $scheme, $root, 1);
-    }
-
-    /**
-     * Set the forced root URL.
-     *
-     * @param  string  $root
-     * @return void
-     */
-    public function forceRootUrl($root)
-    {
-        $this->forcedRoot = rtrim($root, '/');
-
-        $this->cachedRoot = null;
     }
 
     /**

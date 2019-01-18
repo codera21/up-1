@@ -5,13 +5,11 @@ namespace Laravel\Lumen\Http;
 use Illuminate\Support\Str;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Traits\Macroable;
+use Illuminate\Contracts\Support\Arrayable;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ResponseFactory
 {
-    use Macroable;
-
     /**
      * Return a new response from the application.
      *
@@ -28,7 +26,7 @@ class ResponseFactory
     /**
      * Return a new JSON response from the application.
      *
-     * @param  mixed  $data
+     * @param  string|array  $data
      * @param  int    $status
      * @param  array  $headers
      * @param  int    $options
@@ -36,6 +34,10 @@ class ResponseFactory
      */
     public function json($data = [], $status = 200, array $headers = [], $options = 0)
     {
+        if ($data instanceof Arrayable) {
+            $data = $data->toArray();
+        }
+
         return new JsonResponse($data, $status, $headers, $options);
     }
 

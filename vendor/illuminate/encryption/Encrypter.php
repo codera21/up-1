@@ -67,7 +67,7 @@ class Encrypter implements EncrypterContract
      */
     public static function generateKey($cipher)
     {
-        return random_bytes($cipher === 'AES-128-CBC' ? 16 : 32);
+        return random_bytes($cipher == 'AES-128-CBC' ? 16 : 32);
     }
 
     /**
@@ -125,7 +125,7 @@ class Encrypter implements EncrypterContract
      *
      * @param  mixed  $payload
      * @param  bool  $unserialize
-     * @return mixed
+     * @return string
      *
      * @throws \Illuminate\Contracts\Encryption\DecryptException
      */

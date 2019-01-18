@@ -5,7 +5,6 @@ namespace Illuminate\Database\Migrations;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
-use Illuminate\Console\OutputStyle;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
 
@@ -40,18 +39,18 @@ class Migrator
     protected $connection;
 
     /**
+     * The notes for the current operation.
+     *
+     * @var array
+     */
+    protected $notes = [];
+
+    /**
      * The paths to all of the migration files.
      *
      * @var array
      */
     protected $paths = [];
-
-    /**
-     * The output interface implementation.
-     *
-     * @var \Illuminate\Console\OutputStyle
-     */
-    protected $output;
 
     /**
      * Create a new migrator instance.
@@ -125,7 +124,7 @@ class Migrator
         // First we will just make sure that there are any migrations to run. If there
         // aren't, we will just make a note of it to the developer so they're aware
         // that all of the migrations have been run against this database system.
-        if (count($migrations) === 0) {
+        if (count($migrations) == 0) {
             $this->note('<info>Nothing to migrate.</info>');
 
             return;
@@ -220,9 +219,9 @@ class Migrator
     {
         if (($steps = $options['step'] ?? 0) > 0) {
             return $this->repository->getMigrations($steps);
+        } else {
+            return $this->repository->getLast();
         }
-
-        return $this->repository->getLast();
     }
 
     /**
@@ -428,7 +427,7 @@ class Migrator
     public function getMigrationFiles($paths)
     {
         return Collection::make($paths)->flatMap(function ($path) {
-            return Str::endsWith($path, '.php') ? [$path] : $this->files->glob($path.'/*_*.php');
+            return $this->files->glob($path.'/*_*.php');
         })->filter()->sortBy(function ($file) {
             return $this->getMigrationName($file);
         })->values()->keyBy(function ($file) {
@@ -479,16 +478,6 @@ class Migrator
     public function paths()
     {
         return $this->paths;
-    }
-
-    /**
-     * Get the default connection name.
-     *
-     * @return string
-     */
-    public function getConnection()
-    {
-        return $this->connection;
     }
 
     /**
@@ -567,28 +556,23 @@ class Migrator
     }
 
     /**
-     * Set the output implementation that should be used by the console.
-     *
-     * @param  \Illuminate\Console\OutputStyle  $output
-     * @return $this
-     */
-    public function setOutput(OutputStyle $output)
-    {
-        $this->output = $output;
-
-        return $this;
-    }
-
-    /**
-     * Write a note to the conosle's output.
+     * Raise a note event for the migrator.
      *
      * @param  string  $message
      * @return void
      */
     protected function note($message)
     {
-        if ($this->output) {
-            $this->output->writeln($message);
-        }
+        $this->notes[] = $message;
+    }
+
+    /**
+     * Get the notes for the last operation.
+     *
+     * @return array
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 }

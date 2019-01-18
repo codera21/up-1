@@ -5,10 +5,10 @@ namespace Laravel\Lumen\Console;
 use Exception;
 use Throwable;
 use RuntimeException;
-use Illuminate\Http\Request;
 use Laravel\Lumen\Application;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Console\Application as Artisan;
+use Illuminate\Contracts\Cache\Repository as Cache;
 use Illuminate\Contracts\Console\Kernel as KernelContract;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 
@@ -52,38 +52,9 @@ class Kernel implements KernelContract
     {
         $this->app = $app;
 
-        if ($this->app->runningInConsole()) {
-            $this->setRequestForConsole($this->app);
-        }
-
         $this->app->prepareForConsoleCommand($this->aliases);
+
         $this->defineConsoleSchedule();
-    }
-
-    /**
-     * Set the request instance for URL generation.
-     *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
-     * @return void
-     */
-    protected function setRequestForConsole(Application $app)
-    {
-        $uri = $app->make('config')->get('app.url', env('APP_URL', 'http://localhost'));
-
-        $components = parse_url($uri);
-
-        $server = $_SERVER;
-
-        if (isset($components['path'])) {
-            $server = array_merge($server, [
-                'SCRIPT_FILENAME' => $components['path'],
-                'SCRIPT_NAME' => $components['path'],
-            ]);
-        }
-
-        $app->instance('request', Request::create(
-            $uri, 'GET', [], [], [], $server
-        ));
     }
 
     /**
@@ -94,7 +65,7 @@ class Kernel implements KernelContract
     protected function defineConsoleSchedule()
     {
         $this->app->instance(
-            'Illuminate\Console\Scheduling\Schedule', $schedule = new Schedule
+            'Illuminate\Console\Scheduling\Schedule', $schedule = new Schedule($this->app[Cache::class])
         );
 
         $this->schedule($schedule);
@@ -110,8 +81,6 @@ class Kernel implements KernelContract
     public function handle($input, $output = null)
     {
         try {
-            $this->app->boot();
-
             return $this->getArtisan()->run($input, $output);
         } catch (Exception $e) {
             $this->reportException($e);
@@ -148,9 +117,9 @@ class Kernel implements KernelContract
      * @param  array  $parameters
      * @return int
      */
-    public function call($command, array $parameters = [], $outputBuffer = null)
+    public function call($command, array $parameters = [])
     {
-        return $this->getArtisan()->call($command, $parameters, $outputBuffer);
+        return $this->getArtisan()->call($command, $parameters);
     }
 
     /**

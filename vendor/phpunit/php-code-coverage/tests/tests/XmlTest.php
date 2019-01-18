@@ -12,7 +12,7 @@ namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
 use SebastianBergmann\CodeCoverage\TestCase;
 
-class XmlTest extends TestCase
+class XMLTest extends TestCase
 {
     private static $TEST_REPORT_PATH_SOURCE;
 
@@ -57,7 +57,8 @@ class XmlTest extends TestCase
 
     public function testForClassWithAnonymousFunction()
     {
-        $expectedFilesPath = self::$TEST_REPORT_PATH_SOURCE . DIRECTORY_SEPARATOR . 'CoverageForClassWithAnonymousFunction';
+        $expectedFilesPath =
+            self::$TEST_REPORT_PATH_SOURCE . DIRECTORY_SEPARATOR . 'CoverageForClassWithAnonymousFunction';
 
         $xml = new Facade('1.0.0');
         $xml->process($this->getCoverageForClassWithAnonymousFunction(), self::$TEST_TMP_PATH);

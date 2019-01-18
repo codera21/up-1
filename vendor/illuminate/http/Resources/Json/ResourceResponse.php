@@ -42,8 +42,6 @@ class ResourceResponse implements Responsable
             ),
             $this->calculateStatus()
         ), function ($response) use ($request) {
-            $response->original = $this->resource->resource;
-
             $this->resource->withResponse($request, $response);
         });
     }

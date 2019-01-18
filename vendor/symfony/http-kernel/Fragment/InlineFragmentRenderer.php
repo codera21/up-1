@@ -118,12 +118,9 @@ class InlineFragmentRenderer extends RoutableFragmentRenderer
             $subRequest->headers->set('Surrogate-Capability', $request->headers->get('Surrogate-Capability'));
         }
 
-        static $setSession;
-
-        if (null === $setSession) {
-            $setSession = \Closure::bind(function ($subRequest, $request) { $subRequest->session = $request->session; }, null, Request::class);
+        if ($session = $request->getSession()) {
+            $subRequest->setSession($session);
         }
-        $setSession($subRequest, $request);
 
         if ($request->get('_format')) {
             $subRequest->attributes->set('_format', $request->get('_format'));

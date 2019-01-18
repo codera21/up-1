@@ -78,7 +78,9 @@ class InputStream implements \IteratorAggregate
             $current = array_shift($this->input);
 
             if ($current instanceof \Iterator) {
-                yield from $current;
+                foreach ($current as $cur) {
+                    yield $cur;
+                }
             } else {
                 yield $current;
             }

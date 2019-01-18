@@ -4,9 +4,7 @@ namespace Illuminate\Pipeline;
 
 use Closure;
 use RuntimeException;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Container\Container;
-use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Contracts\Pipeline\Pipeline as PipelineContract;
 
 class Pipeline implements PipelineContract
@@ -132,7 +130,7 @@ class Pipeline implements PipelineContract
                     // the appropriate method and arguments, returning the results back out.
                     return $pipe($passable, $stack);
                 } elseif (! is_object($pipe)) {
-                    [$name, $parameters] = $this->parsePipeString($pipe);
+                    list($name, $parameters) = $this->parsePipeString($pipe);
 
                     // If the pipe is a string we will parse the string and resolve the class out
                     // of the dependency injection container. We can then build a callable and
@@ -147,13 +145,9 @@ class Pipeline implements PipelineContract
                     $parameters = [$passable, $stack];
                 }
 
-                $response = method_exists($pipe, $this->method)
+                return method_exists($pipe, $this->method)
                                 ? $pipe->{$this->method}(...$parameters)
                                 : $pipe(...$parameters);
-
-                return $response instanceof Responsable
-                            ? $response->toResponse($this->container->make(Request::class))
-                            : $response;
             };
         };
     }
@@ -166,7 +160,7 @@ class Pipeline implements PipelineContract
      */
     protected function parsePipeString($pipe)
     {
-        [$name, $parameters] = array_pad(explode(':', $pipe, 2), 2, []);
+        list($name, $parameters) = array_pad(explode(':', $pipe, 2), 2, []);
 
         if (is_string($parameters)) {
             $parameters = explode(',', $parameters);
@@ -179,7 +173,6 @@ class Pipeline implements PipelineContract
      * Get the container instance.
      *
      * @return \Illuminate\Contracts\Container\Container
-     *
      * @throws \RuntimeException
      */
     protected function getContainer()

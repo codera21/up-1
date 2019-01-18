@@ -152,6 +152,9 @@ class ArgumentResolverTest extends TestCase
         $this->assertEquals(array($request), self::$resolver->getArguments($request, $controller), '->getArguments() injects the request when extended');
     }
 
+    /**
+     * @requires PHP 5.6
+     */
     public function testGetVariadicArguments()
     {
         $request = Request::create('/');
@@ -163,6 +166,7 @@ class ArgumentResolverTest extends TestCase
     }
 
     /**
+     * @requires PHP 5.6
      * @expectedException \InvalidArgumentException
      */
     public function testGetVariadicArgumentsWithoutArrayInRequest()
@@ -176,6 +180,7 @@ class ArgumentResolverTest extends TestCase
     }
 
     /**
+     * @requires PHP 5.6
      * @expectedException \InvalidArgumentException
      */
     public function testGetArgumentWithoutArray()
@@ -205,6 +210,9 @@ class ArgumentResolverTest extends TestCase
         self::$resolver->getArguments($request, $controller);
     }
 
+    /**
+     * @requires PHP 7.1
+     */
     public function testGetNullableArguments()
     {
         $request = Request::create('/');
@@ -216,6 +224,9 @@ class ArgumentResolverTest extends TestCase
         $this->assertEquals(array('foo', new \stdClass(), 'value', 'mandatory'), self::$resolver->getArguments($request, $controller));
     }
 
+    /**
+     * @requires PHP 7.1
+     */
     public function testGetNullableArgumentsWithDefaults()
     {
         $request = Request::create('/');

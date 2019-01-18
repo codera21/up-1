@@ -26,7 +26,19 @@ class EsiFragmentRendererTest extends TestCase
         $strategy->render('/', Request::create('/'));
     }
 
-    public function testRenderFallbackWithScalar()
+    /**
+     * @group legacy
+     * @expectedDeprecation Passing non-scalar values as part of URI attributes to the ESI and SSI rendering strategies is deprecated %s.
+     */
+    public function testRenderFallbackWithObjectAttributesIsDeprecated()
+    {
+        $strategy = new EsiFragmentRenderer(new Esi(), $this->getInlineStrategy(true), new UriSigner('foo'));
+        $request = Request::create('/');
+        $reference = new ControllerReference('main_controller', array('foo' => new \stdClass()), array());
+        $strategy->render($reference, $request);
+    }
+
+    public function testRenderFallbackWithScalarIsNotDeprecated()
     {
         $strategy = new EsiFragmentRenderer(new Esi(), $this->getInlineStrategy(true), new UriSigner('foo'));
         $request = Request::create('/');

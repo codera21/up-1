@@ -11,8 +11,6 @@
 
 namespace Symfony\Component\Debug;
 
-use PHPUnit\Framework\MockObject\Matcher\StatelessInvocation;
-
 /**
  * Autoloader checking if the class is really defined in the file found.
  *
@@ -23,7 +21,6 @@ use PHPUnit\Framework\MockObject\Matcher\StatelessInvocation;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Christophe Coevoet <stof@notk.org>
  * @author Nicolas Grekas <p@tchwork.com>
- * @author Guilhem Niot <guilhem.niot@gmail.com>
  */
 class DebugClassLoader
 {
@@ -37,7 +34,7 @@ class DebugClassLoader
     private static $deprecated = array();
     private static $internal = array();
     private static $internalMethods = array();
-    private static $annotatedParameters = array();
+    private static $php7Reserved = array('int' => 1, 'float' => 1, 'bool' => 1, 'string' => 1, 'true' => 1, 'false' => 1, 'null' => 1);
     private static $darwinCache = array('/' => array('/', array()));
 
     public function __construct(callable $classLoader)
@@ -151,7 +148,7 @@ class DebugClassLoader
                     require $file;
                 }
             } else {
-                ($this->classLoader)($class);
+                \call_user_func($this->classLoader, $class);
                 $file = false;
             }
         } finally {
@@ -186,6 +183,10 @@ class DebugClassLoader
             }
 
             $deprecations = $this->checkAnnotations($refl, $name);
+
+            if (isset(self::$php7Reserved[\strtolower($refl->getShortName())])) {
+                $deprecations[] = sprintf('The "%s" class uses the reserved name "%s", it will break on PHP 7 and higher', $name, $refl->getShortName());
+            }
 
             foreach ($deprecations as $message) {
                 @trigger_error($message, E_USER_DEPRECATED);
@@ -264,12 +265,11 @@ class DebugClassLoader
             return $deprecations;
         }
 
-        // Inherit @final, @internal and @param annotations for methods
+        // Inherit @final and @internal annotations for methods
         self::$finalMethods[$class] = array();
         self::$internalMethods[$class] = array();
-        self::$annotatedParameters[$class] = array();
         foreach ($parentAndOwnInterfaces as $use) {
-            foreach (array('finalMethods', 'internalMethods', 'annotatedParameters') as $property) {
+            foreach (array('finalMethods', 'internalMethods') as $property) {
                 if (isset(self::${$property}[$use])) {
                     self::${$property}[$class] = self::${$property}[$class] ? self::${$property}[$use] + self::${$property}[$class] : self::${$property}[$use];
                 }
@@ -293,52 +293,15 @@ class DebugClassLoader
                 }
             }
 
-            // To read method annotations
-            $doc = $method->getDocComment();
-
-            if (isset(self::$annotatedParameters[$class][$method->name])) {
-                $definedParameters = array();
-                foreach ($method->getParameters() as $parameter) {
-                    $definedParameters[$parameter->name] = true;
-                }
-
-                foreach (self::$annotatedParameters[$class][$method->name] as $parameterName => $deprecation) {
-                    if (!isset($definedParameters[$parameterName]) && !($doc && preg_match("/\\n\\s+\\* @param (.*?)(?<= )\\\${$parameterName}\\b/", $doc))) {
-                        $deprecations[] = sprintf($deprecation, $class);
-                    }
-                }
-            }
-
-            if (!$doc) {
+            // Detect method annotations
+            if (false === $doc = $method->getDocComment()) {
                 continue;
             }
-
-            $finalOrInternal = false;
 
             foreach (array('final', 'internal') as $annotation) {
                 if (false !== \strpos($doc, $annotation) && preg_match('#\n\s+\* @'.$annotation.'(?:( .+?)\.?)?\r?\n\s+\*(?: @|/$)#s', $doc, $notice)) {
                     $message = isset($notice[1]) ? preg_replace('#\s*\r?\n \* +#', ' ', $notice[1]) : '';
                     self::${$annotation.'Methods'}[$class][$method->name] = array($class, $message);
-                    $finalOrInternal = true;
-                }
-            }
-
-            if ($finalOrInternal || $method->isConstructor() || false === \strpos($doc, '@param') || StatelessInvocation::class === $class) {
-                continue;
-            }
-            if (!preg_match_all('#\n\s+\* @param (.*?)(?<= )\$([a-zA-Z0-9_\x7f-\xff]++)#', $doc, $matches, PREG_SET_ORDER)) {
-                continue;
-            }
-            if (!isset(self::$annotatedParameters[$class][$method->name])) {
-                $definedParameters = array();
-                foreach ($method->getParameters() as $parameter) {
-                    $definedParameters[$parameter->name] = true;
-                }
-            }
-            foreach ($matches as list(, $parameterType, $parameterName)) {
-                if (!isset($definedParameters[$parameterName])) {
-                    $parameterType = trim($parameterType);
-                    self::$annotatedParameters[$class][$method->name][$parameterName] = sprintf('The "%%s::%s()" method will require a new "%s$%s" argument in the next major version of its parent class "%s", not defining it is deprecated.', $method->name, $parameterType ? $parameterType.' ' : '', $parameterName, $method->class);
                 }
             }
         }

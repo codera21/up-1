@@ -3,7 +3,6 @@
 namespace Laravel\Lumen\Routing;
 
 use Closure as BaseClosure;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Validator;
@@ -55,9 +54,7 @@ trait ProvidesConvenienceMethods
      * @param  array  $rules
      * @param  array  $messages
      * @param  array  $customAttributes
-     * @return array
-     *
-     * @throws ValidationException
+     * @return void
      */
     public function validate(Request $request, array $rules, array $messages = [], array $customAttributes = [])
     {
@@ -66,22 +63,6 @@ trait ProvidesConvenienceMethods
         if ($validator->fails()) {
             $this->throwValidationException($request, $validator);
         }
-
-        return $this->extractInputFromRules($request, $rules);
-    }
-
-    /**
-     * Get the request input based on the given validation rules.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  array  $rules
-     * @return array
-     */
-    protected function extractInputFromRules(Request $request, array $rules)
-    {
-        return $request->only(collect($rules)->keys()->map(function ($rule) {
-            return Str::contains($rule, '.') ? explode('.', $rule)[0] : $rule;
-        })->unique()->toArray());
     }
 
     /**
@@ -90,8 +71,6 @@ trait ProvidesConvenienceMethods
      * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Contracts\Validation\Validator  $validator
      * @return void
-     *
-     * @throws ValidationException
      */
     protected function throwValidationException(Request $request, $validator)
     {
@@ -182,18 +161,6 @@ trait ProvidesConvenienceMethods
     public function dispatch($job)
     {
         return app('Illuminate\Contracts\Bus\Dispatcher')->dispatch($job);
-    }
-
-    /**
-     * Dispatch a command to its appropriate handler in the current process.
-     *
-     * @param  mixed  $job
-     * @param  mixed  $handler
-     * @return mixed
-     */
-    public function dispatchNow($job, $handler = null)
-    {
-        return app('Illuminate\Contracts\Bus\Dispatcher')->dispatchNow($job, $handler);
     }
 
     /**
