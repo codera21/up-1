@@ -183,7 +183,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
     Route::group(['middleware' => ['isActive'], 'as' => 'commission', 'prefix' => 'commission'], function () {
         Route::get('/', ['as' => '', 'uses' => 'UserCommissionController@index']);
     });
-    // My Academy aaaa
+    // My Academy
     Route::group(['middleware' => ['isActive','ban'], 'as' => 'user-academy', 'prefix' => 'user-academy'], function () {
         Route::get('/video', ['as' => '.video', 'uses' => 'UserAcademyController@view_video']);
         Route::get('/course', ['as' => '.course', 'uses' => 'UserAcademyController@view_course']);
@@ -405,5 +405,4 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     Route::get('{page}', ['as' => 'page', 'uses' => 'PageController@index']);
 });
 
-//check dfgfdgcls
 
