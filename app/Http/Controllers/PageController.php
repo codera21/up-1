@@ -133,7 +133,7 @@ class PageController extends Controller
             ),  function($message) use($request)
             {
                 $message->from($request->email);
-                $message->to('ashish336b@gmail.com', 'Admin')->subject('Dnasbook contact us');
+                $message->to('yahiadjipe@yahoo.com', 'Admin')->subject('Dnasbook contact us');
             });
         return \Redirect::route('contact')->with('success', trans('Thanks for contacting us!'));
     }
