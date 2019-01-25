@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
     <div class="main-wrapper">
         <!-- added by a21 -->
         <div class="main-content">
@@ -22,7 +21,11 @@
                     <div class="hero-subheading">{{ __('home_page.subheading')}}</div>
                     <div class="hero-heading">{{ __('home_page.heading')}}</div>
                     <div class="btn hero-button">
+                        @if(env('SITE') == 'ENG')
                         <a href="{{ url('register/2') }}" class="btn-black">{{ __('home_page.SignUp')}}</a>
+                            @else
+                            <a href="{{ url('register/345') }}" class="btn-black">{{ __('home_page.SignUp')}}</a>
+                            @endif
                     </div>
                 </div>
             </div>
@@ -80,8 +83,13 @@
                                     {{ __('home_page.HowWeCanHelpYouDescription') }}
                                 </p>
                                 <div class="btn">
+                                    @if(env('SITE') == 'ENG')
                                     <a href="{{ url('register/2') }}"
                                        class="btn-lt-blue">{{ __('home_page.SignUpNow') }}!</a>
+                                        @else
+                                        <a href="{{ url('register/345') }}"
+                                           class="btn-lt-blue">{{ __('home_page.SignUpNow') }}!</a>
+                                        @endif
                                 </div>
                             </div>
                         </div>

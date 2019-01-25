@@ -1,4 +1,7 @@
 <!-- Head section Start -->
+<?php
+//dump(env('SITE'))
+//?>
 <header class="nav-header">
     <!-- Icon Section Start -->
     <div class="icon-section">
@@ -34,7 +37,11 @@
                         <li><a href="#"><i class="livicon" data-name="login" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class=""><a href="{{ url('/locale/fr') }}" class="text-white">{{ trans('French') }}</a></label></li>
                         @if (Auth::guest())
                             <li><a href="#"><i class="livicon" data-name="login" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class=""><a href="{{ url('/login') }}" class="text-white">{{ trans('frontend.login') }}</a></label></li>
+                        @if(env('SITE') == 'ENG')
                             <li><a href="#"><i class="livicon" data-name="register" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class=""><a href="{{ url('/register/2') }}" class="text-white">{{ trans('frontend.register') }}</a></label></li>
+                            @else
+                                <li><a href="#"><i class="livicon" data-name="register" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class=""><a href="{{ url('/register/345') }}" class="text-white">{{ trans('frontend.register') }}</a></label></li>
+                            @endif
                         @else
                             <li>
                                 <a href="{{ route('user.dashboard') }}" class="text-white"><i class="glyphicon glyphicon-user"></i> {{ trans('frontend.dashboard') }}</a>
