@@ -128,7 +128,15 @@ class RegisterController extends Controller
             DB::table('companies_profiles')->insert([
                 'user_id' => $user->id
             ]);
-            // UserVerification::send($user, 'Welcome to DNAsbook Digital Marketing:: Confirm Your Email Address');
+
+
+            DB::table('users')->update(
+                [
+                    'verified' => 1,
+                    'not_now' => 1
+                ]
+            );
+
 
             Log::info("============ User Registration (END) ============");
 
