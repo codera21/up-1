@@ -125,17 +125,19 @@ class RegisterController extends Controller
 
             Log::info("User (User ID: " . $user->id . " - Email: " . $user->email . ") has been registered successfully.");
 
-            //Send registration mail
-            //$user->sendRegisterNotification();
-            UserVerification::generate($user);
+
             DB::table('companies_profiles')->insert([
                 'user_id' => $user->id
             ]);
-            UserVerification::send($user, 'Welcome to DNAsbook Digital Marketing:: Confirm Your Email Address');
+
+            DB::table('users')->update(
+                [
+                    'verified' => 1,
+                ]
+            );
 
             Log::info("============ User Registration (END) ============");
 
-            Session::flash('danger', trans('login.email_sent'));
 
             return $user;
         } else {
