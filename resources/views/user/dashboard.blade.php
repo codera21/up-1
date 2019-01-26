@@ -6,9 +6,14 @@
 <div class="panel panel-default">
         <div class="panel-heading">{{ trans('app.dashboard') }}</div>
     <br>
+    @if(Auth::user()->not_now == 1)
+    <div class="alert alert-info" role="alert">
+        <b class="text-danger">Important</b>: {{trans('app.flash-message1')}} 
+        <a href="/online-payment/addnew1" style="font-weight:bold;color:blue">{{ trans('app.click_here') }}</a>
+    </div>
+    @endif
     <div class="alert alert-info" role="alert">
         <b class="text-danger">Important</b>: {{trans('app.flash-message')}} 
-        <a href="online-payment/addnew1" style="font-weight:bold;color:blue">{{ trans('app.click_here') }}</a>
     </div>
         <div class="panel-body">
         <h3>copy your referral link</h3>
@@ -16,7 +21,6 @@
                 <div class="col-lg-5">
                     <input type="text" id= "myInput" class="form-control" value="{{ asset('/register').'/'.$user }}" id="inputDefault"  readonly>
                 </div>
-
                 <div class="col-lg-1">
                     <button type="button" data-toggle="tooltip" data-html="true" title="copy to clipboard" class="btn btn-default btn-sm" onclick="myFunction()">
                         <span class="glyphicon glyphicon-paperclip" aria-hidden="true" style="font-size: 2rem"></span>

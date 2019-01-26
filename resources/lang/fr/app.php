@@ -45,7 +45,7 @@ return [
     'payment_message' => '<b class="text-danger">Important </b>: Après avoir payé vos frais via PayPal, vous devez cliquer sur le bouton "Revenir au marchand" à la fin de la page pour retourner sur notre site, sinon notre site n\'acceptera pas vos frais. En cas de problème, contactez-nous à l\'adresse paymentproblems@gmail.com (Envoyez-nous votre nom, le numéro de reçu PayPal et le montant payé).',
     'not_now_message' => '<b class="text-danger">Important </b>:  Vous avez le choix de ne pas payer maintenant les frais d\'abonnement en cliquant sur le bouton "Pas maintenant". Cela sert de période d\'essai. Mais vous devez payer avant le 30 de ce mois, sinon votre compte sera bloqué.',
     'method' => 'meeethhhod',
-    // 'flash-message'=>Session::get('flash-message-french'),
-    'flash-message'=> 'Vous êtes dans notre période de promotion. Vous devez payer vos frais avant le 30 de ce mois pour maintenir votre compte ouvert! Pour payer vos frais,',
+    'flash-message'=>Session::get('flash-message-french'),
+    'flash-message1'=> 'Vous êtes dans notre période de promotion. Vous devez payer vos frais avant le 30 de ce mois pour maintenir votre compte ouvert! Pour payer vos frais,',
     'click_here'=>'cliquez ici!',    
 ];
