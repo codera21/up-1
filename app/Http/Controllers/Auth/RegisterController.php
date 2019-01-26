@@ -101,7 +101,7 @@ class RegisterController extends Controller
             'last_name' => 'required|name|max:50',
             'address1' => 'required|address|max:255',
             'address2' => 'address|max:255',
-            'city' => 'required|city|max:255',
+            'country' => 'required|address|max:255',
             'state' => 'required',
             'phone' => 'required|phone|max:10',
             'username' => 'required|max:100|unique:users',
@@ -114,7 +114,6 @@ class RegisterController extends Controller
     {
         $data['password'] = bcrypt($data['password']);
         $data['admin'] = 'NO';
-
         Log::info("============ User Registration (START) ============");
 
         Log::info("====== Registration Form Submitted Data ======");
@@ -129,15 +128,11 @@ class RegisterController extends Controller
             DB::table('companies_profiles')->insert([
                 'user_id' => $user->id
             ]);
-
-            DB::table('users')->update(
-                [
-                    'verified' => 1,
-                ]
-            );
+            // UserVerification::send($user, 'Welcome to DNAsbook Digital Marketing:: Confirm Your Email Address');
 
             Log::info("============ User Registration (END) ============");
 
+            /* Session::flash('danger', trans('login.email_sent')); */
 
             return $user;
         } else {
@@ -150,7 +145,6 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-
         event(new Registered($user = $this->create($request->all())));
 
         //$this->guard()->login($user);

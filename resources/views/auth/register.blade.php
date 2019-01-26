@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         
-                        <div class="form-group{{ $errors->has('address2') ? ' has-error' : '' }}">
+                        {{-- <div class="form-group{{ $errors->has('address2') ? ' has-error' : '' }}">
                             {!! Form::label('address2', trans('register.address2'), ['class' => 'col-md-3 control-label']) !!}
                             <div class="col-md-6">
                                 {!! Form::text('address2', old('address2'), ['class'=>'form-control validate-address', 'maxlength'=>'47']) !!}
@@ -64,15 +64,31 @@
                                     </span>
                                 @endif
                             </div>
+                        </div> --}}
+                        <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }} required">
+                            {!! Form::label('country', trans('country'), ['class' => 'col-md-3 control-label']) !!}
+                            <div class="col-md-6">
+                                {!! Form::text('country', old('country'), ['class'=>'form-control validate-address', 'maxlength'=>'47', 'required']) !!}
+                                @if ($errors->has('country'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('country') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
                         
-                        <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }} required">
-                            {!! Form::label('city', trans('register.city'), ['class' => 'col-md-3 control-label']) !!}
+                        <div class="form-group{{ $errors->has('sex') ? ' has-error' : '' }} required">
+                            {!! Form::label('Sex', trans('sex'), ['class' => 'col-md-3 control-label']) !!}
                             <div class="col-md-3">
-                                {!! Form::text('city', old('city'), ['class'=>'form-control validate-city', 'maxlength'=>'50']) !!}
-                                @if ($errors->has('city'))
+                                {{-- {!!Form::select('size', array('L' => 'Large', 'S' => 'Small'), 'S');!!} --}}
+                                <select name="sex" class="form-control validate-address"  aria-invalid="false">
+                                    <option value="Male" selected="selected">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                @if ($errors->has('sex'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('city') }}</strong>
+                                        <strong>{{ $errors->first('sex') }}</strong>
                                     </span>
                                 @endif
                             </div>

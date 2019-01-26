@@ -237,7 +237,6 @@
                         required: true,
                         //address: true
                     },
-                    city: "required",
                     state: "required",
                     zip: {
                         required: false,

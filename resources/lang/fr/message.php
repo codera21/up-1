@@ -5,7 +5,7 @@ return [
     'sent' => 'Envoyé',
     'trash' => 'Poubelle',
     'unread' => 'Non lu',
-    'from' => 'De'
+    'from' => 'De',
     'subject' => 'Assujettir',
     'date' => 'Rendez-vous amoureux',
     'recepient' => 'Bénéficiaire',
