@@ -237,7 +237,6 @@
                         required: true,
                         //address: true
                     },
-                    state: "required",
                     zip: {
                         required: false,
                         digits: true,

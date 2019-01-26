@@ -6,13 +6,11 @@ return [
     'account' => 'Account Settings',
     'tree' => 'User Subscribers Tree',
 
-
     // Group
     'title' => 'Title',
     'material_type' => 'Material Type',
     'material_group' => 'Material Group',
     'material_level' => 'Material Level',
-
 
     // Buttons
     'details' => 'Details',
@@ -32,7 +30,6 @@ return [
 
     'amount' => 'Amount',
 
-
     'not_active' => 'Your Account is blocked due to non-payment of subscription fees! To reopen your account, please pay your subscription fees!',
     'click_here' => 'Click Here',
 
@@ -44,7 +41,9 @@ return [
                 now by clicking the button
                 "Not Now". This serves as a trial period. But you have to pay by the 30th of this month, otherwise your
                 account will be blocked.',
-    'method'=>'method',
+    'method' => 'method',
     //flash message for online-payment/add or addnew1 or activate
-    'flash-message'=>  Session::get('flash-message-english'),
+    // 'flash-message'=>  Session::get('flash-message-english'),
+    'flash-message' => 'You are in our trial period, you have to pay your fees before the 30th of this month to keep your account open! To pay your fees,',
+    'click_here'=>'Click here'
 ];

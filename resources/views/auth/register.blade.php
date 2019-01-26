@@ -12,10 +12,10 @@
             <div class="featured-box featured-box-primary">
                 <br>
                 <div class="box-content">
-                    <div class="alert alert-danger">
+                    {{-- <div class="alert alert-danger">
                         <span class="fas fa-exclamation-triangle" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;
                         {{trans('auth.register_warning')}} <a href="{{trans('auth.video_link')}}" style="color: blue">click here</a>
-                    </div>
+                    </div> --}}
                 @if(!is_null($parentid))
                     
                     {!! Form::open(['id' => 'register', 'method' => 'post', 'files' => false, 'class'=>'form-horizontal']) !!}
@@ -52,19 +52,7 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
-                        
-                        {{-- <div class="form-group{{ $errors->has('address2') ? ' has-error' : '' }}">
-                            {!! Form::label('address2', trans('register.address2'), ['class' => 'col-md-3 control-label']) !!}
-                            <div class="col-md-6">
-                                {!! Form::text('address2', old('address2'), ['class'=>'form-control validate-address', 'maxlength'=>'47']) !!}
-                                @if ($errors->has('address2'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('address2') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div> --}}
+                        </div>                
                         <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }} required">
                             {!! Form::label('country', trans('country'), ['class' => 'col-md-3 control-label']) !!}
                             <div class="col-md-6">
@@ -92,7 +80,7 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="col-md-3">
+                            {{-- <div class="col-md-3">
                                 {!! Form::text('state', old('state'), ['class'=>'form-control', 'placeholder' => trans('register.state'), 'maxlength'=>'50']) !!}
                                 @if ($errors->has('state'))
                                     <span class="help-block">
@@ -100,13 +88,13 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             {!! Form::label('zip', trans('register.zip').' & '.trans('register.zip4'), ['class' => 'col-md-3 control-label']) !!}
                             <div class="col-md-3">
                                 {!! Form::text('zip', old('zip'), ['placeholder'=>'Zip', 'class'=>'form-control']) !!}
-                            </div>
+                            </div> --}}
 
                         </div>
 

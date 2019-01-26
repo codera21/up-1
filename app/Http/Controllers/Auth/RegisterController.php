@@ -17,7 +17,7 @@ use App\Http\Requests;
 use Log;
 use Validator;
 use Session;
-
+use Auth;
 // Models and Repo
 use App\Models\User;
 use App\Repositories\UserRepository;
@@ -102,7 +102,6 @@ class RegisterController extends Controller
             'address1' => 'required|address|max:255',
             'address2' => 'address|max:255',
             'country' => 'required|address|max:255',
-            'state' => 'required',
             'phone' => 'required|phone|max:10',
             'username' => 'required|max:100|unique:users',
             'email' => 'required|email|max:100|unique:users',
@@ -133,7 +132,8 @@ class RegisterController extends Controller
             DB::table('users')->update(
                 [
                     'verified' => 1,
-                    'not_now' => 1
+                    'not_now' => 1,
+                    'is_active'=>'YES'
                 ]
             );
 
@@ -153,8 +153,9 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-        event(new Registered($user = $this->create($request->all())));
-
+        $users = event(new Registered($user = $this->create($request->all())));
+        Auth::login($user);
+        return redirect()->guest('user/dashboard');
         //$this->guard()->login($user);
 
         return $this->registered($request, $user)

@@ -30,12 +30,18 @@ http://itsolutionstuff.com/post/laravel-5-category-treeview-hierarchical-structu
                     <td>{{ trans('Last Name') }}</td>
                     <td>{!! $user->last_name !!}</td>
                 </tr>
-
+                <tr>
+                        <td>{{ trans('Sex') }}</td>
+                        <td>{!! $user->sex !!}</td>
+                    </tr>
                 <tr>
                     <td>{{ trans('Email') }}</td>
                     <td>{!! $user->email !!}</td>
                 </tr>
-
+                <tr>
+                    <td>{{ trans('Country') }}</td>
+                    <td>{!! $user->country !!}</td>
+                </tr>
                 <tr>
                     <td>{{ trans('Phone') }}</td>
                     <td>{!! $user->phone !!}</td>

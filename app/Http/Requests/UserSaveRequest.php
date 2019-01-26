@@ -29,7 +29,6 @@ class UserSaveRequest extends FormRequest
             'last_name' => 'required|name|max:47',
             'address1' => 'required|address|max:47',
             'country' => 'required|address|max:47',
-            'state' => 'required',
             'phone' => 'required|digits:10|min:10|max:10',
             'password' => 'required|min:6|max:20',
             'password_confirmation' => 'required|min:6|max:20',
