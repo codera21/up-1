@@ -111,6 +111,19 @@ class UserController extends Controller
                         }
                     ),
                     array(
+                        'name' => 'sex',
+                        'label' => trans('Sex'),
+                        'sortable' => true,
+                        'searchable' => false,
+                        'searchfield' => array(
+                            'type' => 'text',
+                        ),
+                        'width' => '200',
+                        'value' => function ($row) {
+                            return $row->sex;
+                        }
+                    ),
+                    array(
                         'name' => 'parent_id',
                         'label' => trans('Parent'),
                         'sortable' => true,

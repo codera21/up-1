@@ -8,13 +8,13 @@
     <br>
     @if(Auth::user()->not_now == 1)
     <div class="alert alert-info" role="alert">
-        <b class="text-danger">Important</b>: {{trans('app.flash-message1')}} 
-        <a href="/online-payment/addnew1" style="font-weight:bold;color:blue">{{ trans('app.click_here') }}</a>
+        <b class="text-danger">Important</b>: {{trans('app.flash-message1')}} {{ trans('app.flash-message') }}
+        <a href="/online-payment/addnew1" style="font-weight:bold;color:blue"> {{ trans('app.click_here') }}</a>
     </div>
     @endif
-    <div class="alert alert-info" role="alert">
+    {{-- <div class="alert alert-info" role="alert">
         <b class="text-danger">Important</b>: {{trans('app.flash-message')}} 
-    </div>
+    </div> --}}
         <div class="panel-body">
         <h3>copy your referral link</h3>
             <div class="row">
