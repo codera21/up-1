@@ -98,7 +98,7 @@ class UserController extends Controller
                         }
                     ),
                     array(
-                        'name' => 'last_name',
+                        'name' => 'last_name' ,
                         'label' => trans('Last Name'),
                         'sortable' => true,
                         'searchable' => true,
