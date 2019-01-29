@@ -45,5 +45,6 @@ return [
     //flash message for online-payment/add or addnew1 or activate
     'flash-message'=>  Session::get('flash-message-english'),
     'flash-message1' => 'You are in our trial period, you have to pay your fees before the 30th of this month to keep your account open! To pay your fees,',
-    'click_here'=>'Click here'
+    'click_here'=>'Click here',
+    'combine_message'=> session::get('combine_eng'),
 ];

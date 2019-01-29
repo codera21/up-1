@@ -8,7 +8,7 @@
     <br>
     @if(Auth::user()->not_now == 1)
     <div class="alert alert-info" role="alert">
-        <b class="text-danger">Important</b>: {{trans('app.flash-message1')}} {{ trans('app.flash-message') }}
+        <b class="text-danger">Important</b>: {{trans('app.combine_message')}}
         <a href="/online-payment/addnew1" style="font-weight:bold;color:blue"> {{ trans('app.click_here') }}</a>
     </div>
     @endif

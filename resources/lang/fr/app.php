@@ -48,4 +48,5 @@ return [
     'flash-message'=>Session::get('flash-message-french'),
     'flash-message1'=> 'Vous êtes dans notre période de promotion. Vous devez payer vos frais avant le 30 de ce mois pour maintenir votre compte ouvert! Pour payer vos frais,',
     'click_here'=>'cliquez ici!',    
+    'combine_message'=> session::get('combine_fr'),
 ];
