@@ -577,7 +577,7 @@ class OnlinePaymentController extends Controller
                 'payment_mode' => 'ONLINE',
                 'payment_type' => 'RECURRING',
                 'paid_for' => 'SUBSCRIPTION',
-                'amount_paid' => Session::get('total'),
+                'amount_paid' => env('TOTAL'),
                 'status' => 'APPROVED'
             ]
         );
@@ -588,7 +588,7 @@ class OnlinePaymentController extends Controller
                 'subscription_fee' => 'YES',
                 'start_date' => Carbon::now()->startOfMonth(), // first day of the month no matter when he/she pays
                 'end_date' => Carbon::now()->endOfMonth(),  // last day of the month no matter when he/she pays
-                'amount' => Session::get('total'),
+                'amount' => env('TOTAL'),
                 'transaction_id' => $transactionID
             ]
         );

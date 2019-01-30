@@ -29,6 +29,22 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
+            $users = DB::table('users')->get();
+            foreach ($users as $list) {
+                $today = date("y-m-d");
+                $expire = $list->ban_date; //from database
+                $today_time = strtotime($today);
+                $expire_time = strtotime($expire);
+                $minus = $expire_time - $today_time;
+                if ($minus == 0 && $list->is_active == 'NO') {
+                    DB::table('users')->where('id', $list->id)->update([
+                        'ban' => 'YES',
+                    ]);
+                }
+            }
+        })->everyMinute();
+
+        $schedule->call(function () {
             ///  block users who has not paid for subscription
             $paymentThisMonth = DB::table('payments_details')
                 ->where('subscription_fee', 'YES')
@@ -43,14 +59,14 @@ class Kernel extends ConsoleKernel
             $otherUsers = DB::table('users')
                 ->whereNotIn('id', $userIDs)
                 ->get();
-
             foreach ($otherUsers as $user) {
                 DB::table('users')
                     ->where('id', $user->id)
                     ->update(['is_active' => 'NO']);
             }
-
-
+            DB::table('users')->where('is_active', 'YES')->update([
+                'ban_date' => Carbon::now()->addMonths(2)
+            ]);
             /// give commission according to active users
             $levels = array();
             $users = DB::table('users')
@@ -126,41 +142,21 @@ class Kernel extends ConsoleKernel
                 }
             }
 
-        })->when(
+        })->everyMinute();
+        /*->when(
             function () {
                 return Carbon::now()->endOfMonth()->isToday();
             }
-        );
+        );*/
         // check wheather to ban or not
-
-        $schedule->call(function () {
-            $users = DB::table('users')->get();
-            foreach ($users as $list) {
-                $today = date("y-m-d");
-                $expire = $list->ban_date; //from database
-                $today_time = strtotime($today);
-                $expire_time = strtotime($expire);
-                $minus = $expire_time - $today_time;
-                if ($minus == 0) {
-                    DB::table('users')->where('id', $list->id)->update([
-                        'ban' => 'YES',
-                    ]);
-                }
-            }
-        })->daily();
-
         // set ban date and then make user inactive
 
-        $schedule->call(function () {
-            DB::table('users')->where('is_active', 'YES')->update([
-                'is_active' => 'NO',
-                'ban_date' => Carbon::now()->addMonths(2),
-            ]);
-        })->when(
-            function () {
-                return Carbon::now()->endOfMonth()->isToday();
-            }
-        );
+
+//            ->when(
+//            function () {
+//                return Carbon::now()->endOfMonth()->isToday();
+//            }
+//        );
     }
 
     /**
