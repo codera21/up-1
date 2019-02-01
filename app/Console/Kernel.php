@@ -142,12 +142,11 @@ class Kernel extends ConsoleKernel
                 }
             }
 
-        })->everyMinute();
-            /*->when(
+        })->when(
             function () {
                 return Carbon::now()->endOfMonth()->isToday();
             }
-        );*/
+        );
         // check wheather to ban or not
         // set ban date and then make user inactive
 
