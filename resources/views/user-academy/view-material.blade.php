@@ -112,7 +112,5 @@
         -moz-box-shadow: 10px 6px 67px -14px rgba(0, 0, 0, 0.56);
         box-shadow: 10px 6px 67px -14px rgba(0, 0, 0, 0.56);
     }
-    iframe {
-        height : 455px !important;
-    }
+
 </style>
