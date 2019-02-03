@@ -71,7 +71,9 @@ class UserAcademyController extends Controller
     public function viewMaterial($id)
     {
         $material = $this->material->find($id);
-        return view('user-academy.view-material', ['material' => $material]);
+        $material_details = DB::table('material')->where('id', $id)->first();
+        
+        return view('user-academy.view-material', ['material' => $material, 'material_details' => $material_details]);
     }
 
     public function viewPdf($id)

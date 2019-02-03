@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\DB;
 // Request & Response
 use Illuminate\Http\Request;
 use App\Http\Requests;
-
+use App\Models\Material;
 // Facades
 use Grid;
 use Date;
@@ -312,12 +312,9 @@ class MaterialController extends Controller
      */
     public function save(MaterialSaveRequest $request)
     {
-
-
+        
         $data = $request->except(['_token', 'video_url', 'thumbnail']);
-
         $data['enable_payment_button'] = $request->input('enable_payment_button');
-
         // Check Payment Type button
         $materialGroup = $this->materialGroup->find($data['group_id']);
         $data['payment_type'] = $materialGroup->payment_type;
@@ -412,10 +409,8 @@ class MaterialController extends Controller
             $data['video_url'] = $fileUrl;
         } else {
             // save the file name manually
-            $fileName = $data['video_url_name'];
-            $data['video_url'] = asset($local->url($fileName));
+            
         }
-
         /*if ($request->hasFile('course_url')) {
             $file = $request->file('course_url');
             $fileName = date('Ymd_His') . '_' . $file->getClientOriginalName();
@@ -425,9 +420,10 @@ class MaterialController extends Controller
             //$fileUrl                = public_path($storagePath);
             $data['course_url'] = $fileUrl;
         }*/
-
-
         if ($material = $this->material->create($data)) {
+            DB::table('material')->where('title', $request->title)->update([
+                'embed' => $request->input('video_url_name'),
+            ]);
             return redirect()->route('admin.material')->with('success', trans('Material has been saved successfully.'));
         } else {
             return redirect()->route('admin.material.add')->withInput()->with('error', trans('Material has not been saved.'));
@@ -509,6 +505,9 @@ class MaterialController extends Controller
         }
 
         if ($material = $this->material->update($data, $Id)) {
+            DB::table('material')->where('id', $Id)->update([
+                'embed' => $request->input('video_url_name'),
+            ]);
             return redirect()->route('admin.material.edit', ['id' => $Id])->with('success', trans('Material has been updated successfully.'));
         } else {
             return redirect()->route('admin.material.edit', ['id' => $Id])->withInput()->with('error', trans('Material has not been updated.'));

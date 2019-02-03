@@ -77,7 +77,7 @@
                     <label style="padding-top: 7px;"><b>--OR--</b></label>
                 </div>
                 <div class="col-md-3">
-                    {!! Form::text('video_url_name', old('video_url_name'), ['id'=>'video_url_name', 'class'=>'form-control']) !!}
+                    {!! Form::text('video_url_name', old('video_url_name', $material->embed), ['id'=>'video_url_name', 'class'=>'form-control']) !!}
 
                 </div>
 

@@ -5,14 +5,17 @@
 @endsection
 
 @section('content')
-
     <div class="container video-controller">
         <div class="panel panel-primary">
             <div class="panel-body">
+                <?php if($material_details->embed == null) : ?>
                 <video class="video" controls controlsList="nodownload">
                     <source src="{{ $material['video_url'] }}"
                             type="video/mp4">
                 </video>
+            <?php else:?>
+            <?php echo $material_details->embed?>
+            <?php endif;?>
                 <h3 class="text-dark heading-text">{{$material['title']}}</h3>
                 <p class="text-dark views-text" style="color: gray;"></p>
                 <hr>
@@ -29,6 +32,9 @@
 
 
 <style>
+    .panel-body > iframe{
+        width: 100%;
+    }
     .video-controller {
         margin-top: 4%;
     }
