@@ -409,8 +409,8 @@ class MaterialController extends Controller
             $data['video_url'] = $fileUrl;
         } else {
             // save the file name manually
-            
         }
+        
         /*if ($request->hasFile('course_url')) {
             $file = $request->file('course_url');
             $fileName = date('Ymd_His') . '_' . $file->getClientOriginalName();

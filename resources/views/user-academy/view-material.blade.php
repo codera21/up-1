@@ -33,7 +33,7 @@
 
 <style>
     .panel-body > iframe{
-        width: 100%;
+        margin-left: 10%;
     }
     .video-controller {
         margin-top: 4%;
