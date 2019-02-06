@@ -24,14 +24,7 @@ class UserSaveRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|max:64|unique:users',
-            'first_name' => 'required|name|max:47',
-            'last_name' => 'required|name|max:47',
-            'address1' => 'required|address|max:47',
-            'country' => 'required|address|max:47',
-            'phone' => 'required|digits:10|min:10|max:10',
-            'password' => 'required|min:6|max:20',
-            'password_confirmation' => 'required|min:6|max:20',
+            
         ];
     }
 }

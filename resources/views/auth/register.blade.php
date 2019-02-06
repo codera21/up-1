@@ -53,10 +53,10 @@
                                 @endif
                             </div>
                         </div>                
-                        <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }} required">
+                        <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
                             {!! Form::label('country', trans('country'), ['class' => 'col-md-3 control-label']) !!}
                             <div class="col-md-6">
-                                {!! Form::text('country', old('country'), ['class'=>'form-control validate-address', 'maxlength'=>'47', 'required']) !!}
+                                {!! Form::text('country', old('country'), ['class'=>'form-control validate-address', 'maxlength'=>'47']) !!}
                                 @if ($errors->has('country'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('country') }}</strong>

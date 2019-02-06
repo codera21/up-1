@@ -231,37 +231,35 @@
             */
             $("form#register").validate({
                 rules: {
-                    first_name: "required",
-                    last_name: "required",
                     address1: {
-                        required: true,
+                        required: false,
                         //address: true
                     },
                     zip: {
                         required: false,
-                        digits: true,
+                        digits: false,
                     },
                     phone: {
-                        required: true,
-                        digits: true
+                        required: false,
+                        digits: false
                     },
                     username: {
-                        required: true,
+                        required: false,
                     },
                     email: {
-                        required: true,
-                        email: true
+                        required: false,
+                        email: false
                     },
                     password: {
-                        required: true,
+                        required: false,
                         minlength: 6
                     },
                     password_confirmation: {
-                        required: true,
+                        required: false,
                         minlength: 6,
                         equalTo: "#password"
                     },
-                    agree: "required"
+                    
                 },
                 messages: {
                     first_name: "Please enter your first name",
