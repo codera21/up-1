@@ -11,6 +11,7 @@
                 <?php if($material_details->embed == null) : ?>
                 <video class="video" controls controlsList="nodownload">
                     <source src="{{ $material['video_url'] }}"
+                    <source src="{{ $material['video_url'] }}"
                             type="video/mp4">
                 </video>
             <?php else:?>
@@ -111,4 +112,5 @@
         -moz-box-shadow: 10px 6px 67px -14px rgba(0, 0, 0, 0.56);
         box-shadow: 10px 6px 67px -14px rgba(0, 0, 0, 0.56);
     }
+
 </style>
