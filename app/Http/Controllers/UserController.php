@@ -204,7 +204,12 @@ class UserController extends Controller
         $total_comm = Session::get('total_comm');
         $curr = Session::get('curr');
         $user = Auth::user();
-        $users = $this->user->findByField('parent_id', $user->id);
+        $users = $this->user->with(
+            array(
+                'children' => function($query){
+                    $query->orderby('created_at');
+                }))
+                ->orderby('created_at')->findByField('parent_id', $user->id);
         $level = 4;  // may be changed later
         //$data is variable to pass in view just to look code good
         $data = array(
