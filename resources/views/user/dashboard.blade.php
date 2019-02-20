@@ -11,6 +11,11 @@
         <b class="text-danger">Important</b>: {{trans('app.combine_message')}}
         <a href="/online-payment/addnew1" style="font-weight:bold;color:blue"> {{ trans('app.click_here') }}</a>
     </div>
+    <br>
+    <div class="alert alert-info" role="alert">
+        <b class="text-danger">Important</b>: {{trans('app.this_is_how')}}
+    <a href="{{trans('app.this_is_link')}}" style="font-weight:bold;color:blue"> {{ trans('app.click_here') }}</a>
+    </div>
     @endif
     {{-- <div class="alert alert-info" role="alert">
         <b class="text-danger">Important</b>: {{trans('app.flash-message')}} 

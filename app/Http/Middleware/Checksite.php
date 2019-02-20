@@ -36,6 +36,11 @@ class Checksite
             session::put('youtube_video_link_fr','https://www.youtube.com/watch?v=nmMcEircrxU&feature=youtu.be&fbclid=IwAR0cvNaU_36HcogtV_18iK45c8yDMXHnbiW3Z0bWt9QAmZ5XxCOcoWcrsuo');
             session::put('combine_eng', "You are in your trial period. You have to pay your fees before the 30th of this month to keep your account open. Our monthly fees are 59.7(monthly fees $50 and taxes and other fees: $9.7). To pay your fees");
             session::put('combine_fr',"Vous êtes dans votre période d'essai. Vous devez payer vos frais avant le 30 de ce mois pour que votre compte reste ouvert. Nos frais mensuels sont de  59,7 $  (frais mensuels de 50 $ et taxes et autres frais: 9,7 $). Pour payer vos frais");
+            // this is how to
+            session::put("this_is_how_eng",' This is how to pay on Opportunity "4": ');
+            session::put("this_is_link_eng",'https://www.dnasbookdigimarket.com/pages/how-to-pay-in-opportunity-4');
+            session::put("this_is_how_fr",'Voici comment payer sur Opportunité "4": ');
+            session::put("this_is_link_fr",'https://www.dnasbookdigimarket.com/pages/comment-payer-en-opportunity-4');
         } else {
             //usercommission page url
             Session::put('amount', '1000F');
@@ -56,6 +61,10 @@ class Checksite
             session::put('youtube_video_link_fr','https://www.youtube.com/watch?v=RpHeXDvXM1U&feature=youtu.be&fbclid=IwAR2B4oWwZSl9rBIe6h-Lqg3FAe8hnPnubRDIUutqz_SWsLLztWnE6nZzauc');
             session::put('combine_eng','You are in your trial period. You have to pay your fees before the 30th of this month to keep your account open. Our monthly fees are 1600F(monthly fees 1000F and taxes and other fees: 600F). To pay your fees,');
             session::put('combine_fr',"Vous êtes dans votre période d'essai. Vous devez payer vos frais avant le 30 de ce mois pour que votre compte reste ouvert. Nos frais mensuels sont de 1600F (frais mensuels de 1000F et taxes et autres frais: 600F). Pour payer vos frais,");
+            session::put('this_is_how_eng','This is how to pay on Opportunity "4":');
+            session::put('this_is_link_eng','https://www.dnasbookdigimarketafrica.com/pages/how-to-pay-in-opportunity-4');
+            session::put('this_is_how_fr',' Voici comment payer sur Opportunité "4": ');
+            session::put('this_is_link_fr','https://www.dnasbookdigimarketafrica.com/pages/comment-payer-sur-opportunity-4');
         }
         return $next($request);
     }

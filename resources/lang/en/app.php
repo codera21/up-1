@@ -47,4 +47,7 @@ return [
     'flash-message1' => 'You are in our trial period, you have to pay your fees before the 30th of this month to keep your account open! To pay your fees,',
     'click_here'=>'Click here',
     'combine_message'=> session::get('combine_eng'),
+    //for this is how to pay
+    'this_is_how'=>Session::get('this_is_how_eng'),
+    'this_is_link'=>Session::get('this_is_link_eng'),
 ];
