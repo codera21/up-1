@@ -12,6 +12,7 @@
         <table class="table table-hover">
             <thead>
             <tr>
+                <th>SN</th>
                 <th scope="col">Id</th>
                 <th scope="col">Name of Subs</th>
                 <th scope="col">Country</th>
@@ -23,8 +24,11 @@
             </tr>
             </thead>
             <tbody>
+                <?php $count = 1?>
             @foreach($data as $item)
                 <tr>
+                    <th>{{$count++}}</th>
+                <th>{{$item->created_at}}</th>
                     <th scope="row">{{$item->id}}</th>
                     <td>{{$item->name_of_subscriber}}</td>
                     <td>{{$item->country}}</td>
