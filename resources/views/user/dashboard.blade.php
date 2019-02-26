@@ -32,6 +32,9 @@
                 </div>
             </div>
         </div>
+        <div class="fb-share-button" data-href="{{asset('/register').'/'.$user  }}" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fregister%2F71&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-url="{{asset('/register').'/'.$user}}" data-related="asdf" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <div class="g-plus" data-action="share" data-height="24" data-href="{{asset('/register').'/'.$user}}"></div>
     <div class="flash-message" role="alert">
         <div>
             <p><?php echo trans('app.p_one')?></p>
@@ -57,9 +60,7 @@
     </div>
         
     <br>
-    <div class="fb-share-button" data-href="{{asset('/register').'/'.$user  }}" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Fregister%2F71&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-url="{{asset('/register').'/'.$user}}" data-related="asdf" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    <div class="g-plus" data-action="share" data-height="24" data-href="{{asset('/register').'/'.$user}}"></div>
+    
 </div>
 @endsection
 <script src="https://apis.google.com/js/platform.js" async defer></script>
