@@ -12,8 +12,8 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>SN</th>
-                <th scope="col">Id</th>
+                <th>Order No.</th>
+                <th scope="col">Date</th>
                 <th scope="col">Name of Subs</th>
                 <th scope="col">Country</th>
                 {{--<th scope="col">Means of Payment</th>
@@ -28,8 +28,7 @@
             @foreach($data as $item)
                 <tr>
                     <th>{{$count++}}</th>
-                <th>{{$item->created_at}}</th>
-                    <th scope="row">{{$item->id}}</th>
+                    <th>{{$item->created_at}}</th>
                     <td>{{$item->name_of_subscriber}}</td>
                     <td>{{$item->country}}</td>
                     {{--<td>{{$item->payment_type}}</td>

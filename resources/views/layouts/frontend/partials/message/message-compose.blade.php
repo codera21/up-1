@@ -58,6 +58,16 @@
 
         $('#message-compose-modal').modal('show');
     });
+    $(document).ready(function () {
+            //Generate Slug
+            
+
+            //Display CKEDITOR for content
+            CKEDITOR.replace('message',
+                {
+                    toolbar: 'Standard', /* this does the magic */
+                });
+        });
     </script>
 @endpush
 @endif
