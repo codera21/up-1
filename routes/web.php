@@ -1,5 +1,5 @@
 <?php
-
+// google
 Route::pattern('id', '\d+');
 Route::pattern('id', '[A-Za-z0-9-]+');
 Route::pattern('hash', '[a-z0-9]+');
@@ -24,7 +24,6 @@ Route::get('/clear-config', function () {
     $exitCode = Artisan::call('config:clear');
     return redirect()->back();
 });
-
 
 Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () {
     Route::get('/', ['as' => 'home', 'uses' => 'PageController@index']);
