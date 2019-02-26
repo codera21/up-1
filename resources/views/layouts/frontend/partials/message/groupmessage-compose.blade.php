@@ -33,7 +33,7 @@
                         {!! Form::label('message', old('Message'), ['class' => 'control-label']) !!}
                     </div>
                     <div class="col-md-6">
-                    {!! Form::textarea('description', old('description'), ['id'=>'description', 'class'=>'form-control']) !!}
+                        {!! Form::textarea('message', old('message'), ['id'=>'message', 'class'=>'form-control']) !!}
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@
                 {
                     toolbar: 'Standard', /* this does the magic */
                 });
-        })
+        });
     </script>
     @endpush
 @endif
