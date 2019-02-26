@@ -50,4 +50,21 @@ return [
     //for this is how to pay
     'this_is_how'=>Session::get('this_is_how_eng'),
     'this_is_link'=>Session::get('this_is_link_eng'),
+    //one
+    'p_one'=> "How does this project work?<br>
+    This project trains you in entrepreneurship and finances you for free. How?<br>
+    Entrepreneurship courses are given online in the form of videos and texts. 
+    Where to find these videos and training texts? Under the heading 'My Academy'. 
+    You must take the time to visualize and understand these videos and 
+    read the corresponding texts. It is a distance online training. 
+    Once you have subscribed to these courses, you become a lifetime subscriber, 
+    which courses will gradually increase for life. All innovations, 
+    new methods and entrepreneurial knowledge will be gradually added to these online courses ...",
+    //two
+    'p_two'=>"How are subscribers financed? As we want to cover as many people as possible with this opportunity never seen elsewhere, all subscribers to our courses are encouraged to bring other subscribers into the training, giving them this great opportunity. Subscribers, we reward them by paying them a monthly commission on the monthly fees paid by the subscribers they have invited to the training. How much? 40% of the total fees paid in the system by the subscribers they invited in the training. And to explode their commissions, we do not only pay the subscribers on the fees of the subscribers whom they invite in the training, we also pay them on the fees of the subscribers that their subscribers invite into the training until the 4th level. To know what we're talking about here, watch the videos under 'my academy'. Our goal is to train our subscribers in entrepreneurs while financing them. Our ambition is to give to our subscribers the means to pursue their dreams as they train as entrepreneurs, thus fighting against unemployment and thereby developing the private sector.",
+    'p_three'=>"How it works? How to take part in this project? You must register on our official website, so you have access to all our information and online training for life! When you invent people into the training who sign up and pay their monthly fees, we pay you monthly commissions, 40% of the fees of the people in your group, this for life.",
+    'p_four'=> "Conditions? We want to help everyone, so anyone who wants to seize this opportunity is welcome!",
+    'p_five'=>"You can not even pay a fee in this program when you apply our famous Rule 20/20!",
+    'p_six'=> 'You cannot earn commissions in this program without inviting other people into the training and encourage them to invite other people into the training up to the 4th level!',
+    'p_seven'=> 'We have rewards in the program if you reach a certain level of performance!',
 ];

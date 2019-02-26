@@ -51,4 +51,32 @@ return [
     'combine_message'=> session::get('combine_fr'),
     'this_is_how'=>Session::get('this_is_how_fr'),
     'this_is_link'=>session::get('this_is_link_fr'),
+    //one
+    'p_one'=> "Comment ce projet fonctionne? <br>
+    Ce projet vous forme en entrepreneuriat et vous finance gratuitement. Comment?<br>
+    Les cours d’entreprenariat sont donnés en ligne sous forme de vidéos et textes. Où trouver ces vidéos et textes de formation? Sous l'intertitre 'mon Académie'. Vous devez prendre le temps pour visualiser et comprendre ces vidéos et lires les textes correspondants. C'est une formation en ligne à distance. Une fois que vous vous êtes abonné à ces cours, vous devenez un abonné à vie, lesquels cours augmenteront progressivement à vie. Toutes les innovations, les nouvelles méthodes et les connaissances en entrepreneuriat seront progressivement ajoutées à ces cours en ligne.
+    ",
+    //two
+    'p_two'=>"Comment finance-t-on les abonnés? Comme nous voulons couvrir plus de personne possible 
+    avec cette opportunité jamais vu ailleurs, tous les abonnés à nos cours sont encouragés à 
+    amener d’autres abonnés dans la formation, leur donnant ainsi cette grande 
+    opportunité. Les abonnés, nous les recompensons en leur 
+    payant une commission mensuelle sur les frais 
+    mensuels payés par les abonnés qu’ils ont invités à la 
+    formation. Combien? 40% du total des frais 
+    payés dans le système par les abonnés qu'ils 
+    ont invités dans la formation. Et pour exploser leurs
+     commissions, nous ne payons pas seulement 
+     les abonnés sur les frais des abonnés qu'ils 
+     invitent dans la formation, nous les payons aussi 
+     sur les frais des abonnés que leurs abonnés ont 
+     enmenés dans la formation jusqu'au 4ème niveau. 
+     Pour savoir de quoi nous parlons ici, régardez les vidéos sous 'mon académie'. Notre but c'est de former nos abonnés en entrepreneurs tout en les finançant. Nous ambitionnons ainsi donner à nos abonnés les moyens de poursuivre leurs rêves pendant qu'ils se forment en entrepreneurs, luttant ainsi contre le chômage et devéloppant ainsi le secteur privé.",
+     //three
+     'p_three'=> "Comment ça marche? Comment prendre part de ce projet? Vous devez vous enregistrer sur notre site officiel, ainsi vous avez accès à toutes nos informations et formations en ligne à vie! Quand vous inventez des gens à la formation qui s’inscrivent et paient leurs frais mensuels, nous vous payons des commissions mensuelles, 40% des frais des gens dans votre groupe, ceci à vie.",
+     'p_four' => "Les conditions? Nous voulons aider tout le monde, donc toute personne qui veut saisir cette opportunité est bien venue!",
+     'p_five'=> "Vous pouvez ne meme pas payer des frais dans ce programme quand vous appliquez notre fameuse règle 20/20!",
+     'p_six'=>"Vous ne pouvez pas gagner des commissions dans ce programme sans inviter d'autres personnes dans la formation et encourager les abonnés dans votre groupe à inviter d'autres personnes dans la formation jusqu'au 4ème niveau!",
+     'p_seven'=>"Nous avons des récompenses dans le programme si vous atteignez un certtain niveau de performance!",
+     
 ];

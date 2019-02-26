@@ -20,6 +20,29 @@
     {{-- <div class="alert alert-info" role="alert">
         <b class="text-danger">Important</b>: {{trans('app.flash-message')}} 
     </div> --}}
+    <div class="flash-message" role="alert">
+        <div>
+            <p><?php echo trans('app.p_one')?></p>
+            <p>
+            <?php echo trans('app.p_two') ?>
+            </p>
+            <p>
+            <?php echo trans('app.p_three') ?>
+            </p>
+            <p>
+            <?php echo trans('app.p_four') ?>
+            </p>
+            <p>
+                <?php  echo trans('app.p_five') ?>
+            </p>
+            <p>
+                <?php echo trans('app.p_six') ?>
+            </P>
+            <p>
+            <?php echo trans('app.p_seven') ?>
+            </p>
+        </div>
+    </div>
         <div class="panel-body">
         <h3>copy your referral link</h3>
             <div class="row">
@@ -66,3 +89,12 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 <!-- Place this tag where you want the share button to render. -->
+<style>
+    .flash-message{
+        font-size : 16px;
+        border: 1px solid red;
+        padding: 20px;
+        text-align: justify;
+        margin : 30px;
+    }
+</style>
