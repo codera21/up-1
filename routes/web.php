@@ -118,7 +118,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
 |--------------------------------------------------------------------------
 */
 //is active is add on each group manually
-Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVerified','ban']], function () {
+Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVerified', 'ban']], function () {
     Route::group(['middleware' => ['isActive'], 'as' => 'user', 'prefix' => 'user'], function () {
         Route::get('/dashboard', ['as' => '.dashboard', 'uses' => 'UserController@dashboard']);
         Route::get('/account', ['as' => '.account', 'uses' => 'UserController@edit']);
@@ -174,7 +174,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
       });*/
 
     // Payments history
-    Route::group(['middleware' => ['isActive','ban'], 'as' => 'payment-history', 'prefix' => 'payment-history'], function () {
+    Route::group(['middleware' => ['isActive', 'ban'], 'as' => 'payment-history', 'prefix' => 'payment-history'], function () {
         Route::get('/', ['as' => '', 'uses' => 'UserPaymentHistoryController@index']);
         Route::get('/detail/{id}', ['as' => '.detail', 'uses' => 'UserPaymentHistoryController@detail']);
     });
@@ -183,7 +183,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVer
         Route::get('/', ['as' => '', 'uses' => 'UserCommissionController@index']);
     });
     // My Academy
-    Route::group(['middleware' => ['isActive','ban'], 'as' => 'user-academy', 'prefix' => 'user-academy'], function () {
+    Route::group(['middleware' => ['isActive', 'ban'], 'as' => 'user-academy', 'prefix' => 'user-academy'], function () {
         Route::get('/video', ['as' => '.video', 'uses' => 'UserAcademyController@view_video']);
         Route::get('/course', ['as' => '.course', 'uses' => 'UserAcademyController@view_course']);
         Route::get('/viewpdf/{id}', ['as' => '.viewpdf', 'uses' => 'UserAcademyController@viewPdf']);
@@ -385,7 +385,8 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
 
 
 });
-
+Route::get('/cornban', ['as' => 'ban', 'uses' => 'Corncontroller@ban']);
+Route::get('/cornpayment', ['as' => 'cornpayment', 'uses' => 'Corncontroller@cornpayment']);
 // Remove conflict of Barryvdh Debugbar with slug / pages routes
 //Route::get( '/_debugbar/assets/stylesheets', '\Barryvdh\Debugbar\Controllers\AssetController@css' );
 //Route::get( '/_debugbar/assets/javascript', '\Barryvdh\Debugbar\Controllers\AssetController@js' );
