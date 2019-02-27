@@ -8,6 +8,13 @@ use Carbon\Carbon;
 
 class Corncontroller extends Controller
 {
+    public function corntest()
+    {
+        $count = 0;
+        $user = DB::table('test')->insert([
+            'count'=> $count
+        ]);
+    }
     public function ban()
     {
         $users = DB::table('users')->get();
