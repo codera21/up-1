@@ -387,7 +387,7 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
 });
 Route::get('/cornban', ['as' => 'ban', 'uses' => 'Corncontroller@ban']);
 Route::get('/cornpayment', ['as' => 'cornpayment', 'uses' => 'Corncontroller@cornpayment']);
-Route::get('/corntest', ['as' => 'cornpayment', 'uses' => 'Corncontroller@test']);
+Route::get('/corntest', ['as' => 'cornpayment', 'uses' => 'Corncontroller@corntest']);
 // Remove conflict of Barryvdh Debugbar with slug / pages routes
 //Route::get( '/_debugbar/assets/stylesheets', '\Barryvdh\Debugbar\Controllers\AssetController@css' );
 //Route::get( '/_debugbar/assets/javascript', '\Barryvdh\Debugbar\Controllers\AssetController@js' );
