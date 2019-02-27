@@ -260,7 +260,7 @@
         </div><!-- /.content-wrapper -->
     </div><!-- ./wrapper -->
 </div>
-{{--@include('layouts.frontend.partials.footer')--}}
+@include('layouts.frontend.partials.footer')
 
 </body>
 </html>
