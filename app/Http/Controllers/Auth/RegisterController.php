@@ -118,9 +118,9 @@ class RegisterController extends Controller
             DB::table('companies_profiles')->insert([
                 'user_id' => $user->id
             ]);
+            
 
-
-            DB::table('users')->update(
+            DB::table('users')->where('id', $user->id)->update(
                 [
                     'verified' => 1,
                     'not_now' => 1,
