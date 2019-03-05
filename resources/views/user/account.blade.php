@@ -50,7 +50,14 @@
                                     {!! Form::text('email', old('email', $user->email), ['id'=>'email', 'class'=>'form-control', 'placeholder'=>"Email", 'disabled'=>"disabled"]) !!}
 
                                 </div>
-
+                                <div>
+                                    {!! Form::label('Sex', trans('Sex'), ['class' => 'control-label']) !!}
+                                    <select name="sex" class="form-control validate-address valid" aria-invalid="false">
+                                        <option value="Male" selected="selected">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
 
                             </div>
                         </div>

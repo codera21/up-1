@@ -90,6 +90,7 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request)
     {
+
         $data = $request->except(['_token']);
         $user = Auth::user();
         $receipt = Storage::disk('uploads.profile');
@@ -108,7 +109,6 @@ class UserController extends Controller
         $data['prevent_users_to_see_phone'] = $request->input('prevent_users_to_see_phone');
         $data['prevent_users_to_see_comments_messages'] = $request->input('prevent_users_to_comments_messages');
         $data['photo'] = $fileName;
-        //dd($data);        
         /*if($user->id === $user_id){
             $data['disabled'] = 'NO';
         }
@@ -119,6 +119,9 @@ class UserController extends Controller
         /*DB::table('users')->where('id',$user->id)->update([
             'photo'=>$fileName
         ]);*/
+        DB::table('users')->where('id', $user->id)->update([
+            'sex'=> $request->sex,
+        ]);
         if ($user = $this->user->update($data, $user->id)) {
             return redirect()->route('user.account')->with('success', trans('Account Settings have been updated successfully.'));
         } else {

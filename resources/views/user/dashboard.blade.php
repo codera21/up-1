@@ -37,7 +37,7 @@
     <div class="g-plus" data-action="share" data-height="24" data-href="{{asset('/register').'/'.$user}}"></div>
     <br>
     <div style="width:50%; margin-left:20%">
-    <div style='position:relative;height:0;padding-bottom:56.25%'><iframe class='sproutvideo-player' src='https://videos.sproutvideo.com/embed/1c9ddcb71313e4cd94/98292d5df1187b61?playerTheme=dark&amp;playerColor=2f3437' style='position:absolute;width:100%;height:100%;left:0;top:0' frameborder='0' allowfullscreen></iframe></div>
+    <div style='position:relative;height:0;padding-bottom:56.25%'><?php echo trans('contact.dashboard_video')?></div>
     </div>
     <div class="flash-message" role="alert">
         <div>

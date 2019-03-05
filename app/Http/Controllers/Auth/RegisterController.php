@@ -145,6 +145,9 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
         $users = event(new Registered($user = $this->create($request->all())));
+        DB::table('users')->where('first_name', $request->first_name)->update([
+            'sex'=> $request->sex,
+        ]);
         Auth::login($user);
         return redirect()->guest('user/dashboard');
         //$this->guard()->login($user);
