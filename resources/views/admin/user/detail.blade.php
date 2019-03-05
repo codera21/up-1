@@ -91,7 +91,7 @@ http://itsolutionstuff.com/post/laravel-5-category-treeview-hierarchical-structu
                     <td>{{ trans('Parent User') }}</td>
                     <td>
                         @if($user->parent)
-                            {!! $user->parent->first_name !!}
+                            {!! $user->parent->first_name !!} {!! $user->parent->last_name !!}
                         @else
                             {!! 'No Parent' !!}
                         @endif
