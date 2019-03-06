@@ -37,7 +37,7 @@
     <div class="g-plus" data-action="share" data-height="24" data-href="{{asset('/register').'/'.$user}}"></div>
     <br>
     <div style="width:50%; margin-left:20%">
-    <div style='position:relative;height:0;padding-bottom:56.25%'><?php echo trans('contact.dashboard_video')?></div>
+    <div style='position:relative;height:0;padding-bottom:56.25%'><?php echo $link->link?></div>
     </div>
     <div class="flash-message" role="alert">
         <div>

@@ -132,6 +132,7 @@ class UserController extends Controller
 
     public function dashboard()
     {
+        $link = DB::table('link')->where('lang', App::getLocale())->first();
         $loggedUser = Auth::user();
         $user = Auth::user()->id;
         $parentuser = DB::table('users')->where('id', $loggedUser->parent_id)->first();
@@ -140,7 +141,7 @@ class UserController extends Controller
         } else {
             $parentuser = DB::table('users')->where('id', $loggedUser->parent_id)->first();
         }
-        return view('user.dashboard', ['user' => $user, 'parentuser' => $parentuser]);
+        return view('user.dashboard', ['user' => $user, 'parentuser' => $parentuser, 'link'=>$link]);
     }
 
     public function profile(Request $request, $username)

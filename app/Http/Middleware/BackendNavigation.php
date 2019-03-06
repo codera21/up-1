@@ -56,7 +56,10 @@ class BackendNavigation
             $menu->get('manageWebsite')
                 ->add('About Us', ['route' => 'admin.about'])
                 ->active('admin.about.*');
-
+            //Dashboard video link
+            $menu->get('manageWebsite')
+                ->add('Dashboard Link', ['route' => 'admin.dashboard_video'])
+                ->active('admin.about.*');
 
             // Manage Materials
             $menu->add('Manage Materials', '#')

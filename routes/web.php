@@ -295,7 +295,11 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
         Route::put('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\PageController@aboutupdate']);
         Route::get('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\PageController@aboutdelete']);
     });
-
+    Route::group(['as' => 'admin.dashboard_video', 'prefix' => 'dashboardVideo'], function () {
+        Route::get('/', ['as' => '', 'uses' => 'Admin\VideoLInkController@index']);
+        Route::get('/edit/{id}', ['as' => '.edit1', 'uses' => 'Admin\VideoLInkController@show']);
+        Route::Post('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\VideoLInkController@update']);
+    });
     // Material Group
     Route::group(['as' => 'admin.material-group', 'prefix' => 'material-group'], function () {
         Route::get('/', ['as' => '', 'uses' => 'Admin\MaterialGroupController@index']);
