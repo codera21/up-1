@@ -160,7 +160,7 @@
                         <label for="exampleInputEmail1">Upload Receipt copy</label>
                     </div>
                     <div class="col-lg-4">
-                        <input name="receipt_photo" type="file">
+                        <input name="receipt_photo" type="file" required>
                     </div>
                 </div>
             </div>

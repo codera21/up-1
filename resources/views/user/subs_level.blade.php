@@ -21,6 +21,7 @@
         <?php if($count):?>
         <tr>
             <th scope="col">Level</th>
+            <th scope = 'col'>SN</th>
             <th scope="col">Subscribers</th>
             <th scope="col">Status</th>
             <th scope="col">Total fees</th>
@@ -31,6 +32,15 @@
         <tbody>
         <tr>
             <th scope="row">1</th>
+            <?php $levelone = 1?>
+            <td>
+            @foreach($users as $user)
+                    <?php echo $levelone;
+                        $levelone++;
+                    ?>
+                    <br>
+                @endforeach
+            </td>
             <td>
                 @foreach($users as $user)
                     <a href="#">{{ $user->first_name }} {{ $user->last_name}}</a>
@@ -97,6 +107,20 @@
         </tr>
         <tr>
             <th scope="row">2</th>
+            <?php $second_level_sn = 1?>
+            <td>
+            @foreach($users as $user)
+                    <?php $second_level = $user->children;
+                        $level_two = 1;
+                    ?>
+                    @foreach($second_level as $second)
+                        <?php echo $level_two;
+                            $level_two++
+                        ?>
+                        <br>
+                    @endforeach
+                @endforeach
+            </td>
             <td>
                 @foreach($users as $user)
                     <?php $second_level = $user->children?>
@@ -180,6 +204,22 @@
         </tr>
         <tr>
             <th scope="row">3</th>
+            <td>
+            @foreach($users as $user)
+                    <?php $second_level = $user->children;
+                        $levelthree = 1;
+                    ?>
+                    @foreach($second_level as $second)
+                        <?php $third_level = $second->children?>
+                        @foreach($third_level as $third)
+                            <?php echo $levelthree;
+                                $levelthree++;
+                            ?>
+                            <br>
+                        @endforeach
+                    @endforeach
+                @endforeach        
+            </td>
             <td>
                 @foreach($users as $user)
                     <?php $second_level = $user->children?>
@@ -276,6 +316,25 @@
         </tr>
         <tr>
             <th scope="row">4</th>
+            <td>
+            <?php 
+                $levelfour = 1;?>
+                @foreach($users as $user)
+                    <?php $second_level = $user->children?>
+                    @foreach($second_level as $second)
+                        <?php $third_level = $second->children?>
+                        @foreach($third_level as $third)
+                            <?php $forth_level = $third->children?>
+                            @foreach($forth_level as $forth)
+                                <?php echo $levelfour;
+                                    $levelfour++;
+                                ?>
+                                <br>
+                            @endforeach
+                        @endforeach
+                    @endforeach
+                @endforeach
+            </td>
             <td>
                 @foreach($users as $user)
                     <?php $second_level = $user->children?>
