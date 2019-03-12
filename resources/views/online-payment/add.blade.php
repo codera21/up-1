@@ -10,6 +10,7 @@
         <div class="alert alert-info" role="alert">
             <b class="text-danger">Important</b>: {{trans('app.flash-message')}}
         </div>
+        @if(env('SITE') == 'ENG')
         <h3>
             <mark>1. Make one time Payment</mark>
         </h3>
@@ -23,6 +24,7 @@
                href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=37MF4DYE7RXKE">Pay for this
                 month</a>
         </div>
+        @endif
         @if(env('SITE')=='ENG')
             <h3>
                 <mark>2. Make recurring payment</mark>
