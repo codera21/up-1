@@ -150,10 +150,9 @@
             $('#slug').slugify('#title');
 
             //Display CKEDITOR for content
-            CKEDITOR.replace('description',
-                {
-                    toolbar: 'Standard', /* this does the magic */
-                });
+            $('#description').summernote({
+                height: 150,
+            });
         })
     </script>
 @endpush

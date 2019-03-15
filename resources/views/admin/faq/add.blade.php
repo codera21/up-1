@@ -70,10 +70,9 @@
             );
 
             //Display CKEDITOR for content
-            CKEDITOR.replace('answer',
-                {
-                    toolbar: 'Standard', /* this does the magic */
-                });
+            $('#answer').summernote({
+                height: 150,
+            });
         })
     </script>
 @endpush

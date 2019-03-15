@@ -48,20 +48,14 @@
             {!! Form::close() !!}
         </div>
     </div>
-
 @endsection
 @push('scripts')
     <script>
+        $(document).ready(function() {
+  $('#description').summernote({
+    height: 150,                 // set editor height
 
-        $(document).ready(function () {
-            //Generate Slug
-            $('#slug').slugify('#title');
-
-            //Display CKEDITOR for content
-            CKEDITOR.replace('description',
-                {
-                    toolbar: 'Standard', /* this does the magic */
-                });
-        })
+  });
+});
     </script>
 @endpush

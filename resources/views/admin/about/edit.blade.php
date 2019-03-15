@@ -72,10 +72,9 @@
         );
 
         //Display CKEDITOR for content
-        CKEDITOR.replace('description',
-            {
-                toolbar: 'Standard', /* this does the magic */
-            });
+        $('.description').summernote({
+            height: 200,
+        });
     })
 </script>
 @endpush

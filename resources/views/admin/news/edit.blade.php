@@ -57,10 +57,9 @@
             $('#slug').slugify('#title');
 
             //Display CKEDITOR for long description
-            CKEDITOR.replace('description',
-                {
-                    toolbar: 'Standard', /* this does the magic */
-                });
+            $('#description').summernote({
+                height: 150
+            });
         })
     </script>
 @endpush

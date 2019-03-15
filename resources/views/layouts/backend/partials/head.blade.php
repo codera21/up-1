@@ -39,7 +39,8 @@
   <!--<script type="text/javascript" src="{{URL::asset('backend/admin-lte/bootstrap/js/bootstrap.min.js')}}"></script>-->
   <!-- AdminLTE App -->
   <script type="text/javascript" src="{{URL::asset('backend/admin-lte/dist/js/app.min.js')}}"></script>
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
   <!-- CKEditor -->
   <!--<script type="text/javascript" src="{{URL::asset('js/ckeditor/ckeditor.js')}}"></script>-->
 

@@ -114,10 +114,9 @@
             );
 
             //Display CKEDITOR for content
-            CKEDITOR.replace( 'page-content',
-            {
-                toolbar : 'Standard', /* this does the magic */
+            $('#page-content').summernote({
+                height: 150,
             });
-        })
+            })
     </script>
 @endpush
