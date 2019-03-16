@@ -82,8 +82,8 @@ class UserPaymentHistoryController extends Controller
                             'type' => 'text',
                         ),
                         'width' => 'auto',
-                        'value' => function ($row) {
-                           return $row->user['first_name']." ".$row->user['last_name'];
+                        'value' => function ($row) {                            
+                            return $row->user['last_name'].' '.$row->user['first_name'];
                         }
                     ),
                     array(

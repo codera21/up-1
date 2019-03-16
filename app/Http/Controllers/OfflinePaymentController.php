@@ -105,7 +105,7 @@ class OfflinePaymentController extends Controller
 
         Log::getMonolog()->popHandler();//Remove Old Handlers
         Log::useDailyFiles(config('settings.log.offlinepayment'));//Set New Handler
-        $this->middleware('isActive', ['except' => ['offline_add', 'offline','verify','search']]);
+        $this->middleware('isActive', ['except' => ['offline_add', 'offline', 'verify', 'search']]);
 
     }
 
@@ -353,17 +353,17 @@ class OfflinePaymentController extends Controller
     public function offline_add(request $request)
     {
         $receipt = Storage::disk('uploads.receipt_photo');
-               $file = $request->file('receipt_photo');
-               if ($request->hasFile('receipt_photo')) {
-                   $receiptFile = $request->file('receipt_photo');
-                   $receiptFileName = date('Ymd_His') . '_' . $receiptFile->getClientOriginalName();
-                   $receiptFileRElativePath = $receipt->putFileAs('', $receiptFile, $receiptFileName);
-                   $receiptStoragePath = $receipt->url($receiptFileRElativePath);
-                   $receiptFileUrl = asset($receiptStoragePath);
-                   $fileName = $receiptFileUrl;
-               } else {
-                   $fileName = '';
-               }
+        $file = $request->file('receipt_photo');
+        if ($request->hasFile('receipt_photo')) {
+            $receiptFile = $request->file('receipt_photo');
+            $receiptFileName = date('Ymd_His') . '_' . $receiptFile->getClientOriginalName();
+            $receiptFileRElativePath = $receipt->putFileAs('', $receiptFile, $receiptFileName);
+            $receiptStoragePath = $receipt->url($receiptFileRElativePath);
+            $receiptFileUrl = asset($receiptStoragePath);
+            $fileName = $receiptFileUrl;
+        } else {
+            $fileName = '';
+        }
         $addpayment = DB::table('offline_pay')->insert([
             'bank_slip_no' => $request->input('bank_slip_no'),
             'amount_paid' => $request->input('amount_paid'),
@@ -371,26 +371,30 @@ class OfflinePaymentController extends Controller
             'account_no' => $request->input('account_no'),
             'country' => $request->input('country'),
             'name_of_subscriber' => $request->input('name_of_subscriber'),
-            'receipt_photo'=>$fileName
+            'receipt_photo' => $fileName
         ]);
         if ($addpayment) {
             return redirect()->route('offline_pay.verify')
                 ->with('success', 'payment added successfully');
         }
     }
+
     public function verify()
     {
+
         $user = Auth::user();
-        DB::table('users')->where('id',$user->id)->update([
-           'is_active'=>'YES'
+        DB::table('users')->where('id', $user->id)->update([
+            'is_active' => 'YES'
         ]);
-      return view('offline-payment.verify_form');
+        return view('offline-payment.verify_form');
+
     }
+
     public function search(request $request)
     {
         $data = $request->input('bank_slip_no');
-        $payment = DB::table('offline_pay')->where('bank_slip_no',$data)->first();
-        $count = DB::table('offline_pay')->where('bank_slip_no',$data)->count();
-        return view('offline-payment.details',['payment'=>$payment,'count'=>$count]);
+        $payment = DB::table('offline_pay')->where('bank_slip_no', $data)->first();
+        $count = DB::table('offline_pay')->where('bank_slip_no', $data)->count();
+        return view('offline-payment.details', ['payment' => $payment, 'count' => $count]);
     }
 }
