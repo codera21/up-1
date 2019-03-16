@@ -380,7 +380,8 @@ class OfflinePaymentController extends Controller
     }
     public function verify()
     {
-        DB::table('users')->update([
+        $user = Auth::user();
+        DB::table('users')->where('id',$user->id)->update([
            'is_active'=>'YES'
         ]);
       return view('offline-payment.verify_form');
