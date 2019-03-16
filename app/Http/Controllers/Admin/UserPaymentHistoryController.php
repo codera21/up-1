@@ -82,8 +82,8 @@ class UserPaymentHistoryController extends Controller
                             'type' => 'text',
                         ),
                         'width' => 'auto',
-                        'value' => function ($row) {                            
-                            return $row->user['last_name'].' '.$row->user['first_name'];
+                        'value' => function ($row) {
+                            return $row->user['last_name'] . ' ' . $row->user['first_name'];
                         }
                     ),
                     array(
@@ -170,7 +170,7 @@ class UserPaymentHistoryController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return Session::get('curr').Helper::moneyFormat($row->amount_paid);
+                            return Session::get('curr') . Helper::moneyFormat($row->amount_paid);
                         }
                     ),
                     array(
@@ -183,7 +183,7 @@ class UserPaymentHistoryController extends Controller
                         'value' => function ($row) {
                             return '<a href="' . route('admin.payment-history.detail', ['id' => $row->id]) . '" class="btn btn-primary btn-xs text-white edit" >' . trans('Details') . '</a>';
                         }
-                    ),                    
+                    ),
                 )
             );
 
