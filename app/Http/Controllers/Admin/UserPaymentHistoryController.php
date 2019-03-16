@@ -83,6 +83,8 @@ class UserPaymentHistoryController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
+                            var_dump($row);
+                            die;
                             return $row->user->last_name.' '.$row->user->first_name;
                         }
                     ),
