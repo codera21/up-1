@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 // Request & Response
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
+use Illuminate\Support\Facades\DB;
 // Facades
 use Grid;
 use Date;
 use Helper;
 use Session;
+
 // Models and Repo
 use App\Repositories\PaymentRepository;
 use App\Repositories\PaymentDetailsRepository;
@@ -44,7 +45,6 @@ class UserPaymentHistoryController extends Controller
         //Get model
         $this->payment->pushCriteria(new \App\Criteria\Admin\UserPaymentHistoryCriteria());
         $payments = $this->payment;
-
         //Setup grid
         $grid = new Grid();
         $grid->setGridName('user-payment-history-grid')->setBaseUrl(route('admin.payment-history'))
@@ -74,7 +74,7 @@ class UserPaymentHistoryController extends Controller
                         }
                     ),
                     array(
-                        'name' => 'user_name',
+                        'name' => 'username',
                         'label' => trans('User Name'),
                         'sortable' => false,
                         'searchable' => false,
@@ -83,7 +83,7 @@ class UserPaymentHistoryController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            return $row->user->last_name.' '.$row->user->first_name;
+                           return $row->user['first_name']." ".$row->user['last_name'];
                         }
                     ),
                     array(
