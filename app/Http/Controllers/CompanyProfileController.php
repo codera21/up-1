@@ -136,7 +136,9 @@ class CompanyProfileController extends Controller
                 'email' => $request->input('email'),
                 'contact' => $request->input('contact'),
                 'company_description_title' => $request->input('change_description'),
-                'company_image_title' => $request->input('change_images')
+                'company_image_title' => $request->input('change_images'),
+                'skype_link'=> $request->input('skype_link'),
+                'youtube_link'=> $request->input('youtube_link'),
             ]);
         if ($request->hasFile('back_photo')) {
             $companyupdate = DB::table('companies_profiles')->where('user_id', $user['user_id'])

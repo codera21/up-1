@@ -29,13 +29,16 @@
 
         @endif
     @endforeach
-    <div style="margin-left: 40%">
+    <div class="clearfix"></div>
+    <div class="text-center">
         {{$material->links()}}
     </div>
     <br>
 @endsection
 <style>
-
+    ul.pagination li.active span {
+        background-color: #006600 !important;
+    }
     .thumbnail {
         margin: 20px 20px 0 0;
         height: 500px;

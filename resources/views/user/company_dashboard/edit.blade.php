@@ -100,6 +100,28 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group container">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label for="exampleInputEmail1">Youtube Link</label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <input type="name" name="youtube_link" class="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group container">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label for="exampleInputEmail1">Skype Link</label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <input type="name" name="skype_link" class="form-control" id="exampleInputEmail1"
+                                           aria-describedby="emailHelp" value="">
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group container required" id="thumbnail">
                             <div class="row">
                                 <div class="col-lg-4">

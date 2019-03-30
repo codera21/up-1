@@ -105,6 +105,10 @@ class UserAcademyController extends Controller
             where('material_type','VIDEO')->
         orderBYRaw('title + 0', 'ASC', 'title')->
         paginate(15);
+        
+
+        //  dd(($material));
+
         return view('user-academy.view-material-group', ['material' => $material]);
     }
 
