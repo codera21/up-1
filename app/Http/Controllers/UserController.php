@@ -3,22 +3,21 @@
 namespace App\Http\Controllers;
 
 // Request & Response
+use App\Http\Requests\UserUpdateRequest;
+use App\Repositories\GoalRepository;
+use App\Repositories\UserRepository;
+use Auth;
+// Facades
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\DB;
-// Facades
-use Auth;
-use Grid;
-use Storage;
-use Session;
 
 // Models and Repo
-use App\Repositories\UserRepository;
-use App\Repositories\GoalRepository;
+use Illuminate\Support\Facades\DB;
+use Session;
 
 // Form Requests
-use App\Http\Requests\UserUpdateRequest;
+use Storage;
 
 class UserController extends Controller
 {
@@ -26,7 +25,6 @@ class UserController extends Controller
     protected $user;
 
     protected $goal;
-
 
     public function __construct(UserRepository $user, GoalRepository $goal)
     {
@@ -62,7 +60,7 @@ class UserController extends Controller
                 $response = array(
                     'status' => 'success',
                     'message' => trans('New user has been added successfully.'),
-                    'redirect_url' => route('user')
+                    'redirect_url' => route('user'),
                 );
             } else {
                 $response = array(
@@ -78,7 +76,6 @@ class UserController extends Controller
         }
 
         return $response;
-
 
     }
 
@@ -110,17 +107,17 @@ class UserController extends Controller
         $data['prevent_users_to_see_comments_messages'] = $request->input('prevent_users_to_comments_messages');
         $data['photo'] = $fileName;
         /*if($user->id === $user_id){
-            $data['disabled'] = 'NO';
+        $data['disabled'] = 'NO';
         }
-        
+
         if($request->has('password')){
-            $data['password'] = bcrypt($request->input('password'));
+        $data['password'] = bcrypt($request->input('password'));
         }*/
         /*DB::table('users')->where('id',$user->id)->update([
-            'photo'=>$fileName
+        'photo'=>$fileName
         ]);*/
         DB::table('users')->where('id', $user->id)->update([
-            'sex'=> $request->sex,
+            'sex' => $request->sex,
         ]);
         if ($user = $this->user->update($data, $user->id)) {
             return redirect()->route('user.account')->with('success', trans('Account Settings have been updated successfully.'));
@@ -137,11 +134,11 @@ class UserController extends Controller
         $user = Auth::user()->id;
         $parentuser = DB::table('users')->where('id', $loggedUser->parent_id)->first();
         if ($parentuser == null) {
-            $parentuser = DB::table('users')->where('id', $loggedUser->id)->first();;
+            $parentuser = DB::table('users')->where('id', $loggedUser->id)->first();
         } else {
             $parentuser = DB::table('users')->where('id', $loggedUser->parent_id)->first();
         }
-        return view('user.dashboard', ['user' => $user, 'parentuser' => $parentuser, 'link'=>$link]);
+        return view('user.dashboard', ['user' => $user, 'parentuser' => $parentuser, 'link' => $link]);
     }
 
     public function profile(Request $request, $username)
@@ -150,7 +147,7 @@ class UserController extends Controller
         $username1 = DB::table('users')->where('id', $loggedUser->id)->first();
         $parentuser = DB::table('users')->where('id', $loggedUser->parent_id)->first();
         if ($parentuser == null) {
-            $parentuser = DB::table('users')->where('id', $loggedUser->id)->first();;
+            $parentuser = DB::table('users')->where('id', $loggedUser->id)->first();
         } else {
             $parentuser = DB::table('users')->where('id', $loggedUser->parent_id)->first();
         }
@@ -186,7 +183,6 @@ class UserController extends Controller
         return view('user.public_profile', ['join_user_goals' => $join_user_goals, 'user' => $user, 'loggedUser' => $loggedUser, 'route' => 'user/' . $user->username, 'goals' => $goals, 'userGoals' => $userGoals]);
     }
 
-
     /**
      * Show user tree
      *
@@ -210,11 +206,11 @@ class UserController extends Controller
         $user = Auth::user();
         $users = $this->user->with(
             array(
-                'children' => function($query){
+                'children' => function ($query) {
                     $query->orderby('created_at');
                 }))
-                ->orderby('created_at')->findByField('parent_id', $user->id);
-        $level = 4;  // may be changed later
+            ->orderby('created_at')->findByField('parent_id', $user->id);
+        $level = 4; // may be changed later
         //$data is variable to pass in view just to look code good
         $data = array(
             'users' => $users,
@@ -223,8 +219,8 @@ class UserController extends Controller
             'amount' => $amount,
             'comm' => $comm,
             'total1' => $total1,
-            'total_comm' =>$total_comm,
-            'curr'=>$curr
+            'total_comm' => $total_comm,
+            'curr' => $curr,
         );
         return view('user.subs_level ', $data);
     }
@@ -245,5 +241,13 @@ class UserController extends Controller
             ->limit($result_per_page)
             ->get();
         return view('payment-profile.pagination_test', ['no_of_page' => $no_of_page, 'users' => $users]);
+    }
+    public function api()
+    {
+        $user = DB::table("users")->get();
+        $array = array();
+        $array["record"] = array();
+        array_push($array["record"],$user);
+        echo \json_encode($array);
     }
 }
