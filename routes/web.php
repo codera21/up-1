@@ -119,7 +119,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
 */
 //is active is add on each group manually
 //For login Api
-Route::get('/api', ['as' => '.api', 'uses' => 'Api\APiAuthController@AuthLogin']);
+Route::post('/api', ['as' => '.api', 'uses' => 'Api\APiAuthController@AuthLogin']);
 Route::get('/csrf', ['as' => '.csrf', 'uses' => 'Api\APiAuthController@csrf']);
 
 Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs', 'isVerified', 'ban']], function () {
