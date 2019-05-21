@@ -12,8 +12,8 @@ class APiAuthController extends Controller
 {
     public function AuthLogin()
     {
-        $email = isset($_POST["email"]) ? $_POST["email"] : '';
-        $password = isset($_POST["password"]) ? $_POST["password"] : '';
+        $email = isset($_POST["email"]) ? $_POST["email"] : 'hari@gmail.com';
+        $password = isset($_POST["password"]) ? $_POST["password"] : '11111111';
         $array = ["email" => $email, "password" => $password];
         $query = DB::table("users")->where("email", $email)->first();
 
@@ -31,5 +31,9 @@ class APiAuthController extends Controller
             $result["success"] = "0";
             $result["message"] = "error";
         }
+    }
+    public function csrf()
+    {
+        return view("apiLogin");
     }
 }
