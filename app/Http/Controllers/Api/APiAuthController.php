@@ -66,6 +66,9 @@ class APiAuthController extends Controller
             'parent_id' => '2'
         ]);
         if ($query) {
+            DB::table('companies_profiles')->insert([
+                'user_id' => $query->id
+            ]);
             $array["success"] = "1";
         }
         echo json_encode($array);
