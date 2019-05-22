@@ -65,11 +65,13 @@ class APiAuthController extends Controller
             'is_active' => 'YES',
             'parent_id' => '2'
         ]);
+        $getRecentlyCreatedUsers = DB::table("users")->where("email",$email)->first();
         if ($query) {
             DB::table('companies_profiles')->insert([
-                'user_id' => $query->id
+                'user_id' => $getRecentlyCreatedUsers->id
             ]);
             $array["success"] = "1";
+            $array["id"] = $getRecentlyCreatedUsers->id;
         }
         echo json_encode($array);
     }
