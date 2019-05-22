@@ -9,8 +9,11 @@ class AboutController extends Controller
 {
     public function index()
     {
+        $array = [];
+        $array['about'] = [];
         $about = About::all();
-        return response()->json($about);
+        array_push($array['about'],$about[0]);
+        return response()->json($array);
     }
 
     public function getbyid($id)

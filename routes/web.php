@@ -164,4 +164,11 @@ $router->group(['as' => 'user_goals', 'prefix' => 'user_goals'], function () use
     $router->put('update/{id}', ['as' => '.update', 'uses' => 'UserGoalsController@update']);
     $router->delete('/delete/{id}', ['as' => '.delete', 'uses' => 'UserGoalsController@delete']);
 });
-//check
+//check Auth
+$router->group(['as' => 'authLogin', 'prefix' => 'authLogin'], function () use ($router) {
+    $router->get('/', ['uses' => 'LoginController@AuthCheck']);
+    $router->get('/{id}', ['as' => '.about', 'uses' => 'UserGoalsController@getbyid']);
+    $router->post('/create', ['as' => '.create', 'uses' => 'UserGoalsController@create']);
+    $router->put('update/{id}', ['as' => '.update', 'uses' => 'UserGoalsController@update']);
+    $router->delete('/delete/{id}', ['as' => '.delete', 'uses' => 'UserGoalsController@delete']);
+});
