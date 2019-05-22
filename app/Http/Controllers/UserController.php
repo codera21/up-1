@@ -22,7 +22,13 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $data = Users::create($request->all());
-        return response()->json($data, 201);
+        $array = array();
+        $array["register"] = array();
+        if($data)
+        {
+            $array["success"]= "1";
+        }
+        return response()->json($array,201);
     }
 
     public function update(Request $request, $id)

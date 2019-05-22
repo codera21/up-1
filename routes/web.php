@@ -20,6 +20,12 @@ $router->get('/', [
 $router->get('users', [
     'as' => 'users', 'uses' => 'UserController@index'
 ]);
+
+//api for login is written is laravel in Auth\ApiLoginController.php
+
+//api for register
+$router->get('/', ['uses' => 'TestoController@index']);
+
 // Testomonial table
 $router->group(['as' => 'testo', 'prefix' => 'testo'], function () use ($router) {
     $router->get('/', ['uses' => 'TestoController@index']);
@@ -171,4 +177,12 @@ $router->group(['as' => 'authLogin', 'prefix' => 'authLogin'], function () use (
     $router->post('/create', ['as' => '.create', 'uses' => 'UserGoalsController@create']);
     $router->put('update/{id}', ['as' => '.update', 'uses' => 'UserGoalsController@update']);
     $router->delete('/delete/{id}', ['as' => '.delete', 'uses' => 'UserGoalsController@delete']);
+});
+//Register
+$router->group(['as' => 'user', 'prefix' => 'user'], function () use ($router) {
+    $router->get('/', ['uses' => 'UserController@index']);
+    $router->get('/{id}', ['as' => '.about', 'uses' => 'UserController@getbyid']);
+    $router->post('/create', ['as' => '.create', 'uses' => 'UserController@create']);
+    $router->put('update/{id}', ['as' => '.update', 'uses' => 'UserController@update']);
+    $router->delete('/delete/{id}', ['as' => '.delete', 'uses' => 'UserController@delete']);
 });
