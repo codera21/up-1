@@ -40,7 +40,7 @@ class APiAuthController extends Controller
         $last_name = isset($_POST["last_name"]) ? $_POST["last_name"] : "TestApi";
         $address = isset($_POST["address1"]) ? $_POST["address1"] : "AddressApi";
         $country = isset($_POST["country"]) ? $_POST["country"] : "NepalApi";
-        $sex = isset($_POST["sex"]) ? $_POST["sex"] : "Female";
+        $sex = isset($_POST["sex"]) ? $_POST["sex"] : "";
         $phone = isset($_POST["phone"]) ? $_POST["phone"] : "111222111";
         $username = isset($_POST["username"]) ? $_POST["username"] : "apiusername";
         $email = isset($_POST["email"]) ? $_POST["email"] : "api@gmail.com";
@@ -65,7 +65,7 @@ class APiAuthController extends Controller
             'is_active' => 'YES',
             'parent_id' => '2'
         ]);
-        $getRecentlyCreatedUsers = DB::table("users")->where("email",$email)->first();
+        $getRecentlyCreatedUsers = DB::table("users")->where("email", $email)->first();
         if ($query) {
             DB::table('companies_profiles')->insert([
                 'user_id' => $getRecentlyCreatedUsers->id
