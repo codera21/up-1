@@ -20,7 +20,7 @@ use App\Repositories\UserGoalRepository;
 
 class UserController extends Controller
 {
-
+    private $resetPasswordValue;
     /**
      * @var UserRepository
      */
@@ -98,7 +98,7 @@ class UserController extends Controller
                         }
                     ),
                     array(
-                        'name' => 'last_name' ,
+                        'name' => 'last_name',
                         'label' => trans('Last Name'),
                         'sortable' => true,
                         'searchable' => true,
@@ -177,7 +177,9 @@ class UserController extends Controller
                                         <a href="' . route('admin.user.edit', array('id' => $row->id)) . '" class="btn btn-success btn-xs edit" >' . trans('Edit') . '</a>                                  
                                         <a href="' . route('admin.user.delete', ['id' => $row->id]) . '" class="btn btn-danger btn-xs delete">' . trans('Delete') . '</a>                                 
                                         <a href="' . route('admin.user.ban', ['id' => $row->id]) . '" class="btn btn-warning btn-xs edit"id="ban/unban">' . trans('ban') . '</a>
-                                        <a href="' . route('admin.user.goals', ['id' => $row->id]) . '" class="btn btn-info btn-xs edit">' . trans('Goals') . '</a>';
+                                        <a href="' . route('admin.user.goals', ['id' => $row->id]) . '" class="btn btn-info btn-xs edit">' . trans('Goals') . '</a>
+                                        <a href="' . route('admin.user.reset', ['id' => $row->id]) . '" class="btn btn-primary btn-xs edit">' . trans('Reset Password') . '</a>
+                                        ';
                         }
                     ),
                 )
@@ -472,6 +474,34 @@ class UserController extends Controller
         ];
 
         return view('admin.user-commission.details', $admin);
+    }
+
+    public function resetPassword($id)
+    {
+        $getUser = DB::table('users')->where('id', $id)->first();
+        $passArrayInViews = array(
+            "id" => $id,
+            "getUser" => $getUser,
+        );
+        return view("admin.resetPassword.index", $passArrayInViews);
+    }
+
+    public function changePassword(Request $request, $id)
+    {
+        $email = $request->input("email");
+        $password = $request->input("password");
+        $password = bcrypt($password);
+        $arrayFilter = array(
+            "id" => $id,
+            "email" => $email
+        );
+        $changePassword = DB::table("users")->where($arrayFilter)->update([
+            "password" => $password
+        ]);
+        if ($changePassword) {
+            return redirect()->route('admin.user.reset', ['post' => $id])
+                ->with('success', 'Password reset successfully');
+        }
     }
 }
         

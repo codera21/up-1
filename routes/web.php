@@ -239,6 +239,8 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
         Route::get('/tree', ['as' => '.tree', 'uses' => 'Admin\UserController@treeView']);
         Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\UserController@delete']);
         Route::get('/goals/{id}', ['as' => '.goals', 'uses' => 'Admin\UserController@userGoals']);
+        Route::get('/reset/{id}', ['as' => '.reset', 'uses' => 'Admin\UserController@resetPassword']);
+        Route::post('/reset/{id}', ['as' => '.changePassword', 'uses' => 'Admin\UserController@changePassword']);
     });
 
     /*for password check*/
