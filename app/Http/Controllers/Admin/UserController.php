@@ -450,7 +450,7 @@ class UserController extends Controller
 
     public function test2()
     {
-        $admin['list'] = DB::table('users')->where('is_active', 'YES')->paginate(25);
+        $admin['list'] = DB::table('users')->paginate(25);
         return view('admin.user-commission.user_list', $admin);
     }
 
