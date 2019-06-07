@@ -258,6 +258,7 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
     Route::group(['as' => 'admin.offline_pay', 'prefix' => 'offline_pay'], function () {
         Route::get('/', ['as' => '', 'uses' => 'Admin\BankController@offline_pay']);
         Route::get('/details/{id}', ['as' => '.details', 'uses' => 'Admin\BankController@details']);
+        Route::get('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\BankController@deletePayment']);
     });
 
     // News

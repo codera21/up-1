@@ -209,8 +209,20 @@ class BankController extends Controller
 
     public function offline_pay()
     {
-        $data['data'] = DB::table('offline_pay')->get();
+        $data['data'] = DB::table('offline_pay')->where('isdeleted', 0)->paginate(10);
         return view('admin.payment-history.offline_pay', $data);
+    }
+
+    public function deletePayment($id)
+    {
+        $deleteData = DB::table("offline_pay")->where(['id' => $id])->update([
+            "isdeleted" => 1
+        ]);
+        if ($deleteData) {
+            return redirect()->route("admin.offline_pay")->with('success', trans("Deleted Successfully"));
+        } else {
+            return redirect()->route("admin.offline_pay")->with('success', trans("Deleted not Successfully"));
+        }
     }
 
     public function details($id)

@@ -293,7 +293,7 @@
             <td colspan="6"></td>
         </tr>
         <tr>
-            <th colspan="6" style="text-align: center">User dont have any subscriber</th>
+            <th colspan="6" style="text-align: center">User don't have any subscriber</th>
         </tr>
         <tr class="myTableRow">
             <td colspan="6"></td>

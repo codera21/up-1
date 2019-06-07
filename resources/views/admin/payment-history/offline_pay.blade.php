@@ -24,7 +24,7 @@
             </tr>
             </thead>
             <tbody>
-                <?php $count = 1?>
+            <?php $count = 1?>
             @foreach($data as $item)
                 <tr>
                     <th>{{$count++}}</th>
@@ -35,10 +35,14 @@
                     <td>{{$item->bank_slip_no}}</td>
                     <td>{{$item->account_no}}</td>--}}
                     <td>{{$item->amount_paid}}</td>
-                    <td><a class="btn btn-success btn-sm" href="offline_pay/details/{{$item->id}}" role="button">View Details</a></td>
+                    <td><a class="btn btn-success btn-sm" href="offline_pay/details/{{$item->id}}" role="button">View
+                            Details</a>
+                        <a class="btn btn-danger btn-sm" href="offline_pay/delete/{{$item->id}}" role="button">Delete</a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+        {!! $data->links() !!}
     </div>
 @endsection
