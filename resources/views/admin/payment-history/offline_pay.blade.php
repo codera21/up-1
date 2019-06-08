@@ -5,8 +5,6 @@
 @endsection
 
 @section('content')
-
-
     <div class="container-fluid">
         <br>
         <table class="table table-hover">
@@ -37,7 +35,9 @@
                     <td>{{$item->amount_paid}}</td>
                     <td><a class="btn btn-success btn-sm" href="offline_pay/details/{{$item->id}}" role="button">View
                             Details</a>
-                        <a class="btn btn-danger btn-sm" href="offline_pay/delete/{{$item->id}}" role="button">Delete</a>
+                        <a onclick="return deleteevent()" class="btn btn-danger btn-sm"
+                           href="offline_pay/delete/{{$item->id}}"
+                           role="button">Delete</a>
                     </td>
                 </tr>
             @endforeach
@@ -46,3 +46,12 @@
         {!! $data->links() !!}
     </div>
 @endsection
+<script>
+    function deleteevent() {
+        if (confirm("Are you sure want to delete")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
