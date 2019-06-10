@@ -35,9 +35,8 @@
         </tr>
 
         {{-- 8888888888888888888888888888888888888   Level one    88888888888888888888888888888888888888888888888888888888--}}
-
-        @foreach($users as $user):
         <?php $firstLevelCount = 1; $firstLevelSnCount = 1;$one = 0;?>
+        @foreach($users as $user):
         <tr class="myTableRow">
             <th scope="row">{{$firstLevelCount}}</th>
             <td>{{$firstLevelSnCount}}</td>
