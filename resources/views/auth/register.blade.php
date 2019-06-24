@@ -173,12 +173,14 @@
                                     {!! Form::checkbox('agree', 'YES') !!} {{ trans('register.agree') }}
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="col-md-offset-4 col-md-4" style="padding-bottom: 15px">
                                 <div class="col-md-12 pull-right">
                                     <div class="g-recaptcha"
                                          data-sitekey="6Ld0aaoUAAAAAIBLykzBDEYrNyfaYA_j9PMzzXrV"></div>
                                 </div>
                             </div>
+                            <br>
+                            <br>
                             <div style="margin-left: 30%">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-lg btn-primary">
@@ -186,8 +188,8 @@
                                     </button>
                                 </div>
                             </div>
-
                             {!! Form::close() !!}
+                            <br>
                         @else
                             <h1>{{ trans('register.no_referal') }}</h1>
                         @endif
@@ -198,4 +200,5 @@
 
         </div>
     </div>
+    <br>
 @endsection
