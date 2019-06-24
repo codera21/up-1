@@ -175,8 +175,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <div class="g-recaptcha" data-sitekey="6LdHaaoUAAAAAJ_TgaVjr-cVc85iHUHbyM9vJUql"></div>
-
+                                    <div class="g-recaptcha" data-sitekey="6Ld0aaoUAAAAAIBLykzBDEYrNyfaYA_j9PMzzXrV"></div>
                                 </div>
                             </div>
                             <div class="form-group">
