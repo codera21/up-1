@@ -96,7 +96,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            
+
         ]);
     }
 
@@ -118,13 +118,13 @@ class RegisterController extends Controller
             DB::table('companies_profiles')->insert([
                 'user_id' => $user->id
             ]);
-            
+
 
             DB::table('users')->where('id', $user->id)->update(
                 [
                     'verified' => 1,
                     'not_now' => 1,
-                    'is_active'=>'YES'
+                    'is_active' => 'YES'
                 ]
             );
 
@@ -143,17 +143,36 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
-        $users = event(new Registered($user = $this->create($request->all())));
-        DB::table('users')->where('first_name', $request->first_name)->update([
-            'sex'=> $request->sex,
-        ]);
-        Auth::login($user);
-        return redirect()->guest('user/dashboard');
+//        dd($request->all());
+        if (isset($_POST['g-recaptcha-response'])) {
+            $capta = $request->input("g-recaptcha-response");
+        }
+        if (!$capta) {
+            return redirect()->route('register', ['post' => $request->input("parent_id")])
+                ->with('danger', 'Complete captcha');
+        }
+        $secrect_key = "6Ld0aaoUAAAAAJe3yNib7ahWdBjx8U8NO7armg3d";
+        $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secrect_key) . '&response=' . urlencode($capta);
+        $response = file_get_contents($url);
+        $responseKeys = json_decode($response, true);
+        if ($responseKeys["success"]) {
+            $this->validator($request->all())->validate();
+            $users = event(new Registered($user = $this->create($request->all())));
+            DB::table('users')->where('first_name', $request->first_name)->update([
+                'sex' => $request->sex,
+            ]);
+            Auth::login($user);
+            return redirect()->guest('user/dashboard');
+        } else {
+            return redirect()->route('register', ['post' => $request->input("parent_id")])
+                ->with('danger', 'Could Not Register');
+            /*return $this->registered($request, $user)
+                ?: redirect($this->redirectPath());*/
+        }
+
         //$this->guard()->login($user);
 
-        return $this->registered($request, $user)
-            ?: redirect($this->redirectPath());
+
     }
 
 }

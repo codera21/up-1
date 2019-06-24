@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <script src="https://www.google.com/recaptcha/api.js"  async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <div class="featured-boxes">
         <div class="row">
@@ -174,13 +174,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-12">
-                                    <div class="g-recaptcha" data-sitekey="6Ld0aaoUAAAAAIBLykzBDEYrNyfaYA_j9PMzzXrV"></div>
+                                <div class="col-md-12 pull-right">
+                                    <div class="g-recaptcha"
+                                         data-sitekey="6Ld0aaoUAAAAAIBLykzBDEYrNyfaYA_j9PMzzXrV"></div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div style="margin-left: 30%">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-lg btn-primary pull-right">
+                                    <button type="submit" class="btn btn-lg btn-primary">
                                         <i class="fa fa-btn fa-user-plus"></i> {{ trans('register.submit') }}
                                     </button>
                                 </div>
