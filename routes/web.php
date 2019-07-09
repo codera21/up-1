@@ -40,7 +40,7 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     Route::get('hcl/{id_id_id}', ['as' => 'hcl', 'uses' => 'Admin\FAQController@smp']);
     Route::get('/hcl_hcl/{id_id_id}', ['as' => '.hcl_hcl', 'uses' => 'Admin\FAQController@smp1']);
     // Registration Routes...
-    Route::get('register/{id}', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm']);
+    Route::get('register/{id}', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm'])->middleware('formStep');
     Route::post('register/{id}', ['as' => 'register', 'uses' => 'Auth\RegisterController@register']);
     // Password Reset Routes...
     Route::get('password/reset', ['as' => 'password.forgot', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
