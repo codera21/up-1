@@ -4,6 +4,9 @@
     {{ trans('about') }}
 @endsection
 <style>
+    body > div.container > div > div > div > div > div   a{
+        color:red;
+    }
     .container a{
         color:red;
     }
