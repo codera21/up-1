@@ -22,7 +22,7 @@ class formStep
             return redirect('pages/distributor')->withCookie($cookie);
         }else if(!$request->cookie("privacyandpolicy")){
             $cookie1 = Cookie::make("privacyandpolicy","privacypolicy");
-            return redirect('pages/privacy-policy')->withCookie($cookie1);
+            return redirect('pages/videos')->withCookie($cookie1);
         }
         return $next($request);
     }
