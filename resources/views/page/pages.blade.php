@@ -3,7 +3,11 @@
 @section('page_title')
     {{ trans('about') }}
 @endsection
-
+<style>
+    .container a{
+        color:red;
+    }
+</style>
 @section('content')
     <div class="row">
 
@@ -19,12 +23,13 @@
     </div>
 @endsection
 <style>
-    #heading{
+    #heading {
         color: black;
         font-size: 2.3rem;
         text-align: center;
     }
-    #para{
+
+    #para {
         font-size: 1.5rem;
     }
 </style>
