@@ -9,9 +9,9 @@
 <?php $baseUrl = URL::to('/'); ?>
 @section('content')
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" id="content">
             @foreach($data as $list)
-                <div id="contentdiv" class="row1">
+                <div class="row1">
                     {{--Title of pages--}}
                     <h1 id="heading">{{$list->title}}</h1>
                     {{--other content according to url--}}
@@ -64,25 +64,33 @@
                     </div>
                     <br>
                     {{--Content of pages--}}
-                    <p id="para"><?php echo $list->content?></p>
+                    <div id="contentpara">
+                        <p id="para"><?php echo $list->content?></p>
+                    </div>
                 </div>
             @endforeach
             <?php if (Request::url() == "$baseUrl/pages/distributor"): ?>
-            <p class="text-danger">Make sure visit all link before clicking Next</p>
+            <p class="text-danger">Visit all above Link to proceed</p>
             <?php if (env("SITE") == "ENG"): ?>
-            <a href="<?php echo $baseUrl ?>/register/2">Next</a>
+            <a href="<?php echo $baseUrl ?>/register/2" class="btn btn-primary registerlink"
+               disabled="disabled">Next</a>
             <?php else: ?>
-            <a href="<?php echo $baseUrl ?>/register/345" disabled="disabled" class="btn btn-primary"
+            <a href="<?php echo $baseUrl ?>/register/345" class="btn  btn-primary registerlink" disabled="disabled"
                style="color: black;cursor:grab ">Next</a>
             <?php endif; ?>
             <?php endif; ?>
         </div>
     </div>
     <br>
+    {{----}}
 @endsection
 <style>
     body > div.container > div > div > div > div > div a {
         color: blue;
+    }
+
+    body > div.container > div > div > div > div > div a:visited {
+        color: red;
     }
 
     #heading {
@@ -96,8 +104,26 @@
     }
 </style>
 <?php if (Request::url() == "$baseUrl/pages/distributor"): ?>
+<script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
 <script>
-    var allLink = document.querySelector("#contentdiv");
-    console.log(allLink);
+    $(document).ready(function () {
+        $('#contentpara a').attr("target", "_blank");
+        $('#contentpara a').click(function (e) {
+            $(e.target).addClass("clicked");
+        });
+        var noOfLinkClicked;
+        $("#contentpara a").click(function () {
+            noOfLinkClicked = $("#contentpara").find(".clicked").length;
+            localStorage.count = noOfLinkClicked;
+        });
+        var nooflink = parseInt(localStorage.count);
+        console.log(nooflink);
+        if (nooflink === 7) {
+            $(".registerlink").removeAttr("disabled");
+        }
+    });
 </script>
 <?php endif; ?>
