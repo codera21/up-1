@@ -25,6 +25,3 @@ Homestead.yaml
 /public/uploads/*/*/*
 
 !/public/uploads/*/*/.gitkeep
-
-
-/config/database.php
