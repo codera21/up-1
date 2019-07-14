@@ -119,11 +119,13 @@
             noOfLinkClicked = $("#contentpara").find(".clicked").length;
             localStorage.count = noOfLinkClicked;
         });
-        var nooflink = parseInt(localStorage.count);
-        console.log(nooflink);
-        if (nooflink >= 7) {
-            $(".registerlink").removeAttr("disabled");
-        }
+        $(document).mousemove(function () {
+            var nooflink = parseInt(localStorage.count);
+            console.log(nooflink);
+            if (nooflink >= 7) {
+                $(".registerlink").removeAttr("disabled");
+            }
+        });
     });
 </script>
 <?php endif; ?>
