@@ -121,7 +121,7 @@
         });
         var nooflink = parseInt(localStorage.count);
         console.log(nooflink);
-        if (nooflink === 7) {
+        if (nooflink >= 7) {
             $(".registerlink").removeAttr("disabled");
         }
     });
