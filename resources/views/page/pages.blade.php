@@ -4,22 +4,19 @@
     {{ trans('about') }}
 @endsection
 <style>
-    body > div.container > div > div > div > div > div a {
-        color: blue;
-    }
+
 </style>
+<?php $baseUrl = URL::to('/'); ?>
 @section('content')
     <div class="row">
         <div class="col-md-12">
             @foreach($data as $list)
-                <div>
+                <div id="contentdiv" class="row1">
                     {{--Title of pages--}}
                     <h1 id="heading">{{$list->title}}</h1>
                     {{--other content according to url--}}
                     <div>
-                        <?php
-                        $baseUrl = URL::to('/');
-                        if(Request::url() == "$baseUrl/pages/videos"): ?>
+                        <?php if(Request::url() == "$baseUrl/pages/videos"): ?>
                         <div>
                             <?php if(env("SITE") == "ENG"): ?>
                             {{--get language for english site--}}
@@ -70,10 +67,24 @@
                     <p id="para"><?php echo $list->content?></p>
                 </div>
             @endforeach
+            <?php if (Request::url() == "$baseUrl/pages/distributor"): ?>
+            <p class="text-danger">Make sure visit all link before clicking Next</p>
+            <?php if (env("SITE") == "ENG"): ?>
+            <a href="<?php echo $baseUrl ?>/register/2">Next</a>
+            <?php else: ?>
+            <a href="<?php echo $baseUrl ?>/register/345" disabled="disabled" class="btn btn-primary"
+               style="color: black;cursor:grab ">Next</a>
+            <?php endif; ?>
+            <?php endif; ?>
         </div>
     </div>
+    <br>
 @endsection
 <style>
+    body > div.container > div > div > div > div > div a {
+        color: blue;
+    }
+
     #heading {
         color: black;
         font-size: 2.3rem;
@@ -84,3 +95,9 @@
         font-size: 1.5rem;
     }
 </style>
+<?php if (Request::url() == "$baseUrl/pages/distributor"): ?>
+<script>
+    var allLink = document.querySelector("#contentdiv");
+    console.log(allLink);
+</script>
+<?php endif; ?>
