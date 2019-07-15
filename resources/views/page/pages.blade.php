@@ -90,7 +90,10 @@
     body > div.container > div > div > div > div > div a {
         color: blue;
     }
-
+    #content > a{
+        background: blue;
+        color: white;
+    }
     #heading {
         color: black;
         font-size: 2.3rem;
