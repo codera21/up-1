@@ -11,4 +11,7 @@ return [
     'profile' => 'Profile',
     'manage_post' => 'Manage Post',
     'manage_settings' => 'Manage Settings',
+    //for pages distributor
+    "note_above_button"=>'Visit all the above links, subscribe where you have to subscribe, read where you have to read to be able to proceed',
+    "checkbox_note"=>"You must watch this video before registering on the next page",
 ];

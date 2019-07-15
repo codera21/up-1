@@ -70,7 +70,10 @@
                 </div>
             @endforeach
             <?php if (Request::url() == "$baseUrl/pages/distributor"): ?>
-            <p class="text-danger">Visit all above Link to proceed</p>
+            <p class="text-danger">{{trans('backend.note_above_button')}}</p>
+            <div class="checkbox">
+                <label><input type="checkbox" value="" id="myCheck" required>{{trans("backend.checkbox_note")}}</label>
+            </div>
             <?php if (env("SITE") == "ENG"): ?>
             <a href="<?php echo $baseUrl ?>/register/2" class="btn btn-primary registerlink"
                disabled="disabled">Next</a>
@@ -82,15 +85,10 @@
         </div>
     </div>
     <br>
-    {{----}}
 @endsection
 <style>
     body > div.container > div > div > div > div > div a {
         color: blue;
-    }
-
-    body > div.container > div > div > div > div > div a:visited {
-        color: red;
     }
 
     #heading {
@@ -108,6 +106,7 @@
         src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
         crossorigin="anonymous"></script>
+
 <script>
     $(document).ready(function () {
         $('#contentpara a').attr("target", "_blank");
@@ -122,8 +121,14 @@
         $(document).mousemove(function () {
             var nooflink = parseInt(localStorage.count);
             console.log(nooflink);
+            let checkboxvalid = document.getElementById("myCheck").checked;
+            console.log(checkboxvalid);
             if (nooflink >= 7) {
-                $(".registerlink").removeAttr("disabled");
+                if (checkboxvalid) {
+                    $(".registerlink").removeAttr("disabled");
+                } else {
+                    $(".registerlink").attr("disabled", "disabled");
+                }
             }
         });
     });
