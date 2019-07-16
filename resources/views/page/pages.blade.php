@@ -123,8 +123,7 @@
 <script>
     $(document).ready(function () {
         $(".registerBlock").removeAttr("href");
-        var a = $("#messageforvideo").addClass("text-center text-danger").css("font-size", "25px");
-        console.log(a);
+        $("#contentpara p").addClass("text-center text-danger").css("font-size", "25px");
         $(document).mousemove(function () {
             let checkboxvalid = document.getElementById("myCheck").checked;
             if (checkboxvalid) {
