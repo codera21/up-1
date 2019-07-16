@@ -38,9 +38,9 @@
                         @if (Auth::guest())
                             <li><a href="#"><i class="livicon" data-name="login" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class=""><a href="{{ url('/login') }}" class="text-white">{{ trans('frontend.login') }}</a></label></li>
                         @if(env('SITE') == 'ENG')
-                            <li><a href="#"><i class="livicon" data-name="register" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class=""><a href="{{ url('/register/2') }}" class="text-white">{{ trans('frontend.register') }}</a></label></li>
+                            <li><a href="#"><i class="livicon" data-name="register" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class=""><a href="{{ url('/register/2') }}" class="text-white registerBlock">{{ trans('frontend.register') }}</a></label></li>
                             @else
-                                <li><a href="#"><i class="livicon" data-name="register" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class=""><a href="{{ url('/register/345') }}" class="text-white">{{ trans('frontend.register') }}</a></label></li>
+                                <li><a href="#" ><i class="livicon" data-name="register" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a><label class=""><a href="{{ url('/register/345') }}" class="text-white registerBlock">{{ trans('frontend.register') }}</a></label></li>
                             @endif
                         @else
                             <li>

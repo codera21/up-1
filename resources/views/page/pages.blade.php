@@ -122,12 +122,14 @@
         crossorigin="anonymous"></script>
 <script>
     $(document).ready(function () {
+        $(".registerBlock").removeAttr("href");
+        var a = $("#messageforvideo").addClass("text-center text-danger").css("font-size", "25px");
+        console.log(a);
         $(document).mousemove(function () {
             let checkboxvalid = document.getElementById("myCheck").checked;
-            console.log(checkboxvalid);
-            if(checkboxvalid){
+            if (checkboxvalid) {
                 $(".registerlink").removeAttr("disabled");
-            }else{
+            } else {
                 $(".registerlink").attr("disabled", "disabled");
             }
         })
@@ -142,6 +144,8 @@
 
 <script>
     $(document).ready(function () {
+        $(".registerBlock").removeAttr("href");
+        localStorage.count = 0;
         $('#contentpara a').attr("target", "_blank");
         $('#contentpara a').click(function (e) {
             $(e.target).addClass("clicked");
