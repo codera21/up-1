@@ -71,10 +71,10 @@
                         <p class="text-danger">{{trans("backend.checkbox_note")}}</p></label>
                 </div>
                 <?php if (env("SITE") == "ENG"): //for site buttons?>
-                <a href="<?php echo $baseUrl ?>/register/2" class="btn  btn-primary registerlink"
+                <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>" class="btn  btn-primary registerlink"
                    style="color: black;cursor:grab ">Next</a>
                 <?php else: ?>
-                <a href="<?php echo $baseUrl ?>/register/345" class="btn  btn-primary registerlink"
+                <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>" class="btn  btn-primary registerlink"
                    style="color: black;cursor:grab ">Next</a>
                 <?php endif; //for site buttons else end here ?>
                 <?php endif; ?>
@@ -83,10 +83,10 @@
                 <?php if (Request::url() == "$baseUrl/pages/distributor"): ?>
                 <p class="text-danger">{{trans('backend.note_above_button')}}</p>
                 <?php if (env("SITE") == "ENG"): ?>
-                <a href="<?php echo $baseUrl ?>/register/2" class="btn btn-primary registerlink"
+                <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>" class="btn btn-primary registerlink"
                    disabled="disabled">Next</a>
                 <?php else: ?>
-                <a href="<?php echo $baseUrl ?>/register/345" class="btn  btn-primary registerlink" disabled="disabled"
+                <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>" class="btn  btn-primary registerlink" disabled="disabled"
                    style="color: black;cursor:grab ">Next</a>
                 <?php endif; ?>
                 <?php endif; ?>
