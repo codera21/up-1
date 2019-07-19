@@ -71,5 +71,6 @@ class Kernel extends HttpKernel
         'checkGroupPayment' => \App\Http\Middleware\CheckGroupPayment::class,
         'checkMaterialPayment' => \App\Http\Middleware\CheckMaterialPayment::class,
         'formStep'=> \App\Http\Middleware\formStep::class,
+        'pageSite'=>\App\Http\Middleware\pageSite::class,
     ];
 }

@@ -170,8 +170,9 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
-                                    {!! Form::checkbox('agree', 'YES') !!} {{ trans('register.agree') }}
+                                    {!! Form::checkbox('agree', 'YES') !!}<?= trans('register.agree')?>
                                 </div>
+
                             </div>
                             <div class="col-md-offset-4 col-md-4" style="padding-bottom: 15px">
                                 <div class="col-md-12 pull-right">

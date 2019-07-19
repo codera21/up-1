@@ -12,6 +12,6 @@ return [
     'manage_post' => 'Manage Post',
     'manage_settings' => 'Manage Settings',
     //pages distributor
-    "note_above_button" => 'Visit all the above links, subscribe where you have to subscribe, read where you have to read to be able to proceed',
+    "note_above_button" => 'Visitez tous les liens ci-dessous en bleu, inscrivez-vous où vous devez vous inscrire, lisez où vous devez lire pour pouvoir continuer!',
     "checkbox_note" => "J’atteste que j’ai vu la vidéo en entier",
 ];

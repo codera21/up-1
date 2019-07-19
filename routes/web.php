@@ -63,7 +63,7 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     // Contact Us
     Route::get('contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
     Route::post('contact', ['as' => 'contact', 'uses' => 'PageController@postContact']);
-    Route::get('pages/{slug}', ['as' => 'pages', 'uses' => 'PageController@pages']);
+    Route::get('pages/{slug}', ['as' => 'pages', 'uses' => 'PageController@pages'])->middleware("pageSite");
 
     // IPN Listener
     Route::post('ipn', ['as' => 'ipn', 'uses' => 'IpnController@ipn']);

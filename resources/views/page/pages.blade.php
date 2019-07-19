@@ -3,9 +3,6 @@
 @section('page_title')
     {{ trans('about') }}
 @endsection
-<style>
-
-</style>
 <?php $baseUrl = URL::to('/'); ?>
 @section('content')
     <div class="row">
@@ -17,6 +14,10 @@
                     {{--other content according to url--}}
                     <br>
                     {{--Content of pages--}}
+                    @if(Request::url() == "$baseUrl/pages/distributor")
+                        <p class="text-danger"
+                           style="font-size: 2rem;padding-bottom: 3px;">{{trans('backend.note_above_button')}}</p>
+                    @endif
                     <div id="contentpara">
                         <p id="para"><?php echo $list->content?></p>
                     </div>
@@ -71,22 +72,24 @@
                         <p class="text-danger">{{trans("backend.checkbox_note")}}</p></label>
                 </div>
                 <?php if (env("SITE") == "ENG"): //for site buttons?>
-                <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>" class="btn  btn-primary registerlink"
+                <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>"
+                   class="btn  btn-primary registerlink"
                    style="color: black;cursor:grab ">Next</a>
                 <?php else: ?>
-                <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>" class="btn  btn-primary registerlink"
+                <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>"
+                   class="btn  btn-primary registerlink"
                    style="color: black;cursor:grab ">Next</a>
                 <?php endif; //for site buttons else end here ?>
                 <?php endif; ?>
             </div>
             <div class="distributor">
                 <?php if (Request::url() == "$baseUrl/pages/distributor"): ?>
-                <p class="text-danger">{{trans('backend.note_above_button')}}</p>
                 <?php if (env("SITE") == "ENG"): ?>
                 <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>" class="btn btn-primary registerlink"
                    disabled="disabled">Next</a>
                 <?php else: ?>
-                <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>" class="btn  btn-primary registerlink" disabled="disabled"
+                <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>"
+                   class="btn  btn-primary registerlink" disabled="disabled"
                    style="color: black;cursor:grab ">Next</a>
                 <?php endif; ?>
                 <?php endif; ?>
@@ -123,7 +126,10 @@
 <script>
     $(document).ready(function () {
         $(".registerBlock").removeAttr("href");
-        $("#contentpara p").addClass("text-center text-danger").css("font-size", "25px");
+        $(".checkbox").css({"margin-left": "75%", 'font-size': '1.6rem'});
+        $("#contentpara p").addClass("text-center text-danger").css({
+            "font-size": "25px", "padding-bottom": "10px"
+        });
         $(document).mousemove(function () {
             let checkboxvalid = document.getElementById("myCheck").checked;
             if (checkboxvalid) {
