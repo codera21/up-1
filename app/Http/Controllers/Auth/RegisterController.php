@@ -96,7 +96,20 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-
+            'parent_id' => 'required|numeric',
+            'first_name' => 'required|name|max:50',
+            'last_name' => 'required|name|max:50',
+            'address1' => 'required|address|max:255',
+            /*'address2' => 'address|max:255',*/
+            /*'city' => 'required|city|max:255',
+            'state' => 'required',*/
+            'phone' => 'required|phone|max:10',
+            'username' => 'required|max:100|unique:users',
+            'email' => 'required|email|max:100|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'agree'=>'required'
+        ],[
+            'agree.required'=>'You Should agree with terms of Use and Privacy Policy',
         ]);
     }
 
@@ -151,6 +164,7 @@ class RegisterController extends Controller
             return redirect()->route('register', ['post' => $request->input("parent_id")])
                 ->with('danger', 'Complete captcha');
         }
+
         $secrect_key = "6Ld0aaoUAAAAAJe3yNib7ahWdBjx8U8NO7armg3d";
         $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secrect_key) . '&response=' . urlencode($capta);
         $response = file_get_contents($url);
