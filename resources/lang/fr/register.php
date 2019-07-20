@@ -20,7 +20,7 @@ return [
     'password_confirmation' => 'Confirmez le mot de passe',
     'submit' => 'registre',
     'download_terms' => 'Lisez et téléchargez nos conditions d\'utilisation et notre politique de confidentialité.',
-    'agree' => 'Cochez cette case si vous acceptez nos <a href="/pages/terms-and-conditions" style="color: blue"> conditions d\'utilisation</a> et notre <a href="/pages/privacy-policy" style="color: blue;"> politique de confidentialité</a>',
+    'agree' => 'Cochez cette case si vous acceptez nos <a href="/pages/terms-and-conditions" target="_blank" style="color: blue"> conditions d\'utilisation</a> et notre <a href="/pages/privacy-policy" target="_blank" style="color: blue;"> politique de confidentialité</a>',
     'no_referal' => 'Désolé, vous n\'avez pas spécifié de référence',
     'example' => 'Exemple',
 ];
