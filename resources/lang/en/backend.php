@@ -11,7 +11,7 @@ return [
     'profile' => 'Profile',
     'manage_post' => 'Manage Post',
     'manage_settings' => 'Manage Settings',
-    //for pages distributor
+    /// for dist
     "note_above_button"=>'Read this page carefully before you proceed!',
     "checkbox_note"=>"I have watched the entire video",
 ];
