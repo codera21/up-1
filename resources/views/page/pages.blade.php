@@ -88,6 +88,13 @@
                    >Next</a>
                 <?php endif;?>
             </div>
+            {{--<div class="terms_and_condition">
+                @if(Request::url() == "$baseUrl/pages/terms-and-conditions")
+                    <a href=""
+                       class="btn  btn-primary registerlink"
+                       style="color: black;cursor:grab ">Next</a>
+                    @endif
+            </div>--}}
         </div>
     </div>
     <br>
