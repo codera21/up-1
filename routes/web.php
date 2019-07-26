@@ -416,5 +416,3 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
   });*/
     Route::get('{page}', ['as' => 'page', 'uses' => 'PageController@index']);
 });
-
-
