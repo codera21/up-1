@@ -1,5 +1,5 @@
 <?php
-// google
+// google 
 Route::pattern('id', '\d+');
 Route::pattern('id', '[A-Za-z0-9-]+');
 Route::pattern('hash', '[a-z0-9]+');
