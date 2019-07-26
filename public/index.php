@@ -51,7 +51,6 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 |
 */
 
-<<<<<<< HEAD
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
@@ -61,6 +60,3 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
-=======
-$app->run();
->>>>>>> 6178de7f946270d6bc03e0bdf8ce31210613ff80
