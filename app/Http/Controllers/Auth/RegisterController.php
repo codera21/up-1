@@ -97,8 +97,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'parent_id' => 'required|numeric',
-            'first_name' => 'required|name|max:50',
-            'last_name' => 'required|name|max:50',
+            // 'first_name' => 'required|name|max:50',
+            // 'last_name' => 'required|name|max:50',
             'address1' => 'required|address|max:255',
             /*'address2' => 'address|max:255',*/
             /*'city' => 'required|city|max:255',
