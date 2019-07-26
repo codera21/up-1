@@ -72,10 +72,10 @@
                         <p class="text-danger">{{trans("backend.checkbox_note")}}</p></label>
                 </div>
                 <?php if (env("SITE") == "ENG"): //for site buttons?>
-				                <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>"
-				                   class="btn  btn-primary registerlink"
-				                   style="color: black;cursor:grab ">Next</a>
-				                <?php else: ?>
+								 <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>"
+		                         class="btn  btn-primary registerlink"
+		                         style="color: black;cursor:grab ">Next</a>
+		                         <?php else: ?>
                 <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>"
                    class="btn  btn-primary registerlink"
                    style="color: black;cursor:grab ">Next</a>
@@ -84,17 +84,13 @@
             </div>
             <div class="distributor">
                 <?php if (Request::url() == "$baseUrl/pages/distributor"): ?>
-                <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>" class="btn btn-primary registerlink"
+                <a href="{{$baseUrl}}/register/<?php echo $_GET["id"] ?>"
+                   class="btn btn-primary registerlink"
+                   style="color: black;cursor:grab"
                    >Next</a>
                 <?php endif;?>
             </div>
-            {{--<div class="terms_and_condition">
-                @if(Request::url() == "$baseUrl/pages/terms-and-conditions")
-                    <a href=""
-                       class="btn  btn-primary registerlink"
-                       style="color: black;cursor:grab ">Next</a>
-                    @endif
-            </div>--}}
+
         </div>
     </div>
     <br>

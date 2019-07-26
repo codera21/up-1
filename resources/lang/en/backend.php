@@ -12,6 +12,6 @@ return [
     'manage_post' => 'Manage Post',
     'manage_settings' => 'Manage Settings',
     //for pages distributor
-    "note_above_button"=>'Visit all the below links in blue, subscribe where you have to subscribe, read where you have to read to be able to proceed!',
+    "note_above_button"=>'Read this page carefully before you proceed!',
     "checkbox_note"=>"I have watched the entire video",
 ];
