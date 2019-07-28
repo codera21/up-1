@@ -3,68 +3,50 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 // Request & Response
-use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Models\Material;
-// Facades
-use Grid;
-use Date;
-use Storage;
-use Config;
-
-// Models and Repo
-use App\Repositories\MaterialRepository;
-use App\Repositories\MaterialGroupRepository;
-use App\Repositories\MaterialSubGroupRepository;
-use App\Repositories\PaymentDetailsRepository;
-use App\Repositories\PaymentRepository;
-
-// Form Requests
 use App\Http\Requests\Admin\MaterialSaveRequest;
 use App\Http\Requests\Admin\MaterialUpdateRequest;
 use App\Http\Requests\Admin\SubscriptionUpdateRequest;
+// Facades
+use App\Models\Material;
+use App\Repositories\MaterialGroupRepository;
+use App\Repositories\MaterialRepository;
+use App\Repositories\MaterialSubGroupRepository;
+
+// Models and Repo
+use App\Repositories\PaymentDetailsRepository;
+use App\Repositories\PaymentRepository;
+use Config;
+use Date;
+use Grid;
+
+// Form Requests
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 // Used to process plans
-use PayPal\Api\ChargeModel;
 use PayPal\Api\Currency;
 use PayPal\Api\MerchantPreferences;
-use PayPal\Api\PaymentDefinition;
-use PayPal\Api\Plan;
 use PayPal\Api\Patch;
 use PayPal\Api\PatchRequest;
+use PayPal\Api\PaymentDefinition;
+use PayPal\Api\Plan;
+use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Common\PayPalModel;
 use PayPal\Rest\ApiContext;
-use PayPal\Auth\OAuthTokenCredential;
-
+use Storage;
 
 class MaterialController extends Controller
 {
 
-    /**
-     * @var MaterialSubGroupRepository
-     */
     protected $materialSubGroup;
 
-    /**
-     * @var MaterialGroupRepository
-     */
     protected $materialGroup;
 
-    /**
-     * @var MaterialRepository
-     */
     protected $material;
 
-    /**
-     * @var PaymentDetailsRepository
-     */
     protected $paymentDetails;
 
-    /**
-     * @var PaymentRepository
-     */
     protected $payment;
 
     private $apiContext;
@@ -73,11 +55,10 @@ class MaterialController extends Controller
     private $secret;
 
     public function __construct(MaterialSubGroupRepository $materialSubGroup,
-                                MaterialGroupRepository $materialGroup,
-                                MaterialRepository $material,
-                                PaymentDetailsRepository $paymentDetails,
-                                PaymentRepository $payment)
-    {
+        MaterialGroupRepository $materialGroup,
+        MaterialRepository $material,
+        PaymentDetailsRepository $paymentDetails,
+        PaymentRepository $payment) {
         $this->materialSubGroup = $materialSubGroup;
         $this->materialGroup = $materialGroup;
         $this->material = $material;
@@ -98,27 +79,18 @@ class MaterialController extends Controller
 
     }
 
-    /**
-     * Show all materials
-     *
-     * @return Response
-     */
     public function index(Request $request)
     {
-
         //Get all material sub groups
         $materialSubGroups = array();
         $this->materialSubGroup->all()->map(function ($item) use (&$materialSubGroups) {
             $materialSubGroups[$item->id] = $item->title;
         });
 
-        //Get all material groups
         $materialGroups = array();
         $this->materialGroup->all()->map(function ($item) use (&$materialGroups) {
             $materialGroups[$item->id] = $item->title;
         });
-
-        //dd($materialGroups);
 
         //Get model
         $this->material->pushCriteria(new \App\Criteria\Admin\MaterialCriteria());
@@ -128,18 +100,18 @@ class MaterialController extends Controller
         $grid = new Grid();
         $grid->setGridName('material-grid')->setBaseUrl(route('admin.material'))
             ->setPaginator($materials, 'created_at', 'desc', 25)
-            ->setMainActions(//Optional
+            ->setMainActions( //Optional
                 array(
                     array(
                         'name' => 'refresh',
                         'title' => trans('Refresh'),
-                        'url' => route('admin.material', array('action' => 'refresh'))
+                        'url' => route('admin.material', array('action' => 'refresh')),
                     ),
                     array(
                         'name' => 'add',
                         'title' => trans('New'),
-                        'url' => route('admin.material.add')
-                    )
+                        'url' => route('admin.material.add'),
+                    ),
                 )
             )
             ->setColumns(
@@ -155,7 +127,7 @@ class MaterialController extends Controller
                         'width' => 'auto',
                         'value' => function ($row) {
                             return $row->id;
-                        }
+                        },
                     ),
                     array(
                         'name' => 'title',
@@ -168,7 +140,7 @@ class MaterialController extends Controller
                         'width' => 'auto',
                         'value' => function ($row) {
                             return $row->title;
-                        }
+                        },
                     ),
                     array(
                         'name' => 'price',
@@ -181,7 +153,7 @@ class MaterialController extends Controller
                         'width' => 'auto',
                         'value' => function ($row) {
                             return $row->price;
-                        }
+                        },
                     ),
                     array(
                         'name' => 'material_type',
@@ -196,7 +168,7 @@ class MaterialController extends Controller
                         'width' => 'auto',
                         'value' => function ($row) {
                             return $row->material_type;
-                        }
+                        },
                     ),
                     array(
                         'name' => 'payment_type',
@@ -209,7 +181,7 @@ class MaterialController extends Controller
                         'width' => 'auto',
                         'value' => function ($row) {
                             return $row->payment_type;
-                        }
+                        },
                     ),
                     array(
                         'name' => 'enable_payment_button',
@@ -222,7 +194,7 @@ class MaterialController extends Controller
                         'width' => 'auto',
                         'value' => function ($row) {
                             return $row->enable_payment_button;
-                        }
+                        },
                     ),
                     array(
                         'name' => 'material_group',
@@ -240,7 +212,7 @@ class MaterialController extends Controller
                                 return $row->materialGroups->title;
                             }
 
-                        }
+                        },
                     ),
                     array(
                         'name' => 'material_sub_group',
@@ -258,7 +230,7 @@ class MaterialController extends Controller
                                 return $row->materialSubGroups->title;
                             }
 
-                        }
+                        },
                     ),
                     array(
                         'name' => 'action',
@@ -273,7 +245,7 @@ class MaterialController extends Controller
                             <a href="' . route('admin.material.delete', ['id' => $row->id]) . '" class="btn btn-danger btn-xs delete">' . trans('Delete') . '</a>';
                             }
 
-                        }
+                        },
                     ),
                 )
             );
@@ -281,108 +253,26 @@ class MaterialController extends Controller
         return view('admin.material.index', ['grid' => $grid]);
     }
 
-    /**
-     * Show add material form
-     *
-     * @return Response
-     */
     public function add()
     {
 
         return view('admin.material.add');
     }
 
-    /**
-     * Show edit material form
-     *
-     * @param integer $Id
-     * @return Response
-     */
     public function edit($Id)
     {
         $material = $this->material->find($Id);
         return view('admin.material.edit', ['material' => $material]);
     }
 
-    /**
-     * Save Material
-     *
-     * @param MaterialSaveRequest $request
-     * @return Redirect
-     */
     public function save(MaterialSaveRequest $request)
     {
-        
-        $data = $request->except(['_token', 'video_url', 'thumbnail']);
+        $data = $request->except(['_token', 'thumbnail']);
         $data['enable_payment_button'] = $request->input('enable_payment_button');
         // Check Payment Type button
         $materialGroup = $this->materialGroup->find($data['group_id']);
         $data['payment_type'] = $materialGroup->payment_type;
         $data['course_url'] = $request->input('url');
-        // Online Payment with Paypal starts here
-//        if ($data['payment_type'] == 'RECURRING') {
-//
-//            // Create a new billing plan
-//            $plan = new Plan();
-//            $plan->setName(config('settings.sitename') . ' Monthly Billing for ' . $data['title'])
-//                ->setDescription('Monthly ' . $data['title'] . ' Billing to the ' . config('settings.sitename'))
-//                ->setType('infinite');
-//
-//            // Set billing plan definitions
-//            $paymentDefinition = new PaymentDefinition();
-//            $paymentDefinition->setName('Regular Monthly Payments for ' . $data['title'])
-//                ->setType('REGULAR')
-//                ->setFrequency('Month')
-//                ->setFrequencyInterval('1')
-//                ->setCycles('0')
-//                ->setAmount(new Currency(array('value' => $data['price'], 'currency' => 'USD')));
-//
-//            // Set merchant preferences
-//            $merchantPreferences = new MerchantPreferences();
-//            $merchantPreferences->setReturnUrl(route('online-payment.success'))
-//                ->setCancelUrl(route('online-payment.cancel'))
-//                ->setAutoBillAmount('yes')
-//                ->setInitialFailAmountAction('CONTINUE')
-//                ->setMaxFailAttempts('0');
-//
-//            $plan->setPaymentDefinitions(array($paymentDefinition));
-//            $plan->setMerchantPreferences($merchantPreferences);
-//
-//            //create the plan
-//            try {
-//                $createdPlan = $plan->create($this->apiContext);
-//
-//                try {
-//                    /*$patch = new Patch();
-//                    $value = new PayPalModel('{"state":"ACTIVE"}');
-//                    $patch->setOp('replace')
-//                      ->setPath('/')
-//                      ->setValue($value);
-//                    $patchRequest = new PatchRequest();
-//                    $patchRequest->addPatch($patch);
-//                    $createdPlan->update($patchRequest, $this->apiContext);
-//                    $plan = Plan::get($createdPlan->getId(), $this->apiContext);*/
-//
-//                    // Output plan id
-//                    $data['paypal_plan_id'] = $createdPlan->getId();
-//
-//                } catch (PayPal\Exception\PayPalConnectionException $ex) {
-//
-//                    return redirect()->route('admin.material.add')->withInput()->with('error', trans('Material has not been saved. Error: ') . $ex->getData());
-//                } catch (Exception $ex) {
-//
-//                    return redirect()->route('admin.material.add')->withInput()->with('error', trans('Material has not been saved. Error: ') . $ex);
-//                }
-//            } catch (PayPal\Exception\PayPalConnectionException $ex) {
-//                return redirect()->route('admin.material.add')->withInput()->with('error', trans('Material has not been saved. Error: ') . $ex->getData());
-//            } catch (Exception $ex) {
-//
-//                return redirect()->route('admin.material.add')->withInput()->with('error', trans('Material has not been saved. Error: ') . $ex);
-//            }
-//        }
-
-        // ======================================
-
 
         // thumbnail
         $thumbnail = Storage::disk('uploads.thumbnails');
@@ -396,47 +286,18 @@ class MaterialController extends Controller
             $data['thumbnail_url'] = $thumbFileUrl;
 
         }
+
         // video url
-        // Storage local disk
-        $local = Storage::disk('uploads.materials');
-        if ($request->hasFile('video_url')) {
-            $file = $request->file('video_url');
-            $fileName = date('Ymd_His') . '_' . $file->getClientOriginalName();
-            $fileRelativePath = $local->putFileAs('', $file, $fileName);
-            $storagePath = $local->url($fileRelativePath);
-            $fileUrl = asset($storagePath);
-            //$fileUrl                = public_path($storagePath);
-            $data['video_url'] = $fileUrl;
-        } else {
-            // save the file name manually
-        }
-        
-        /*if ($request->hasFile('course_url')) {
-            $file = $request->file('course_url');
-            $fileName = date('Ymd_His') . '_' . $file->getClientOriginalName();
-            $fileRelativePath = $local->putFileAs('', $file, $fileName);
-            $storagePath = $local->url($fileRelativePath);
-            $fileUrl = asset($storagePath);
-            //$fileUrl                = public_path($storagePath);
-            $data['course_url'] = $fileUrl;
-        }*/
-        if ($material = $this->material->create($data)) {
-            DB::table('material')->where('title', $request->title)->update([
-                'embed' => $request->input('video_url_name'),
-            ]);
+        $data['embed'] = $request->input('video_url_name');
+
+        if ($this->material->create($data)) {
+
             return redirect()->route('admin.material')->with('success', trans('Material has been saved successfully.'));
         } else {
             return redirect()->route('admin.material.add')->withInput()->with('error', trans('Material has not been saved.'));
         }
     }
 
-    /**
-     * Update Material
-     *
-     * @param MaterialUpdateRequest $request
-     * @param integer $Id
-     * @return Redirect
-     */
     public function update(MaterialUpdateRequest $request, $Id)
     {
         $data = $request->except(['_token']);
@@ -467,7 +328,7 @@ class MaterialController extends Controller
                         ->setPath('/payment-definitions/' . $paymentDefinitionId)
                         ->setValue(json_decode(
                             '{
-                                "amount": {                                    
+                                "amount": {
                                     "currency": "USD",
                                     "value": "' . $data['price'] . '"
                                 }
@@ -514,24 +375,12 @@ class MaterialController extends Controller
         }
     }
 
-    /**
-     * Show edit subscription form
-     *
-     * @param integer $Id
-     * @return Response
-     */
     public function editSubscription($Id)
     {
         $material = $this->material->find($Id);
         return view('admin.subscription.edit', ['material' => $material]);
     }
 
-    /**
-     * Update Subscription
-     *
-     * @param SubscriptionUpdateRequest $request
-     * @return Redirect
-     */
     public function updateSubscription(SubscriptionUpdateRequest $request)
     {
         $data = $request->except(['_token']);
@@ -600,7 +449,6 @@ class MaterialController extends Controller
 
         // ======================================
 
-
         if ($material = $this->material->update($data, 1)) {
             return redirect()->route('admin.subscription.edit', 1)->with('success', trans('Subscription Fee has been updated successfully.'));
         } else {
@@ -608,13 +456,6 @@ class MaterialController extends Controller
         }
     }
 
-    /**
-     * Delete Material
-     *
-     * @param Request $request
-     * @param integer $Id
-     * @return Redirect
-     */
     public function delete(Request $request, $Id)
     {
         // Delete all childs

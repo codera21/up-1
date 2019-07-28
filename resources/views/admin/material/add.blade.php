@@ -57,16 +57,10 @@
 
             <div class="form-group required" id="material-video">
                 <div class="col-md-4">
-                    {!! Form::label('video_url', trans('Video File (FLV, MP4)'), ['class' => 'control-label']) !!}
-                </div>
-                <div class="col-md-2">
-                    {!! Form::file('video_url') !!}
+                    {!! Form::label('video_url', trans('Video Link'), ['class' => 'control-label']) !!}
                 </div>
 
-                <div class="col-md-1">
-                    <label style="padding-top: 7px;"><b>--OR--</b></label>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     {!! Form::text('video_url_name', old('video_url_name'), ['id'=>'video_url_name', 'class'=>'form-control']) !!}
 
                 </div>
@@ -86,7 +80,7 @@
 
             <div class="form-group required" id="material-course" style="display:none;">
                 <div class="col-md-4">
-                    {!! Form::label('url', trans('Url'), ['class' => 'control-label']) !!}
+                    {!! Form::label('url', trans('Material Page Url'), ['class' => 'control-label']) !!}
                 </div>
                 <div class="col-md-6">
                     {!! Form::text('url', old('url'), ['id'=>'url', 'class'=>'form-control']) !!}
@@ -106,7 +100,7 @@
                 <div class="col-md-4">
                     {!! Form::label('description', trans('Description'), ['class' => 'control-label']) !!}
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-6">
                     {!! Form::textarea('description', old('description'), ['id'=>'description', 'class'=>'form-control']) !!}
                 </div>
             </div>

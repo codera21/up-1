@@ -45,43 +45,37 @@
                     {!! Form::text('slug', old('slug', $material->slug), ['id'=>'slug', 'class'=>'form-control']) !!}
                 </div>
             </div>
-                {{--edit url--}}
-
-        <div class="form-group required">
-            <div class="col-md-4">
-                {!! Form::label('Url', trans('Url'), ['class' => 'control-label']) !!}
-            </div>
-            <div class="col-md-6">
-                {!! Form::text('course_url', old('title', $material->course_url), ['id'=>'course_url', 'class'=>'form-control']) !!}
-            </div>
-        </div>
-        {{--end of edit--}}
+        
+        
+        
             <div class="form-group required">
                 <div class="col-md-4">
                     {!! Form::label('material_type', trans('Material Type'), ['class' => 'control-label']) !!}
                 </div>
                 <div class="col-md-6">
-                    {!! Form::select('material_type', ['VIDEO' => 'Video', 'COURSE' => 'Course'], old('material_type', $material->material_type), ['class'=>'form-control']) !!}
+                    {!! Form::text('material_type', old('material_type', $material->material_type), ['class'=>'form-control', 'readonly']) !!}
                 </div>
             </div>
-
+            @if($material->material_type == 'VIDEO')
             <div class="form-group required">
                 <div class="col-md-4">
-                    {!! Form::label('video_url', trans('Video File (V)'), ['class' => 'control-label']) !!}
+                    {!! Form::label('video_url', trans('Video Link'), ['class' => 'control-label']) !!}
                 </div>
-                <div class="col-md-2">
-                    {!! Form::file('video_url') !!}
-                    {!! ($material->video_url) ? "<a href='$material->video_url' target='_blank' class='btn btn-primary btn-xs'>Download File</a>" : '' !!}
-                </div>
-                <div class="col-md-1">
-                    <label style="padding-top: 7px;"><b>--OR--</b></label>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     {!! Form::text('video_url_name', old('video_url_name', $material->embed), ['id'=>'video_url_name', 'class'=>'form-control']) !!}
-
                 </div>
-
             </div>
+            @endif
+            @if($material->material_type == 'COURSE')
+            <div class="form-group required">
+                <div class="col-md-4">
+                    {!! Form::label('Url', trans('Course Link'), ['class' => 'control-label']) !!}
+                </div>
+                <div class="col-md-6">
+                    {!! Form::text('course_url', old('title', $material->course_url), ['id'=>'course_url', 'class'=>'form-control']) !!}
+                </div>
+            </div>
+            @endif
 
             <div class="form-group required">
                 <div class="col-md-4">
@@ -96,7 +90,7 @@
                 <div class="col-md-4">
                     {!! Form::label('description', trans('Description'), ['class' => 'control-label']) !!}
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-6">
                     {!! Form::textarea('description', old('description',$material->description), ['id'=>'description', 'class'=>'form-control']) !!}
                 </div>
             </div>
@@ -121,8 +115,11 @@
 
             <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
-                    <a class="btn btn-default btn-close" href="{{ URL::route('admin.material-sub-group') }}">{{ trans('Cancel') }}</a>
-                    {!! Form::submit(trans('Update Changes'), ['class' => 'btn btn-success']) !!}
+                        {!! Form::submit(trans('Update Changes'), ['class' => 'btn btn-success']) !!}
+                        &nbsp;
+                    <a class="btn btn-default btn-close" href="{{ URL::route('admin.material') }}">{{ trans('Back') }}</a>
+                    
+                    
                 </div>
             </div>
 

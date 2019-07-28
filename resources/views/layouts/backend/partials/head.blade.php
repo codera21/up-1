@@ -140,6 +140,12 @@
 <link href="{{ asset('/backend/css/style.css') }}" rel="stylesheet">
 <script src="{{ asset('/backend/js/script.js') }}"></script>
 
+
+<style>
+div.ibox {
+  padding: 1.5em 0;
+}
+</style>
 @stack('scripts')
 
 <!-- 
