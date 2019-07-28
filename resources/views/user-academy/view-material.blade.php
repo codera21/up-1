@@ -11,7 +11,7 @@
                 <?php if($material_details->embed == null) : ?>
                 <video class="video" controls controlsList="nodownload">
                     <source src="{{ $material['video_url'] }}"
-                    <source src="{{ $material['video_url'] }}"
+                    
                             type="video/mp4">
                 </video>
             <?php else:?>

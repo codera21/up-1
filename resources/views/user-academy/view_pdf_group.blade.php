@@ -12,7 +12,7 @@
                             <h4 class="pull-right text-success">${{$materialItem->price}}</h4>
                         @endif
                         <h4>
-                            <a href="{!! url('user-academy/view/' . $materialItem->id)   !!}">{{ $materialItem->title }}</a>
+                            <a href="{{$materialItem->course_url}}">{{ $materialItem->title }}</a>
                         </h4>
                         <hr>
                     </div>
@@ -21,7 +21,7 @@
                              style="width: 700px; height: 300px"/>
                     </a>
                     <div class="caption">
-                        <p class="description">{!! str_limit($materialItem->description , $limit = 150 , $end = '... <a href="' . url('user-academy/view/' . $materialItem->id) . '">read more</a>' )!!}</p>
+                        <p class="description">{!! str_limit($materialItem->description , $limit = 150 , $end = '... <a href=" {{$materialItem->course_url }}">read more</a>' )!!}</p>
                     </div>
                 </div>
             </div>
