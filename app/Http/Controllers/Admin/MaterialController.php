@@ -268,6 +268,7 @@ class MaterialController extends Controller
     public function save(MaterialSaveRequest $request)
     {
         $data = $request->except(['_token', 'thumbnail']);
+
         $data['enable_payment_button'] = $request->input('enable_payment_button');
         // Check Payment Type button
         $materialGroup = $this->materialGroup->find($data['group_id']);
@@ -291,7 +292,6 @@ class MaterialController extends Controller
         $data['embed'] = $request->input('video_url_name');
 
         if ($this->material->create($data)) {
-
             return redirect()->route('admin.material')->with('success', trans('Material has been saved successfully.'));
         } else {
             return redirect()->route('admin.material.add')->withInput()->with('error', trans('Material has not been saved.'));
@@ -369,7 +369,7 @@ class MaterialController extends Controller
             DB::table('material')->where('id', $Id)->update([
                 'embed' => $request->input('video_url_name'),
             ]);
-            return redirect()->route('admin.material.edit', ['id' => $Id])->with('success', trans('Material has been updated successfully.'));
+            return redirect()->route('admin.material')->with('success', trans('Material has been updated successfully.'));
         } else {
             return redirect()->route('admin.material.edit', ['id' => $Id])->withInput()->with('error', trans('Material has not been updated.'));
         }

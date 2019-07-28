@@ -143,7 +143,7 @@
 
 <style>
 div.ibox {
-  padding: 1.5em 0;
+  padding: 1.5em 1em;
 }
 </style>
 @stack('scripts')
