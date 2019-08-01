@@ -41,18 +41,8 @@
                         <h4 class="media-heading">{{trans('contact.address')}}:</h4>
 
                         <address>
-                            Pediatric Surgeons of Alaska
-                            <br> 3340 Providence Drive #565
-                            <br> Anchorage, AK(Alaska)
-                            <br> North Las Vegas, NV
+                                {!! trans('contact.address_details') !!}
                         </address>
-                    </div>
-                </div>
-                <div class="media padleft10">
-
-                    <div class="media-body padbtm2">
-                        <h4 class="media-heading">{{trans('contact.telephone')}}:</h4> (703) 717-4200
-                        <br/> Fax:400 423 1456
                     </div>
                 </div>
             </div>

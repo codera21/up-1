@@ -3,21 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Mail;
+use App\Http\Requests\ContactFormRequest;
 // Request & Response
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\Repositories\FAQRepository;
+use App\Repositories\NewsRepository;
 // Models and Repo
 
 use App\Repositories\PageRepository;
-use App\Repositories\FAQRepository;
-use App\Repositories\NewsRepository;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 // Form Requests
-use App\Http\Requests\ContactFormRequest;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Mail;
 
 class PageController extends Controller
 {
@@ -55,7 +55,7 @@ class PageController extends Controller
     {
         $faqs = DB::table('faqs')
             ->where('lang', App::getLocale())
-            ->orderBYRaw('question + 0','ASC', 'question')
+            ->orderBYRaw('question + 0', 'ASC', 'question')
             ->get();
         return view('page.faq', ['faqs' => $faqs]);
     }
@@ -64,13 +64,12 @@ class PageController extends Controller
     {
         $lang = App::getLocale();
         $data = array(
-            'lang' => $lang
+            'lang' => $lang,
         );
         $data1['about_us'] = DB::table('about')->where($data)->get();
         /*dd($data1);*/
         return view('page.about', $data1);
     }
-
 
     /**
      * Show news
@@ -113,25 +112,14 @@ class PageController extends Controller
         return view('page.contact-us');
     }
 
-    /**
-     * Show send contact us email
-     *
-     * @return Response
-     */
-
     public function postContact(ContactFormRequest $request)
     {
-
-        $name = $request->get('name');
-        $email = $request->get('email');
-        $message = $request->get('message');
         Mail::send('emails.contact',
             array(
-                'name' => $request->get('name'),
-                'email' => $request->get('email'),
-                'user_message' => $request->get('message')
-            ),  function($message) use($request)
-            {
+                'name' => $request->name,
+                'email' => $request->email,
+                'user_message' => $request->message,
+            ), function ($message) use ($request) {
                 $message->from($request->email);
                 $message->to('yahiadjipe@yahoo.com', 'Admin')->subject('Dnasbook contact us');
             });
@@ -159,7 +147,8 @@ class PageController extends Controller
             ->where('id', $userID)
             ->update(['is_active' => 'No']);
     }
-    public  function  ban(){
+    public function ban()
+    {
         return view('page.ban');
     }
 }
