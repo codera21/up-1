@@ -16,11 +16,11 @@ return [
     Direct: 862 214 6863 (USA). En dehors des États-Unis: +1 862 214 6863.<br/>
     Fax: 862 214 6868/973 926 0890 (USA). En dehors des États-Unis: +1 862 214 6863 / + 1 973 926 0890.<br/>
     Cellphone & WhatSapp: 908 249 7637 (USA). En dehors des États-Unis: +1 908 249 7637.<br/>
-    <br/><br/>
-    <strong>African Headquarters:</strong><br/>
+    <br/>
+    <strong>Siège Africain:</strong><br/>
     Biyem-assi/Mendong/Carrefour TKC<br/>
     Immeuble CLARA, Porte 6, Cameroon, Yaoundé<br/>
-    Phone & Fax: 222 314 866 (Cameroon). Outside Cameroon: (+237) 222 314 866<br/>
-    Cellphone: 680 64 82 11 (Cameroon). Outside Cameroon: (+237) 680 64 82 11<br/>
+    Phone & Fax: 222 314 866 (Cameroon). En dehors du Cameroon: (+237) 222 314 866<br/>
+    Cellphone: 680 64 82 11 (Cameroon). En dehors du Cameroon: (+237) 680 64 82 11<br/>
     WhatSapp: +225 07 96 40 75.",
 ];
