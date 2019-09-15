@@ -38,7 +38,7 @@ class PaymentsController extends Controller
 
     public function delete($id)
     {
-        $data = Payments::findOrFail($id)->delete();
+        Payments::findOrFail($id)->delete();
         return response('deleted successfully', 200);
     }
 }
