@@ -1,5 +1,5 @@
 <?php
-// google 
+// google
 Route::pattern('id', '\d+');
 Route::pattern('id', '[A-Za-z0-9-]+');
 Route::pattern('hash', '[a-z0-9]+');
@@ -108,6 +108,14 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
         // Show Material's Box loaded from Sub Group
         Route::post('/show-material', ['as' => '.show-material', 'uses' => 'OnlinePaymentController@showMaterial']);
         Route::get('/activate', ['as' => '.activate', 'uses' => 'OnlinePaymentController@activate']);
+    });
+    /*code to remove*/
+    Route::group(['as' => 'subscription', 'prefix' => 'subscription'], function () {
+        Route::get('/', ['as' => '', 'uses' => 'paypal\PaypalController@recurring']);
+        Route::get('/executePayment', ['as' => '', 'uses' => 'paypal\PaypalController@executePayment']);
+        Route::post('/create-payment','paypal\PaypalController@create')->name('create-payment');
+        Route::get('/clientExecute','paypal\PaypalController@clientExecute')->name('clientExecute');
+        Route::post('/createtest', ['as' => '', 'uses' => 'paypal\PaypalController@test']);
     });
 });
 
@@ -416,3 +424,4 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
   });*/
     Route::get('{page}', ['as' => 'page', 'uses' => 'PageController@index']);
 });
+

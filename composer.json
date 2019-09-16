@@ -18,7 +18,8 @@
         "lavary/laravel-menu": "^1.6",
         "league/flysystem": "^1.0",
         "nesbot/carbon": "^1.21",
-        "paypal/rest-api-sdk-php": "^1.13",
+        "paypal/paypal-checkout-sdk": "1.0.0",
+        "paypal/rest-api-sdk-php": "*",
         "prettus/l5-repository": "^2.6",
         "tijmen-wierenga/laravel-chargebee": "^0.3.0"
     },

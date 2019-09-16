@@ -119,7 +119,7 @@
                     });
                 }
 
-            }, '#paypal-button');
+            }, '#paypalController-button');
 
         });
     </script>

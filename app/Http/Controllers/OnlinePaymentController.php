@@ -76,17 +76,17 @@ class OnlinePaymentController extends Controller
         $this->user = $user;
 
         // Detect if we are running in live mode or sandbox
-        if (config('paypal.settings.mode') == 'live') {
-            $this->client_id = config('paypal.live_client_id');
-            $this->secret = config('paypal.live_secret');
+        if (config('paypalController.settings.mode') == 'live') {
+            $this->client_id = config('paypalController.live_client_id');
+            $this->secret = config('paypalController.live_secret');
         } else {
-            $this->client_id = config('paypal.sandbox_client_id');
-            $this->secret = config('paypal.sandbox_secret');
+            $this->client_id = config('paypalController.sandbox_client_id');
+            $this->secret = config('paypalController.sandbox_secret');
         }
 
         // Set the Paypal API Context/Credentials
         $this->apiContext = new ApiContext(new OAuthTokenCredential($this->client_id, $this->secret));
-        $this->apiContext->setConfig(config('paypal.settings'));
+        $this->apiContext->setConfig(config('paypalController.settings'));
 
         Log::getMonolog()->popHandler();//Remove Old Handlers
         Log::useDailyFiles(config('settings.log.onlinepayment'));//Set New Handler
@@ -182,7 +182,7 @@ class OnlinePaymentController extends Controller
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_POST, true);
         //curl_setopt($curl, CURLOPT_URL, 'https://api-3t.sandbox.paypal.com/nvp');
-        curl_setopt($curl, CURLOPT_URL, 'https://api-3t.paypal.com/nvp');
+        curl_setopt($curl, CURLOPT_URL, 'https://api-3t.paypalController.com/nvp');
         curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query(array(
             //Test
             /* 'USER' => 'yahiadjipe-facilitator_api1.yahoo.com',
@@ -233,7 +233,7 @@ class OnlinePaymentController extends Controller
                 'token' => $nvp['TOKEN']
             );
             //Live
-            $redirectURL = sprintf('https://www.paypal.com/cgi-bin/webscr?%s', http_build_query($query));
+            $redirectURL = sprintf('https://www.paypalController.com/cgi-bin/webscr?%s', http_build_query($query));
             //Test
             //$redirectURL = sprintf('https://www.sandbox.paypal.com/cgi-bin/webscr?%s', http_build_query($query));
 
@@ -379,7 +379,7 @@ class OnlinePaymentController extends Controller
 
             // Add payer type
             $payer = new Payer();
-            $payer->setPaymentMethod('paypal');
+            $payer->setPaymentMethod('paypalController');
             $agreement->setPayer($payer);
 
             try {
@@ -470,7 +470,7 @@ class OnlinePaymentController extends Controller
 
             if (isset($result->id)) {
 
-                $data['payment_profile_id'] = $result->id;  //paypal profile id
+                $data['payment_profile_id'] = $result->id;  //paypalController profile id
 
                 // ======================================
                 if ($onlinePayment = $this->onlinePayment->create($data)) {

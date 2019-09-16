@@ -12,9 +12,10 @@ class Corncontroller extends Controller
     {
         $count = 0;
         $user = DB::table('test')->insert([
-            'count'=> $count
+            'count' => $count
         ]);
     }
+
     public function ban()
     {
         $users = DB::table('users')->get();

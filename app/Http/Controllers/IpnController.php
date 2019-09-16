@@ -31,11 +31,11 @@ class IpnController extends Controller
              * https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNandPDTVariables/
              */
             foreach($_POST as $key=>$value){
-                Log::info('Key: '. $key .' - Value: '.$value);    
+                Log::info('Key: '. $key .' - Value: '.$value);
             }
-            
+
         }
-        // Reply with an empty 200 response to indicate to paypal the IPN was received correctly.
+        // Reply with an empty 200 response to indicate to paypalController the IPN was received correctly.
         header("HTTP/1.1 200 OK");
     }
     public function smp($query)

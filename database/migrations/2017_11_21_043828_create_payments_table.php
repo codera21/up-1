@@ -18,8 +18,8 @@ class CreatePaymentsTable extends Migration
             $table->integer('user_id');
             $table->string('bank_slip_no')->nullable(); // for offline payment
             $table->string('bank_id')->nullable(); // for offline payment
-            $table->string('payment_profile_id', 255)->nullable(); // paypal agreement id, or bank id
-            $table->string('paypal_plan_id', 255)->nullable(); // paypal plan id which was created when group, level or material was created
+            $table->string('payment_profile_id', 255)->nullable(); // paypalController agreement id, or bank id
+            $table->string('paypal_plan_id', 255)->nullable(); // paypalController plan id which was created when group, level or material was created
             $table->enum('payment_mode', ['OFFLINE', 'ONLINE']);
             $table->enum('payment_type', ['RECURRING', 'ONE TIME']);
             $table->enum('paid_for', ['GROUP', 'LEVEL', 'MATERIAL', 'SUBSCRIPTION']);
