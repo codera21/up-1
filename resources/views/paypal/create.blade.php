@@ -17,7 +17,7 @@
         <label for="email">Email</label>
         <input type="text" id="email" name="email" placeholder="email">
         <br>
-        <input type="submit" value="submit">
+        <input type="submit" value="submit" formtarget="_blank">
     </div>
 </form>
 </body>

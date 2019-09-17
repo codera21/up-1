@@ -34,10 +34,12 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-    'stripe'=> [
-        'model'=> App\User::class,
-        'key'=> env('STRIVE_KEY'),
-        'secret'=>env('STRIPE_SERECT')
+    'paypal'=>[
+        'id'=>env('PAY_ID'),
+        'secret'=>env('PAYPAL_SECRET'),
+        'url'=>[
+            'redirect'=>'http://127.0.0.1:8000/subscription/executePayment',
+            'cancel'=>'http://127.0.0.1:8000/subscription/cancel'
+        ]
     ]
-
 ];
