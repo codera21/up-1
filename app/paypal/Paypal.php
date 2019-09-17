@@ -13,7 +13,7 @@ class Paypal
         $this->apiContext = new \PayPal\Rest\ApiContext(
             new \PayPal\Auth\OAuthTokenCredential(
                 config('services.paypal.id'),     // ClientID
-                config('services.paypal.secret')
+                config('services.paypal.secret') //client secret
             )
         );
     }

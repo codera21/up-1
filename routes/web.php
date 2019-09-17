@@ -114,6 +114,12 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
         Route::get('/', ['as' => '', 'uses' => 'paypal\PaypalController@recurring']);
         Route::get('/executePayment', ['as' => '', 'uses' => 'paypal\PaypalController@executePayment']);
         Route::post('/create-payment', 'paypal\PaypalController@create')->name('create-payment');
+        Route::get('/plan/create', ['as' => '', 'uses' => 'paypal\SubscriptionController@Plan']);
+        Route::get('/plan/list', ['as' => '', 'uses' => 'paypal\SubscriptionController@Plan']);
+        Route::get('/plan/{id}', ['as' => '', 'uses' => 'paypal\SubscriptionController@showPlan']);
+        Route::get('/plan/{id}/activate', ['as' => '', 'uses' => 'paypal\SubscriptionController@activatePlan']);
+        Route::post('/plan/{id}/agreement/create', 'paypal\SubscriptionController@createAgreement')->name('.create-agreement');
+        Route::get('/execute-agreement/{success}', ['as' => '', 'uses' => 'paypal\PlanController@execute']);
     });
 });
 

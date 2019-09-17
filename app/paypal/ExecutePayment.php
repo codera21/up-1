@@ -22,6 +22,7 @@ class ExecutePayment extends Paypal
 
         $result = $payment->execute($execution, $this->apiContext);
 
+
         return $result;
     }
 

@@ -34,12 +34,17 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-    'paypal'=>[
-        'id'=>env('PAY_ID'),
-        'secret'=>env('PAYPAL_SECRET'),
-        'url'=>[
-            'redirect'=>'http://127.0.0.1:8000/subscription/executePayment',
-            'cancel'=>'http://127.0.0.1:8000/subscription/cancel'
+    /*Paypal config*/
+    'paypal' => [
+        'id' => env('PAY_ID'),
+        'secret' => env('PAY_SECRET'),
+        'url' => [
+            'redirect' => 'http://127.0.0.1:8000/subscription/executePayment',
+            'cancel' => 'http://127.0.0.1:8000/subscription/cancel',
+            'executeAgreement' => [
+                'success' => 'http://127.0.0.1:8000/subscription/execute-agreement/true',
+                'failure' => 'http://127.0.0.1:8000/subscription/execute-agreement/false'
+            ]
         ]
     ]
 ];
