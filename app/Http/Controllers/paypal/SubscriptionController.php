@@ -4,7 +4,6 @@ namespace App\Http\Controllers\paypal;
 
 use App\paypal\PaypalAgreement;
 use App\paypal\SubscriptionPlan;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class SubscriptionController extends Controller

@@ -36,7 +36,7 @@ class SubscriptionPlan extends Paypal
 
     public function listPlan()
     {
-        $params = array('page_size' => '20');
+        $params = array('page_size' => '2');
         $planList = Plan::all($params, $this->apiContext);
         return $planList;
     }
