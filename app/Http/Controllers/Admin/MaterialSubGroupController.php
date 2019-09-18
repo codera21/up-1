@@ -70,9 +70,9 @@ class MaterialSubGroupController extends Controller
     private $client_id;
     private $secret;
 
-    public function __construct(MaterialSubGroupRepository $materialSubGroup, 
+    public function __construct(MaterialSubGroupRepository $materialSubGroup,
         MaterialGroupRepository $materialGroup,
-        MaterialRepository $material, 
+        MaterialRepository $material,
         PaymentDetailsRepository $paymentDetails,
         PaymentRepository $payment)
     {
@@ -90,10 +90,10 @@ class MaterialSubGroupController extends Controller
             $this->client_id = config('paypalController.sandbox_client_id');
             $this->secret = config('paypalController.sandbox_secret');
         }
-        
+
         // Set the Paypal API Context/Credentials
         $this->apiContext = new ApiContext(new OAuthTokenCredential($this->client_id, $this->secret));
-        $this->apiContext->setConfig(config('paypalController.settings'));
+        $this->apiContext->setConfig(config('paypal.settings'));
     }
 
     /**
@@ -103,7 +103,7 @@ class MaterialSubGroupController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         //Get all material groups
         $materialGroups = array();
         $this->materialGroup->all()->map(function($item) use(&$materialGroups) {
@@ -214,11 +214,11 @@ class MaterialSubGroupController extends Controller
                         'width' => 'auto',
                         'value' => function ($row) {
                             if($row->materialGroups){
-                                return $row->materialGroups->title;   
+                                return $row->materialGroups->title;
                             }
-                            
+
                         }
-                    ),       
+                    ),
                     array(
                         'name' => 'action',
                         'label' => trans('Action'),
@@ -261,7 +261,7 @@ class MaterialSubGroupController extends Controller
 
     /**
      * Save MaterialSubGroup
-     * 
+     *
      * @param MaterialSubGroupSaveRequest $request
      * @return Redirect
      */
@@ -336,9 +336,9 @@ class MaterialSubGroupController extends Controller
 //                return redirect()->route('admin.material-sub-group.add')->withInput()->with('error', trans('Material Sub Group has not been saved. Error: ').$ex);
 //            }
 //        }
-        
+
         // ======================================
-        
+
         if ($materialGroup = $this->materialSubGroup->create($data)) {
             return redirect()->route('admin.material-sub-group')->with('success', trans('Material Sub Group has been saved successfully.'));
         } else {
@@ -348,7 +348,7 @@ class MaterialSubGroupController extends Controller
 
      /**
      * Update Material Group
-     * 
+     *
      * @param MaterialSubGroupUpdateRequest $request
      * @param integer $Id
      * @return Redirect
@@ -379,7 +379,7 @@ class MaterialSubGroupController extends Controller
     public function delete(Request $request, $Id)
     {
         // Delete all childs
-        
+
         // Delete all materials
         $this->material->deleteWhere(['sub_group_id' => $Id]);
 
@@ -387,7 +387,7 @@ class MaterialSubGroupController extends Controller
         $paymentDetails = $this->paymentDetails->findByField('sub_group_id', $Id)->first();
         if($paymentDetails){
             $payment = $paymentDetails->payments()->first();
-        
+
             $this->payment->delete($payment->id);
             $this->paymentDetails->deleteWhere(['sub_group_id' => $Id]);
         }

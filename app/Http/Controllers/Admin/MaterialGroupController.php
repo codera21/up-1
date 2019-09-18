@@ -95,7 +95,7 @@ class MaterialGroupController extends Controller
 
         // Set the Paypal API Context/Credentials
         $this->apiContext = new ApiContext(new OAuthTokenCredential($this->client_id, $this->secret));
-        $this->apiContext->setConfig(config('paypalController.settings'));
+        $this->apiContext->setConfig(config('paypal.settings'));
     }
 
     /**
