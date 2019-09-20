@@ -3,44 +3,35 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
-// Request & Response
-use Illuminate\Http\Request;
-use App\Http\Requests;
-
-// Facades
-use Grid;
-use Date;
-use Config;
-
-// Models and Repo
-use App\Repositories\MaterialGroupRepository;
-use App\Repositories\MaterialSubGroupRepository;
-use App\Repositories\MaterialRepository;
-use App\Repositories\PaymentDetailsRepository;
-use App\Repositories\PaymentRepository;
-
-// Form Requests
 use App\Http\Requests\Admin\MaterialSubGroupSaveRequest;
 use App\Http\Requests\Admin\MaterialSubGroupUpdateRequest;
+use App\Repositories\MaterialGroupRepository;
+use App\Repositories\MaterialRepository;
+use App\Repositories\MaterialSubGroupRepository;
+use App\Repositories\PaymentDetailsRepository;
+use App\Repositories\PaymentRepository;
+use Config;
+use Date;
+use Grid;
+use Illuminate\Http\Request;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Rest\ApiContext;
+
+// Request & Response
+
+// Facades
+
+// Models and Repo
+
+// Form Requests
 
 // Used to process plans
-use PayPal\Api\ChargeModel;
-use PayPal\Api\Currency;
-use PayPal\Api\MerchantPreferences;
-use PayPal\Api\PaymentDefinition;
-use PayPal\Api\Plan;
-use PayPal\Api\Patch;
-use PayPal\Api\PatchRequest;
-use PayPal\Common\PayPalModel;
-use PayPal\Rest\ApiContext;
-use PayPal\Auth\OAuthTokenCredential;
 
 
 class MaterialSubGroupController extends Controller
 {
 
-   /**
+    /**
      * @var MaterialSubGroupRepository
      */
     protected $materialSubGroup;
@@ -71,10 +62,10 @@ class MaterialSubGroupController extends Controller
     private $secret;
 
     public function __construct(MaterialSubGroupRepository $materialSubGroup,
-        MaterialGroupRepository $materialGroup,
-        MaterialRepository $material,
-        PaymentDetailsRepository $paymentDetails,
-        PaymentRepository $payment)
+                                MaterialGroupRepository $materialGroup,
+                                MaterialRepository $material,
+                                PaymentDetailsRepository $paymentDetails,
+                                PaymentRepository $payment)
     {
         $this->materialSubGroup = $materialSubGroup;
         $this->materialGroup = $materialGroup;
@@ -83,7 +74,7 @@ class MaterialSubGroupController extends Controller
         $this->payment = $payment;
 
         // Detect if we are running in live mode or sandbox
-        if(config('paypalController.settings.mode') == 'live'){
+        if (config('paypalController.settings.mode') == 'live') {
             $this->client_id = config('paypalController.live_client_id');
             $this->secret = config('paypalController.live_secret');
         } else {
@@ -106,7 +97,7 @@ class MaterialSubGroupController extends Controller
 
         //Get all material groups
         $materialGroups = array();
-        $this->materialGroup->all()->map(function($item) use(&$materialGroups) {
+        $this->materialGroup->all()->map(function ($item) use (&$materialGroups) {
             $materialGroups[$item->id] = $item->title;
         });
 
@@ -213,7 +204,7 @@ class MaterialSubGroupController extends Controller
                         ),
                         'width' => 'auto',
                         'value' => function ($row) {
-                            if($row->materialGroups){
+                            if ($row->materialGroups) {
                                 return $row->materialGroups->title;
                             }
 
@@ -346,7 +337,7 @@ class MaterialSubGroupController extends Controller
         }
     }
 
-     /**
+    /**
      * Update Material Group
      *
      * @param MaterialSubGroupUpdateRequest $request
@@ -385,7 +376,7 @@ class MaterialSubGroupController extends Controller
 
         // Delete all payments history for this selected Group
         $paymentDetails = $this->paymentDetails->findByField('sub_group_id', $Id)->first();
-        if($paymentDetails){
+        if ($paymentDetails) {
             $payment = $paymentDetails->payments()->first();
 
             $this->payment->delete($payment->id);

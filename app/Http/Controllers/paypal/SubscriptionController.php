@@ -5,6 +5,8 @@ namespace App\Http\Controllers\paypal;
 use App\paypal\PaypalAgreement;
 use App\paypal\SubscriptionPlan;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use PayPal\Api\Agreement;
 
 class SubscriptionController extends Controller
 {
@@ -35,6 +37,18 @@ class SubscriptionController extends Controller
     public function CreateAgreement($id)
     {
         $agreement = new PaypalAgreement;
-        $agreement->create($id);
+        return redirect($agreement->create($id));
     }
+
+    public function executeAgreement($status)
+    {
+        if($status == 'true')
+        {
+            $agreement = new Agreement();
+            $agreement->execute($_GET['token']);
+            $tableData = DB::table("users")->get();
+            var_dump($tableData);
+        }
+    }
+
 }

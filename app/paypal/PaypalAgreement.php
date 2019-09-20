@@ -51,7 +51,7 @@ class PaypalAgreement extends Paypal
 
     public function create($id)
     {
-        return redirect($this->Agreement($id));
+        return $this->Agreement($id);
     }
 
 
@@ -64,7 +64,7 @@ class PaypalAgreement extends Paypal
 
         $agreement->setName('Base Agreement')
             ->setDescription('Basic Agreement')
-            ->setStartDate('2019-06-17T9:45:04Z');
+            ->setStartDate('2019-10-17T9:45:04Z');
 
         $agreement->setPlan($this->Plan($id));
 
@@ -110,4 +110,11 @@ class PaypalAgreement extends Paypal
             ->setCountryCode('US');
         return $shippingAddress;
     }
+
+    public function execute($token)
+    {
+        $token = $_GET['token'];
+        $agreement = new Agreement();
+    }
+
 }

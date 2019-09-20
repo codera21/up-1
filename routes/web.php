@@ -119,6 +119,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
         Route::get('/plan/{id}', ['as' => '', 'uses' => 'paypal\SubscriptionController@showPlan']);
         Route::get('/plan/{id}/activate', ['as' => '', 'uses' => 'paypal\SubscriptionController@activatePlan']);
         Route::post('/plan/{id}/agreement/create', 'paypal\SubscriptionController@createAgreement')->name('.create-agreement');
+        Route::get('/plan/{id}/activate', ['as' => '', 'uses' => 'paypal\SubscriptionController@executeAgreement']);
         Route::get('/execute-agreement/{success}', ['as' => '', 'uses' => 'paypal\PlanController@execute']);
     });
 });

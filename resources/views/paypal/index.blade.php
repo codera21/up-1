@@ -15,7 +15,7 @@
 
 <br>
 <h1>Subscribe</h1>
-<form action="{{route('subscription.create-agreement','P-8Y357200V6328471SH565KNY')}}" method="post">
+<form action="{{route('subscription.create-agreement','P-1WX58412X9730874EJ2GJN7Y')}}" method="post">
     <input type="submit"  value="Subscribe Now">
 </form>
 </body>

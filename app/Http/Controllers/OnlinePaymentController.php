@@ -76,17 +76,17 @@ class OnlinePaymentController extends Controller
         $this->user = $user;
 
         // Detect if we are running in live mode or sandbox
-        if (config('paypalController.settings.mode') == 'live') {
-            $this->client_id = config('paypalController.live_client_id');
-            $this->secret = config('paypalController.live_secret');
+        if (config('paypal.settings.mode') == 'live') {
+            $this->client_id = config('paypal.live_client_id');
+            $this->secret = config('paypal.live_secret');
         } else {
-            $this->client_id = config('paypalController.sandbox_client_id');
-            $this->secret = config('paypalController.sandbox_secret');
+            $this->client_id = config('paypal.sandbox_client_id');
+            $this->secret = config('paypal.sandbox_secret');
         }
 
         // Set the Paypal API Context/Credentials
         $this->apiContext = new ApiContext(new OAuthTokenCredential($this->client_id, $this->secret));
-        $this->apiContext->setConfig(config('paypalController.settings'));
+        $this->apiContext->setConfig(config('paypal.settings'));
 
         Log::getMonolog()->popHandler();//Remove Old Handlers
         Log::useDailyFiles(config('settings.log.onlinepayment'));//Set New Handler
