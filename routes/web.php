@@ -109,18 +109,10 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
         Route::post('/show-material', ['as' => '.show-material', 'uses' => 'OnlinePaymentController@showMaterial']);
         Route::get('/activate', ['as' => '.activate', 'uses' => 'OnlinePaymentController@activate']);
     });
-    /*code to remove*/
+    /*Subscription of site*/
     Route::group(['as' => 'subscription', 'prefix' => 'subscription'], function () {
-        Route::get('/', ['as' => '', 'uses' => 'paypal\PaypalController@recurring']);
-        Route::get('/executePayment', ['as' => '', 'uses' => 'paypal\PaypalController@executePayment']);
-        Route::post('/create-payment', 'paypal\PaypalController@create')->name('create-payment');
-        Route::get('/plan/create', ['as' => '', 'uses' => 'paypal\SubscriptionController@Plan']);
-        Route::get('/plan/list', ['as' => '', 'uses' => 'paypal\SubscriptionController@Plan']);
-        Route::get('/plan/{id}', ['as' => '', 'uses' => 'paypal\SubscriptionController@showPlan']);
-        Route::get('/plan/{id}/activate', ['as' => '', 'uses' => 'paypal\SubscriptionController@activatePlan']);
-        Route::post('/plan/{id}/agreement/create', 'paypal\SubscriptionController@createAgreement')->name('.create-agreement');
-        Route::get('/plan/{id}/activate', ['as' => '', 'uses' => 'paypal\SubscriptionController@executeAgreement']);
-        Route::get('/execute-agreement/{success}', ['as' => '', 'uses' => 'paypal\PlanController@execute']);
+        Route::get('/makeRecurringPayment', ['as' => '', 'uses' => 'paypal\RecurringPaymentController@makeRecurringPayment']);
+        Route::get('/ExecuteRecurringPayment', ['as' => '', 'uses' => 'paypal\RecurringPaymentController@ExecuteRecurringPayment']);
     });
 });
 
