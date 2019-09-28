@@ -107,17 +107,15 @@ class OnlinePaymentController extends Controller
         $dt = new DateTime();
         $dt->format('Ymd');
         $subsexists = DB::table('paypal_subscription')->where('user_id', $userID)->count();
-        $status = DB::table('payments')->where('user_id',Auth::id())->first();
-        if ($status){
-            $status = $status->cancel;
-        }
+        $status = '';
+        $cancel = DB::table('payments')->where('user_id', Auth::id())->where('cancel', 0)->get()->count();
         $profile_id = '';
         if ($subsexists != 0) {
             $user_paypal_info = DB::table('paypal_subscription')->where('user_id', $userID)->first();
             $status = $user_paypal_info->status;
             $profile_id = $user_paypal_info->customer_profile_id;
         }
-        return view('online-payment.add', ['material' => $material, 'notNow' => $user->not_now, 'subsexists' => $subsexists, 'status' => $status, 'profile_id' => $profile_id]);
+        return view('online-payment.add', ['material' => $material, 'cancel' => $cancel, 'notNow' => $user->not_now, 'subsexists' => $subsexists, 'status' => $status, 'profile_id' => $profile_id]);
     }
 
     public function addnew1()
@@ -130,17 +128,15 @@ class OnlinePaymentController extends Controller
         $dt = new DateTime();
         $dt->format('Ymd');
         $subsexists = DB::table('paypal_subscription')->where('user_id', $userID)->count();
-        $status = DB::table('payments')->where('user_id',Auth::id())->first();
-        if ($status){
-            $status = $status->cancel;
-        }
+        $status = '';
+        $cancel = DB::table('payments')->where('user_id', Auth::id())->first()->cancel;
         $profile_id = '';
         if ($subsexists != 0) {
             $user_paypal_info = DB::table('paypal_subscription')->where('user_id', $userID)->first();
             $status = $user_paypal_info->status;
             $profile_id = $user_paypal_info->customer_profile_id;
         }
-        return view('online-payment.addnew1', ['material' => $material, 'notNow' => $user->not_now, 'subsexists' => $subsexists, 'status' => $status, 'profile_id' => $profile_id]);
+        return view('online-payment.addnew1', ['material' => $material, 'notNow' => $user->not_now, 'subsexists' => $subsexists, 'status' => $status, 'cancel' => $cancel, 'profile_id' => $profile_id]);
     }
 
     public function activate()

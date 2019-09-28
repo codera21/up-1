@@ -34,10 +34,11 @@
                 @if(session('msg'))
                     {{session('msg')}}
                 @endif
-                @if($status)
-                    <a class="btn btn-primary" style="color:#fff"
-                       href="{{url('/subscription/makeRecurringPayment')}}">Start Subscription</a><br>
-                @elseif(!$status)
+                @if($cancel == 0)
+                    <a class="btn btn-primary" style="color:#fff" href="{{url('/subscription/makeRecurringPayment')}}">Start
+                        Subscription</a>
+                @endif
+                @if($cancel == 1)
                     <a class="btn btn-primary" href="{{url('subscription/cancelSubscription')}}" style="color:#fff">Cancel
                         Subscription</a>
                 @endif

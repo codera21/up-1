@@ -100,6 +100,8 @@ class RecurringPlan extends Paypal
             } else {
                 echo "could not unsubscribed";
             }
+        } else {
+            echo "could not cancel";
         }
     }
 

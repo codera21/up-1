@@ -1,3 +1,4 @@
+<?php //dd($cancel); ?>
 @extends('layouts.frontend.default')
 
 @section('page_title')
@@ -30,14 +31,17 @@
             <h3>
                 <mark>2. Make recurring payment</mark>
             </h3>
+
             <div class="text-center" style="padding : 50px 0">
-                @if($status)
+                @if($cancel == 0)
                     <a class="btn btn-primary" style="color:#fff" href="{{url('/subscription/makeRecurringPayment')}}">Start
                         Subscription</a>
-                @elseif(!$status)
+                @endif
+                @if($cancel == 1)
                     <a class="btn btn-primary" href="{{url('subscription/cancelSubscription')}}" style="color:#fff">Cancel
                         Subscription</a>
                 @endif
+
             </div>
         @endif
         <br>
