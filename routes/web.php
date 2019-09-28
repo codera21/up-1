@@ -112,6 +112,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
     /*Subscription of site*/
     Route::group(['as' => 'subscription', 'prefix' => 'subscription'], function () {
         Route::get('/makeRecurringPayment', ['as' => '', 'uses' => 'paypal\RecurringPaymentController@makeRecurringPayment']);
+        Route::get('/cancelSubscription', ['as' => '', 'uses' => 'paypal\RecurringPaymentController@cancelSubscription']);
         Route::get('/ExecuteRecurringPayment', ['as' => '', 'uses' => 'paypal\RecurringPaymentController@ExecuteRecurringPayment']);
     });
 });

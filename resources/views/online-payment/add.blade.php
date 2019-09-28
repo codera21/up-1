@@ -11,19 +11,20 @@
             <b class="text-danger">Important</b>: {{trans('app.flash-message')}}
         </div>
         @if(env('SITE') == 'ENG')
-        <h3>
-            <mark>1. Make one time Payment</mark>
-        </h3>
-        <br>
-        <div class="alert alert-info" role="alert">
-            {!!  __('app.payment_message') !!}
-        </div>
+            <h3>
+                <mark>1. Make one time Payment</mark>
+            </h3>
+            <br>
+            <div class="alert alert-info" role="alert">
+                {!!  __('app.payment_message') !!}
+            </div>
 
-        <div class="text-center" style="padding : 50px 0">
-            <a class="btn btn-primary" style="color:#fff"
-               href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=37MF4DYE7RXKE">Pay for this
-                month</a>
-        </div>
+            <div class="text-center" style="padding : 50px 0">
+                <a class="btn btn-primary" style="color:#fff"
+                   href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=37MF4DYE7RXKE">Pay for
+                    this
+                    month</a>
+            </div>
         @endif
         @if(env('SITE')=='ENG')
             <h3>
@@ -33,11 +34,11 @@
                 @if(session('msg'))
                     {{session('msg')}}
                 @endif
-                @if($subsexists == 0)
+                @if($status)
                     <a class="btn btn-primary" style="color:#fff"
-                       href="http://dnasbookdigimarket.com/online-payment/ipn">Start Subscription</a><br>
-                @elseif($status == 'Active')
-                    <a class="btn btn-primary" style="color:#fff" data-toggle="modal" href='#modal-id'>Cancel
+                       href="{{url('/subscription/makeRecurringPayment')}}">Start Subscription</a><br>
+                @elseif(!$status)
+                    <a class="btn btn-primary" href="{{url('subscription/cancelSubscription')}}" style="color:#fff">Cancel
                         Subscription</a>
                 @endif
                 @endif

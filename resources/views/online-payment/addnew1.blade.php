@@ -11,27 +11,34 @@
             <b class="text-danger">Important</b>: {{trans('app.flash-message')}}
         </div>
         @if(env('SITE') =='ENG')
-        <h3><mark>1. Make one time Payment</mark> </h3>
-        <br>
-        <div class="alert alert-info" role="alert">
-            {!!  __('app.payment_message') !!}
-        </div>
+            <h3>
+                <mark>1. Make one time Payment</mark>
+            </h3>
+            <br>
+            <div class="alert alert-info" role="alert">
+                {!!  __('app.payment_message') !!}
+            </div>
 
-        <div class="text-center" style="padding : 50px 0">
-            <a class="btn btn-primary" style="color:#fff"
-               href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=37MF4DYE7RXKE">Pay for this
-                month</a>
-        </div>
+            <div class="text-center" style="padding : 50px 0">
+                <a class="btn btn-primary" style="color:#fff"
+                   href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=37MF4DYE7RXKE">Pay for
+                    this
+                    month</a>
+            </div>
         @endif
         @if(env('SITE')=='ENG')
-        <h3><mark>2. Make  recurring payment</mark></h3>
-        <div class="text-center" style="padding : 50px 0">
-            @if($subsexists == 0)
-                <a class="btn btn-primary" style="color:#fff" href="http://dnasbookdigimarket.com/online-payment/ipn">Start Subscription</a>
-            @elseif($status == 'Active')
-                <a class="btn btn-primary" style="color:#fff" data-toggle="modal" href='#modal-id' >Cancel Subscription</a>
-            @endif
-        </div>
+            <h3>
+                <mark>2. Make recurring payment</mark>
+            </h3>
+            <div class="text-center" style="padding : 50px 0">
+                @if($status)
+                    <a class="btn btn-primary" style="color:#fff" href="{{url('/subscription/makeRecurringPayment')}}">Start
+                        Subscription</a>
+                @elseif(!$status)
+                    <a class="btn btn-primary" href="{{url('subscription/cancelSubscription')}}" style="color:#fff">Cancel
+                        Subscription</a>
+                @endif
+            </div>
         @endif
         <br>
         <br>
@@ -57,7 +64,8 @@
     <div class="modal fade" id="modal-id">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="https://dnasbookdigimarket.com/online-payment/cancelrecurring/?profile_id={{$profile_id}}" method="post">
+                <form action="https://dnasbookdigimarket.com/online-payment/cancelrecurring/?profile_id={{$profile_id}}"
+                      method="post">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Reason for Cancellation</h4>
@@ -76,7 +84,9 @@
             </div>
         </div>
     </div>
-    <h3><mark>3. Make your offline payment</mark></h3>
+    <h3>
+        <mark>3. Make your offline payment</mark>
+    </h3>
     <form action="{{route('offline_pay.add')}}" enctype="multipart/form-data" id="manage-faq" method="POST"
           class="form-horizontal">
         {{ csrf_field() }}

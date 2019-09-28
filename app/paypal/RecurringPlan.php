@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use PayPal\Api\Agreement;
+use PayPal\Api\AgreementStateDescriptor;
 use PayPal\Api\Currency;
 use PayPal\Api\MerchantPreferences;
 use PayPal\Api\Patch;
@@ -24,7 +25,7 @@ class RecurringPlan extends Paypal
         $date = Carbon::now()->addDay(1)->toDateString();
         //create plan
         $createdPlan = $this->MakePlan();
-        dd($createdPlan);
+
         //get id of created plan
         $createdPlanId = $createdPlan->getId();
         //activate plan
@@ -39,6 +40,7 @@ class RecurringPlan extends Paypal
     {
         //id of plan
         $createdPlan = $this->makePlan();
+        $createdPlanId = $createdPlan->getId();
         $planId = $createdPlan->getId();
         $userId = Auth::id();
         $data = DB::table("users")->where("id", $userId)->first();
@@ -54,18 +56,18 @@ class RecurringPlan extends Paypal
                         'user_id' => Auth::id(),
                         'bank_slip_no' => '',
                         'bank_id' => '',
-                        'payment_profile_id' => '',
+                        'agreement_id' => $agreement->getId(),
                         'paypal_plan_id' => $planId,
                         'payment_mode' => 'ONLINE',
                         'payment_type' => 'RECURRING',
-                        'paid_for'=>'SUBSCRIPTION',
-                        'amount_paid'=>59.7,
-                        'status'=>'APPROVED',
-                        'created_at'=>Carbon::now()->toDateTimeString(),
-                        'updated_at'=>Carbon::now()->toDateString()
+                        'paid_for' => 'SUBSCRIPTION',
+                        'amount_paid' => 59.7,
+                        'status' => 'APPROVED',
+                        'created_at' => Carbon::now()->toDateTimeString(),
+                        'updated_at' => Carbon::now()->toDateString()
                     ]);
 
-                    if ($updateusers && $insertInTable ) {
+                    if ($updateusers && $insertInTable) {
                         echo "updated successfully";
                     } else {
                         echo "something went wrong";
@@ -76,6 +78,28 @@ class RecurringPlan extends Paypal
             }
         } else {
             echo "no need to pay now";
+        }
+    }
+
+    public function cancelSubscription()
+    {
+        $getData = DB::table('payments')->where("user_id", Auth::id())->first();
+        $agreement_id = $getData->agreement_id;
+        $agreement = new Agreement();
+        $agreement->setId($agreement_id);
+        $agreementStateDescriptor = new AgreementStateDescriptor();
+        $agreementStateDescriptor->setNote("Cancel the agreement");
+        $cancel = $agreement->cancel($agreementStateDescriptor, $this->apiContext);
+        $cancelAgreementDetails = Agreement::get($agreement->getId(), $this->apiContext);
+        if ($cancel) {
+            $setNull = DB::table('payments')->where('user_id', Auth::id())->update([
+                'cancel' => 1
+            ]);
+            if ($setNull) {
+                echo "cancelled successfully";
+            } else {
+                echo "could not unsubscribed";
+            }
         }
     }
 
@@ -160,6 +184,7 @@ class RecurringPlan extends Paypal
     protected function CreateAgreement($date, Plan $getActivatedPlan)
     {
         $agreement = new Agreement();
+        $agreement->setId('I-ATACAMA');
         $agreement->setName('Base Agreement')
             ->setDescription('Basic Agreement')
             ->setStartDate($date . 'T9:45:04Z');

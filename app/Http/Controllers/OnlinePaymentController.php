@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use DateTime;
-
+use Illuminate\Support\Facades\Auth;
 // Request & Response
 use Carbon\Carbon;
 use Illuminate\Contracts\Session\Session;
@@ -13,7 +13,6 @@ use App\Http\Requests;
 
 // Facades
 use Date;
-use Auth;
 use Log;
 use Cache;
 
@@ -108,7 +107,10 @@ class OnlinePaymentController extends Controller
         $dt = new DateTime();
         $dt->format('Ymd');
         $subsexists = DB::table('paypal_subscription')->where('user_id', $userID)->count();
-        $status = '';
+        $status = DB::table('payments')->where('user_id',Auth::id())->first();
+        if ($status){
+            $status = $status->cancel;
+        }
         $profile_id = '';
         if ($subsexists != 0) {
             $user_paypal_info = DB::table('paypal_subscription')->where('user_id', $userID)->first();
@@ -128,7 +130,10 @@ class OnlinePaymentController extends Controller
         $dt = new DateTime();
         $dt->format('Ymd');
         $subsexists = DB::table('paypal_subscription')->where('user_id', $userID)->count();
-        $status = '';
+        $status = DB::table('payments')->where('user_id',Auth::id())->first();
+        if ($status){
+            $status = $status->cancel;
+        }
         $profile_id = '';
         if ($subsexists != 0) {
             $user_paypal_info = DB::table('paypal_subscription')->where('user_id', $userID)->first();
