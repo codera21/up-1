@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\paypal;
 
 use Carbon\Carbon;
@@ -25,20 +24,15 @@ class RecurringPlan extends Paypal
         $date = Carbon::now()->addDay(1)->toDateString();
         //create plan
         $createdPlan = $this->MakePlan();
-
+        dd($createdPlan);
         //get id of created plan
         $createdPlanId = $createdPlan->getId();
-
         //activate plan
         $this->ActivePlan($createdPlan);
-
         $getActivatedPlan = Plan::get($createdPlanId, $this->apiContext);
-
         //create Agreement
         $agreement = $this->CreateAgreement($date, $getActivatedPlan);
-
         return $agreement->getApprovalLink();
-
     }
 
     public function executeRecurringPayment(Request $request)
@@ -46,7 +40,6 @@ class RecurringPlan extends Paypal
         //id of plan
         $createdPlan = $this->makePlan();
         $planId = $createdPlan->getId();
-
         $userId = Auth::id();
         $data = DB::table("users")->where("id", $userId)->first();
         if ($data->is_active == "NO") {
@@ -57,7 +50,22 @@ class RecurringPlan extends Paypal
                     $updateusers = DB::table("users")->where('id', $userId)->update([
                         'is_active' => 'YES'
                     ]);
-                    if ($updateusers) {
+                    $insertInTable = DB::table('payments')->insert([
+                        'user_id' => Auth::id(),
+                        'bank_slip_no' => '',
+                        'bank_id' => '',
+                        'payment_profile_id' => '',
+                        'paypal_plan_id' => $planId,
+                        'payment_mode' => 'ONLINE',
+                        'payment_type' => 'RECURRING',
+                        'paid_for'=>'SUBSCRIPTION',
+                        'amount_paid'=>59.7,
+                        'status'=>'APPROVED',
+                        'created_at'=>Carbon::now()->toDateTimeString(),
+                        'updated_at'=>Carbon::now()->toDateString()
+                    ]);
+
+                    if ($updateusers && $insertInTable ) {
                         echo "updated successfully";
                     } else {
                         echo "something went wrong";
@@ -137,14 +145,10 @@ class RecurringPlan extends Paypal
     protected function MakePlan()
     {
         $plan = $this->Plan();
-
         $paymentDefinition = $this->PaymentDefination();
-
         $merchantPreferences = $this->MerchantPreferences();
-
         $plan->setPaymentDefinitions(array($paymentDefinition));
         $plan->setMerchantPreferences($merchantPreferences);
-
         $createdPlan = $plan->create($this->apiContext);
         return $createdPlan;
     }
@@ -156,21 +160,16 @@ class RecurringPlan extends Paypal
     protected function CreateAgreement($date, Plan $getActivatedPlan)
     {
         $agreement = new Agreement();
-
         $agreement->setName('Base Agreement')
             ->setDescription('Basic Agreement')
             ->setStartDate($date . 'T9:45:04Z');
-
         $plan = new Plan();
         $plan->setId($getActivatedPlan->getId());
         $agreement->setPlan($plan);
-
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
         $agreement->setPayer($payer);
-
         $agreement = $agreement->create($this->apiContext);
-
         return $agreement;
     }
 }
