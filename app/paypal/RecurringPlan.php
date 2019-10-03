@@ -68,7 +68,8 @@ class RecurringPlan extends Paypal
                     ]);
 
                     if ($updateusers && $insertInTable) {
-                        echo "updated successfully";
+                        return redirect()->route('user.dashboard')
+                            ->with('success', 'Subscription Started successfully');
                     } else {
                         echo "something went wrong";
                     }
@@ -83,7 +84,7 @@ class RecurringPlan extends Paypal
 
     public function cancelSubscription()
     {
-        $getData = DB::table('payments')->where("user_id", Auth::id())->where('cancel',0)->first();
+        $getData = DB::table('payments')->where("user_id", Auth::id())->where('cancel', 0)->first();
         $agreement_id = $getData->agreement_id;
         $agreement = new Agreement();
         $agreement->setId($agreement_id);
@@ -96,7 +97,8 @@ class RecurringPlan extends Paypal
                 'cancel' => 1
             ]);
             if ($setNull) {
-                echo "cancelled successfully";
+                return redirect()->route('user.dashboard')
+                    ->with('success', 'Subscription Cancelled added successfully');
             } else {
                 echo "could not unsubscribed";
             }
