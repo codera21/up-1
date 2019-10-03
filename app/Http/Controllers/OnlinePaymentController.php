@@ -112,7 +112,7 @@ class OnlinePaymentController extends Controller
         if ($cancelobj) {
             $cancel = $cancelobj->cancel;
         } else {
-            $cancel = null;
+            $cancel = 1;
         }
         $profile_id = '';
         if ($subsexists != 0) {
@@ -138,7 +138,7 @@ class OnlinePaymentController extends Controller
         if ($cancelobj) {
             $cancel = $cancelobj->cancel;
         } else {
-            $cancel = null;
+            $cancel = 1;
         }
         $profile_id = '';
         if ($subsexists != 0) {
@@ -164,7 +164,7 @@ class OnlinePaymentController extends Controller
         if ($cancelobj) {
             $cancel = $cancelobj->cancel;
         } else {
-            $cancel = null;
+            $cancel = 1;
         }
         $profile_id = '';
         if ($subsexists != 0) {
@@ -172,7 +172,7 @@ class OnlinePaymentController extends Controller
             $status = $user_paypal_info->status;
             $profile_id = $user_paypal_info->customer_profile_id;
         }
-        return view('online-payment.addnew1', ['material' => $material, 'cancel'=>$cancel ,'notNow' => $user->not_now, 'subsexists' => $subsexists, 'status' => $status, 'profile_id' => $profile_id]);
+        return view('online-payment.addnew1', ['material' => $material, 'cancel' => $cancel, 'notNow' => $user->not_now, 'subsexists' => $subsexists, 'status' => $status, 'profile_id' => $profile_id]);
     }
 
     public function notNow()
