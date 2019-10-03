@@ -24,7 +24,9 @@ class RecurringPaymentController extends Controller
     {
         $execute = new RecurringPlan();
         $execute->executeRecurringPayment($request);
+
     }
+
     public function cancelSubscription()
     {
         $cancel = new RecurringPlan();

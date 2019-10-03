@@ -4,6 +4,9 @@ namespace App\paypal;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+
+use Illuminate\Http\RedirectResponse;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
@@ -48,6 +51,7 @@ class RecurringPlan extends Paypal
             if ($request->has('success') && $request->success == 'true') {
                 $token = $request->token;
                 $agreement = new Agreement();
+                $agreement->setLinks('http://127.0.0.1:8000/user/dashboard');
                 if ($agreement->execute($token, $this->apiContext)) {
                     $updateusers = DB::table("users")->where('id', $userId)->update([
                         'is_active' => 'YES'
@@ -66,10 +70,11 @@ class RecurringPlan extends Paypal
                         'created_at' => Carbon::now()->toDateTimeString(),
                         'updated_at' => Carbon::now()->toDateString()
                     ]);
-
                     if ($updateusers && $insertInTable) {
-                        return redirect()->route('user.dashboard')
-                            ->with('success', 'Subscription Started successfully');
+                        echo <<<_HOME
+            <a href="/user/dashboard">Return Home</a>
+_HOME;
+
                     } else {
                         echo "something went wrong";
                     }
@@ -84,7 +89,7 @@ class RecurringPlan extends Paypal
 
     public function cancelSubscription()
     {
-        $getData = DB::table('payments')->where("user_id", Auth::id())->where('cancel', 0)->first();
+        $getData = DB::table('payments')->where("user_id", Auth::id())->first();
         $agreement_id = $getData->agreement_id;
         $agreement = new Agreement();
         $agreement->setId($agreement_id);
@@ -97,8 +102,7 @@ class RecurringPlan extends Paypal
                 'cancel' => 1
             ]);
             if ($setNull) {
-                return redirect()->route('user.dashboard')
-                    ->with('success', 'Subscription Cancelled added successfully');
+                echo "cancelled successfully";
             } else {
                 echo "could not unsubscribed";
             }
