@@ -114,7 +114,6 @@ class OnlinePaymentController extends Controller
         } else {
             $cancel = null;
         }
-        dd($cancelobj);
         $profile_id = '';
         if ($subsexists != 0) {
             $user_paypal_info = DB::table('paypal_subscription')->where('user_id', $userID)->first();
