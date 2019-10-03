@@ -83,7 +83,7 @@ class RecurringPlan extends Paypal
 
     public function cancelSubscription()
     {
-        $getData = DB::table('payments')->where("user_id", Auth::id())->first();
+        $getData = DB::table('payments')->where("user_id", Auth::id())->where('cancel',0)->first();
         $agreement_id = $getData->agreement_id;
         $agreement = new Agreement();
         $agreement->setId($agreement_id);
