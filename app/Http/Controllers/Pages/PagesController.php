@@ -43,7 +43,6 @@ class PagesController extends Controller
         $pages = new Pages();
         $data = $pages->$slug();
         if (file_exists($data['fileName'])) {
-            echo "present";
             return view('regpage.' . $data['method'], $data['array']);
         } else {
             $created = File::put($data['fileName'], $data['content']);
