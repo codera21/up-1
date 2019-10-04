@@ -42,11 +42,11 @@ class PagesController extends Controller
         $PageName = str_replace('_', '-', $slug);
         $pages = new Pages();
         $data = $pages->$slug();
+        dd(file_exists($data['fileName']));
         if (file_exists($data['fileName'])) {
             echo "present";
 //            return view('regpage.' . $data['method'], $data['array']);
         } else {
-            mkdir($data['fileName'], 0777, true);
             $created = File::put($data['fileName'], $data['content']);
             if ($created) {
                 echo "created";
