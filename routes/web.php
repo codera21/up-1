@@ -65,6 +65,14 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     Route::post('contact', ['as' => 'contact', 'uses' => 'PageController@postContact']);
     Route::get('pages/{slug}', ['as' => 'pages', 'uses' => 'PageController@pages'])->middleware("pageSite");
 
+    Route::group(['as' => 'regpage', 'prefix' => 'regpage'], function () {
+        Route::get('/dnasbook_distributor_payment', ['as' => '.dnasbook-distributor-payment', 'uses' => 'Pages\PagesController@dnasbook_distributor_payment']);
+        Route::get('/page_connected_to_paypal_payment', ['as' => '.page_connected_to_paypal_payment', 'uses' => 'Pages\PagesController@page_connected_to_paypal_payment']);
+        Route::get('/dnasbook_webinar_questions', ['as' => '.dnasbook_webinar_questions', 'uses' => 'Pages\PagesController@dnasbook_webinar_questions']);
+        Route::get('/dnasbook_distributor_training_certificate', ['as' => '.dnasbook_distributor_training_certificate', 'uses' => 'Pages\PagesController@dnasbook_distributor_training_certificate']);
+        Route::get('/certificate', ['as' => '.certificate', 'uses' => 'Pages\PagesController@certificate']);
+    });
+
     // IPN Listener
     Route::post('ipn', ['as' => 'ipn', 'uses' => 'IpnController@ipn']);
 //for frontend company_profile
