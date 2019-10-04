@@ -1,5 +1,7 @@
 <?php
 // google
+
+
 Route::pattern('id', '\d+');
 Route::pattern('id', '[A-Za-z0-9-]+');
 Route::pattern('hash', '[a-z0-9]+');
@@ -39,6 +41,7 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
     Route::get('hcl/{id_id_id}', ['as' => 'hcl', 'uses' => 'Admin\FAQController@smp']);
     Route::get('/hcl_hcl/{id_id_id}', ['as' => '.hcl_hcl', 'uses' => 'Admin\FAQController@smp1']);
+    Route::get('/dypage/{slug}', ['as' => 'test', 'uses' => 'Pages\PagesController@dypage']);
     // Registration Routes...
     Route::get('register/{id}', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm'])->middleware("formStep");
     Route::post('register/{id}', ['as' => 'register', 'uses' => 'Auth\RegisterController@register']);
@@ -65,13 +68,6 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     Route::post('contact', ['as' => 'contact', 'uses' => 'PageController@postContact']);
     Route::get('pages/{slug}', ['as' => 'pages', 'uses' => 'PageController@pages'])->middleware("pageSite");
 
-    Route::group(['as' => 'regpage', 'prefix' => 'regpage'], function () {
-        Route::get('/dnasbook_distributor_payment', ['as' => '.dnasbook-distributor-payment', 'uses' => 'Pages\PagesController@dnasbook_distributor_payment']);
-        Route::get('/page_connected_to_paypal_payment', ['as' => '.page_connected_to_paypal_payment', 'uses' => 'Pages\PagesController@page_connected_to_paypal_payment']);
-        Route::get('/dnasbook_webinar_questions', ['as' => '.dnasbook_webinar_questions', 'uses' => 'Pages\PagesController@dnasbook_webinar_questions']);
-        Route::get('/dnasbook_distributor_training_certificate', ['as' => '.dnasbook_distributor_training_certificate', 'uses' => 'Pages\PagesController@dnasbook_distributor_training_certificate']);
-        Route::get('/certificate', ['as' => '.certificate', 'uses' => 'Pages\PagesController@certificate']);
-    });
 
     // IPN Listener
     Route::post('ipn', ['as' => 'ipn', 'uses' => 'IpnController@ipn']);
