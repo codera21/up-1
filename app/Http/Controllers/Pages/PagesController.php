@@ -43,13 +43,14 @@ class PagesController extends Controller
         $pages = new Pages();
         $data = $pages->$slug();
         if (file_exists($data['fileName'])) {
-
-            return view('regpage.' . $data['method'], $data['array']);
+            echo "present";
+//            return view('regpage.' . $data['method'], $data['array']);
         } else {
             mkdir($data['fileName'], 0777, true);
             $created = File::put($data['fileName'], $data['content']);
             if ($created) {
-                return view('regpage.' . $data['method'], $data['array']);
+                echo "created";
+//                return view('regpage.' . $data['method'], $data['array']);
             }
         }
     }
