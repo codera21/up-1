@@ -48,8 +48,10 @@ class PagesController extends Controller
         } else {
             mkdir($data['fileName'], 0777, true);
             $created = File::put($data['fileName'], $data['content']);
+            if ($created) {
+                return view('regpage.' . $data['method'], $data['array']);
+            }
         }
-        return view('regpage.' . $data['method'], $data['array']);
     }
 }
 
