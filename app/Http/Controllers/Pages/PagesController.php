@@ -42,7 +42,7 @@ class PagesController extends Controller
         $PageName = str_replace('_', '-', $slug);
         $pages = new Pages();
         $data = $pages->$slug();
-        dd(file_exists($data['fileName']));
+        dump(file_exists($data['fileName']));
         if (file_exists($data['fileName'])) {
             echo "present";
 //            return view('regpage.' . $data['method'], $data['array']);

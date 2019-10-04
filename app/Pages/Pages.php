@@ -14,8 +14,8 @@ class Pages extends Controller
     public function __call($method, $parameters)
     {
         $lang = App::getLocale();
-        $fileName = base_path('resources\views\regpage') . "\\" . $method . ".blade.php";
-        dd($fileName);
+        $fileName = base_path('resources/views/regpage') . "/" . $method . ".blade.php";
+        dump($fileName);
         $content = file_get_contents(base_path('index.blade.php'));
         $pagesData = Page::where('language', $lang)->where('slug', $method)->first();
         $array = array(
