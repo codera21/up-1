@@ -19,7 +19,7 @@
                            style="font-size: 2rem;padding-bottom: 3px;">{{trans('backend.note_above_button')}}</p>
                     @endif
                     <div id="contentpara">
-                        <p id="para"><?php echo $list->content ?></p>
+                        <p id="para">{!! $list->content !!}</p>
                     </div>
                 </div>
             @endforeach
@@ -72,10 +72,10 @@
                         <p class="text-danger">{{trans("backend.checkbox_note")}}</p></label>
                 </div>
                 <?php if (env("SITE") == "ENG"): //for site buttons?>
-								 <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>"
-		                         class="btn  btn-primary registerlink"
-		                         style="color: black;cursor:grab ">Next</a>
-		                         <?php else: ?>
+                <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>"
+                   class="btn  btn-primary registerlink"
+                   style="color: black;cursor:grab ">Next</a>
+                <?php else: ?>
                 <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>"
                    class="btn  btn-primary registerlink"
                    style="color: black;cursor:grab ">Next</a>
@@ -83,12 +83,12 @@
                 <?php endif;?>
             </div>
             <div class="distributor">
-                <?php if (Request::url() == "$baseUrl/pages/distributor"): ?>
-                <a href="{{$baseUrl}}/register/<?php echo $_GET["id"] ?>"
-                   class="btn btn-primary registerlink"
-                   style="color: black;cursor:grab"
-                   >Next</a>
-                <?php endif;?>
+                @if(Request::url() == "$baseUrl/pages/distributor")
+                    <a href="{{$baseUrl}}/register/<?php echo $_GET["id"] ?>"
+                       class="btn btn-primary registerlink"
+                       style="color: black;cursor:grab"
+                    >Next</a>
+                @endif
             </div>
 
         </div>
@@ -117,9 +117,9 @@
 </style>
 <?php if (Request::url() == "$baseUrl/pages/videos"): ?>
 <script
-        src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-        crossorigin="anonymous"></script>
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
 <script>
     $(document).ready(function () {
         $(".registerBlock").removeAttr("href");

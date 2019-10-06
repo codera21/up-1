@@ -11,15 +11,15 @@ class formStep
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
         $arrayofurl = array();
         $url = $request->url();
-        $arrayofurl = explode("/","$url");
+        $arrayofurl = explode("/", "$url");
         end($arrayofurl);
         $key = key($arrayofurl);
         $value = $arrayofurl[$key];
