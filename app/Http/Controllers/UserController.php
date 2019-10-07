@@ -242,12 +242,13 @@ class UserController extends Controller
             ->get();
         return view('payment-profile.pagination_test', ['no_of_page' => $no_of_page, 'users' => $users]);
     }
+
     public function api()
     {
         $user = DB::table("users")->get();
         $array = array();
         $array["record"] = array();
-        array_push($array["record"],$user);
+        array_push($array["record"], $user);
         echo \json_encode($array);
     }
 }

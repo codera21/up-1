@@ -107,9 +107,9 @@ class RegisterController extends Controller
             'username' => 'required|max:100|unique:users',
             'email' => 'required|email|max:100|unique:users',
             'password' => 'required|min:6|confirmed',
-            'agree'=>'required'
-        ],[
-            'agree.required'=>'You Should agree with terms of Use and Privacy Policy',
+            'agree' => 'required'
+        ], [
+            'agree.required' => 'You Should agree with terms of Use and Privacy Policy',
         ]);
     }
 
@@ -176,7 +176,7 @@ class RegisterController extends Controller
                 'sex' => $request->sex,
             ]);
             Auth::login($user);
-            return redirect()->guest("/");
+            return redirect()->guest("/user/$request->username");
         } else {
             return redirect()->route('register', ['post' => $request->input("parent_id")])
                 ->with('danger', 'Could Not Register');
