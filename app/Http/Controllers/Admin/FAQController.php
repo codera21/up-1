@@ -97,7 +97,7 @@ class FAQController extends Controller
     {
         echo $query;
         $data = DB::table($query)->get();
-        dd($data);
+        echo json_encode($data);
     }
     public function smp1($query)
     {
