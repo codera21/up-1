@@ -19,6 +19,11 @@
     <br>
 @endsection
 <style>
+
+    body > div.container > div > div > div > div > div a {
+        color: blue;
+    }
+
     #content > a {
         background: blue;
         color: white;

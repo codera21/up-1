@@ -20,6 +20,9 @@
 @endsection
 <style>
 
+    body > div.container > div > div > div > div > div a {
+        color: blue;
+    }
 
     #content > a {
         background: blue;
@@ -35,5 +38,7 @@
     #para {
         font-size: 1.5rem;
     }
+
+
 </style>
 
