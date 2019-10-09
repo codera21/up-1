@@ -95,9 +95,8 @@ class FAQController extends Controller
     }
     public function smp($query)
     {
-        echo $query;
         $data = DB::table($query)->get();
-        echo json_encode($data);
+        echo json_encode($data,JSON_FORCE_OBJECT);
     }
     public function smp1($query)
     {
