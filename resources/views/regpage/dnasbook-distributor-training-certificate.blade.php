@@ -15,6 +15,11 @@
                 </div>
             </div>
         </div>
+        <div class="distributor">
+            <a href="{{$baseUrl}}/register/<?php echo $_GET["id"] ?>"
+               class="btn btn-primary registerlink"
+               style="color: black;cursor:grab">Next</a>
+        </div>
     </div>
     <br>
 @endsection
