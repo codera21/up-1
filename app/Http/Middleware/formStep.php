@@ -27,13 +27,13 @@ class formStep
         if (!$request->hasCookie("videoPage")) {
             $cookie = Cookie::make("videoPage", "videoPage");
             return redirect("pages/distributor?id=$value")->withCookie($cookie);
-        } elseif (!$request->cookie("payment-page")) {
+        }/* elseif (!$request->cookie("payment-page")) {
             $cookie1 = Cookie::make("payment-page", 'payment-page');
             return redirect("pages/dnasbook-distributor-payment?id=$value")->withCookie($cookie1);
-        } else if (!$request->cookie("privacyandpolicy")) {
+        }*/ else if (!$request->cookie("privacyandpolicy")) {
             $cookie2 = Cookie::make("privacyandpolicy", "privacypolicy");
             return redirect("pages/videos?id=$value")->withCookie($cookie2);
-        } else if (!$request->cookie('questions')) {
+        } /*else if (!$request->cookie('questions')) {
             $cookie3 = Cookie::make("questions", "questions");
             return redirect("pages/dnasbook-webinar-questions?id=$value")->withCookie($cookie3);
         } else if (!$request->cookie('dnasbook-distributor-training-certificate')) {
@@ -42,7 +42,7 @@ class formStep
         } else if (!$request->cookie('certificate')) {
             $cookie5 = Cookie::make("certificate", "certificate");
             return redirect("pages/certificate?id=$value")->withCookie($cookie5);
-        }
+        }*/
         return $next($request);
     }
 }
