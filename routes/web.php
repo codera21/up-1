@@ -67,8 +67,12 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     Route::get('contact', ['as' => 'contact', 'uses' => 'PageController@contact']);
     Route::post('contact', ['as' => 'contact', 'uses' => 'PageController@postContact']);
     Route::get('dypage/{slug}', ['as' => 'pages', 'uses' => 'PageController@pages'])->middleware("pageSite");
-
-
+    //payment routes in registeration pages
+    Route::get('/makeOneTimePayment', ['as' => '', 'uses' => 'paypal\OneTimePaymentController@makeOneTimePayment']);
+    Route::get('/ExecuteOneTimePayment', ['as' => '', 'uses' => 'paypal\OneTimePaymentController@ExecuteOneTimePayment']);
+    //token post route
+    Route::post('/token', ['as' => 'token', 'uses' => 'Pages\PagesController@token']);
+    Route::get('/expiry', ['as' => 'tokenexpiry', 'uses' => 'Pages\PagesController@expiry']);
     // IPN Listener
     Route::post('ipn', ['as' => 'ipn', 'uses' => 'IpnController@ipn']);
 //for frontend company_profile
@@ -119,6 +123,7 @@ Route::group(['middleware' => ['auth', 'fe.navigation', 'fe.breadcrumbs']], func
         Route::get('/cancelSubscription', ['as' => '', 'uses' => 'paypal\RecurringPaymentController@cancelSubscription']);
         Route::get('/ExecuteRecurringPayment', ['as' => '', 'uses' => 'paypal\RecurringPaymentController@ExecuteRecurringPayment']);
     });
+
 });
 
 

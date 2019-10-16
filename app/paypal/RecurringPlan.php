@@ -51,7 +51,6 @@ class RecurringPlan extends Paypal
             if ($request->has('success') && $request->success == 'true') {
                 $token = $request->token;
                 $agreement = new Agreement();
-                $agreement->setLinks('http://127.0.0.1:8000/user/dashboard');
                 if ($agreement->execute($token, $this->apiContext)) {
                     $updateusers = DB::table("users")->where('id', $userId)->update([
                         'is_active' => 'YES'

@@ -108,7 +108,7 @@ class OnlinePaymentController extends Controller
         $dt->format('Ymd');
         $subsexists = DB::table('paypal_subscription')->where('user_id', $userID)->count();
         $status = '';
-        $cancelobj = DB::table('payments')->where('user_id', Auth::id())->where('cancel', 0)->first();
+        $cancelobj = DB::table('payments')->where('user_id', Auth::id())->where('cancel', 0)->where('payment_type', 'RECURRING')->first();
         if ($cancelobj) {
             $cancel = $cancelobj->cancel;
         } else {
@@ -134,7 +134,7 @@ class OnlinePaymentController extends Controller
         $dt->format('Ymd');
         $subsexists = DB::table('paypal_subscription')->where('user_id', $userID)->count();
         $status = '';
-        $cancelobj = DB::table('payments')->where('user_id', Auth::id())->where('cancel', 0)->first();
+        $cancelobj = DB::table('payments')->where('user_id', Auth::id())->where('cancel', 0)->where('payment_type', 'RECURRING')->first();
         if ($cancelobj) {
             $cancel = $cancelobj->cancel;
         } else {
@@ -160,7 +160,7 @@ class OnlinePaymentController extends Controller
         $dt->format('Ymd');
         $subsexists = DB::table('paypal_subscription')->where('user_id', $userID)->count();
         $status = '';
-        $cancelobj = DB::table('payments')->where('user_id', Auth::id())->where('cancel', 0)->first();
+        $cancelobj = DB::table('payments')->where('user_id', Auth::id())->where('cancel', 0)->where('payment_type', 'RECURRING')->first();
         if ($cancelobj) {
             $cancel = $cancelobj->cancel;
         } else {

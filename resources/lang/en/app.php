@@ -67,4 +67,5 @@ return [
     'p_five'=>"You can not even pay a fee in this program when you apply our famous Rule 20/20!",
     'p_six'=> 'You cannot earn commissions in this program without inviting other people into the training and encourage them to invite other people into the training up to the 4th level!',
     'p_seven'=> 'We have rewards in the program if you reach a certain level of performance!',
+    'flash_of_payment_register'=>'Payment Made Successfully'
 ];

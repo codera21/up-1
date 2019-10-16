@@ -5,13 +5,7 @@
 @endsection
 
 @section('content')
-
     <div class="panel panel-default" style="padding-top: 2rem">
-        {{--<div class="panel-heading">
-            <a href="about/add">
-                <button type="button" class="btn btn-primary" style="margin-left: 90%;">Add</button>
-            </a>
-        </div>--}}
         <div class="panel-body">
             <table class="table table-sm">
                 <thead>

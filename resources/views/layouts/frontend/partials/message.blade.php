@@ -1,6 +1,7 @@
 @section('message')
 
     @if(Session::has('success'))
+        <br>
         <div class="alert alert-success">
             <span class="glyphicon glyphicon-ok-sign"
                   aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;{!! Session::get('success') !!}

@@ -1,22 +1,17 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>Fully server integration</h1>
-<form action="/subscription/create-payment" method="post">
-    <input type="submit" value="payNow">
-</form>
+@extends('layouts.frontend.default')
 
-<br>
-<h1>Subscribe</h1>
-<form action="{{route('subscription.create-agreement','P-5C3354017U897711TH6XZKMQ')}}" method="post">
-    <input type="submit" value="Subscribe Now">
-</form>
-</body>
-</html>
+@section('page_title')
+    {{ trans('offline_payment.title') }}
+@endsection
+
+@section('content')
+
+
+<div>
+    <a href="/register/2">sdaf</a>
+</div>
+
+
+
+
+@endsection
