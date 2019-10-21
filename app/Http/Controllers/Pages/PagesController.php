@@ -66,7 +66,7 @@ class PagesController extends Controller
                 if ($updateData) {
                     session()->put('canWatch', false);
                     return response(200);
-                }else{
+                } else {
                     return "NO changes";
                 }
             }
