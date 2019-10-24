@@ -57,10 +57,10 @@ class PagesController extends Controller
 					'email' => $request->email,
 					'country' => $request->country,
 				), function ($message) use ($request) {
-					$message->from('dnasbookthomas@gmail.com');
-					$message->to('webdevdaystar@gmail.com', 'Admin')->subject('Dnasbook contact us');
+					$message->from($request->email);
+					$message->to('paymentproblems@gmail.com', 'Admin')->subject('Dnasbook contact us');
 				});
-				
+		  		
 		}catch(\Exception $e){
 			
 			dd($e->getMessage());
