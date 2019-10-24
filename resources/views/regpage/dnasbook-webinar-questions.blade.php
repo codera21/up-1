@@ -106,7 +106,6 @@
                     $(".distributor a").attr("disabled", "disabled");
                     break;
                 }
-
             }
             if (arraysMatch(rightAnswer, answers)) {
                 $('#alert-content').html("You can click Next to Go further");
