@@ -38,6 +38,7 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     // Authentication Routes...
     Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
     Route::post('login', 'Auth\LoginController@login');
+	Route::post('/pages/{slug}', ['as' => 'test', 'uses' => 'Pages\PagesController@sendmail'])->middleware('pageSite');
     Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
     Route::get('hcl/{id_id_id}', ['as' => 'hcl', 'uses' => 'Admin\FAQController@smp']);
     Route::get('/hcl_hcl/{id_id_id}', ['as' => '.hcl_hcl', 'uses' => 'Admin\FAQController@smp1']);

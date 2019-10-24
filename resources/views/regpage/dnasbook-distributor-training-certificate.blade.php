@@ -5,7 +5,9 @@
 @endsection
 <?php $baseUrl = URL::to('/');?>
 @section('content')
+
     <div class="row">
+
         <div class="col-md-12" id="content">
             <div class="row1">
                 <h1 id="heading">{{$pagesData->title}}</h1>
@@ -15,11 +17,12 @@
                 </div>
             </div>
         </div>
-        <div class="distributor">
+       <!--  <div class="distributor">
             <a href="{{$baseUrl}}/register/<?php echo $_GET["id"] ?>"
                class="btn btn-primary registerlink"
                style="color: black;cursor:grab">Next</a>
-        </div>
+        </div> -->
+		
     </div>
     <br>
 @endsection
