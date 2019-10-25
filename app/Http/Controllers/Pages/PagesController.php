@@ -125,10 +125,10 @@ class PagesController extends Controller
         }
         if ($data) {
             session()->put("canWatch", true);
-            return redirect('pages/videos?id=' . $id);
+            return redirect('pages/dnasbook-distributor-training-certificate?id=' . $id);
         } else {
             session()->put('canWatch', false);
-            return redirect('pages/videos?id=' . $id);
+            return redirect('pages/dnasbook-distributor-training-certificate?id=' . $id);
         }
     }
 
