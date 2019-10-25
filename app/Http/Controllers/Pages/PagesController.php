@@ -28,11 +28,11 @@ class PagesController extends Controller
         $PageName = str_replace('_', '-', $slug);
         $pages = new Pages();
         $data = $pages->$slug();
-<<<<<<< HEAD
-	    $data['array']['date']=date('d-m-Y'); 
-=======
 
->>>>>>> ddc989ae081e353e1f8396eca86ae04761b71fca
+	    $data['array']['date']=date('d-m-Y'); 
+
+
+
         if (file_exists($data['fileName'])) {
             return view('regpage.' . $data['method'], $data['array']);
         } else {
@@ -55,7 +55,7 @@ class PagesController extends Controller
         $PageName = str_replace('_', '-', $slug);
         $pages = new Pages();
         $data = $pages->$slug();
-<<<<<<< HEAD
+
 	
 			
 		$sent=  Mail::send('emails.certificate',
@@ -74,7 +74,7 @@ class PagesController extends Controller
 	
 		//
 	  if (file_exists($data['fileName'])) {
-=======
+
 
         try {
             $sent = Mail::send('emails.certificate',
@@ -96,7 +96,7 @@ class PagesController extends Controller
 
         //
         if (file_exists($data['fileName'])) {
->>>>>>> ddc989ae081e353e1f8396eca86ae04761b71fca
+
             return view('regpage.' . $data['method'], $data['array']);
         } else {
             $created = File::put($data['fileName'], $data['content']);
