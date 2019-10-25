@@ -46,5 +46,18 @@
     #para {
         font-size: 1.5rem;
     }
+	
+	.form-group label.control-label.col-sm-2 {
+    width: 10%;
+    vertical-align: middle;
+}
+.form-group {
+    WIDTH: 100%;
+    display: flex;
+}
+.form-control {
+    margin-top: 5px;
+    background-color: #fff;
+}
 </style>
 

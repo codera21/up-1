@@ -27,7 +27,7 @@ class PagesController extends Controller
         $PageName = str_replace('_', '-', $slug);
         $pages = new Pages();
         $data = $pages->$slug();
-	
+	    $data['array']['date']=date('d-m-Y'); 
         if (file_exists($data['fileName'])) {
             return view('regpage.' . $data['method'], $data['array']);
         } else {
@@ -49,8 +49,8 @@ class PagesController extends Controller
         $PageName = str_replace('_', '-', $slug);
         $pages = new Pages();
         $data = $pages->$slug();
-		
-		try{	
+	
+			
 		$sent=  Mail::send('emails.certificate',
 				array(
 					'name' => $request->name,
@@ -61,12 +61,9 @@ class PagesController extends Controller
 					$message->to('paymentproblems@gmail.com', 'Admin')->subject('Dnasbook contact us');
 				});
 		  		
-		}catch(\Exception $e){
-			
-			dd($e->getMessage());
-		}
 		
 		$data['array']['name']=$request->name;
+		$data['array']['date']=date('d-m-Y');
 	
 		//
 	  if (file_exists($data['fileName'])) {
