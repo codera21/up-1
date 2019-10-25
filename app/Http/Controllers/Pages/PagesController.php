@@ -29,8 +29,7 @@ class PagesController extends Controller
         $pages = new Pages();
         $data = $pages->$slug();
 
-	    $data['array']['date']=date('d-m-Y'); 
-
+        $data['array']['date'] = date('d-m-Y');
 
 
         if (file_exists($data['fileName'])) {
@@ -56,56 +55,55 @@ class PagesController extends Controller
         $pages = new Pages();
         $data = $pages->$slug();
 
-	
-			
-		$sent=  Mail::send('emails.certificate',
-				array(
-					'name' => $request->name,
-					'email' => $request->email,
-					'country' => $request->country,
-				), function ($message) use ($request) {
-					$message->from($request->email);
-					$message->to('paymentproblems@gmail.com', 'Admin')->subject('Dnasbook contact us');
-				});
-		  		
-		
-		$data['array']['name']=$request->name;
-		$data['array']['date']=date('d-m-Y');
-	
-		//
-	  if (file_exists($data['fileName'])) {
 
+        $sent = Mail::send('emails.certificate',
+            array(
+                'name' => $request->name,
+                'email' => $request->email,
+                'country' => $request->country,
+            ), function ($message) use ($request) {
+                $message->from($request->email);
+                $message->to('paymentproblems@gmail.com', 'Admin')->subject('Dnasbook contact us');
+            });
 
-        try {
-            $sent = Mail::send('emails.certificate',
-                array(
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'country' => $request->country,
-                ), function ($message) use ($request) {
-                    $message->from($request->email);
-                    $message->to('paymentproblems@gmail.com', 'Admin')->subject('Dnasbook contact us');
-                });
-
-        } catch (\Exception $e) {
-
-            dd($e->getMessage());
-        }
 
         $data['array']['name'] = $request->name;
+        $data['array']['date'] = date('d-m-Y');
 
         //
         if (file_exists($data['fileName'])) {
 
-            return view('regpage.' . $data['method'], $data['array']);
-        } else {
-            $created = File::put($data['fileName'], $data['content']);
-            if ($created) {
+
+            try {
+                $sent = Mail::send('emails.certificate',
+                    array(
+                        'name' => $request->name,
+                        'email' => $request->email,
+                        'country' => $request->country,
+                    ), function ($message) use ($request) {
+                        $message->from($request->email);
+                        $message->to('paymentproblems@gmail.com', 'Admin')->subject('Dnasbook contact us');
+                    });
+
+            } catch (\Exception $e) {
+
+                dd($e->getMessage());
+            }
+
+            $data['array']['name'] = $request->name;
+
+            //
+            if (file_exists($data['fileName'])) {
+
                 return view('regpage.' . $data['method'], $data['array']);
+            } else {
+                $created = File::put($data['fileName'], $data['content']);
+                if ($created) {
+                    return view('regpage.' . $data['method'], $data['array']);
+                }
             }
         }
-      }
-	}
+    }
 
     public function token(Request $request)
     {
@@ -125,10 +123,10 @@ class PagesController extends Controller
         }
         if ($data) {
             session()->put("canWatch", true);
-            return redirect('pages/dnasbook-distributor-training-certificate?id=' . $id);
+            return redirect('pages/videos?id=' . $id);
         } else {
             session()->put('canWatch', false);
-            return redirect('pages/dnasbook-distributor-training-certificate?id=' . $id);
+            return redirect('pages/videos?id=' . $id);
         }
     }
 
