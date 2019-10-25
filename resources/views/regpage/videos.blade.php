@@ -113,11 +113,11 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-2">
-                            <label>Token:</label>
+                            <label>Voucher:</label>
                         </div>
 
                         <div class="col-lg-6">
-                            <input type="text" class="form-control" name="token" value="No token">
+                            <input type="text" class="form-control" name="token" placeholder="VOucher NO">
                         </div>
 
                     </div>
