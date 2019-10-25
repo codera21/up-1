@@ -27,7 +27,7 @@ class formStep
         if (!$request->hasCookie("videoPage")) {
             $cookie = Cookie::make("videoPage", "videoPage");
             return redirect("pages/distributor?id=$value")->withCookie($cookie);
-        } elseif (!$request->cookie("payment-page")) {
+        } elseif (!$request->cookie("payment-page") && env('SITE') == 'ENG') {
             $cookie1 = Cookie::make("payment-page", 'payment-page');
             return redirect("pages/dnasbook-distributor-payment?id=$value")->withCookie($cookie1);
         } else if (!$request->cookie("privacyandpolicy")) {
