@@ -12,7 +12,10 @@
                 <h1 id="heading">{{$pagesData->title}}</h1>
                 <br>
                 <div id="contentpara">
-				Name: {{ $name }}
+	         
+			@if(@isset($name))
+			Name: {{  $name  }}
+				@endif
                     <p id="para">{!! $pagesData->content !!}</p>
                 </div>
             </div>
