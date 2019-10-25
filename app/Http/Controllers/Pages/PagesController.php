@@ -104,7 +104,8 @@ class PagesController extends Controller
                 return view('regpage.' . $data['method'], $data['array']);
             }
         }
-    }
+      }
+	}
 
     public function token(Request $request)
     {
