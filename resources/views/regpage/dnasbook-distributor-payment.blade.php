@@ -22,39 +22,44 @@
                 <div id="contentpara">
                     <p id="para">{!! $pagesData->content !!}</p>
                 </div>
-                <div class="text-center">
-                    <a href="/makeOneTimePayment">
-                        <button class="btn btn-warning" role="button">Pay Now</button>
-                    </a>
-                </div>
+                @if(env('SITE') == 'ENG')
+                    <div class="text-center">
+                        <a href="/makeOneTimePayment">
+                            <button class="btn btn-warning" role="button">Pay Now</button>
+                        </a>
+                    </div>
+                @endif
                 <br>
-                <div class="form-group" style="padding-top: 30px">
-                    <h4 class=" text-danger">Copy Your Code from Here To SomeDocument File</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group row">
-                                <div class="col-lg-9">
-                                    @if(isset($_COOKIE['token']))
-                                        <input type="text" class="form-control" name="token" id="password"
-                                               placeholder="Token" value="{{$_COOKIE['token']}}" readonly>
-                                    @else
-                                        <input type="text" class="form-control" name="token" id="password"
-                                               placeholder="Token" value="NO token yet" readonly>
-                                    @endif
-                                </div>
-                                <div class="col-lg-3">
-                                    <button onclick="copyText()" type="button" data-toggle="tooltip" data-html="true"
-                                            title=""
-                                            class="btn btn-default btn-sm"
-                                            onclick="myFunction()" data-original-title="copy to clipboard">
+                @if(env('SITE') == 'ENG')
+                    <div class="form-group" style="padding-top: 30px">
+                        <h4 class=" text-danger">Copy Your Code from Here To SomeDocument File</h4>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group row">
+                                    <div class="col-lg-9">
+                                        @if(isset($_COOKIE['token']))
+                                            <input type="text" class="form-control" name="token" id="password"
+                                                   placeholder="Token" value="{{$_COOKIE['token']}}" readonly>
+                                        @else
+                                            <input type="text" class="form-control" name="token" id="password"
+                                                   placeholder="Token" value="NO token yet" readonly>
+                                        @endif
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <button onclick="copyText()" type="button" data-toggle="tooltip"
+                                                data-html="true"
+                                                title=""
+                                                class="btn btn-default btn-sm"
+                                                onclick="myFunction()" data-original-title="copy to clipboard">
                             <span class="glyphicon glyphicon-paperclip" aria-hidden="true"
                                   style="font-size: 2rem"></span>
-                                    </button>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
         <div class="distributor">
