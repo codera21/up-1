@@ -16,5 +16,13 @@ class Paypal
                 config('services.paypal.secret') //client secret
             )
         );
+        $this->apiContext->setConfig(
+            array(
+                'mode' => 'live',
+                'log.LogEnabled' => true,
+                'log.FileName' => 'PayPal.log',
+                'log.LogLevel' => 'FINE'
+            )
+        );
     }
 }

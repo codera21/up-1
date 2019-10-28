@@ -1,0 +1,14 @@
+[28-10-2019 03:32:08] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[28-10-2019 03:32:09] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:32:10] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[28-10-2019 03:32:10] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/billing-plans/
+[28-10-2019 03:32:10] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:32:11] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[28-10-2019 03:32:11] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/billing-plans/. {"name":"REQUIRED_SCOPE_MISSING","message":"Access token does not have required scope","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#REQUIRED_SCOPE_MISSING","debug_id":"d55c815b80432"}
+[28-10-2019 03:32:22] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[28-10-2019 03:32:22] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:32:23] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[28-10-2019 03:32:23] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/billing-plans/
+[28-10-2019 03:32:24] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:32:25] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[28-10-2019 03:32:25] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/billing-plans/. {"name":"REQUIRED_SCOPE_MISSING","message":"Access token does not have required scope","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#REQUIRED_SCOPE_MISSING","debug_id":"ca2f9d6d1836c"}
