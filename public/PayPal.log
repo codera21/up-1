@@ -75,3 +75,9 @@
 [28-10-2019 03:45:02] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/billing-agreements/
 [28-10-2019 03:45:03] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
 [28-10-2019 03:45:05] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
+[28-10-2019 06:45:55] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[28-10-2019 06:45:55] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 06:45:57] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[28-10-2019 06:45:57] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/payment
+[28-10-2019 06:45:58] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 06:45:59] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
