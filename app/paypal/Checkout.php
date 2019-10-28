@@ -27,7 +27,7 @@ class Checkout extends Paypal
             ->setCurrency('USD')
             ->setQuantity(1)
             ->setSku("123123") // Similar to `item_number` in Classic API
-            ->setPrice(10);
+            ->setPrice(env('ONETIME_PAY'));
 
 
         $itemList = new ItemList();
@@ -36,7 +36,7 @@ class Checkout extends Paypal
 
         $amount = new Amount();
         $amount->setCurrency("USD")
-            ->setTotal(10);
+            ->setTotal(env('ONETIME_PAY'));
 
         $transaction = new Transaction();
         $transaction->setAmount($amount)
@@ -78,9 +78,9 @@ class Checkout extends Paypal
                 'PayerId' => $request->PayerID,
                 'paymentID' => $request->paymentId,
                 'created_at' => $result->create_time,
-                'amount' => 10,
+                'amount' => env('ONETIME_PAY'),
                 'token' => $uniqueToken,
-                'expiry_time'=>time()+60*60*72
+                'expiry_time' => time() + 60 * 60 * 72
             ];
             return $resultArr;
         }

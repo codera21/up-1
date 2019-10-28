@@ -133,7 +133,7 @@ _HOME;
             ->setFrequency('Month')
             ->setFrequencyInterval("1")
             ->setCycles("12")
-            ->setAmount(new Currency(array('value' => 59.7, 'currency' => 'USD')));
+            ->setAmount(new Currency(array('value' => env('RECURRING_PAY'), 'currency' => 'USD')));
         return $paymentDefinition;
     }
 
@@ -149,7 +149,7 @@ _HOME;
             ->setAutoBillAmount("yes")
             ->setInitialFailAmountAction("CONTINUE")
             ->setMaxFailAttempts("0")
-            ->setSetupFee(new Currency(array('value' => 59.7, 'currency' => 'USD')));
+            ->setSetupFee(new Currency(array('value' => env('RECURRING_PAY'), 'currency' => 'USD')));
         return $merchantPreferences;
     }
 
