@@ -244,3 +244,14 @@
         })
     });
 </script>
+
+<script>
+    $(document).ready(function () {
+        $(".distributor button").click(function () {
+            var baseURL = "<?php echo $baseUrl ?>";
+            var getID = "<?php echo $_GET['id'] ?>";
+            document.cookie = "videos=1;path=/";
+            window.location = baseURL + "/register/" + getID;
+        })
+    })
+</script>

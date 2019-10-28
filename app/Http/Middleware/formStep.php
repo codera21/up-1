@@ -24,25 +24,20 @@ class formStep
         $key = key($arrayofurl);
         $value = $arrayofurl[$key];
         $value = intval($value);
-        if (!$request->hasCookie("distributorPage")) {
-//            $cookie = Cookie::make("distributorPage", "1");
+        if (!isset($_COOKIE['distributorPage'])) {
             return redirect("pages/distributor?id=$value");
-
-        } elseif (!$request->cookie("payment-page")) {
-            $cookie1 = Cookie::make("payment-page", '1');
-            return redirect("pages/dnasbook-distributor-payment?id=$value")->withCookie($cookie1);
-        } else if (!$request->cookie("privacyandpolicy")) {
-            $cookie2 = Cookie::make("privacyandpolicy", "1");
-            return redirect("pages/videos?id=$value")->withCookie($cookie2);
-        } else if (!$request->cookie('questions')) {
-            $cookie3 = Cookie::make("questions", "1");
-            return redirect("pages/dnasbook-webinar-questions?id=$value")->withCookie($cookie3);
-        }/* else if (!$request->cookie('dnasbook-distributor-training-certificate')) {
-            $cookie4 = Cookie::make("dnasbook-distributor-training-certificate", "dnasbook-distributor-training-certificate");
-            return redirect("pages/dnasbook-distributor-training-certificate?id=$value")->withCookie($cookie4);
-        }*/ else if (!$request->cookie('certificate')) {
-            $cookie5 = Cookie::make("certificate", "1");
-            return redirect("pages/certificate?id=$value")->withCookie($cookie5);
+        } elseif ( !isset($_COOKIE['distributor-distributor-payment'])) {
+            unset($_COOKIE['distributorPage']);
+            return redirect("pages/dnasbook-distributor-payment?id=$value");
+        } else if (!isset($_COOKIE['videos'])) {
+            unset($_COOKIE['distributor-distributor-payment']);
+            return redirect("pages/videos?id=$value");
+        } else if (!isset($_COOKIE['videos'])) {
+            unset($_COOKIE['questions']);
+            return redirect("pages/dnasbook-webinar-questions?id=$value");
+        } else if (!isset($_COOKIE['certificate'])) {
+            unset($_COOKIE['questions']);
+            return redirect("pages/certificate?id=$value");
         }
         return $next($request);
     }
