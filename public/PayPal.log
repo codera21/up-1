@@ -12,3 +12,66 @@
 [28-10-2019 03:32:24] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
 [28-10-2019 03:32:25] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
 [28-10-2019 03:32:25] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/billing-plans/. {"name":"REQUIRED_SCOPE_MISSING","message":"Access token does not have required scope","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#REQUIRED_SCOPE_MISSING","debug_id":"ca2f9d6d1836c"}
+[28-10-2019 03:36:37] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[28-10-2019 03:36:37] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:36:39] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[28-10-2019 03:36:39] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/billing-plans/
+[28-10-2019 03:36:40] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:36:42] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[28-10-2019 03:36:42] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/billing-plans/. {"name":"REQUIRED_SCOPE_MISSING","message":"Access token does not have required scope","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#REQUIRED_SCOPE_MISSING","debug_id":"84940b2600c0a"}
+[28-10-2019 03:36:46] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[28-10-2019 03:36:46] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:36:47] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[28-10-2019 03:36:47] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/billing-plans/
+[28-10-2019 03:36:47] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:36:49] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[28-10-2019 03:36:49] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/billing-plans/. {"name":"REQUIRED_SCOPE_MISSING","message":"Access token does not have required scope","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#REQUIRED_SCOPE_MISSING","debug_id":"1215180c79878"}
+[28-10-2019 03:37:17] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[28-10-2019 03:37:18] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:37:19] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[28-10-2019 03:37:19] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/billing-plans/
+[28-10-2019 03:37:19] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:37:20] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[28-10-2019 03:37:20] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/billing-plans/. {"name":"REQUIRED_SCOPE_MISSING","message":"Access token does not have required scope","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#REQUIRED_SCOPE_MISSING","debug_id":"18c35871153c1"}
+[28-10-2019 03:43:19] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[28-10-2019 03:43:20] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:43:21] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[28-10-2019 03:43:21] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/billing-plans/
+[28-10-2019 03:43:21] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:43:22] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[28-10-2019 03:43:22] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/billing-plans/. {"name":"REQUIRED_SCOPE_MISSING","message":"Access token does not have required scope","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#REQUIRED_SCOPE_MISSING","debug_id":"24faa28e06e46"}
+[28-10-2019 03:43:48] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[28-10-2019 03:43:50] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:43:51] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[28-10-2019 03:43:51] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/billing-plans/
+[28-10-2019 03:43:51] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:43:52] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[28-10-2019 03:43:52] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/billing-plans/. {"name":"REQUIRED_SCOPE_MISSING","message":"Access token does not have required scope","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#REQUIRED_SCOPE_MISSING","debug_id":"a30b425243d79"}
+[28-10-2019 03:43:55] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[28-10-2019 03:43:59] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:44:00] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[28-10-2019 03:44:00] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/billing-plans/
+[28-10-2019 03:44:00] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:44:02] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 403
+[28-10-2019 03:44:02] PayPal\Core\PayPalHttpConnection : ERROR: Got Http response code 403 when accessing https://api.paypal.com/v1/payments/billing-plans/. {"name":"REQUIRED_SCOPE_MISSING","message":"Access token does not have required scope","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#REQUIRED_SCOPE_MISSING","debug_id":"c6e1c03710d5e"}
+[28-10-2019 03:44:32] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[28-10-2019 03:44:32] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:44:33] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[28-10-2019 03:44:33] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/billing-plans/
+[28-10-2019 03:44:34] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:44:35] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
+[28-10-2019 03:44:53] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/oauth2/token
+[28-10-2019 03:44:54] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:44:56] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[28-10-2019 03:44:56] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/billing-plans/
+[28-10-2019 03:44:56] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:44:58] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
+[28-10-2019 03:44:58] PayPal\Core\PayPalHttpConnection : INFO: PATCH https://api.paypal.com/v1/payments/billing-plans/P-36Y498552P358440KCB3YJLA
+[28-10-2019 03:44:59] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:45:00] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[28-10-2019 03:45:00] PayPal\Core\PayPalHttpConnection : INFO: GET https://api.paypal.com/v1/payments/billing-plans/P-36Y498552P358440KCB3YJLA
+[28-10-2019 03:45:01] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:45:02] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 200
+[28-10-2019 03:45:02] PayPal\Core\PayPalHttpConnection : INFO: POST https://api.paypal.com/v1/payments/billing-agreements/
+[28-10-2019 03:45:03] PayPal\Core\PayPalHttpConnection : INFO: Invalid or no certificate authority found - Retrying using bundled CA certs file
+[28-10-2019 03:45:05] PayPal\Core\PayPalHttpConnection : INFO: Response Status 	: 201
