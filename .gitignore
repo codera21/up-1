@@ -16,6 +16,7 @@ Homestead.yaml
 
 # Uploads Directory
 /public/uploads/*
+/public/PayPal.log
 !/public/uploads/.gitkeep
 
 !/public/uploads/*/
