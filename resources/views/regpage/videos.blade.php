@@ -90,16 +90,17 @@
                             <label><input type="checkbox" id="myCheck">
                                 <p class="text-danger">{{trans("backend.checkbox_note")}}</p></label>
                         </div>
-                        @if(env("SITE") == "ENG")
-                            <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>"
-                               class="btn  btn-primary registerlink"
-                               style="color: black;cursor:grab ">Next</a>
-                        @else
-                            <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>"
-                               class="btn  btn-primary registerlink"
-                               style="color: black;cursor:grab ">Next</a>
-                        @endif
-
+                        <div class="distributor">
+                            @if(env("SITE") == "ENG")
+                                <button
+                                   class="btn  btn-primary registerlink"
+                                   style="color: black;cursor:grab ">Next</button>
+                            @else
+                                <button
+                                   class="btn  btn-primary registerlink"
+                                   style="color: black;cursor:grab ">Next</button>
+                            @endif
+                        </div>
                     </div>
                 </div>
             @endif
@@ -186,16 +187,19 @@
                             <label><input type="checkbox" id="myCheck">
                                 <p class="text-danger">{{trans("backend.checkbox_note")}}</p></label>
                         </div>
-                        @if(env("SITE") == "ENG")
-                            <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>"
-                               class="btn  btn-primary registerlink"
-                               style="color: black;cursor:grab ">Next</a>
-                        @else
-                            <a href="<?php echo $baseUrl ?>/register/<?php echo $_GET["id"] ?>"
-                               class="btn  btn-primary registerlink"
-                               style="color: black;cursor:grab ">Next</a>
-                        @endif
-
+                        <div class="distributor">
+                            @if(env("SITE") == "ENG")
+                                <button
+                                    class="btn  btn-primary registerlink"
+                                    style="color: black;cursor:grab ">Next
+                                </button>
+                            @else
+                                <button
+                                    class="btn  btn-primary registerlink"
+                                    style="color: black;cursor:grab ">Next
+                                </button>
+                            @endif
+                        </div>
                     </div>
                 </div>
             @endif

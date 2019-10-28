@@ -39,9 +39,9 @@
             </div>
         </div>
         <div class="distributor">
-            <a href="{{$baseUrl}}/register/<?php echo $_GET["id"] ?>"
+            <button href="{{$baseUrl}}/register/<?php echo $_GET["id"] ?>"
                class="btn btn-primary registerlink"
-               style="color: black;cursor:grab">Next</a>
+               style="color: black;cursor:grab">Next</button>
         </div>
     </div>
     <br>

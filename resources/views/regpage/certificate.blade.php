@@ -41,9 +41,9 @@
             </div>
         </div>
         <div class="distributor">
-            <a href="{{$baseUrl}}/register/<?php echo $_GET["id"] ?>"
+            <button
                class="btn btn-primary registerlink"
-               style="color: black;cursor:grab">Next</a>
+               style="color: black;cursor:grab">Next</button>
         </div>
     </div>
     <br>
@@ -327,7 +327,7 @@
         }
     }
 </style>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         $(".distributor button").click(function () {
