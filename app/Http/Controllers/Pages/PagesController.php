@@ -20,7 +20,14 @@ class PagesController extends Controller
 
     public function dypage($slug)
     {
-        $lang = App::getLocale();
+/*
+		session()->forget('canWatch');
+		session()->forget('codeid');
+		session()->forget('videoExpireTime');
+*/
+		self::check_video_expiry();
+		
+		$lang = App::getLocale();
         $databaseRecord = Page::where('slug', $slug)->where('language', $lang)->count();
         if (!$databaseRecord) {
             return "No data with slug name <h1>" . $slug . "</h1>";
@@ -37,7 +44,7 @@ class PagesController extends Controller
         } else {
             $created = File::put($data['fileName'], $data['content']);
             if ($created) {
-                return view('regpage.' . $data['method'], $data['array']);
+            	return view('regpage.' . $data['method'], $data['array']);
             }
         }
     }
@@ -107,6 +114,8 @@ class PagesController extends Controller
 
     public function token(Request $request)
     {
+		
+		dd($request);
         if (env('SITE') == 'ENG') {
             $id = 2;
         } else {
@@ -143,10 +152,66 @@ class PagesController extends Controller
                     session()->put('canWatch', false);
                     return response(200);
                 } else {
-                    return "NO changes";
+                    return "No changes";
                 }
             }
         }
+    }
+	
+	
+	/*===========================================
+	| New Functions for video codes
+	============================================*/
+	public function videocode(Request $request)
+    {
+		if (env('SITE') == 'ENG') {
+            $id = 2;
+        } else {
+            $id = 345;
+        }
+        
+		$array = [
+            'code' => $request->input("videocode"),
+            'expired' => 0
+        ];
+		
+       
+        $code = DB::table('codes')->where($array)->first();
+
+		if ($code) {
+           	//--- Expires in 72 hours
+		    $expiretime = time() + ( 60 * 60 * 72 );
+			
+			session()->put("canWatch", true);
+			session()->put("videoExpireTime", $expiretime);
+			session()->put("codeid", $code->id);
+        } else {
+            session()->forget("canWatch");
+        }
+
+		return redirect("pages/videos?id=$id");
+    }
+	
+	public function check_video_expiry()
+    {
+		if(session()->has("videoExpireTime")){
+			$expireTime = session()->get("videoExpireTime");
+			
+			if(time() >= $expireTime){
+				$where = ["id" => session()->get("codeid")];
+				$updateData = DB::table('codes')->where($where)->update([
+					'expired' => 1
+				]);
+			
+				if ($updateData) {
+					session()->forget('canWatch');
+					session()->forget('codeid');
+					session()->forget('videoExpireTime');
+					
+					return response(200);
+				}
+			}
+		}
     }
 }
 

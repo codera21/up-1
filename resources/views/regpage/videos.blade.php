@@ -127,6 +127,28 @@
                     </div>
                 </div>
             </form>
+            
+            
+			@if(!session()->get('canWatch') || @$_GET["code"])
+            <h1 class="text-center text-primary">Submit Your Video Code To Watch</h1>
+            <form action="/videocode" method="post">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label>Video Code:</label>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control" name="videocode" placeholder="Video Code">
+                        </div>
+
+                    </div>
+                    <div class="text-center">
+                        <input type="submit" class=" btn btn-primary" value="Submit Code">
+                    </div>
+                </div>
+            </form>
+            @endif
             @if(session()->get('canWatch'))
                 <div class="col-md-12" id="content">
                     <div class="row1">

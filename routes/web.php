@@ -73,6 +73,7 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     Route::get('/ExecuteOneTimePayment', ['as' => '', 'uses' => 'paypal\OneTimePaymentController@ExecuteOneTimePayment']);
     //token post route
     Route::post('/token', ['as' => 'token', 'uses' => 'Pages\PagesController@token']);
+	Route::post('/videocode', ['as' => 'token', 'uses' => 'Pages\PagesController@videocode']);
     Route::get('/expiry', ['as' => 'tokenexpiry', 'uses' => 'Pages\PagesController@expiry']);
     // IPN Listener
     Route::post('ipn', ['as' => 'ipn', 'uses' => 'IpnController@ipn']);
@@ -296,6 +297,17 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
         Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\LevelController@edit']);
         Route::put('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\LevelController@update']);
         Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\LevelController@delete']);
+
+    });
+	
+	 // Codes
+    Route::group(['as' => 'admin.code', 'prefix' => 'code'], function () {
+        Route::get('/', ['as' => '', 'uses' => 'Admin\CodeController@index']);
+        Route::get('/add', ['as' => '.add', 'uses' => 'Admin\CodeController@add']);
+        Route::post('/add', ['as' => '.add', 'uses' => 'Admin\CodeController@save']);
+        Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\CodeController@edit']);
+        Route::put('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\CodeController@update']);
+        Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\CodeController@delete']);
 
     });
 

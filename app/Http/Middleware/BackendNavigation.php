@@ -141,7 +141,15 @@ class BackendNavigation
             $menu->get('payments')
                 ->add('Offline Payment', route('admin.offline_pay'))
                 ->active('admin.offline_pay.*');
-
+			
+			// Manage Codes
+            $menu->add('Codes', '#')
+                ->prepend('<i class="fa fa-list"></i> <span class="nav-label">')
+                ->append('</span>');
+            // Manage Payment History
+            $menu->get('codes')
+                ->add('Codes List', route('admin.code'))
+                ->active('admin.code.*');
 
         })->filter(function ($item) {
 
