@@ -185,11 +185,13 @@ class PagesController extends Controller
 			session()->put("canWatch", true);
 			session()->put("videoExpireTime", $expiretime);
 			session()->put("codeid", $code->id);
+			return redirect("pages/videos?id=$id");
         } else {
             session()->forget("canWatch");
+			return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, check your code');
         }
 
-		return redirect("pages/videos?id=$id");
+		//return redirect("pages/videos?id=$id");
     }
 	
 	public function check_video_expiry()
