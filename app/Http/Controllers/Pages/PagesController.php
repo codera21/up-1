@@ -37,6 +37,7 @@ class PagesController extends Controller
         $data = $pages->$slug();
 
         $data['array']['date'] = date('d-m-Y');
+        $data['array']['lang'] = $lang;
 
 
         if (file_exists($data['fileName'])) {
@@ -76,7 +77,7 @@ class PagesController extends Controller
 
         $data['array']['name'] = $request->name;
         $data['array']['date'] = date('d-m-Y');
-
+        $data['array']['lang'] = $lang;
         //
         if (file_exists($data['fileName'])) {
 
