@@ -124,9 +124,7 @@
         background-repeat: no-repeat;
     }
     
-	.certificate_outer {
-            height: 527px;
-        }
+	
 
 	.certificate_outer_french {
 		background-size: contain;
@@ -144,9 +142,7 @@
         background-repeat: no-repeat;
     }
     
-	.certificate_outer_french {
-            height: 527px;
-        }
+	
 
 	.certificate_outer_french {
 		background-size: contain;
