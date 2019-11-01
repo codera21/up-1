@@ -5,6 +5,7 @@
 @endsection
 <?php $baseUrl = URL::to('/');?>
 @section('content')
+    @if($lang == 'en')
     <div class="row">
         <div class="col-md-12" id="content">
             <div class="row1">
@@ -47,6 +48,49 @@
             </button>
         </div>
     </div>
+@elseif ($lang == 'fr')
+ <div class="row">
+        <div class="col-md-12" id="content">
+            <div class="row1">
+                <h1 id="heading">{{$pagesData->title}}</h1>
+                <br>
+                <div id="contentpara">
+                    <p id="para">
+                    <h2><em>S'il vous plaît, imprimez votre certificat!</em></h2>
+                    <div class="certificate_outer_french">
+                        <div class="certi_top">
+                            <div class="certificate_inner1">
+                                <h2>Ceci reconnaît que</h2>
+                                @if(@isset($name))
+                                    <h1>{{  $name  }}</h1>
+                                @else
+                                    <h1>[Name of the person]</h1>
+                                @endif
+                                <h3>A terminé avec succès l'entraînement "4"!..</h3>
+                            </div>
+                            <div class="certificate_inner2">
+                                <div class="ceo">
+                                    <p class="pra">SIGNÉ PAR <span>T.Y AHLADJIPE</span></p>
+                                    <p class="bottom_ceo">CEO</p>
+                                </div>
+                                <div class="date">
+                                    <p class="pra">{{  $date  }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Cliquez sur <em><strong>SUIVANT</strong></em>&nbsp; enregistrer!</h2>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="distributor">
+            <button
+               class="btn btn-primary registerlink"
+               style="color: black;cursor:grab">SUIVANT</button>
+        </div>
+    </div>
+@endif	
     <br>
 @endsection
 <style>
@@ -80,7 +124,30 @@
         color: #505251;
         background-repeat: no-repeat;
     }
+    
+	
 
+	.certificate_outer_french {
+		background-size: contain;
+	}
+	
+	.certificate_outer_french {
+        height: auto;
+        background-image: url(https://www.dnasbookdigimarket.com/uploads/french-cer-eng.jpg);
+        text-align: center;
+        background-size: contain;
+        width: 100%;
+        position: relative;
+        background-position: top center;
+        color: #505251;
+        background-repeat: no-repeat;
+    }
+    
+	
+
+	.certificate_outer_french {
+		background-size: contain;
+	}
     .certi_top {
         height: 900px;
     }
@@ -170,13 +237,7 @@
             width: 100%;
         }
 
-        .certificate_outer {
-            height: 527px;
-        }
-
-        .certificate_outer {
-            background-size: contain;
-        }
+        
 
         .certificate_inner1 h1 {
             font-size: 30px;

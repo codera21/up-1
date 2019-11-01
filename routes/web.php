@@ -44,7 +44,7 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     Route::get('/hcl_hcl/{id_id_id}', ['as' => '.hcl_hcl', 'uses' => 'Admin\FAQController@smp1']);
     Route::get('/pages/{slug}', ['as' => 'test', 'uses' => 'Pages\PagesController@dypage'])->middleware('pageSite');
     // Registration Routes...
-    Route::get('register/{id}', ['as' => 'register', 'uses' => 'Auth\RegisterController@showRegistrationForm'])->middleware("formStep");
+    Route::get('register/{id}', ['as' => 'registerrr', 'uses' => 'Auth\RegisterController@showRegistrationForm'])->middleware("formStep");
     Route::post('register/{id}', ['as' => 'register', 'uses' => 'Auth\RegisterController@register']);
     // Password Reset Routes...
     Route::get('password/reset', ['as' => 'password.forgot', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
@@ -299,7 +299,7 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
         Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\LevelController@delete']);
 
     });
-	
+
 	 // Codes
     Route::group(['as' => 'admin.code', 'prefix' => 'code'], function () {
         Route::get('/', ['as' => '', 'uses' => 'Admin\CodeController@index']);

@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="distributor">
-            <button href="{{$baseUrl}}/register/<?php echo $_GET["id"] ?>"
+            <button href="{{$baseUrl}}/pages/dnasbook-distributor-training-certificate?id=<?php echo $_GET["id"] ?>"
                class="btn btn-primary registerlink"
                style="color: black;cursor:grab">Next</button>
         </div>
@@ -126,7 +126,7 @@
             var baseURL = "<?php echo $baseUrl ?>";
             var getID = "<?php echo $_GET['id'] ?>";
             document.cookie = "questions=1;path=/";
-            window.location = baseURL+"/register/"+getID;
+            window.location = baseURL+"/pages/dnasbook-distributor-training-certificate?id="+getID;
         })
     })
 </script>

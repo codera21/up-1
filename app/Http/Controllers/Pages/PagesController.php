@@ -37,6 +37,7 @@ class PagesController extends Controller
         $data = $pages->$slug();
 
         $data['array']['date'] = date('d-m-Y');
+        $data['array']['lang'] = $lang;
 
 
         if (file_exists($data['fileName'])) {
@@ -76,7 +77,7 @@ class PagesController extends Controller
 
         $data['array']['name'] = $request->name;
         $data['array']['date'] = date('d-m-Y');
-
+        $data['array']['lang'] = $lang;
         //
         if (file_exists($data['fileName'])) {
 
@@ -185,11 +186,13 @@ class PagesController extends Controller
 			session()->put("canWatch", true);
 			session()->put("videoExpireTime", $expiretime);
 			session()->put("codeid", $code->id);
+			return redirect("pages/videos?id=$id");
         } else {
             session()->forget("canWatch");
+			return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, check your code');
         }
 
-		return redirect("pages/videos?id=$id");
+		//return redirect("pages/videos?id=$id");
     }
 	
 	public function check_video_expiry()
