@@ -6,10 +6,10 @@ Name: {{ $name }}
 </p>
 
 <p>
-{{ $email }}
+email: {{ $email }}
 </p>
 
 <p>
-{{ $country }}
+Country: {{ $country }}
 </p>
 @endsection

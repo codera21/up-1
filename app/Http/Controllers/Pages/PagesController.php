@@ -68,7 +68,7 @@ class PagesController extends Controller
             array(
                 'name' => $request->name,
                 'email' => $request->email,
-                'country' => $request->country,
+                'country' => $request->Country,
             ), function ($message) use ($request) {
                 $message->from($request->email);
                 $message->to('paymentproblems@gmail.com', 'Admin')->subject('Dnasbook contact us');
