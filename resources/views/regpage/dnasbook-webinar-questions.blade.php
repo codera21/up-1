@@ -71,28 +71,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     var arraysMatch = function (arr1, arr2) {
-
-        // Check if the arrays are the same length
         if (arr1.length !== arr2.length) return false;
-
-        // Check if all items exist and are in the same order
         for (var i = 0; i < arr1.length; i++) {
             if (arr1[i] !== arr2[i]) return false;
         }
-
-        // Otherwise, return true
         return true;
 
     };
 
     $(document).ready(function () {
         var checked = true;
-        $(".distributor a").attr("disabled", "disabled");
+        // $(".distributor button").attr("disabled", "disabled");
         var rightAnswer = ["1_b", "2_d", "3_c", "4_a", "5_b", "6_d", "7_b", "8_d", "9_b", "10_a", "11_c", "12_b", "13_d"];
         var answers = [];
         $('form').on('submit', function (event) {
             event.preventDefault();
-
             var currentAnswer;
             for (i = 1; i <= 13; i++) {
                 if (!document.querySelector('input[name="' + i + '"]:checked')) {
@@ -103,17 +96,17 @@
                     answers.push(currentAnswer);
                 } else {
                     $('#alert-content').html("You have to Give All Answer");
-                    $(".distributor a").attr("disabled", "disabled");
+                    $(".distributor button").attr("disabled", "disabled");
                     break;
                 }
             }
             if (arraysMatch(rightAnswer, answers)) {
                 $('#alert-content').html("You can click Next to Go further");
-                $(".distributor a").removeAttr("disabled");
+                $(".distributor button").removeAttr("disabled");
                 answers = [];
             } else {
                 $('#alert-content').html("You have to Give Correct Answer");
-                $(".distributor a").attr("disabled", "disabled");
+                $(".distributor button").attr("disabled", "disabled");
                 answers = [];
             }
         });

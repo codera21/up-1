@@ -84,13 +84,13 @@
                 </div>
             </div>
         </div>
-        <div class="distributor">
-            <button
-               class="btn btn-primary registerlink"
-               style="color: black;cursor:grab">SUIVANT</button>
-        </div>
+     <div class="distributor">
+         <button href="{{$baseUrl}}/register/?id=<?php echo $_GET["id"] ?>"
+                 class="btn btn-primary registerlink"
+                 style="color: black;cursor:grab">Next</button>
+     </div>
     </div>
-@endif	
+@endif
     <br>
 @endsection
 <style>
@@ -124,13 +124,13 @@
         color: #505251;
         background-repeat: no-repeat;
     }
-    
-	
+
+
 
 	.certificate_outer_french {
 		background-size: contain;
 	}
-	
+
 	.certificate_outer_french {
         height: auto;
         background-image: url(https://www.dnasbookdigimarket.com/uploads/french-cer-eng.jpg);
@@ -142,8 +142,8 @@
         color: #505251;
         background-repeat: no-repeat;
     }
-    
-	
+
+
 
 	.certificate_outer_french {
 		background-size: contain;
@@ -237,7 +237,7 @@
             width: 100%;
         }
 
-        
+
 
         .certificate_inner1 h1 {
             font-size: 30px;
