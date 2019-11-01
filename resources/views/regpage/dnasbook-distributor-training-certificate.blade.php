@@ -17,12 +17,6 @@
                 </div>
             </div>
         </div>
-       <!--  <div class="distributor">
-            <a href="{{$baseUrl}}/register/<?php echo $_GET["id"] ?>"
-               class="btn btn-primary registerlink"
-               style="color: black;cursor:grab">Next</a>
-        </div> -->
-		
     </div>
     <br>
 @endsection
@@ -46,7 +40,7 @@
     #para {
         font-size: 1.5rem;
     }
-	
+
 	.form-group label.control-label.col-sm-2 {
     width: 10%;
     vertical-align: middle;
@@ -60,4 +54,16 @@
     background-color: #fff;
 }
 </style>
+<script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function () {
+        $('form').removeAttr('action').
+        attr('action','/pages/certificate?id=<?php echo $_GET['id'] ?>');
+        $('input[type="submit"]').addClass('btn btn-primary');
+    })
+</script>
 

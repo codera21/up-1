@@ -7,53 +7,50 @@
 @section('content')
     @if(env('SITE') == 'ENG')
         <div class="row">
-            <h1 class="text-center text-primary">Submit Your Token To watch Video</h1>
+            @if(!session()->get('canWatch') && env('SITE') == 'ENG')
+                <h1 class="text-center text-primary">Submit Your Token  To Watch</h1>
+                <form action="/token" method="post">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Token Code:</label>
+                            </div>
 
-            <form action="/token" method="post">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <label>Token:</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" name="token" placeholder="token">
+                            </div>
+
                         </div>
-
-                        <div class="col-lg-6">
-                            @if(isset($_COOKIE['token']))
-                                <input type="text" class="form-control" name="token" value="{{$_COOKIE['token']}}">
-                            @else
-                                <input type="text" class="form-control" name="token" value="No token">
-                            @endif
+                        <div class="text-center">
+                            <input type="submit" class=" btn btn-primary" value="Submit Code">
                         </div>
+                    </div>
+                </form>
+            @endif
 
-                    </div>
-                    <div class="text-center">
-                        <input type="submit" class=" btn btn-primary" value="Submit Token">
-                    </div>
-                </div>
-            </form>
-            
             @if(!session()->get('canWatch'))
-            <h1 class="text-center text-primary">Submit Your Video Code To Watch</h1>
-            <form action="/videocode" method="post">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <label>Video Code:</label>
-                        </div>
+                <h1 class="text-center text-primary">Submit Your Video Code To Watch</h1>
+                <form action="/videocode" method="post">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Video Code:</label>
+                            </div>
 
-                        <div class="col-lg-6">
-                            <input type="text" class="form-control" name="videocode" placeholder="Video Code">
-                        </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" name="videocode" placeholder="Video Code">
+                            </div>
 
+                        </div>
+                        <div class="text-center">
+                            <input type="submit" class=" btn btn-primary" value="Submit Code">
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <input type="submit" class=" btn btn-primary" value="Submit Code">
-                    </div>
-                </div>
-            </form>
+                </form>
             @endif
-            
+
             @if(session()->get('canWatch'))
-            
+
                 <div class="col-md-12" id="content">
                     <div class="row1">
                         <h1 id="heading">{{$pagesData->title}}</h1>
@@ -124,82 +121,6 @@
                                     class="btn  btn-primary registerlink"
                                     style="color: black;cursor:grab ">Next
                                 </button>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            @endif
-            
-            
-            @if(session()->get('canWatch'))
-                <div class="col-md-12" id="content">
-                    <div class="row1">
-                        <h1 id="heading">{{$pagesData->title}}</h1>
-                        <br>
-                        <div id="contentpara">
-                            <p id="para">{!! $pagesData->content !!}</p>
-                        </div>
-                    </div>
-                    <div class="videosPage">
-                        <div>
-                            @if(env("SITE") == "ENG")
-                                {{--get language for english site--}}
-                                <?php $lang = App::getLocale();?>
-                                @if($lang == 'en')
-                                    <div style='position:relative;height:0;padding-bottom:56.25%'>
-                                        <iframe class='sproutvideo-player'
-                                                src='https://videos.sproutvideo.com/embed/7c9ddab3191ceaccf4/a01c4bcd20484085?playerTheme=dark&amp;playerColor=2f3437'
-                                                style='position:absolute;width:100%;height:100%;left:0;top:0'
-                                                frameborder='0'
-                                                allowfullscreen></iframe>
-                                    </div>
-                                @else
-                                    <div style='position:relative;height:0;padding-bottom:56.25%'>
-                                        <iframe class='sproutvideo-player'
-                                                src='https://videos.sproutvideo.com/embed/489ddab31a1ce6c2c0/2ba3aa34a14cf04a?playerTheme=dark&amp;playerColor=2f3437'
-                                                style='position:absolute;width:100%;height:100%;left:0;top:0'
-                                                frameborder='0'
-                                                allowfullscreen></iframe>
-                                    </div>
-                                @endif
-
-                            @else
-                                {{--get language for africa site--}}
-                                <?php $lang = App::getLocale();?>
-                                @if($lang == 'en')
-                                    <div style='position:relative;height:0;padding-bottom:56.25%'>
-                                        <iframe class='sproutvideo-player'
-                                                src='https://videos.sproutvideo.com/embed/7c9ddab3191ceaccf4/a01c4bcd20484085?playerTheme=dark&amp;playerColor=2f3437'
-                                                style='position:absolute;width:100%;height:100%;left:0;top:0'
-                                                frameborder='0'
-                                                allowfullscreen></iframe>
-                                    </div>
-                                @else
-                                    <div style='position:relative;height:0;padding-bottom:56.25%'>
-                                        <iframe class='sproutvideo-player'
-                                                src='https://videos.sproutvideo.com/embed/1c9ddab31a1de4c894/6287c5da6616e386?playerTheme=dark&amp;playerColor=2f3437'
-                                                style='position:absolute;width:100%;height:100%;left:0;top:0'
-                                                frameborder='0'
-                                                allowfullscreen></iframe>
-                                    </div>
-
-                                @endif
-
-                            @endif
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" id="myCheck">
-                                <p class="text-danger">{{trans("backend.checkbox_note")}}</p></label>
-                        </div>
-                        <div class="distributor">
-                            @if(env("SITE") == "ENG")
-                                <button
-                                   class="btn  btn-primary registerlink"
-                                   style="color: black;cursor:grab ">Next</button>
-                            @else
-                                <button
-                                   class="btn  btn-primary registerlink"
-                                   style="color: black;cursor:grab ">Next</button>
                             @endif
                         </div>
                     </div>
@@ -209,49 +130,28 @@
         <br>
     @else
         <div class="row">
-            <h1 class="text-center text-primary">Submit Your Voucher Number To watch Video</h1>
+            @if(!session()->get('canWatch'))
+                <h1 class="text-center text-primary">Soumettez votre code vidéo à regarder</h1>
+                <form action="/videocode" method="post">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Code vidéo:</label>
+                            </div>
 
-            <form action="/token" method="post">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <label>Voucher:</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" name="videocode" placeholder="Code vidéo">
+                            </div>
+
                         </div>
-
-                        <div class="col-lg-6">
-                            <input type="text" class="form-control" name="token" placeholder="VOucher NO">
+                        <div class="text-center">
+                            <input type="submit" class=" btn btn-primary" value="Soumettre le code">
                         </div>
-
                     </div>
-                    <div class="text-center">
-                        <input type="submit" class=" btn btn-primary" value="Submit Voucher Number">
-                    </div>
-                </div>
-            </form>
-            
-            
-			@if(!session()->get('canWatch'))
-            <h1 class="text-center text-primary">Soumettez votre code vidéo à regarder</h1>
-            <form action="/videocode" method="post">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <label>Code vidéo:</label>
-                        </div>
-
-                        <div class="col-lg-6">
-                            <input type="text" class="form-control" name="videocode" placeholder="Code vidéo">
-                        </div>
-
-                    </div>
-                    <div class="text-center">
-                        <input type="submit" class=" btn btn-primary" value="Soumettre le code">
-                    </div>
-                </div>
-            </form>
+                </form>
             @endif
             @if(session()->get('canWatch'))
-            
+
                 <div class="col-md-12" id="content">
                     <div class="row1">
                         <h1 id="heading">{{$pagesData->title}}</h1>

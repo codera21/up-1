@@ -19,9 +19,7 @@ class Paypal
         $this->apiContext->setConfig(
             array(
                 'mode' => 'live',
-                'log.LogEnabled' => true,
-                'log.FileName' => 'PayPal.log',
-                'log.LogLevel' => 'FINE'
+                'log.LogEnabled' => false,
             )
         );
     }
