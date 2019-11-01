@@ -81,7 +81,7 @@
 
     $(document).ready(function () {
         var checked = true;
-        // $(".distributor button").attr("disabled", "disabled");
+        $(".distributor button").attr("disabled", "disabled");
         var rightAnswer = ["1_b", "2_d", "3_c", "4_a", "5_b", "6_d", "7_b", "8_d", "9_b", "10_a", "11_c", "12_b", "13_d"];
         var answers = [];
         $('form').on('submit', function (event) {
