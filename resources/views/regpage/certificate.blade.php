@@ -42,8 +42,9 @@
         </div>
         <div class="distributor">
             <button
-               class="btn btn-primary registerlink"
-               style="color: black;cursor:grab">Next</button>
+                class="btn btn-primary registerlink"
+                style="color: black;cursor:grab">Next
+            </button>
         </div>
     </div>
     <br>
