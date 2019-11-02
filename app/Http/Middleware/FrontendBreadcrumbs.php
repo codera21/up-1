@@ -161,7 +161,7 @@ class FrontendBreadcrumbs
             $breadcrumbs->push(trans('page_title.news'));
         });
         Breadcrumbs::register('about', function ($breadcrumbs) {
-            $breadcrumbs->parent('home');
+           $breadcrumbs->parent('home');
             $breadcrumbs->push(trans('page_title.about_us'));
         });
         Breadcrumbs::register('contact', function ($breadcrumbs) {
