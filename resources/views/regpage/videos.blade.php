@@ -131,21 +131,21 @@
     @else
         <div class="row">
             @if(!session()->get('canWatch'))
-                <h1 class="text-center text-primary">Soumettez votre code vidéo à regarder</h1>
+                <h1 class="text-center text-primary">{{trans('register.video_page_code')}}</h1>
                 <form action="/videocode" method="post">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-2">
-                                <label>Code vidéo:</label>
+                                <label>{{trans('register.enter_code_label')}}</label>
                             </div>
 
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" name="videocode" placeholder="Code vidéo">
+                                <input type="text" class="form-control" name="videocode" placeholder="{{trans('register.enter_code_label')}}">
                             </div>
 
                         </div>
                         <div class="text-center">
-                            <input type="submit" class=" btn btn-primary" value="Soumettre le code">
+                            <input type="submit" class=" btn btn-primary" value="{{trans('register.enter_code')}}">
                         </div>
                     </div>
                 </form>
