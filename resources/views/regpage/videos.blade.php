@@ -17,6 +17,7 @@
                             </div>
 
                             <div class="col-lg-6">
+                                <input type="hidden" name="id" value="{{$_GET['id']}}">
                                 <input type="text" class="form-control" name="token" placeholder="{{trans('register.video_page_label')}}">
                             </div>
 
@@ -38,6 +39,7 @@
                             </div>
 
                             <div class="col-lg-6">
+                                <input type="hidden" name="id" value="{{$_GET['id']}}">
                                 <input type="text" class="form-control" name="videocode" placeholder="{{trans('register.enter_code_label')}}">
                             </div>
 
@@ -140,6 +142,7 @@
                             </div>
 
                             <div class="col-lg-6">
+                                <input type="hidden" name="id" value="{{$_GET['id']}}">
                                 <input type="text" class="form-control" name="videocode" placeholder="{{trans('register.enter_code_label')}}">
                             </div>
 
