@@ -176,7 +176,7 @@ class RegisterController extends Controller
                 'sex' => $request->sex,
             ]);
             Auth::login($user);
-            return redirect()->guest("/user/$request->username");
+            return redirect()->guest("/user/dashboard");
         } else {
             return redirect()->route('register', ['post' => $request->input("parent_id")])
                 ->with('danger', 'Could Not Register');
