@@ -28,13 +28,13 @@
                                 @endif
                                 <h3 style="text-transform: uppercase;font-size: 18px;color: #505251;font-style: italic; font-weight: 600; margin-top: 10px; margin-bottom: 5px;">Has successfully finished opportunity "4" training!..</h3>
                             </div>
-                            <div class="certificate_inner2" style="margin: auto;left: 0;right: 0;bottom: 28%;position: absolute;display: flex;width: 70%;align-items: baseline;">
+                            <div class="certificate_inner2" style="margin: auto;left: 0;right: 0;bottom: 20%;position: absolute;display: flex;width: 70%;align-items: baseline;">
                                 <div class="ceo" style=" width: 48%; padding: 0 20px;">
-                                    <p class="pra" style="padding-bottom: 10px; text-align: center;border-bottom: 1px solid #505251;font-size: 10px; margin: 0 0 10px;">SIGNED BY <span style="color: #788d84;font-size: 22px;font-weight: 600; margin: 0 0 10px;">T.Y AHLADJIPE</span></p>
-                                    <p class="bottom_ceo" style="border-bottom: 0;font-size: 16px;font-weight: 600;     margin: 0 0 10px;">CEO</p>
+                                    <p class="pra" style="padding-bottom: 10px; text-align: center;border-bottom: 1px solid #505251;font-size: 14px; margin: 0 0 10px;">SIGNED BY <span style="color: #788d84;font-size: 22px;font-weight: 600; margin: 0 0 10px;">T.Y AHLADJIPE</span></p>
+                                    <p class="bottom_ceo" style="border-bottom: 0;font-size: 16px;font-weight: 600;     margin: 0 0 10px; text-align:center;">CEO</p>
                                 </div>
                                 <div class="date" style="border-bottom: 0;font-size: 16px;font-weight: 600;  width: 48%; padding: 0 20px;">
-                                    <p class="pra" style="    text-align: center;border-bottom: 1px solid #505251;font-size: 10px; padding-bottom: 15px;">{{  $date  }}</p>
+                                    <p class="pra" style="    text-align: center;border-bottom: 1px solid #505251;font-size: 14px; padding-bottom: 15px;">{{  $date  }}</p>
                                 </div>
                             </div>
                         </div>
@@ -77,13 +77,13 @@ Certificat d'impression" /></h2>
                                 @endif
                                 <h3 style="text-transform: uppercase;font-size: 18px;color: #505251;font-style: italic; font-weight: 600; margin-top: 10px; margin-bottom: 5px;">A terminé avec succès l'entraînement "4"!..</h3>
                             </div>
-                            <div class="certificate_inner2" style="margin: auto;left: 0;right: 0;bottom: 28%;position: absolute;display: flex;width: 70%;align-items: baseline;">
+                            <div class="certificate_inner2" style="margin: auto;left: 0;right: 0;bottom: 20%;position: absolute;display: flex;width: 70%;align-items: baseline;">
                                 <div class="ceo" style=" width: 48%; padding: 0 20px;">
-                                    <p class="pra" style="padding-bottom: 10px; text-align: center;border-bottom: 1px solid #505251;font-size: 10px; margin: 0 0 10px;">SIGNÉ PAR <span style="color: #788d84;font-size: 22px;font-weight: 600; margin: 0 0 10px;">T.Y AHLADJIPE</span></p>
-                                    <p class="bottom_ceo" style="border-bottom: 0;font-size: 16px;font-weight: 600;     margin: 0 0 10px;">CEO</p>
+                                    <p class="pra" style="padding-bottom: 10px; text-align: center;border-bottom: 1px solid #505251;font-size: 14px; margin: 0 0 10px;">SIGNÉ PAR <span style="color: #788d84;font-size: 22px;font-weight: 600; margin: 0 0 10px;">T.Y AHLADJIPE</span></p>
+                                    <p class="bottom_ceo" style="border-bottom: 0;font-size: 16px;font-weight: 600;     margin: 0 0 10px;text-align:center;">CEO</p>
                                 </div>
                                 <div class="date" style="border-bottom: 0;font-size: 16px;font-weight: 600;  width: 48%; padding: 0 20px;">
-                                    <p class="pra" style="    text-align: center;border-bottom: 1px solid #505251;font-size: 10px; padding-bottom: 15px;">{{  $date  }}</p>
+                                    <p class="pra" style="    text-align: center;border-bottom: 1px solid #505251;font-size: 14px; padding-bottom: 15px;">{{  $date  }}</p>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@ function printCertificate(divid) {
 	var data = $("#"+divid).html();
     var mywindow = window.open('');
     mywindow.document.write('<html><head><title>Certificate</title>');
-
+    mywindow.document.write('<style>@page { size: landscape; }</style>');
     mywindow.document.write(data);
     mywindow.document.write('</body></html>');	
 	mywindow.print();
