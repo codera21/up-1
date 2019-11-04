@@ -17,8 +17,8 @@
                 <div id="print_english_certificate">
 					<div class="certificate_outer" style="    text-align: center;  width: 100%;    height: 100%;
     background-size: contain; position: relative; background-position: top center; color: #505251; background-repeat: no-repeat;">
-					<img class="cert-img" style=" position: absolute;left: 0;top: 0;" src="https://www.dnasbookdigimarket.com/uploads/new-cer-eng.jpg" height="800px" width="100%"/>
-                        <div style=" position: relative; top: 0; height: 800px;"  class="certi_top">
+					<img class="cert-img" style=" position: absolute;left: 0;top: 0;" src="https://www.dnasbookdigimarket.com/uploads/new-cer-eng.jpg" height="100%" width="100%"/>
+                        <div style=" position: relative; top: 0; height: 100%;"  class="certi_top">
                             <div class="certificate_inner1" style="position: absolute; top: 38%; left: 0; right: 0;">
                                 <h2 style="font-size: 22px;text-transform: uppercase; margin-top: 10px; margin-bottom: 5px;">This acknowledges that</h2>
                                 @if(@isset($name))
@@ -66,8 +66,8 @@ Certificat d'impression" /></h2>
                    <div id="print_french_certificate">
 					<div class="certificate_outer_french" style="    text-align: center;  width: 100%;    height: 100%;
     background-size: contain; position: relative; background-position: top center; color: #505251; background-repeat: no-repeat;">
-					<img class="cert-img" style=" position: absolute;left: 0;top: 0;" src="https://www.dnasbookdigimarket.com/uploads/french-cer-eng.jpg" height="800px" width="100%"/>
-                        <div style=" position: relative; top: 0; height: 800px;"  class="certi_top">
+					<img class="cert-img" style=" position: absolute;left: 0;top: 0;" src="https://www.dnasbookdigimarket.com/uploads/french-cer-eng.jpg" height="100%" width="100%"/>
+                        <div style=" position: relative; top: 0; height: 100%;"  class="certi_top">
                             <div class="certificate_inner1" style="position: absolute; top: 38%; left: 0; right: 0;">
                                 <h2 style="font-size: 22px;text-transform: uppercase; margin-top: 10px; margin-bottom: 5px;">Ceci reconnaît que</h2>
                                 @if(@isset($name))
