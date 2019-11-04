@@ -23,7 +23,9 @@ return [
     'agree' => 'Check this box if you Agree to our<a href="/pages/terms-and-conditions" target="_blank" style="color: blue"> Terms Of Use </a> and <a href="/pages/privacy-policy" target="_blank" style="color: blue">Privacy Policy</a>',
     'no_referal' => 'Sorry, You didn\'t specify referer',
     'example' => 'Example',
-    'video_page_code'=>'Enter Code to watch Video',
-    'enter_code'=>'Submit Code',
-    'enter_code_label'=>'Video code'
+    'video_page_code' => 'Enter Code to watch Video',
+    'enter_code' => 'Submit Code',
+    'enter_code_label' => 'Video code',
+    'video_page_token' => 'Submit Your Token To Watch',
+    'video_page_label' => 'Token Code'
 ];
