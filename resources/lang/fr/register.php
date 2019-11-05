@@ -25,5 +25,7 @@ return [
     'example' => 'Exemple',
     'video_page_code' => 'Soumettez votre code vidéo à regarder',
     'enter_code' => 'Soumettre le code',
-    'enter_code_label'=>'Code vidéo'
+    'enter_code_label' => 'Code vidéo',
+    'video_page_token' => 'Soumettez votre jeton pour regarder',
+    'video_page_label' => 'Code de jeton'
 ];

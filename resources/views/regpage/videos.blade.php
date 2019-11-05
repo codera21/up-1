@@ -8,42 +8,44 @@
     @if(env('SITE') == 'ENG')
         <div class="row">
             @if(!session()->get('canWatch') && env('SITE') == 'ENG')
-                <h1 class="text-center text-primary">Submit Your Token  To Watch</h1>
+                <h1 class="text-center text-primary">{{trans('register.video_page_token')}}</h1>
                 <form action="/token" method="post">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-2">
-                                <label>Token Code:</label>
+                                <label>{{trans('register.video_page_label')}}</label>
                             </div>
 
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" name="token" placeholder="token">
+                                <input type="hidden" name="id" value="{{$_GET['id']}}">
+                                <input type="text" class="form-control" name="token" placeholder="{{trans('register.video_page_label')}}">
                             </div>
 
                         </div>
                         <div class="text-center">
-                            <input type="submit" class=" btn btn-primary" value="Submit Code">
+                            <input type="submit" class=" btn btn-primary" value="{{trans('register.enter_code')}}">
                         </div>
                     </div>
                 </form>
             @endif
 
             @if(!session()->get('canWatch'))
-                <h1 class="text-center text-primary">Submit Your Video Code To Watch</h1>
+                <h1 class="text-center text-primary">{{trans('register.video_page_code')}}</h1>
                 <form action="/videocode" method="post">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-2">
-                                <label>Video Code:</label>
+                                <label>{{trans('register.enter_code_label')}}</label>
                             </div>
 
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" name="videocode" placeholder="Video Code">
+                                <input type="hidden" name="id" value="{{$_GET['id']}}">
+                                <input type="text" class="form-control" name="videocode" placeholder="{{trans('register.enter_code_label')}}">
                             </div>
 
                         </div>
                         <div class="text-center">
-                            <input type="submit" class=" btn btn-primary" value="Submit Code">
+                            <input type="submit" class=" btn btn-primary" value="{{trans('register.enter_code')}}">
                         </div>
                     </div>
                 </form>
@@ -140,6 +142,7 @@
                             </div>
 
                             <div class="col-lg-6">
+                                <input type="hidden" name="id" value="{{$_GET['id']}}">
                                 <input type="text" class="form-control" name="videocode" placeholder="{{trans('register.enter_code_label')}}">
                             </div>
 

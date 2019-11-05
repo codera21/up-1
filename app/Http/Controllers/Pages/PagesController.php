@@ -115,11 +115,7 @@ class PagesController extends Controller
 
     public function token(Request $request)
     {
-        if (env('SITE') == 'ENG') {
-            $id = 2;
-        } else {
-            $id = 345;
-        }
+        $id = $request->id;
         $array = [
             'token' => $_POST['token'],
             'is_expired' => 'NO'
@@ -159,11 +155,7 @@ class PagesController extends Controller
     ============================================*/
     public function videocode(Request $request)
     {
-        if (env('SITE') == 'ENG') {
-            $id = 2;
-        } else {
-            $id = 345;
-        }
+        $id = $request->id;
 
         $array = [
             'code' => $request->input("videocode"),
