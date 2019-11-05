@@ -6,6 +6,51 @@
 <?php $baseUrl = URL::to('/');?>
 @section('content')
     @if($lang == 'en')
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@midea screen and (max-width:767px){
+.certificate_inner2{
+    width:90%;
+}
+.ceo, .date{
+    width:50%;
+	padding: 0px 15px;
+}
+.ceo p{ 
+   font-size: 12px;
+}
+.date p{ 
+   font-size: 12px;
+   padding-bottom:27px;
+}
+..ceo .pra span{ 
+   font-size: 16px;
+}
+.bottom_ceo{
+   font-size: 16px;
+}
+.contentpara h2{
+   font-size:24px;
+}
+.certificate_inner1{
+    padding: 15px;
+    margin: 0 auto;
+    width: 90%;
+}
+.certificate_inner1 h2{
+    font-size:14px;
+}
+.certificate_inner1 h2{
+    font-size:24px;
+}
+.certificate_inner1 h2{
+    font-size:12px;
+}
+.certificate_inner2{
+    bottom: 15%;
+}
+}
+</style>
     <div class="row">
         <div class="col-md-12" id="content">
             <div class="row1">
