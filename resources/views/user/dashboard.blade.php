@@ -9,7 +9,7 @@
         @if(Auth::user()->not_now == 1)
             <div class="alert alert-info" role="alert">
                 <b class="text-danger">Important</b>: {{trans('app.combine_message')}}
-                <a href="{{trans('app.this_is_link')}}"
+                <a href="/pages/how-to-pay-in-opportunity-4"
                    style="font-weight:bold;color:blue"> {{ trans('app.click_here') }}</a>
 
             </div>

@@ -50,7 +50,7 @@ return [
     'click_here' => 'cliquez ici!',
     'combine_message' => session::get('combine_fr'),
     'this_is_how' => Session::get('this_is_how_fr'),
-    'this_is_link' => session::get('this_is_link_fr'),
+
     //one
     'p_one' => "Comment ce projet fonctionne? <br>
     Ce projet vous forme en entrepreneuriat et vous finance gratuitement. Comment?<br>

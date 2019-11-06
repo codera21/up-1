@@ -101,11 +101,7 @@ class PageController extends Controller
         return view('page.news-detail', ['news' => $news]);
     }
 
-    /**
-     * Show contact us
-     *
-     * @return Response
-     */
+
     public function contact(Request $request)
     {
 
