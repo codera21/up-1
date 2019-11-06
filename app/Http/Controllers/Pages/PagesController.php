@@ -12,21 +12,28 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Mail;
-
+use Carbon\Carbon;
 //use Illuminate\Support\Facades\Request;
 
 class PagesController extends Controller
 {
 
-    public function dypage($slug)
+    public function dypage($slug, Request $request)
     {
-        /*
-                session()->forget('canWatch');
-                session()->forget('codeid');
-                session()->forget('videoExpireTime');
-        */
-        self::check_video_expiry();
-
+       	//--- Validate video token
+		self::check_video_expiry();
+		
+		$restricted_slugs = ["distributor", "dnasbook-distributor-payment", 
+							 "dnasbook-webinar-questions", 
+							 "dnasbook-distributor-training-certificate", "certificate"		
+							];
+							
+		//--- If video code wasnt' entered don't allow to access other pages.
+		if(in_array($slug, $restricted_slugs) && !session()->has("canWatch")){
+			$id = $request->id;
+			return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, enter your code');
+		}
+		
         $lang = App::getLocale();
         $databaseRecord = Page::where('slug', $slug)->where('language', $lang)->count();
         if (!$databaseRecord) {
@@ -39,6 +46,18 @@ class PagesController extends Controller
         $data['array']['date'] = date('d-m-Y');
         $data['array']['lang'] = $lang;
 
+		if(session()->has("codeid")){
+			$code = DB::table("codes")->where(["id" => session()->get("codeid")])->first();	
+			$end = Carbon::parse($code->started_at)->addHours(72);
+			$pages_slug = $restricted_slugs;
+			$pages_slug[] = "videos";
+			
+			if(in_array($slug, $pages_slug)){
+				$data['array']['started_at'] = $code->started_at;
+				$data['array']['end_at'] = $end;
+				$data['array']['timezone'] = Carbon::now()-> tzName;
+			}
+		}
 
         if (file_exists($data['fileName'])) {
             return view('regpage.' . $data['method'], $data['array']);
@@ -166,13 +185,19 @@ class PagesController extends Controller
         $code = DB::table('codes')->where($array)->first();
 
         if ($code) {
-            //--- Expires in 72 hours
-            $expiretime = time() + (60 * 60 * 72);
+            
+			if($code->started_at == null){
+				$data["started_at"] = Carbon::now()->toDateTimeString();
+				DB::table('codes')->where(["id" => $code->id])->update( $data );
+			}
+
+			//--- Expires in 72 hours
+			//$expiretime = time() + (60 * 60 * 72);
 
             session()->put("canWatch", true);
-            session()->put("videoExpireTime", $expiretime);
             session()->put("codeid", $code->id);
-            return redirect("pages/videos?id=$id");
+           
+		    return redirect("pages/videos?id=$id");
         } else {
             session()->forget("canWatch");
             return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, check your code');
@@ -183,24 +208,30 @@ class PagesController extends Controller
 
     public function check_video_expiry()
     {
-        if (session()->has("videoExpireTime")) {
-            $expireTime = session()->get("videoExpireTime");
+        if (session()->has("codeid")) {
+            $where = ["id" => session()->get("codeid")];
+            $code = DB::table('codes')->where($where)->first();
+			
+			if($code){
+				
+				$expireTime = strtotime($code->started_at) + (60 * 60 * 72);
 
-            if (time() >= $expireTime) {
-                $where = ["id" => session()->get("codeid")];
-                $updateData = DB::table('codes')->where($where)->update([
-                    'expired' => 1
-                ]);
-
-                if ($updateData) {
-                    session()->forget('canWatch');
-                    session()->forget('codeid');
-                    session()->forget('videoExpireTime');
-
-                    return response(200);
-                }
-            }
+				if (time() >= $expireTime) {
+					
+					$updateData = DB::table('codes')->where($where)->update([
+						'expired' => 1
+					]);
+	
+					if ($updateData) {
+						session()->forget('canWatch');
+						session()->forget('codeid');
+	
+						return response(200);
+					}
+				}
+			}
         }
+		
     }
 }
 

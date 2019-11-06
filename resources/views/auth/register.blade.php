@@ -7,7 +7,7 @@
 @section('content')
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <div class="featured-boxes">
+    <div class="featured-boxes" id="content">
         <div class="row">
             <div class="col-sm-12 pull-left">
 
