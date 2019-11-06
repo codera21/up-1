@@ -120,7 +120,7 @@ Certificat d'impression" /></h2>
                                 @else
                                     <h1 style="font-size: 60px; margin-top: 10px; margin-bottom:5px;">[Nom de la personne]</h1>
                                 @endif
-                                <h3 style="text-transform: uppercase;font-size: 18px;color: #505251;font-style: italic; font-weight: 600; margin-top: 10px; margin-bottom: 5px;">A terminé avec succès l'entraînement "4"!..</h3>
+                                <h3 style="text-transform: uppercase;font-size: 18px;color: #505251;font-style: italic; font-weight: 600; margin-top: 10px; margin-bottom: 5px;">A TERMINÉ AVEC SUCCÈS LA FORMATION DE OPPORTUNITY "4".</h3>
                             </div>
                             <div class="certificate_inner2" style="margin: auto;left: 0;right: 0;bottom: 20%;position: absolute;display: flex;width: 70%;align-items: baseline;">
                                 <div class="ceo" style=" width: 48%; padding: 0 20px;">
@@ -149,7 +149,7 @@ Certificat d'impression" /></h2>
     <br>
 @endsection
 <link media="print" href="{{ asset('/frontend/josh/css/print.css') }}" />
- <link rel="stylesheet" href="{{ asset('/frontend/josh/css/certificate.css') }}" type="text/css" /> 
+ 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -173,7 +173,4 @@ function printCertificate(divid) {
 	mywindow.print();
     mywindow.top.close();	
 }
-
-
-
 </script>
