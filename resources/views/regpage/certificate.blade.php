@@ -171,6 +171,6 @@ function printCertificate(divid) {
     mywindow.document.write(data);
     mywindow.document.write('</body></html>');	
 	mywindow.print();
-    mywindow.top.close();	
+  //  mywindow.top.close();	
 }
 </script>
