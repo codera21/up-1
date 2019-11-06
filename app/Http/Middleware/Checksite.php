@@ -19,9 +19,7 @@ class Checksite
 
         // this is how to
         session::put("this_is_how_eng", ' This is how to pay on Opportunity "4": ');
-        session::put("this_is_link_eng", '/pages/how-to-pay-in-opportunity-4');
         session::put("this_is_how_fr", 'Voici comment payer sur Opportunité "4": ');
-        session::put("this_is_link_fr", '/pages/how-to-pay-in-opportunity-4');
 
 
         //flash message for online-payment/add and active and addnew1
