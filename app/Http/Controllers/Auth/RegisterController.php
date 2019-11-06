@@ -21,7 +21,7 @@ use Auth;
 // Models and Repo
 use App\Models\User;
 use App\Repositories\UserRepository;
-
+use Carbon\Carbon;
 class RegisterController extends Controller
 {
     /*
@@ -89,8 +89,23 @@ class RegisterController extends Controller
 
     public function showRegistrationForm($id = null)
     {
-
-        return view('auth.register', ['parentid' => $id]);
+		
+		//--- If video code wasnt' entered redirect to video code page.
+		if(!session()->has("canWatch")){
+			return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, enter your code');
+		}
+		
+		$data["parentid"] = $id;
+		
+		if(session()->has("codeid")){
+			$code = DB::table("codes")->where(["id" => session()->get("codeid")])->first();	
+			$end = Carbon::parse($code->started_at)->addHours(72);
+			$data['started_at'] = $code->started_at;
+			$data['end_at'] = $end;
+			$data['timezone'] = Carbon::now()-> tzName;
+		}
+		
+        return view('auth.register', $data);
     }
 
     protected function validator(array $data)
