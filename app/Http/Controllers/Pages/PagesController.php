@@ -26,7 +26,7 @@ class PagesController extends Controller
         $this->material = $material;
     }
 
-<<<<<<< HEAD
+
     public function dypage($slug,Request $request)
     {
         /*
@@ -38,7 +38,7 @@ class PagesController extends Controller
 	
         self::check_video_expiry();
        // $id
-=======
+
     public function dypage($slug, Request $request)
     {
        	//--- Validate video token
@@ -55,7 +55,7 @@ class PagesController extends Controller
 			return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, enter your code');
 		}
 		
->>>>>>> 1d700f0fc5298b07d7510eed74de3319570d37f6
+
         $lang = App::getLocale();
         $databaseRecord = Page::where('slug', $slug)->where('language', $lang)->count();
         if (!$databaseRecord) {
@@ -76,11 +76,6 @@ class PagesController extends Controller
 		} */
         $data['array']['date'] = date('d-m-Y');
         $data['array']['lang'] = $lang;
-<<<<<<< HEAD
-        
-		
-       // view('user-academy.view-material', ['material' => $material, 'material_details' => $material_details]); 
-=======
 
 		if(session()->has("codeid")){
 			$code = DB::table("codes")->where(["id" => session()->get("codeid")])->first();	
@@ -94,7 +89,7 @@ class PagesController extends Controller
 				$data['array']['timezone'] = Carbon::now()-> tzName;
 			}
 		}
->>>>>>> 1d700f0fc5298b07d7510eed74de3319570d37f6
+
 
         if (file_exists($data['fileName'])) {
             return view('regpage.' . $data['method'], $data['array']);
