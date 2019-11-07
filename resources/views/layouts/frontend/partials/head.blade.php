@@ -105,6 +105,13 @@
 
 <link rel="stylesheet" href="{{ asset('/frontend/josh/vendors/owl-carousel/owl.theme.css') }}">
 
+@if(isset($end_at))
+<script>
+	var timezone = '{{$timezone}}';
+	var end_at = new Date('{{$end_at}}');
+</script>
+@endif
+<script src="{{ asset('/frontend/js/show_end_time.js') }}"></script>
 
 <!--JQuery Validation-->
 
@@ -238,7 +245,6 @@
 <script src="{{ asset('/plugins/ckeditor/ckeditor.js') }}"></script>
 
 <script src="{{ asset('/plugins/ckeditor/config.js') }}"></script>
-
 
 <style>
     .container .row .col-md-12 a[href] {
