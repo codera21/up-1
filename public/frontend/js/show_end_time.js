@@ -32,7 +32,7 @@ function show_end_time(){
 					'<strong class="seconds text-danger">'+seconds+'</strong> Seconds';
 	
 	if(hours <= 0 && minutes <= 0 && seconds <= 0){
-		window.location.assign(baseURL + '/pages/videos/');	
+		window.location.reload();	
 	}
 	
 	$(".show_end_time").html(html);

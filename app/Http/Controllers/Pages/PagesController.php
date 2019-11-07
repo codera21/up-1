@@ -27,15 +27,18 @@ class PagesController extends Controller
     }
 
 
+
+
     public function dypage($slug, Request $request)
     {
        	//--- Validate video token
 		self::check_video_expiry();
 		
-		$restricted_slugs = ["distributor", "dnasbook-distributor-payment", 
-							 "dnasbook-webinar-questions", 
-							 "dnasbook-distributor-training-certificate", "certificate"		
-							];
+		$restricted_slugs = [
+							"dnasbook-webinar-questions",
+							"dnasbook-distributor-training-certificate", 
+							"certificate"
+						];
 							
 		//--- If video code wasnt' entered don't allow to access other pages.
 		if(in_array($slug, $restricted_slugs) && !session()->has("canWatch")){
@@ -43,6 +46,7 @@ class PagesController extends Controller
 			return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, enter your code');
 		}
 		
+
         $lang = App::getLocale();
         $databaseRecord = Page::where('slug', $slug)->where('language', $lang)->count();
         if (!$databaseRecord) {
@@ -64,14 +68,23 @@ class PagesController extends Controller
         $data['array']['date'] = date('d-m-Y');
         $data['array']['lang'] = $lang;
 
-		if(session()->has("codeid")){
-			$code = DB::table("codes")->where(["id" => session()->get("codeid")])->first();	
-			$end = Carbon::parse($code->started_at)->addHours(72);
+		if(session()->has("codeid") || session()->has("tokenid")){
+			if(session()->has("codeid")){
+				$code = DB::table("codes")->where(["id" => session()->get("codeid")])->first();	
+				$end = Carbon::parse($code->started_at)->addHours(72);
+				$data['array']['started_at'] = $code->started_at;
+			}
+			
+			if(session()->has("tokenid")){
+				$token = DB::table("training_video_payment")->where(["id" => session()->get("tokenid")])->first();	
+				$end = Carbon::parse($token->started_at)->addHours(72);
+				$data['array']['started_at'] = $token->started_at;
+			}
+			
 			$pages_slug = $restricted_slugs;
 			$pages_slug[] = "videos";
 			
 			if(in_array($slug, $pages_slug)){
-				$data['array']['started_at'] = $code->started_at;
 				$data['array']['end_at'] = $end;
 				$data['array']['timezone'] = Carbon::now()-> tzName;
 			}
@@ -157,10 +170,19 @@ class PagesController extends Controller
             'token' => $_POST['token'],
             'is_expired' => 'NO'
         ];
-        $data = DB::table('training_video_payment')->where($array)->get()->count();
-        if ($data) {
-            session()->put("canWatch", true);
-            return redirect('pages/videos?id=' . $id);
+        
+		$token = DB::table('training_video_payment')->where($array)->first();
+        
+		if ($token) {
+            if($token->started_at == null){
+				$payment_data["started_at"] = Carbon::now()->toDateTimeString();
+				DB::table('training_video_payment')->where(["id" => $token->id])->update( $payment_data );
+			}
+			
+			session()->put("canWatch", true);
+			session()->put("tokenid", $token->id);
+            
+			return redirect('pages/videos?id=' . $id);
         } else {
             session()->put('canWatch', false);
             return redirect('pages/videos?id=' . $id);
