@@ -27,17 +27,7 @@ class PagesController extends Controller
     }
 
 
-    public function dypage($slug,Request $request)
-    {
-        /*
-                session()->forget('canWatch');
-                session()->forget('codeid');
-                session()->forget('videoExpireTime');
-        */
-	
-	
-        self::check_video_expiry();
-       // $id
+
 
     public function dypage($slug, Request $request)
     {
