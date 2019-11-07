@@ -49,6 +49,9 @@
 .certificate_inner2{
     bottom: 15%;
 }
+h1.name {
+    font-size: 26px!important;
+}
 }
 </style>
     <div class="row">
@@ -67,9 +70,9 @@
                             <div class="certificate_inner1" style="position: absolute; top: 38%; left: 0; right: 0;">
                                 <h2 style="font-size: 22px;text-transform: uppercase; margin-top: 10px; margin-bottom: 5px;">This acknowledges that</h2>
                                 @if(@isset($name))
-                                    <h1 style="font-size: 60px; margin-top: 10px; margin-bottom: 5px;">{{  $name  }}</h1>
+                                    <h1 class="name" style="text-align: center;width: 74%;font-size: 26px;line-height: 37px;font-weight: 900; margin-top: 10px;margin:auto; margin-bottom: 5px; word-break: break-all;">{{  $name  }}</h1>
                                 @else
-                                    <h1 style="font-size: 60px; margin-top: 10px; margin-bottom:5px;">[Name of the person]</h1>
+                                    <h1 class="name" style="text-align: center;width: 74%;font-size: 26px;line-height: 37px;font-weight: 900; margin-top: 10px;margin:auto; margin-bottom:5px;word-break: break-all;">[Name of the person]</h1>
                                 @endif
                                 <h3 style="text-transform: uppercase;font-size: 18px;color: #505251;font-style: italic; font-weight: 600; margin-top: 10px; margin-bottom: 5px;">Has successfully finished opportunity "4" training!..</h3>
                             </div>
@@ -106,7 +109,7 @@
                 <div id="contentpara">
                     <p id="para">
 					 <h2><input type="button" onclick="printCertificate('print_french_certificate')" value="
-Certificat d'impression" /></h2>
+Impression de Certificat" /></h2>
 
                    <div id="print_french_certificate">
 					<div class="certificate_outer_french" style="    text-align: center;  width: 100%;    height: 100%;
@@ -116,9 +119,9 @@ Certificat d'impression" /></h2>
                             <div class="certificate_inner1" style="position: absolute; top: 38%; left: 0; right: 0;">
                                 <h2 style="font-size: 22px;text-transform: uppercase; margin-top: 10px; margin-bottom: 5px;">Ceci reconnaît que</h2>
                                 @if(@isset($name))
-                                    <h1 style="font-size: 60px; margin-top: 10px; margin-bottom: 5px;">{{  $name  }}</h1>
+                                    <h1 class="name" style="text-align: center;width: 74%;font-size: 26px;line-height: 37px;font-weight: 900; margin-top: 10px;margin:auto; margin-bottom: 5px;word-break: break-all;">{{  $name  }}</h1>
                                 @else
-                                    <h1 style="font-size: 60px; margin-top: 10px; margin-bottom:5px;">[Nom de la personne]</h1>
+                                    <h1 class="name" style="text-align: center;width: 74%;font-size: 26px;line-height: 37px;font-weight: 900; margin-top: 10px;margin:auto; margin-bottom:5px;word-break: break-all;">[Nom de la personne]</h1>
                                 @endif
                                 <h3 style="text-transform: uppercase;font-size: 18px;color: #505251;font-style: italic; font-weight: 600; margin-top: 10px; margin-bottom: 5px;">A TERMINÉ AVEC SUCCÈS LA FORMATION DE OPPORTUNITY "4".</h3>
                             </div>
@@ -134,7 +137,7 @@ Certificat d'impression" /></h2>
                         </div>
                     </div>
 				</div>	
-                    <h2>Cliquez sur <em><strong>SUIVANT</strong></em>&nbsp; enregistrer!</h2>
+                    <h2>Cliquez sur <em><strong>NEXT</strong></em>&nbsp; pour enregistrer</h2>
                     </p>
                 </div>
             </div>
