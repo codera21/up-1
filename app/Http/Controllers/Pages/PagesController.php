@@ -34,10 +34,11 @@ class PagesController extends Controller
        	//--- Validate video token
 		self::check_video_expiry();
 		
-		$restricted_slugs = ["distributor", "dnasbook-distributor-payment", 
-							 "dnasbook-webinar-questions", 
-							 "dnasbook-distributor-training-certificate", "certificate"		
-							];
+		$restricted_slugs = [
+							"dnasbook-webinar-questions",
+							"dnasbook-distributor-training-certificate", 
+							"certificate"
+						];
 							
 		//--- If video code wasnt' entered don't allow to access other pages.
 		if(in_array($slug, $restricted_slugs) && !session()->has("canWatch")){
