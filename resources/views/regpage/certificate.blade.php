@@ -134,7 +134,7 @@ Certificat d'impression" /></h2>
                         </div>
                     </div>
 				</div>	
-                    <h2>Cliquez sur <em><strong>SUIVANT</strong></em>&nbsp; enregistrer!</h2>
+                    <h2>Cliquez sur <em><strong>NEXT</strong></em>&nbsp; pour enregistrer</h2>
                     </p>
                 </div>
             </div>

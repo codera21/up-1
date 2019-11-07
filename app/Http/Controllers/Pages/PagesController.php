@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Page;
 use App\Pages\Pages;
 use App\Http\Requests;
-
+use App\Repositories\MaterialRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -17,16 +17,26 @@ use Mail;
 
 class PagesController extends Controller
 {
+	
+	protected $material;
 
-    public function dypage($slug)
+    public function __construct( MaterialRepository $material)
+    {
+ 
+        $this->material = $material;
+    }
+
+    public function dypage($slug,Request $request)
     {
         /*
                 session()->forget('canWatch');
                 session()->forget('codeid');
                 session()->forget('videoExpireTime');
         */
+	
+	
         self::check_video_expiry();
-
+       // $id
         $lang = App::getLocale();
         $databaseRecord = Page::where('slug', $slug)->where('language', $lang)->count();
         if (!$databaseRecord) {
@@ -35,10 +45,21 @@ class PagesController extends Controller
         $PageName = str_replace('_', '-', $slug);
         $pages = new Pages();
         $data = $pages->$slug();
-
+		
+        /* this code is used to get the video url of web page */
+		/* if( $id= $request->input('id')){
+			$material=array();
+			$material_details=array();
+			$material = $this->material->find($id);
+			$material_details = DB::table('material')->where('id', $id)->first();
+			$data['array']['material'] = $material;
+			$data['array']['material_details'] = $material_details;
+		} */
         $data['array']['date'] = date('d-m-Y');
         $data['array']['lang'] = $lang;
-
+        
+		
+       // view('user-academy.view-material', ['material' => $material, 'material_details' => $material_details]); 
 
         if (file_exists($data['fileName'])) {
             return view('regpage.' . $data['method'], $data['array']);
