@@ -78,8 +78,8 @@ h1.name {
                             </div>
                             <div class="certificate_inner2" style="margin: auto;left: 0;right: 0;bottom: 20%;position: absolute;display: flex;width: 70%;align-items: baseline;">
                                 <div class="ceo" style=" width: 48%; padding: 0 20px;">
-                                    <p class="pra" style="padding-bottom: 10px; text-align: center;border-bottom: 1px solid #505251;font-size: 14px; margin: 0 0 10px;">SIGNED BY <span style="color: #788d84;font-size: 22px;font-weight: 600; margin: 0 0 10px;">T.Y AHLADJIPE</span></p>
-                                    <p class="bottom_ceo" style="border-bottom: 0;font-size: 16px;font-weight: 600;     margin: 0 0 10px; text-align:center;">CEO</p>
+                                    <p class="pra" style="padding-bottom: 10px; text-align: center;border-bottom: 1px solid #505251;font-size: 14px; margin: 0 0 10px;">SIGNED BY <span style="color: #788d84;font-size: 22px;font-weight: 600; margin: 0 0 10px;">T.Y AHIADJIPE</span></p>
+                               <p class="bottom_ceo" style="border-bottom: 0;font-size: 16px;font-weight: 600;     margin: 0 0 10px; text-align:center;">CEO</p>
                                 </div>
                                 <div class="date" style="border-bottom: 0;font-size: 16px;font-weight: 600;  width: 48%; padding: 0 20px;">
                                     <p class="pra" style="    text-align: center;border-bottom: 1px solid #505251;font-size: 14px; padding-bottom: 15px;">{{  $date  }}</p>
@@ -127,7 +127,7 @@ Impression de Certificat" /></h2>
                             </div>
                             <div class="certificate_inner2" style="margin: auto;left: 0;right: 0;bottom: 20%;position: absolute;display: flex;width: 70%;align-items: baseline;">
                                 <div class="ceo" style=" width: 48%; padding: 0 20px;">
-                                    <p class="pra" style="padding-bottom: 10px; text-align: center;border-bottom: 1px solid #505251;font-size: 14px; margin: 0 0 10px;">SIGNÉ PAR <span style="color: #788d84;font-size: 22px;font-weight: 600; margin: 0 0 10px;">T.Y AHLADJIPE</span></p>
+                                    <p class="pra" style="padding-bottom: 10px; text-align: center;border-bottom: 1px solid #505251;font-size: 14px; margin: 0 0 10px;">SIGNÉ PAR <span style="color: #788d84;font-size: 22px;font-weight: 600; margin: 0 0 10px;">T.Y AHIADJIPE</span></p>
                                     <p class="bottom_ceo" style="border-bottom: 0;font-size: 16px;font-weight: 600;     margin: 0 0 10px;text-align:center;">CEO</p>
                                 </div>
                                 <div class="date" style="border-bottom: 0;font-size: 16px;font-weight: 600;  width: 48%; padding: 0 20px;">
