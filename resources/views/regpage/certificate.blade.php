@@ -50,7 +50,7 @@
     bottom: 15%;
 }
 h1.name {
-    font-size: 26px!important;
+    font-size: 14px!important;
 }
 }
 </style>
