@@ -70,6 +70,7 @@ class UserAcademyController extends Controller
 
     public function viewMaterial($id)
     {
+		 
         $material = $this->material->find($id);
         $material_details = DB::table('material')->where('id', $id)->first();
         

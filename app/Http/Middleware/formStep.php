@@ -24,8 +24,11 @@ class formStep
         $key = key($arrayofurl);
         $value = $arrayofurl[$key];
         $value = intval($value);
-        if (!isset($_COOKIE['distributorPage'])) {
+		/*  if (!isset($_COOKIE['distributorPage'])) {
             return redirect("pages/distributor?id=$value");
+        } */
+		if (!isset($_COOKIE['automatic-webinar'])) {
+            return redirect("pages/automatic-webinar?id=$value");
         } elseif ( !isset($_COOKIE['distributor-distributor-payment'])) {
             return redirect("pages/dnasbook-distributor-payment?id=$value");
         } else if (!isset($_COOKIE['videos'])) {

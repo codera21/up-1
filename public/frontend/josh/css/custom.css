@@ -740,20 +740,59 @@ footer .btn-primary.text-white {
 
 /* ---------- //Advanced Features Css ---------- */
 
-@media (max-width: 759px) {
-    .navbar-nav .dropdown-menu:before {
-        content: none;
-    }
-}
-
 @media (max-width: 950px) {
     .profile {
         display: block;
         margin-right: 4%;
         margin-left: 4%;
     }
+.certificate_inner2{
+    width:90%!important;
 }
-
+.ceo, .date {
+    width: 45%!important;
+    padding: 0px 15px!important;
+    margin: 0 auto;
+}
+.ceo p{ 
+   font-size: 12px!important;
+}
+.date p{ 
+   font-size: 12px!important;
+   padding-bottom:27px!important;
+}
+.ceo .pra span{ 
+   font-size: 13px!important;
+}
+.bottom_ceo{
+   font-size: 16px!important;
+}
+#contentpara h2{
+   font-size:24px!important;
+}
+.certificate_inner1{
+    padding: 15px!important;
+    margin: 0 auto!important;
+    width: 90%!important;
+}
+#contentpara  .certificate_inner1 h2{
+    font-size:12px!important;
+}
+.certificate_inner1 h1{
+    font-size:14px!important;
+}
+.certificate_inner1 h3{
+    font-size:11px!important;
+}
+.certificate_inner2{
+    bottom: 15%!important;
+}
+}
+@media (max-width: 767px) {
+.navbar-nav .dropdown-menu:before {
+        content: none;
+}
+}
 .action-wrap-footer {
     border-top: 1px solid #d0d0d0;
     padding: 15px;

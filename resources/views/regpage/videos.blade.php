@@ -233,8 +233,8 @@
         </div>
         <br>
     @endif
-@endsection
-<style>
+    
+    <style>
     body > div.container > div > div > div > div > div a {
         color: blue;
     }
@@ -286,3 +286,5 @@
         })
     })
 </script>
+@endsection
+
