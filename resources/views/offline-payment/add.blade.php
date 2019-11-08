@@ -31,7 +31,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group {{ $errors->has('slip_no') ? ' has-error' : '' }} required">
-                                    
+
                                     <div class="col-md-3">
                                         {!! Form::label('bank_id', trans('offline_payment.bank_account'), ['class' => 'control-label']) !!}
                                     </div>
@@ -42,7 +42,7 @@
                                 </div>
 
                                 <div class="form-group {{ $errors->has('slip_no') ? ' has-error' : '' }} required">
-                                    
+
                                     <div class="col-md-3">
                                         {!! Form::label('bank_slip_no', trans('offline_payment.bank_slip_no'), ['class' => 'control-label']) !!}
                                     </div>
@@ -67,7 +67,7 @@
 
 
                         <div class="material_info row clearfix {{ old('payment_for', 'MATERIAL') =='MATERIAL' ? '' : 'hidden' }}">
-                            <div class="col-md-12">                        
+                            <div class="col-md-12">
                                 <div class="form-group">
 
                                     <div class="col-md-3">
@@ -94,7 +94,7 @@
                                         {{ Form::radio('paid_for', 'LEVEL') }}
                                     </div>
                                     <div class="col-md-7">
-                                    	
+
                                         {!! Form::selectSubGroup('sub_group_id', old('sub_group_id'), ['id'=>'sub_group_id', 'class'=>'form-control']) !!}
 
                                     </div>
@@ -109,12 +109,12 @@
                                         {!! Form::label('paid_for', trans('offline_payment.purchase'), ['class' => 'control-label']) !!}
                                         {{ Form::radio('paid_for', 'MATERIAL') }}
                                     </div>
-                                    <div class="col-md-7" id="material-box">                                                                                                    
-							             
+                                    <div class="col-md-7" id="material-box">
+
 
                                     </div>
-                                </div>                              
-                           
+                                </div>
+
                             </div>
                         </div>
 

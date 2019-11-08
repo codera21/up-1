@@ -1,6 +1,6 @@
 @extends('layouts.user_backend.default')
 @section('page_title')
-{{ trans('page_title.offline') }}
+    {{ trans('page_title.offline') }}
 @endsection
 @section('content')
 
@@ -85,7 +85,7 @@
                                 <label for="exampleInputEmail1">Amount paid</label>
                             </div>
                             <div class="col-lg-4">
-                                <input type="text" name="amount_paid" class="form-control" id="exampleInputEmail1"
+                                <input type="number" name="amount_paid" class="form-control" id="exampleInputEmail1"
                                        aria-describedby="emailHelp" value="" placeholder="Amount paid" required>
                             </div>
                         </div>
