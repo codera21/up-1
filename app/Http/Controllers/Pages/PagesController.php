@@ -57,14 +57,16 @@ class PagesController extends Controller
         $data = $pages->$slug();
 		
         /* this code is used to get the video url of web page */
-		/* if( $id= $request->input('id')){
-			$material=array();
-			$material_details=array();
-			$material = $this->material->find($id);
-			$material_details = DB::table('material')->where('id', $id)->first();
-			$data['array']['material'] = $material;
+		
+	     if( $slug == "automatic-webinar"){
+		    $material=array();
+		    $material_details=array();
+			$webinar_slug=$slug.'-'.$lang;
+			$material_details = DB::table('material')->where('slug', $webinar_slug)->first();
 			$data['array']['material_details'] = $material_details;
-		} */
+			
+		} 
+	
         $data['array']['date'] = date('d-m-Y');
         $data['array']['lang'] = $lang;
 
