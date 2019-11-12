@@ -187,7 +187,7 @@ class PagesController extends Controller
 			return redirect('pages/videos?id=' . $id);
         } else {
             session()->put('canWatch', false);
-            return redirect('pages/videos?id=' . $id)->with('error', ' Sorry! Submitted token is invalid');;
+            return redirect('pages/videos?id=' . $id)->with('error', ' Sorry! Token you entered is invalid or expired.');
         }
     }
 
@@ -244,7 +244,7 @@ class PagesController extends Controller
 		    return redirect("pages/videos?id=$id");
         } else {
             session()->forget("canWatch");
-            return redirect("pages/videos?id=$id")->with('error', ' Sorry! Submitted code is invalid');
+            return redirect("pages/videos?id=$id")->with('error', ' Sorry! Code you entered is invalid or expired.');
         }
 
         //return redirect("pages/videos?id=$id");
