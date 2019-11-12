@@ -51,7 +51,7 @@
                     {!! Form::label('material_type', trans('Material Type'), ['class' => 'control-label']) !!}
                 </div>
                 <div class="col-md-6">
-                    {!! Form::select('material_type', ['VIDEO' => 'Video', 'COURSE' => 'Course'], old('material_type'), ['class'=>'form-control']) !!}
+                    {!! Form::select('material_type', ['VIDEO' => 'Video', 'COURSE' => 'Course','WEBINAR'=> 'Webinar'], old('material_type'), ['class'=>'form-control']) !!}
                 </div>
             </div>
 

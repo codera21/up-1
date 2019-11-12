@@ -66,6 +66,16 @@
                 </div>
             </div>
             @endif
+			 @if($material->material_type == 'WEBINAR')
+            <div class="form-group required">
+                <div class="col-md-4">
+                    {!! Form::label('video_url', trans('Webinar Video Link'), ['class' => 'control-label']) !!}
+                </div>
+                <div class="col-md-6">
+                    {!! Form::text('video_url_name', old('video_url_name', $material->embed), ['id'=>'video_url_name', 'class'=>'form-control']) !!}
+                </div>
+            </div>
+            @endif
             @if($material->material_type == 'COURSE')
             <div class="form-group required">
                 <div class="col-md-4">
