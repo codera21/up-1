@@ -42,7 +42,11 @@
                     {!! Form::label('slug', trans('Slug'), ['class' => 'control-label']) !!}
                 </div>
                 <div class="col-md-6">
-                    {!! Form::text('slug', old('slug', $material->slug), ['id'=>'slug', 'class'=>'form-control']) !!}
+				 @if($material->material_type == 'WEBINAR')
+                    {!! Form::text('slug', old('slug', $material->slug), ['id'=>'slug', 'class'=>'form-control','readonly' ]) !!}
+				  @else
+					{!! Form::text('slug', old('slug', $material->slug), ['id'=>'slug', 'class'=>'form-control']) !!} 
+				  @endif
                 </div>
             </div>
         
