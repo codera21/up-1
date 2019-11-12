@@ -46,8 +46,10 @@ class PagesController extends Controller
 			return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, enter your code');
 		}
 		
-
-        $lang = App::getLocale();
+        if($lang == ''){
+			 $lang = App::getLocale();
+		}
+        //$lang = App::getLocale();
         $databaseRecord = Page::where('slug', $slug)->where('language', $lang)->count();
         if (!$databaseRecord) {
             return "No data with slug name <h1>" . $slug . "</h1>";

@@ -2,7 +2,7 @@
 <?php
 //dump(env('SITE'))
 //?>
-<header class="nav-header">
+<header class="nav-header"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- Icon Section Start -->
     <div class="icon-section">
         <div class="container">
