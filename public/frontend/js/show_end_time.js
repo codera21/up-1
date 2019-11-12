@@ -24,7 +24,7 @@ function show_end_time(){
 	// If using time pickers with 24 hours format, add the below line get exact hours
 	
 	
-	var html = 		'Registration code will expire in '+
+	var html = 		'Registration code will Expire in '+
 			   		'<strong class="hours text-danger">'+hours+'</strong> Hours, '+
 					'<strong class="minutes text-danger">'+minutes+'</strong> Minutes and '+
 					'<strong class="seconds text-danger">'+seconds+'</strong> Seconds';
