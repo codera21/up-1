@@ -9,6 +9,7 @@ $(document).ready(function(){
 });
 
 function show_end_time(){
+	
 	var started_at = new Date(	new Date().toLocaleString('en-US', {timeZone: timezone}) );
 	
 	var diff = eval(end_at.getTime() - started_at.getTime()); // this is a time in milliseconds
@@ -27,7 +28,7 @@ function show_end_time(){
 	var html = 		'Registration code will expire in '+
 			   		'<strong class="hours text-danger">'+hours+'</strong> Hours, '+
 					'<strong class="minutes text-danger">'+minutes+'</strong> Minutes and '+
-					'<strong class="seconds text-danger">'+seconds+'</strong> Seconds';
+					'<strong class="seconds text-danger">'+seconds+'</strong> Seconds ';
 	
 	if (hours < 0)
 	   hours = hours + 24;
