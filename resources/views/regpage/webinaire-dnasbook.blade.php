@@ -35,7 +35,7 @@
                             type="video/mp4">
                 </video>
             <?php else:?>
-            <video class="video" style="width:100%;" controls controlsList="nodownload">
+                 <video class="video" style="width:100%;" controls controlsList="nodownload">
                     <source src="{{ $material_details->embed }}"
                     
                             type="video/mp4">

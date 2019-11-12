@@ -46,10 +46,8 @@ class PagesController extends Controller
 			return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, enter your code');
 		}
 		
-        if($lang == ''){
-			 $lang = App::getLocale();
-		}
-        //$lang = App::getLocale();
+		
+        $lang = App::getLocale();
         $databaseRecord = Page::where('slug', $slug)->where('language', $lang)->count();
         if (!$databaseRecord) {
             return "No data with slug name <h1>" . $slug . "</h1>";
@@ -60,14 +58,13 @@ class PagesController extends Controller
 		
         /* this code is used to get the video url of web page */
 		
-	     if( $slug == "automatic-webinar"){
+	   //  if( $slug == "automatic-webinar" || $slug == "webinaire-dnasbook"){
 		    $material=array();
 		    $material_details=array();
-			$webinar_slug=$slug.'-'.$lang;
-			$material_details = DB::table('material')->where('slug', $webinar_slug)->first();
+			$material_details = DB::table('material')->where('slug', $slug)->first();
 			$data['array']['material_details'] = $material_details;
 			
-		} 
+		///} 
 	
         $data['array']['date'] = date('d-m-Y');
         $data['array']['lang'] = $lang;
