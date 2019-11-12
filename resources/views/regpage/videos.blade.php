@@ -5,6 +5,25 @@
 @endsection
 <?php $baseUrl = URL::to('/');?>
 @section('content')
+
+<form action="/token" method="post">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>{{trans('register.video_page_label')}}</label>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <input type="hidden" name="id" value="{{$_GET['id']}}">
+                                <input type="text" class="form-control" name="token" placeholder="{{trans('register.video_page_label')}}">
+                            </div>
+
+                        </div>
+                        <div class="text-center">
+                            <input type="submit" class=" btn btn-primary" value="{{trans('register.enter_code')}}">
+                        </div>
+                    </div>
+                </form>
     @if(env('SITE') == 'ENG')
         <div class="row">
             @if(!session()->get('canWatch') && env('SITE') == 'ENG')
