@@ -87,7 +87,7 @@ class PagesController extends Controller
 			$pages_slug[] = "videos";
 			
 			if(in_array($slug, $pages_slug)){
-				$data['array']['end_at'] = $end;
+				$data['array']['end_at'] = date("D M d Y G:i:s ", strtotime($end));
 				$data['array']['timezone'] = Carbon::now()-> tzName;
 			}
 		}
