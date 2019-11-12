@@ -358,6 +358,12 @@
 
         }
     }
+    @media only screen and (max-width: 411px ) {
+        .hero-subheading{
+            margin-top: 3rem;
+        }
+
+    }
 /*for iphone x*/
     @media only screen and (max-width: 400px) {
         #hero-vid {
