@@ -32,7 +32,7 @@ class PagesController extends Controller
     public function dypage($slug, Request $request)
     {
        	//--- Validate video token
-		self::check_video_expiry();
+		self::check_code_expiry();
 		
 		$restricted_slugs = [
 							"dnasbook-webinar-questions",
@@ -186,7 +186,7 @@ class PagesController extends Controller
 			return redirect('pages/videos?id=' . $id);
         } else {
             session()->put('canWatch', false);
-            return redirect('pages/videos?id=' . $id);
+            return redirect('pages/videos?id=' . $id)->with('error', ' Sorry! Token you entered is invalid or expired.');
         }
     }
 
@@ -200,20 +200,22 @@ class PagesController extends Controller
                     'is_expired' => 'YES'
                 ]);
                 if ($updateData) {
-                    session()->put('canWatch', false);
-                    return response(200);
+                    session()->forget('canWatch');
+					session()->forget('tokenid');
                 } else {
                     return "No changes";
                 }
             }
         }
     }
+	
 
 
     /*===========================================
     | New Functions for video codes
     ============================================*/
-    public function videocode(Request $request)
+    
+	public function videocode(Request $request)
     {
         $id = $request->id;
 
@@ -241,13 +243,14 @@ class PagesController extends Controller
 		    return redirect("pages/videos?id=$id");
         } else {
             session()->forget("canWatch");
-            return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, check your code');
+            return redirect("pages/videos?id=$id")->with('error', ' Sorry! Code you entered is invalid or expired.');
         }
 
         //return redirect("pages/videos?id=$id");
     }
 
-    public function check_video_expiry()
+    
+	public function check_code_expiry()
     {
         if (session()->has("codeid")) {
             $where = ["id" => session()->get("codeid")];
@@ -266,6 +269,30 @@ class PagesController extends Controller
 					if ($updateData) {
 						session()->forget('canWatch');
 						session()->forget('codeid');
+	
+						return response(200);
+					}
+				}
+			}
+        }
+		
+		if (session()->has("tokenid")) {
+            $where = ["id" => session()->get("tokenid")];
+            $token = DB::table('training_video_payment')->where($where)->first();
+			
+			if($token){
+				
+				$expireTime = strtotime($token->started_at) + (60 * 60 * 72);
+
+				if (time() >= $expireTime) {
+					
+					$updateData = DB::table('training_video_payment')->where($where)->update([
+						'is_expired' => 'YES'
+					]);
+	
+					if ($updateData) {
+						session()->forget('canWatch');
+						session()->forget('tokenid');
 	
 						return response(200);
 					}

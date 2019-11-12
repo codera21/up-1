@@ -66,6 +66,19 @@ class CodeController extends Controller
                             return $row->code;
                         }
                     ),
+					array(
+                        'name' => 'expired',
+                        'label' => trans('Expired'),
+                        'sortable' => true,
+                        'searchable' => true,
+                        'searchfield' => array(
+                            'type' => 'text',
+                        ),
+                        'width' => 'auto',
+                        'value' => function ($row) {
+                            return $row->expired ? "Yes" : "No";
+                        }
+                    ),
                     array(
                         'name' => 'action',
                         'label' => trans('Action'),
