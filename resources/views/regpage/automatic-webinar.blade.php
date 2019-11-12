@@ -6,7 +6,9 @@
 <?php $baseUrl = URL::to('/');?>
 @section('content')
 
-<?php  if(empty($material_details)){?>
+<?php 
+\Session::put('locale', 'en');
+ if(empty($material_details)){?>
     <div class="row">
         <div class="col-md-12" id="content">
             <div class="row1">
@@ -88,8 +90,8 @@
         $(".automatic-webinar button").click(function () {
             var baseURL = "<?php echo $baseUrl ?>";
             var getID = "<?php echo $_GET['id'] ?>";
-            document.cookie = "automatic-webinar=1;path=/";
-            window.location = baseURL+"/register/"+getID;
+          //  document.cookie = "dnasbook-distributor-payment=1;path=/";
+            window.location = baseURL+"/pages/dnasbook-distributor-payment?id="+getID;
         })
     })
 </script>

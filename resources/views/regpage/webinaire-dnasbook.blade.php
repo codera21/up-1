@@ -6,7 +6,9 @@
 <?php $baseUrl = URL::to('/');?>
 @section('content')
 
-<?php  if(empty($material_details)){?>
+<?php  
+\Session::put('locale', 'fr');
+if(empty($material_details)){?>
     <div class="row">
         <div class="col-md-12" id="content">
             <div class="row1">
@@ -89,7 +91,7 @@
             var baseURL = "<?php echo $baseUrl ?>";
             var getID = "<?php echo $_GET['id'] ?>";
             document.cookie = "automatic-webinar=1;path=/";
-            window.location = baseURL+"/register/"+getID;
+            window.location = baseURL+"/pages/dnasbook-distributor-payment?id="+getID;
         })
     })
 </script>
