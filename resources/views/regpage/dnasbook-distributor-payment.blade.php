@@ -106,7 +106,6 @@
         $(".distributor button").click(function () {
             var baseURL = "<?php echo $baseUrl ?>";
             var getID = "<?php echo $_GET['id'] ?>";
-            document.cookie = "distributorPage=1;path=/";
             document.cookie = "distributor-distributor-payment=1;path=/";
             window.location = baseURL + "/register/" + getID;
         })

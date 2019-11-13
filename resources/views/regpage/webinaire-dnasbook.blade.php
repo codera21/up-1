@@ -91,7 +91,8 @@ if(empty($material_details)){?>
             var baseURL = "<?php echo $baseUrl ?>";
             var getID = "<?php echo $_GET['id'] ?>";
             document.cookie = "automatic-webinar=1;path=/";
-            window.location = baseURL+"/pages/dnasbook-distributor-payment?id="+getID;
+           // window.location = baseURL+"/pages/dnasbook-distributor-payment?id="+getID;
+            window.location = baseURL+"/pages/there-is-a-mandatory-training-to-follow?id="+getID;
         })
     })
 </script>
