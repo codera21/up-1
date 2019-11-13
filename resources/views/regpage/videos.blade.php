@@ -62,14 +62,14 @@
 
 
             <div class="col-md-12" id="content">
-                <div class="row1">
-                    <h1 id="heading">{{$pagesData->title}}</h1>
-                    <br>
-                    <div id="contentpara">
-                        <p id="para">{{trans('register.video_page_instruction')}}</p>
-                    </div>
-                </div>
                 @if(session()->get('canWatch'))
+                    <div class="row1">
+                        <h1 id="heading">{{$pagesData->title}}</h1>
+                        <br>
+                        <div id="contentpara">
+                            <p id="para">{{trans('register.video_page_instruction')}}</p>
+                        </div>
+                    </div>
                     <div class="videosPage">
                         <div>
                             @if(env("SITE") == "ENG")
