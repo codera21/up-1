@@ -49,7 +49,7 @@ class Checksite
             Session::put('total', 1000);
             Session::put('total_comm', 100);
             Session::put('curr', 'F');
-            //site urls
+            //site urls sd
             Session::put('facebook_url', 'https://www.facebook.com/DNAsbookDigitaarketingAfrica/?modal=admin_todo_tour');
             Session::put('twitter_url', 'https://twitter.com/?lang=en');
             Session::put('instagram_url', 'https://www.instagram.com/dnasbookdigimarket/?fbclid=IwAR3LgDXQfRxvagyOJGn9MMdJTZtKxCtrx0XMcRQVbvHxbnDOVzL3PxShTy4');
