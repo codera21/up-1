@@ -5,6 +5,7 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">{{ trans('app.dashboard') }}</div>
+
         <br>
         @if(Auth::user()->not_now == 1)
             <div class="alert alert-info" role="alert">
