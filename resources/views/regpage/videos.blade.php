@@ -5,6 +5,13 @@
 @endsection
 <?php $baseUrl = URL::to('/');?>
 @section('content')
+    <div class="row1">
+        {{--<h1 id="heading">{{$pagesData->title}}</h1>
+        <br>--}}
+        <div>
+            <p>{!! $pagesData->content !!}</p>
+        </div>
+    </div>
     @if(env('SITE') == 'ENG')
         <div class="row">
             @if(!session()->get('canWatch') && env('SITE') == 'ENG')
@@ -18,7 +25,8 @@
 
                             <div class="col-lg-6">
                                 <input type="hidden" name="id" value="{{$_GET['id']}}">
-                                <input type="text" class="form-control" name="token" placeholder="{{trans('register.video_page_label')}}">
+                                <input type="text" class="form-control" name="token"
+                                       placeholder="{{trans('register.video_page_label')}}">
                             </div>
 
                         </div>
@@ -40,7 +48,8 @@
 
                             <div class="col-lg-6">
                                 <input type="hidden" name="id" value="{{$_GET['id']}}">
-                                <input type="text" class="form-control" name="videocode" placeholder="{{trans('register.enter_code_label')}}">
+                                <input type="text" class="form-control" name="videocode"
+                                       placeholder="{{trans('register.enter_code_label')}}">
                             </div>
 
                         </div>
@@ -51,16 +60,16 @@
                 </form>
             @endif
 
-            @if(session()->get('canWatch'))
 
-                <div class="col-md-12" id="content">
-                    <div class="row1">
-                        <h1 id="heading">{{$pagesData->title}}</h1>
-                        <br>
-                        <div id="contentpara">
-                            <p id="para">{!! $pagesData->content !!}</p>
-                        </div>
+            <div class="col-md-12" id="content">
+                <div class="row1">
+                    <h1 id="heading">{{$pagesData->title}}</h1>
+                    <br>
+                    <div id="contentpara">
+                        <p id="para">{{trans('register.video_page_instruction')}}</p>
                     </div>
+                </div>
+                @if(session()->get('canWatch'))
                     <div class="videosPage">
                         <div>
                             @if(env("SITE") == "ENG")
@@ -126,8 +135,8 @@
                             @endif
                         </div>
                     </div>
-                </div>
-            @endif
+                @endif
+            </div>
         </div>
         <br>
     @else
@@ -143,7 +152,8 @@
 
                             <div class="col-lg-6">
                                 <input type="hidden" name="id" value="{{$_GET['id']}}">
-                                <input type="text" class="form-control" name="videocode" placeholder="{{trans('register.enter_code_label')}}">
+                                <input type="text" class="form-control" name="videocode"
+                                       placeholder="{{trans('register.enter_code_label')}}">
                             </div>
 
                         </div>
@@ -160,7 +170,7 @@
                         <h1 id="heading">{{$pagesData->title}}</h1>
                         <br>
                         <div id="contentpara">
-                            <p id="para">{!! $pagesData->content !!}</p>
+                            <p id="para">{{trans('register.video_page_instruction')}}</p>
                         </div>
                     </div>
                     <div class="videosPage">
@@ -233,58 +243,58 @@
         </div>
         <br>
     @endif
-    
+
     <style>
-    body > div.container > div > div > div > div > div a {
-        color: blue;
-    }
+        body > div.container > div > div > div > div > div a {
+            color: blue;
+        }
 
-    #content > a {
-        background: blue;
-        color: white;
-    }
+        #content > a {
+            background: blue;
+            color: white;
+        }
 
-    #heading {
-        color: black;
-        font-size: 2.3rem;
-        text-align: center;
-    }
+        #heading {
+            color: black;
+            font-size: 2.3rem;
+            text-align: center;
+        }
 
-    #para {
-        font-size: 1.5rem;
-    }
-</style>
-<script
-    src="https://code.jquery.com/jquery-3.4.1.js"
-    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function () {
-        $(".registerBlock").removeAttr("href");
-        $(".checkbox").css({"margin-left": "75%", 'font-size': '1.6rem'});
-        $("#contentpara p").addClass("text-center text-danger").css({
-            "font-size": "25px", "padding-bottom": "10px"
+        #para {
+            font-size: 1.5rem;
+        }
+    </style>
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $(".registerBlock").removeAttr("href");
+            $(".checkbox").css({"margin-left": "75%", 'font-size': '1.6rem'});
+            $("#contentpara p").addClass("text-center text-danger").css({
+                "font-size": "25px", "padding-bottom": "10px"
+            });
+            $(document).mousemove(function () {
+                let checkboxvalid = document.getElementById("myCheck").checked;
+                if (checkboxvalid) {
+                    $(".registerlink").removeAttr("disabled");
+                } else {
+                    $(".registerlink").attr("disabled", "disabled");
+                }
+            })
         });
-        $(document).mousemove(function () {
-            let checkboxvalid = document.getElementById("myCheck").checked;
-            if (checkboxvalid) {
-                $(".registerlink").removeAttr("disabled");
-            } else {
-                $(".registerlink").attr("disabled", "disabled");
-            }
-        })
-    });
-</script>
+    </script>
 
-<script>
-    $(document).ready(function () {
-        $(".distributor button").click(function () {
-            var baseURL = "<?php echo $baseUrl ?>";
-            var getID = "<?php echo $_GET['id'] ?>";
-            document.cookie = "videos=1;path=/";
-            window.location = baseURL + "/register/" + getID;
+    <script>
+        $(document).ready(function () {
+            $(".distributor button").click(function () {
+                var baseURL = "<?php echo $baseUrl ?>";
+                var getID = "<?php echo $_GET['id'] ?>";
+                document.cookie = "videos=1;path=/";
+                window.location = baseURL + "/register/" + getID;
+            })
         })
-    })
-</script>
+    </script>
 @endsection
 

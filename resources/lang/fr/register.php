@@ -27,5 +27,6 @@ return [
     'enter_code' => 'Soumettez Le Code',
     'enter_code_label' => 'Le Code Vidéo',
     'video_page_token' => 'Soumettez votre jeton pour regarder',
-    'video_page_label' => 'Le Jeton'
+    'video_page_label' => 'Le Jeton',
+    'video_page_instruction' => 'Vous devez regarder cette vidéo avant de vous inscrire sur la page suivante'
 ];

@@ -27,5 +27,6 @@ return [
     'enter_code' => 'Submit Code',
     'enter_code_label' => 'Video code',
     'video_page_token' => 'Submit Your Token To Watch',
-    'video_page_label' => 'Token Code'
+    'video_page_label' => 'Token Code',
+    'video_page_instruction' => 'You must watch this video before registering on the next page'
 ];
