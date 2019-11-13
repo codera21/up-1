@@ -1,6 +1,6 @@
 @extends('layouts.user_backend.default')
 @section('page_title')
-    {{ trans('app.dashboard') }}
+    {{ trans('app.dashboard') }}{{--sdf--}}
 @endsection
 @section('content')
     <div class="panel panel-default">
