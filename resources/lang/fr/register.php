@@ -23,9 +23,9 @@ return [
     'agree' => 'Cochez cette case si vous acceptez nos <a href="/pages/terms-and-conditions" target="_blank" style="color: blue"> conditions d\'utilisation</a> et notre <a href="/pages/privacy-policy" target="_blank" style="color: blue;"> politique de confidentialité</a>',
     'no_referal' => 'Désolé, vous n\'avez pas spécifié de référence',
     'example' => 'Exemple',
-    'video_page_code' => 'Soumettez votre code vidéo à regarder',
-    'enter_code' => 'Soumettre le code',
-    'enter_code_label' => 'Code vidéo',
+    'video_page_code' => 'Entrez Le Code Pour Regarder La Vidéo',
+    'enter_code' => 'Soumettez Le Code',
+    'enter_code_label' => 'Le Code Vidéo',
     'video_page_token' => 'Soumettez votre jeton pour regarder',
-    'video_page_label' => 'Code de jeton'
+    'video_page_label' => 'Le Jeton'
 ];
