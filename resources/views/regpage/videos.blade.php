@@ -5,13 +5,15 @@
 @endsection
 <?php $baseUrl = URL::to('/');?>
 @section('content')
-    <div class="row1">
-        {{--<h1 id="heading">{{$pagesData->title}}</h1>
-        <br>--}}
-        <div>
-            <p>{!! $pagesData->content !!}</p>
+    @if(!session()->get('canWatch'))
+        <div class="row1">
+            {{--        <h1 id="heading">{{$pagesData->title}}</h1>--}}
+            <br>
+            <div>
+                <p>{!! $pagesData->content !!}</p>
+            </div>
         </div>
-    </div>
+    @endif
     @if(env('SITE') == 'ENG')
         <div class="row">
             @if(!session()->get('canWatch') && env('SITE') == 'ENG')
