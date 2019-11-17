@@ -10,6 +10,8 @@
             <div class="row1">
                 <h1 id="heading">{{$pagesData->title}}</h1>
                 <br>
+                <p>{!! $pagesData->content !!}</p>
+                <br>
                 <div id="contentpara">
                     <form>
                         <?php for ($i = 1;$i <= 13;$i++): ?>
