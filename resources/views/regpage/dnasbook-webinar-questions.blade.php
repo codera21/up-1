@@ -42,8 +42,9 @@
         </div>
         <div class="distributor">
             <button href="{{$baseUrl}}/pages/dnasbook-distributor-training-certificate?id=<?php echo $_GET["id"] ?>"
-               class="btn btn-primary registerlink"
-               style="color: black;cursor:grab">Next</button>
+                    class="btn btn-primary registerlink"
+                    style="color: black;cursor:grab">Next
+            </button>
         </div>
     </div>
     <br>
@@ -83,7 +84,10 @@
 
     $(document).ready(function () {
         var checked = true;
+        @if(env('MODE') == 'LIVE')
         $(".distributor button").attr("disabled", "disabled");
+            @endif
+
         var rightAnswer = ["1_b", "2_d", "3_c", "4_a", "5_b", "6_d", "7_b", "8_d", "9_b", "10_a", "11_c", "12_b", "13_d"];
         var answers = [];
         $('form').on('submit', function (event) {
@@ -121,7 +125,7 @@
             var baseURL = "<?php echo $baseUrl ?>";
             var getID = "<?php echo $_GET['id'] ?>";
             document.cookie = "questions=1;path=/";
-            window.location = baseURL+"/pages/dnasbook-distributor-training-certificate?id="+getID;
+            window.location = baseURL + "/pages/dnasbook-distributor-training-certificate?id=" + getID;
         })
     })
 </script>
