@@ -18,7 +18,6 @@ Route::get('locale/{locale}', function ($locale) {
 });
 
 
-
 Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('cache:clear');
     return redirect()->back();
@@ -40,7 +39,7 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     // Authentication Routes...
     Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
     Route::post('login', 'Auth\LoginController@login');
-	Route::post('/pages/{slug}', ['as' => 'test', 'uses' => 'Pages\PagesController@sendmail'])->middleware('pageSite');
+    Route::post('/pages/{slug}', ['as' => 'test', 'uses' => 'Pages\PagesController@sendmail'])->middleware('pageSite');
     Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
     Route::get('hcl/{id_id_id}', ['as' => 'hcl', 'uses' => 'Admin\FAQController@smp']);
     Route::get('/hcl_hcl/{id_id_id}', ['as' => '.hcl_hcl', 'uses' => 'Admin\FAQController@smp1']);
@@ -75,7 +74,7 @@ Route::group(['middleware' => ['fe.navigation', 'fe.breadcrumbs']], function () 
     Route::get('/ExecuteOneTimePayment', ['as' => '', 'uses' => 'paypal\OneTimePaymentController@ExecuteOneTimePayment']);
     //token post route
     Route::post('/token', ['as' => 'token', 'uses' => 'Pages\PagesController@token']);
-	Route::post('/videocode', ['as' => 'token', 'uses' => 'Pages\PagesController@videocode']);
+    Route::post('/videocode', ['as' => 'token', 'uses' => 'Pages\PagesController@videocode']);
     Route::get('/expiry', ['as' => 'tokenexpiry', 'uses' => 'Pages\PagesController@expiry']);
     // IPN Listener
     Route::post('ipn', ['as' => 'ipn', 'uses' => 'IpnController@ipn']);
@@ -302,7 +301,7 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
 
     });
 
-	 // Codes
+    // Codes
     Route::group(['as' => 'admin.code', 'prefix' => 'code'], function () {
         Route::get('/', ['as' => '', 'uses' => 'Admin\CodeController@index']);
         Route::get('/add', ['as' => '.add', 'uses' => 'Admin\CodeController@add']);
