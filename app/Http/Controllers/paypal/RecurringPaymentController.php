@@ -29,7 +29,7 @@ class RecurringPaymentController extends Controller
 
     public function cancelUrl()
     {
-        return redirect('/online-payment/addnew1')->with('danger', "Your payment has been payment canceled");
+        return redirect('/online-payment/addnew1')->with('danger', "Your payment has been canceled");
     }
 
     public function cancelSubscription()

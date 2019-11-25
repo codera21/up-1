@@ -277,14 +277,14 @@
             $("#contentpara p").addClass("text-center text-danger").css({
                 "font-size": "25px", "padding-bottom": "10px"
             });
-            $(document).mousemove(function () {
-                let checkboxvalid = document.getElementById("myCheck").checked;
-                if (checkboxvalid) {
+            //disable next button if not checked else enable button
+            $('#myCheck').click(function () {
+                if($(this).is(':checked')){
                     $(".registerlink").removeAttr("disabled");
-                } else {
+                }else{
                     $(".registerlink").attr("disabled", "disabled");
                 }
-            })
+            });
         });
     </script>
 
