@@ -19,6 +19,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\Checksite::class,
+        \App\Http\Middleware\CheckSecureSite::class
 //        \App\Http\Middleware\HttpsProtocol::class
     ];
 
@@ -70,7 +71,7 @@ class Kernel extends HttpKernel
         'isActive' => \App\Http\Middleware\CheckActiveUser::class,
         'checkGroupPayment' => \App\Http\Middleware\CheckGroupPayment::class,
         'checkMaterialPayment' => \App\Http\Middleware\CheckMaterialPayment::class,
-        'formStep'=> \App\Http\Middleware\formStep::class,
-        'pageSite'=>\App\Http\Middleware\pageSite::class,
+        'formStep' => \App\Http\Middleware\formStep::class,
+        'pageSite' => \App\Http\Middleware\pageSite::class,
     ];
 }

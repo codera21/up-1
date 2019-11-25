@@ -40,7 +40,7 @@
 
 <script src="{{ asset('/jquery-ui-1.12.1/jquery-ui.js') }}"></script>
 
-
+<link rel="shortcut icon" href="images/Logo.jpeg"/>
 <!-- Bootstrap Core -->
 
 <script src="{{ asset('/bootstrap-3.3.6/js/bootstrap.min.js') }}"></script>

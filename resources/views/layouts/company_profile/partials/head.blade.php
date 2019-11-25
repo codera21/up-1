@@ -10,7 +10,7 @@
 
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
-
+<link rel="shortcut icon" href="images/Logo.jpeg"/>
 <!-- Scripts -->
 <script>
     window.Laravel = <?php echo json_encode([
@@ -41,7 +41,7 @@
 <link rel="stylesheet" href="{{ asset('/frontend/josh/css/timeline.css') }}">
 
 
-<!-- 
+<!--
 /*
 |--------------------------------------------------------------------------
 | Josh Theme (END)
