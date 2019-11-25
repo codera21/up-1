@@ -7,7 +7,6 @@
 @section('content')
 
     <div class="row">
-
         <div class="col-md-12" id="content">
             <div class="row1">
                 <h1 id="heading">{{$pagesData->title}}</h1>
