@@ -5,19 +5,20 @@
 @endsection
 <?php $baseUrl = URL::to('/');?>
 @section('content')
+
     <div class="row">
+
         <div class="col-md-12" id="content">
             <div class="row1">
                 <h1 id="heading">{{$pagesData->title}}</h1>
                 <br>
                 <div id="contentpara">
-				 
                     <p id="para">{!! $pagesData->content !!}</p>
                 </div>
             </div>
         </div>
     </div>
-     <form action="/pages/certificate?id=" method="post">
+   <!--<form action="/pages/certificate?id=" method="post">
         <div class="form-group">
             <label class="control-label col-sm-2" for="name">Name:</label>
             <div class="col-sm-4">
@@ -55,14 +56,14 @@
                     name="Country"
                     required
                 />
-            </div> 
+            </div>
         </div>
         <input
             type="submit"
             id="next-page"
             value="NEXT PAGE"
         />
-    </form>
+    </form>-->
 @endsection
 <style>
 
@@ -111,3 +112,4 @@
         $('input[type="submit"]').addClass('btn btn-primary');
     })
 </script>
+
