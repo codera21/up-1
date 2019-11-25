@@ -4,7 +4,7 @@
 
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
 <!-- Scripts -->
 <script>
     window.Laravel = <?php echo json_encode([
@@ -27,14 +27,14 @@
 <!-- Bootstrap Core -->
 <script src="{{ asset('/bootstrap-3.3.6/js/bootstrap.min.js') }}"></script>
 <link href="{{ asset('/bootstrap-3.3.6/css/bootstrap.min.css') }}" rel="stylesheet">
-
+<link rel="shortcut icon" href="images/Logo.jpeg"/>
 <!-- Font Awesome -->
 <link href="{{ asset('/font-awesome-4.6.3/css/font-awesome.css') }}" rel="stylesheet">
 <!-- Admin LTE Theme -->
  <!-- jQuery 2.2.3 -->
   <!--<script type="text/javascript" src="{{URL::asset('backend/admin-lte/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>-->
- 
-  
+
+
   <!-- Bootstrap 3.3.6 -->
   <!--<script type="text/javascript" src="{{URL::asset('backend/admin-lte/bootstrap/js/bootstrap.min.js')}}"></script>-->
   <!-- AdminLTE App -->
@@ -77,7 +77,7 @@
 <script type="text/javascript" src="{{ asset('/plugins/validation/js/jquery.metadata.js') }}"></script>
 
 <!-- JQery Alphanum -->
-<script src="{{ asset('/plugins/alphanum/jquery.alphanum.js') }}"></script> 
+<script src="{{ asset('/plugins/alphanum/jquery.alphanum.js') }}"></script>
 
 <!--JQuery BlockUi-->
 <script type="text/javascript" src="{{ asset('/plugins/jquery.blockUI.js') }}"></script>
@@ -100,7 +100,7 @@
 <script src="{{ asset('/plugins/pnotify/pnotify.custom.min.js') }}"></script>
 
 <!-- JQery Sweat Alert -->
-<script src="{{ asset('/plugins/sweetalert/dist/sweetalert.min.js') }}"></script> 
+<script src="{{ asset('/plugins/sweetalert/dist/sweetalert.min.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ asset('/plugins/sweetalert/dist/sweetalert.css') }}">
 
 <!--JQuery Chained-->
@@ -148,7 +148,7 @@ div.ibox {
 </style>
 @stack('scripts')
 
-<!-- 
+<!--
 Route Name: {!! Route::getCurrentRoute()->getName() !!}
 URL: {!! Request::url() !!}
 -->

@@ -4,7 +4,7 @@
 
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
 <!-- Scripts -->
 <script>
     window.Laravel = <?php echo json_encode([
@@ -16,7 +16,7 @@
 <meta name="keywords" content="@yield('meta_keywords')">
 <meta name="description" content="@yield('meta_description')">
 <meta name="author" content="Tariq Ali Khan">
-
+<link rel="shortcut icon" href="images/Logo.jpeg"/>
 <!-- JQuery -->
 <script src="{{ asset('/jquery/jquery-2.1.4.min.js') }}"></script>
 <script src="{{ asset('/jquery/jquery-migrate-1.0.0.min.js') }}"></script>
@@ -33,8 +33,8 @@
 <!-- Admin LTE Theme -->
  <!-- jQuery 2.2.3 -->
   <!--<script type="text/javascript" src="{{URL::asset('backend/admin-lte/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>-->
- 
-  
+
+
   <!-- Bootstrap 3.3.6 -->
   <!--<script type="text/javascript" src="{{URL::asset('backend/admin-lte/bootstrap/js/bootstrap.min.js')}}"></script>-->
   <!-- AdminLTE App -->
@@ -76,7 +76,7 @@
 <script type="text/javascript" src="{{ asset('/plugins/validation/js/jquery.metadata.js') }}"></script>
 
 <!-- JQery Alphanum -->
-<script src="{{ asset('/plugins/alphanum/jquery.alphanum.js') }}"></script> 
+<script src="{{ asset('/plugins/alphanum/jquery.alphanum.js') }}"></script>
 
 <!--JQuery BlockUi-->
 <script type="text/javascript" src="{{ asset('/plugins/jquery.blockUI.js') }}"></script>
@@ -99,7 +99,7 @@
 <script src="{{ asset('/plugins/pnotify/pnotify.custom.min.js') }}"></script>
 
 <!-- JQery Sweat Alert -->
-<script src="{{ asset('/plugins/sweetalert/dist/sweetalert.min.js') }}"></script> 
+<script src="{{ asset('/plugins/sweetalert/dist/sweetalert.min.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ asset('/plugins/sweetalert/dist/sweetalert.css') }}">
 
 <!--JQuery Chained-->
@@ -141,7 +141,7 @@
 
 @stack('scripts')
 
-<!-- 
+<!--
 Route Name: {!! Route::getCurrentRoute()->getName() !!}
 URL: {!! Request::url() !!}
 -->
