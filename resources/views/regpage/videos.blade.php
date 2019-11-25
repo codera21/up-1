@@ -278,6 +278,7 @@
                 "font-size": "25px", "padding-bottom": "10px"
             });
             //disable next button if not checked else enable button
+            $(".registerlink").attr("disabled", "disabled");
             $('#myCheck').click(function () {
                 if($(this).is(':checked')){
                     $(".registerlink").removeAttr("disabled");
