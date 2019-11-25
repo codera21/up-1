@@ -145,7 +145,7 @@ _HOME;
         $merchantPreferences = new MerchantPreferences();
         $baseUrl = URL::to('/');
         $merchantPreferences->setReturnUrl("$baseUrl/subscription/ExecuteRecurringPayment?success=true")
-            ->setCancelUrl("$baseUrl/subscription/ExecuteRecurringPayment?success=false")
+            ->setCancelUrl("$baseUrl/subscription/cancelUrl")
             ->setAutoBillAmount("yes")
             ->setInitialFailAmountAction("CONTINUE")
             ->setMaxFailAttempts("0")
