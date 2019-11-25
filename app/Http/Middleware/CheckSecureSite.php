@@ -15,7 +15,7 @@ class CheckSecureSite
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->secure() && env('MODE') == 'PRODUCTION') {
+        if (!$request->secure() && env('MODE') == 'LIVE') {
             return redirect()->secure($request->getRequestUri());
         }
         return $next($request);
