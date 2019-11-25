@@ -35,7 +35,7 @@
             <div class="text-center" style="padding : 50px 0">
                 @if($cancel == 1)
                     <a class="btn btn-primary" style="color:#fff" href="{{url('/subscription/makeRecurringPayment')}}">Start
-                        Subscription</a>
+                        Subscription</a> <span class="text-bold text-danger display-5" style="font-size: 2rem">(${{env('RECURRING_PAY')}})</span>
                 @endif
                 @if($cancel == 0)
                     <a class="btn btn-primary" href="{{url('subscription/cancelSubscription')}}" style="color:#fff">Cancel
