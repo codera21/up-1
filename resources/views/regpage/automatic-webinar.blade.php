@@ -31,17 +31,19 @@
         <div class="panel panel-primary">
             <div class="panel-body">
                 <?php if($material_details->embed == null) : ?>
-                <video class="video" style="width:100%;" controls controlsList="nodownload">
+               <video class="video" style="width:100%;" controls controlsList="nodownload">
                     <source src="{{ $material_details->video_url }}"
                     
                             type="video/mp4">
-                </video>
+                </video> 
+	
             <?php else:?>
-            <video class="video" style="width:100%;" controls controlsList="nodownload">
+           <!-- <video class="video" style="width:100%;" controls controlsList="nodownload">
                     <source src="{{ $material_details->embed }}"
                     
                             type="video/mp4">
-                </video>
+                </video>-->
+				{{ $material_details->embed }}
             <?php endif;?>
                 <h3 class="text-dark heading-text">{{$material_details->title}}</h3>
                 <p class="text-dark views-text" style="color: gray;"></p>
