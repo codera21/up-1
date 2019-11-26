@@ -43,7 +43,7 @@
                     
                             type="video/mp4">
                 </video>-->
-				{{ $material_details->embed }}
+				{{!! $material_details->embed !!}}
             <?php endif;?>
                 <h3 class="text-dark heading-text">{{$material_details->title}}</h3>
                 <p class="text-dark views-text" style="color: gray;"></p>
