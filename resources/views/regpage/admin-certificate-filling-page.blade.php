@@ -18,6 +18,7 @@
             </div>
         </div>
     </div>
+
    <!--<form action="/pages/certificate?id=" method="post">
         <div class="form-group">
             <label class="control-label col-sm-2" for="name">Name:</label>
@@ -108,6 +109,12 @@
 
 <script>
     $(document).ready(function () {
+		document.cookie = "videos=1;path=/";
+		document.cookie = "distributor-distributor-payment=1;path=/";
+		document.cookie = "distributorPage=1;path=/";
+		document.cookie = "questions=1;path=/";
+		document.cookie = "admin-certificate=1;path=/";
+
         $('form').removeAttr('action').attr('action', '/pages/certificate?id=<?php echo $_GET['id'] ?>');
         $('input[type="submit"]').addClass('btn btn-primary');
     })

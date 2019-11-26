@@ -31,21 +31,24 @@ class PagesController extends Controller
 
     public function dypage($slug, Request $request)
     {
-       	//--- Validate video token
-		self::check_code_expiry();
+       
 		
 		$restricted_slugs = [
 							"dnasbook-webinar-questions",
 							"dnasbook-distributor-training-certificate", 
 							"certificate"
 						];
-							
-		//--- If video code wasnt' entered don't allow to access other pages.
-		if(in_array($slug, $restricted_slugs) && !session()->has("canWatch")){
-			$id = $request->id;
-			return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, enter your code');
-		}
+		// if user come from admin-certificate filling page
+        if (!isset($_COOKIE['admin-certificate'])) {
+        	//--- Validate video token
+			self::check_code_expiry();		
+			//--- If video code wasnt' entered don't allow to access other pages.
+			if(in_array($slug, $restricted_slugs) && !session()->has("canWatch")){
+				$id = $request->id;
+				return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, enter your code');
+			}
 		
+		}
 		
         $lang = App::getLocale();
         $databaseRecord = Page::where('slug', $slug)->where('language', $lang)->count();
