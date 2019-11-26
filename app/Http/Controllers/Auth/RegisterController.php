@@ -91,12 +91,9 @@ class RegisterController extends Controller
     {
 		
 		//--- If video code wasnt' entered redirect to video code page.
-		if(!session()->has("canWatch")){
+		/* if(session()->has("canWatch")){
 			return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, enter your code');
-		}
-		
-		$data["parentid"] = $id;
-		
+		} */
 		if(session()->has("codeid")){
 			$code = DB::table("codes")->where(["id" => session()->get("codeid")])->first();	
 			$end = Carbon::parse($code->started_at)->addHours(72);
@@ -104,6 +101,8 @@ class RegisterController extends Controller
 			$data['end_at'] = $end;
 			$data['timezone'] = Carbon::now()-> tzName;
 		}
+		
+		$data["parentid"] = $id;
 		
         return view('auth.register', $data);
     }
