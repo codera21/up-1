@@ -31,17 +31,9 @@ class PagesController extends Controller
 
     public function dypage($slug, Request $request)
     {
-       
-		if($slug == 'admin-certificat-filling-page'){
-			//set by default french
-			\Session::put('locale','fr');
-			
-		}
-		if($slug == 'admin-certificate-filling-page'){
-			//set by default english
-			\Session::put('locale','en');
-		}
+        
 		
+       
 		$restricted_slugs = [
 							"dnasbook-webinar-questions",
 							"dnasbook-distributor-training-certificate", 
@@ -60,7 +52,7 @@ class PagesController extends Controller
 		}
 		
         $lang = App::getLocale();
-
+		
         $databaseRecord = Page::where('slug', $slug)->where('language', $lang)->count();
 		$query = DB::getQueryLog();
 

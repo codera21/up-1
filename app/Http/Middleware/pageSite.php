@@ -15,6 +15,18 @@ class pageSite
      */
     public function handle($request, Closure $next)
     {
+		$slug = $request->route('slug');
+		if($slug == 'admin-certificat-filling-page'){
+			//set by default french
+			\Session::put('locale','fr');
+		  
+		}
+		if($slug == 'admin-certificate-filling-page'){
+			//set by default english
+			\Session::put('locale','en');
+		 
+		} 
+		
         if (!isset($_GET["id"])) {
             $url = $request->url();
             $url = $url . "?id=";
