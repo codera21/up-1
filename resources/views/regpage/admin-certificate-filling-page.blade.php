@@ -5,9 +5,7 @@
 @endsection
 <?php $baseUrl = URL::to('/');?>
 @section('content')
-<?php
-\Session::put('locale', 'en');
-?>
+ 
     <div class="row">
 
         <div class="col-md-12" id="content">

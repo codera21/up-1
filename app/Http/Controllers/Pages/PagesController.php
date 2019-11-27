@@ -51,6 +51,14 @@ class PagesController extends Controller
 		}
 		
         $lang = App::getLocale();
+		if($slug == 'admin-certificat-filling-page'){
+			//set by default french
+			$lang='fr';
+		}
+		if($slug == 'admin-certificate-filling-page'){
+			//set by default english
+			$lang='en';
+		}
         $databaseRecord = Page::where('slug', $slug)->where('language', $lang)->count();
         if (!$databaseRecord) {
             return "No data with slug name <h1>" . $slug . "</h1>";
