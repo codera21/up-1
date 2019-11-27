@@ -6,7 +6,7 @@
 <?php $baseUrl = URL::to('/');?>
 @section('content')
 <?php
-\Session::put('locale', 'en');
+\Session::put('locale', 'fr');
 ?>
     <div class="row">
 
