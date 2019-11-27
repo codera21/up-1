@@ -32,6 +32,15 @@ class PagesController extends Controller
     public function dypage($slug, Request $request)
     {
        
+		if($slug == 'admin-certificat-filling-page'){
+			//set by default french
+			\Session::put('locale','fr');
+			
+		}
+		if($slug == 'admin-certificate-filling-page'){
+			//set by default english
+			\Session::put('locale','en');
+		}
 		
 		$restricted_slugs = [
 							"dnasbook-webinar-questions",
@@ -51,15 +60,12 @@ class PagesController extends Controller
 		}
 		
         $lang = App::getLocale();
-		if($slug == 'admin-certificat-filling-page'){
-			//set by default french
-			$lang='fr';
-		}
-		if($slug == 'admin-certificate-filling-page'){
-			//set by default english
-			$lang='en';
-		}
+
         $databaseRecord = Page::where('slug', $slug)->where('language', $lang)->count();
+		$query = DB::getQueryLog();
+
+      
+	
         if (!$databaseRecord) {
             return "No data with slug name <h1>" . $slug . "</h1>";
         }
