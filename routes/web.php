@@ -319,7 +319,7 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
         Route::post('/add', ['as' => '.add', 'uses' => 'Admin\VideoController@save']);
         Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\VideoController@edit']);
         Route::put('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\VideoController@update']);
-        Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\videoController@delete']);
+        Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\VideoController@delete']);
 
     });
 
