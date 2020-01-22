@@ -160,11 +160,6 @@ Impression de Certificat" /></h2>
             var baseURL = "<?php echo $baseUrl ?>";
             var getID = "<?php echo $_GET['id'] ?>";
             document.cookie = "certificate=1;path=/";
-            document.cookie = "videos=1;path=/";
-            document.cookie = "distributor-distributor-payment=1;path=/";
-            document.cookie = "distributorPage=1;path=/";
-            document.cookie = "questions=1;path=/";
-            document.cookie = "certificate=1;path=/";
             window.location = baseURL + "/register/" + getID;
         });
     })

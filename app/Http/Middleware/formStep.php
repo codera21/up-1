@@ -26,7 +26,7 @@ class formStep
         $value = intval($value);
 		  if (!isset($_COOKIE['distributorPage'])) {
             return redirect("pages/distributor?id=$value");
-        }
+        }  
 		/*if (!isset($_COOKIE['automatic-webinar'])) {
             return redirect("pages/automatic-webinar?id=$value");
         }*/ elseif ( !isset($_COOKIE['distributor-distributor-payment'])) {

@@ -90,11 +90,14 @@ class RegisterController extends Controller
     public function showRegistrationForm($id = null)
     {
 		
-		//--- If video code wasnt' entered redirect to video code page.
-		if(!session()->has("canWatch")){
-			return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, enter your code');
-		}
 		
+	    // if user come from admin-certificate filling page
+		if (!isset($_COOKIE['admin-certificate'])) {
+			//--- If video code wasnt' entered redirect to video code page.
+			if(!session()->has("canWatch")){
+				return redirect("pages/videos?id=$id")->with('error', ' Sorry! Please, enter your code');
+			}
+		}
 		$data["parentid"] = $id;
 		
 		if(session()->has("codeid")){
