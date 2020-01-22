@@ -312,6 +312,16 @@ Route::group(['middleware' => ['auth', 'be.navigation', 'be.breadcrumbs', 'check
         Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\CodeController@delete']);
 
     });
+//video
+    Route::group(['as' => 'admin.video', 'prefix' => 'video'], function () {
+        Route::get('/', ['as' => '', 'uses' => 'Admin\VideoController@index']);
+        Route::get('/add', ['as' => '.add', 'uses' => 'Admin\VideoController@add']);
+        Route::post('/add', ['as' => '.add', 'uses' => 'Admin\VideoController@save']);
+        Route::get('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\VideoController@edit']);
+        Route::put('/edit/{id}', ['as' => '.edit', 'uses' => 'Admin\videoController@update']);
+        Route::delete('/delete/{id}', ['as' => '.delete', 'uses' => 'Admin\videoController@delete']);
+
+    });
 
     // FAQs
     Route::group(['as' => 'admin.faq', 'prefix' => 'faq'], function () {

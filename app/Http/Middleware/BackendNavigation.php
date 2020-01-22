@@ -12,8 +12,8 @@ class BackendNavigation
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -60,6 +60,10 @@ class BackendNavigation
             $menu->get('manageWebsite')
                 ->add('Dashboard Link', ['route' => 'admin.dashboard_video'])
                 ->active('admin.about.*');
+            //video code
+            $menu->get('manageWebsite')
+                ->add('VideoLink', ['route' => 'admin.video'])
+                ->active('admin.video.*');
 
             // Manage Materials
             $menu->add('Manage Materials', '#')
@@ -141,8 +145,8 @@ class BackendNavigation
             $menu->get('payments')
                 ->add('Offline Payment', route('admin.offline_pay'))
                 ->active('admin.offline_pay.*');
-			
-			// Manage Codes
+
+            // Manage Codes
             $menu->add('Codes', '#')
                 ->prepend('<i class="fa fa-list"></i> <span class="nav-label">')
                 ->append('</span>');

@@ -4,6 +4,9 @@
     {{ trans('about') }}
 @endsection
 <?php $baseUrl = URL::to('/');?>
+<?php
+$data = \Illuminate\Support\Facades\DB::table('videolink')->where('lang', \Illuminate\Support\Facades\App::getLocale())->first();
+?>
 @section('content')
     @if(!session()->get('canWatch'))
         <div class="row1">
@@ -74,50 +77,9 @@
                     </div>
                     <div class="videosPage">
                         <div>
-                            @if(env("SITE") == "ENG")
-                                {{--get language for english site--}}
-                                <?php $lang = App::getLocale();?>
-                                @if($lang == 'en')
-                                    <div style='position:relative;height:0;padding-bottom:56.25%'>
-                                        <iframe class='sproutvideo-player'
-                                                src='https://videos.sproutvideo.com/embed/7c9ddab3191ceaccf4/a01c4bcd20484085?playerTheme=dark&amp;playerColor=2f3437'
-                                                style='position:absolute;width:100%;height:100%;left:0;top:0'
-                                                frameborder='0'
-                                                allowfullscreen></iframe>
-                                    </div>
-                                @else
-                                    <div style='position:relative;height:0;padding-bottom:56.25%'>
-                                        <iframe class='sproutvideo-player'
-                                                src='https://videos.sproutvideo.com/embed/489ddab31a1ce6c2c0/2ba3aa34a14cf04a?playerTheme=dark&amp;playerColor=2f3437'
-                                                style='position:absolute;width:100%;height:100%;left:0;top:0'
-                                                frameborder='0'
-                                                allowfullscreen></iframe>
-                                    </div>
-                                @endif
-
-                            @else
-                                {{--get language for africa site--}}
-                                <?php $lang = App::getLocale();?>
-                                @if($lang == 'en')
-                                    <div style='position:relative;height:0;padding-bottom:56.25%'>
-                                        <iframe class='sproutvideo-player'
-                                                src='https://videos.sproutvideo.com/embed/7c9ddab3191ceaccf4/a01c4bcd20484085?playerTheme=dark&amp;playerColor=2f3437'
-                                                style='position:absolute;width:100%;height:100%;left:0;top:0'
-                                                frameborder='0'
-                                                allowfullscreen></iframe>
-                                    </div>
-                                @else
-                                    <div style='position:relative;height:0;padding-bottom:56.25%'>
-                                        <iframe class='sproutvideo-player'
-                                                src='https://videos.sproutvideo.com/embed/1c9ddab31a1de4c894/6287c5da6616e386?playerTheme=dark&amp;playerColor=2f3437'
-                                                style='position:absolute;width:100%;height:100%;left:0;top:0'
-                                                frameborder='0'
-                                                allowfullscreen></iframe>
-                                    </div>
-
-                                @endif
-
-                            @endif
+                            <div style='position:relative;height:0;padding-bottom:56.25%'>
+                                {!! $data->link !!}
+                            </div>
                         </div>
                         <div class="checkbox">
                             <label><input type="checkbox" id="myCheck">
@@ -280,9 +242,9 @@
             //disable next button if not checked else enable button
             $(".registerlink").attr("disabled", "disabled");
             $('#myCheck').click(function () {
-                if($(this).is(':checked')){
+                if ($(this).is(':checked')) {
                     $(".registerlink").removeAttr("disabled");
-                }else{
+                } else {
                     $(".registerlink").attr("disabled", "disabled");
                 }
             });
