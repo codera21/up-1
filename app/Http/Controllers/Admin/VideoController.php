@@ -22,7 +22,7 @@ class VideoController extends Controller
 
     public function save(Request $request)
     {
-        $save = DB::table('videoLink')->insert([
+        $save = DB::table('videolink')->insert([
             'link' => $request->input('link'),
             'lang' => $request->input('lang')
         ]);
