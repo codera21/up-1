@@ -22,12 +22,12 @@
                 @endif
             @else
                 @if(App::getLocale()=='fr')
-                    {{-- Accéder à SAIRUI
+                    Accéder à SAIRUI
                    <a href="/user-academy/viewGroup/22"
-                   style="font-weight:bold;color:blue"> ici!</a> --}}
+                   style="font-weight:bold;color:blue"> ici!</a>
                 @else
                     Access SAIRUI
-                    <a href="/user-academy/viewGroup/19" style="font-weight:bold;color:blue"> Here</a>
+                    <a href="/user-academy/viewGroup/20" style="font-weight:bold;color:blue"> Here</a>
                 @endif
             @endif
         </div>
