@@ -1,3 +1,4 @@
+
 @extends('layouts.user_backend.default')
 @section('page_title')
     {{ trans('app.dashboard') }}{{--sdf--}}
@@ -12,6 +13,11 @@
                 <b class="text-danger">Important</b>: {{trans('app.combine_message')}}
                 <a href="/pages/how-to-pay-in-opportunity-4"
                    style="font-weight:bold;color:blue"> {{ trans('app.click_here') }}</a>
+                   @if(env('SITE') == 'ENG' && App::getLocale() == 'fr')
+                    Accéder à SAIRUI ici!
+                    <a href="/user-academy/viewGroup/22"
+                   style="font-weight:bold;color:blue"> ici!</a>
+                   @endif
 
             </div>
             <br>
