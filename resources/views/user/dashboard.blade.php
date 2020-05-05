@@ -23,7 +23,7 @@
             @else
                 @if(App::getLocale()=='fr')
                     Accéder à SAIRUI
-                   <a href="/user-academy/viewGroup/22"
+                   <a href="/user-academy/viewGroup/20"
                    style="font-weight:bold;color:blue"> ici!</a>
                 @else
                     Access SAIRUI
