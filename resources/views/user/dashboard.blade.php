@@ -12,13 +12,15 @@
             <b class="text-danger">Important</b>: {{ trans('app.combine_message') }}
             <a href="/pages/how-to-pay-in-opportunity-4" style="font-weight:bold;color:blue">
                 {{ trans('app.click_here') }}</a>
+                <br>
+                <br>
             @if(env('SITE') == 'ENG')
                 @if(App::getLocale() == 'fr')
                     Accéder à SAIRUI
                     <a href="/user-academy/viewGroup/22" style="font-weight:bold;color:blue"> ici!</a>
                 @else
                     Access SAIRUI
-                    <a href="/user-academy/viewGroup/22" style="font-weight:bold;color:blue"> Here</a>
+                    <a href="/user-academy/viewGroup/21" style="font-weight:bold;color:blue"> Here</a>
                 @endif
             @else
                 @if(App::getLocale()=='fr')
@@ -27,7 +29,7 @@
                    style="font-weight:bold;color:blue"> ici!</a>
                 @else
                     Access SAIRUI
-                    <a href="/user-academy/viewGroup/20" style="font-weight:bold;color:blue"> Here</a>
+                    <a href="/user-academy/viewGroup/19" style="font-weight:bold;color:blue"> Here</a>
                 @endif
             @endif
         </div>
