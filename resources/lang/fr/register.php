@@ -18,6 +18,7 @@ return [
     'email' => 'Email',
     'password' => 'Mot de passe',
     'password_confirmation' => 'Confirmez le mot de passe',
+    'code' => 'Code',
     'submit' => 'registre',
     'download_terms' => 'Lisez et téléchargez nos conditions d\'utilisation et notre politique de confidentialité.',
     'agree' => 'Cochez cette case si vous acceptez nos <a href="/pages/terms-and-conditions" target="_blank" style="color: blue"> conditions d\'utilisation</a> et notre <a href="/pages/privacy-policy" target="_blank" style="color: blue;"> politique de confidentialité</a>',

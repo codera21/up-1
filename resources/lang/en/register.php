@@ -2,7 +2,6 @@
 
 return [
     'page_title' => 'Register',
-
     'name' => 'Name',
     'first_name' => 'First Name',
     'last_name' => 'Last Name',
@@ -18,6 +17,7 @@ return [
     'email' => 'Email',
     'password' => 'Password',
     'password_confirmation' => 'Confirm Password',
+    'code' => 'Code',
     'submit' => 'Register',
     'download_terms' => 'Read and download our Terms Of Use and Privacy Policy.',
     'agree' => 'Check this box if you Agree to our<a href="/pages/terms-and-conditions" target="_blank" style="color: blue"> Terms Of Use </a> and <a href="/pages/privacy-policy" target="_blank" style="color: blue">Privacy Policy</a>',

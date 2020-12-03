@@ -161,6 +161,18 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }} required">
+                                {!! Form::label('code', trans('register.code'), ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-6">
+                                {!! Form::text('code', old('code'), ['placeholder'=> trans('register.code'),'class'=>'form-control validate-name', 'maxlength'=>'255']) !!}
+                                    @if ($errors->has('code'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('code') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
                                     <a href="{{ url('/terms-of-use')}}"

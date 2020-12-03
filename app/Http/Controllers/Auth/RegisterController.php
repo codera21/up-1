@@ -125,6 +125,7 @@ class RegisterController extends Controller
             'username' => 'required|max:100|unique:users',
             'email' => 'required|email|max:100|unique:users',
             'password' => 'required|min:6|confirmed',
+            'code' => 'required|min:1|unique:users|exists:codes,code',
             'agree' => 'required'
         ], [
             'agree.required' => 'You Should agree with terms of Use and Privacy Policy',
@@ -155,7 +156,8 @@ class RegisterController extends Controller
                 [
                     'verified' => 1,
                     'not_now' => 1,
-                    'is_active' => 'YES'
+                    'is_active' => 'YES',
+                    'code' => $data["code"]
                 ]
             );
 
